@@ -7,10 +7,6 @@ const LocationModel = connection_db.define('Location', {
         autoIncrement: true,
         primaryKey: true
     },
-    country: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     
     city: {
         type: DataTypes.STRING,
