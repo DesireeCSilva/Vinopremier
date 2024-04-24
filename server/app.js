@@ -1,10 +1,10 @@
-import connection_db from "./database/connection_db";
-import { PORT } from './config';
+import connection_db from './database/connection_db.js'
+import { PORT } from './config.js';
 import express from 'express';
-import BookingModel from "./models/BookingModel";
-import EventModel from "./models/EventModel";
-import LocationModel from "./models/LocationModel";
-import UserModel from "./models/UserModel";
+import BookingModel from "./models/BookingModel.js";
+import EventModel from "./models/EventModel.js";
+import LocationModel from "./models/LocationModel.js";
+import UserModel from "./models/UserModel.js";
 
 export const app = express();
 

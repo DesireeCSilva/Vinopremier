@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import connection_db from '../database/connection_db';
+import connection_db from '../database/connection_db.js';
 
 const LocationModel = connection_db.define('Location', {
     id: {
