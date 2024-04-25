@@ -5,10 +5,12 @@ import BookingModel from "./models/BookingModel.js";
 import EventModel from "./models/EventModel.js";
 import LocationModel from "./models/LocationModel.js";
 import UserModel from "./models/UserModel.js";
+import locationRouter from "./routes/locationRouter.js"
 
 export const app = express();
 
 app.use(express.json());
+app.use('/location', locationRouter);
 
 try {
     connection_db.authenticate();
