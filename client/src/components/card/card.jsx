@@ -4,9 +4,11 @@ import Styled from "styled-components";
 export default Card = ({ title, description, image }) => {
     return (
         <CardContainer>
-        <Image src={image} alt={title} />
-        <Title>{title}</Title>
-        <Description>{description}</Description>
+            <Image src={image} alt={title} />
+            <Title>{title}</Title>
+            <Icons>{}</Icons>
+            <Description>{description}</Description>
+
         
         </CardContainer>
     );
