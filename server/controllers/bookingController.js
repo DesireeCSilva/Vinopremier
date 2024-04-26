@@ -2,7 +2,7 @@ import BookingModel from "../models/BookingModel.js";
 import EventModel from "../models/EventModel.js";
 import { getCurrentDateTimeFormatted } from "../utils/dateUtils.js";
 
-const getAllBookings = async (request, response) => {
+export const getAllBookings = async (request, response) => {
     try {
         const bookings = await BookingModel.findAll();
         response.status(201).json(bookings);
@@ -11,7 +11,7 @@ const getAllBookings = async (request, response) => {
     }
 }
 
-const createBooking = async (request, response) => {
+export const createBooking = async (request, response) => {
     try {
         const {id_event} = request.params;
         const newBooking = await BookingModel.create({...request.body, date_booking: getCurrentDateTimeFormatted()});
@@ -36,7 +36,7 @@ const createBooking = async (request, response) => {
     }
 }
 
-const deleteBooking = async (request, response) => {
+export const deleteBooking = async (request, response) => {
     try {
         const { id } = request.params;
         const booking = await BookingModel.destroy({where: {id}})
@@ -46,7 +46,7 @@ const deleteBooking = async (request, response) => {
     }
 }
 
-const getBookingById = async (request, response) => {
+export const getBookingById = async (request, response) => {
     try {
         const { id } = request.params
         const booking = await BookingModel.findByPk(id)
@@ -56,7 +56,7 @@ const getBookingById = async (request, response) => {
     }
 }
 
-const updateBooking = async (request, response) => {
+export const updateBooking = async (request, response) => {
     try {
         const { id } = request.params
         const existingBooking = await BookingModel.findByPk(id);
