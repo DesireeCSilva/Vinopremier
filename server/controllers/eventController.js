@@ -29,7 +29,7 @@ export const updateEvent = async (request, response) => {
         }
         await EventModel.update(request.body, {where: {id}})
         const updatedEvent = await EventModel.findByPk(id)
-        return response.status(201).json({message: 'Event updated succesfully', event: updateEvent})
+        return response.status(201).json({message: 'Event updated succesfully', event: updatedEvent})
     } catch (error) {
 
     }

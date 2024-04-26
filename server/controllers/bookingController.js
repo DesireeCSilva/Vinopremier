@@ -13,8 +13,8 @@ export const getAllBookings = async (request, response) => {
 
 export const createBooking = async (request, response) => {
     try {
-        const {id_event} = request.params;
-        const newBooking = await BookingModel.create({...request.body, date_booking: getCurrentDateTimeFormatted()});
+        const {id_event, people} = request.body;
+        const newBooking = await BookingModel.create({...request.body, date_booking: new Date()});
         const existingEvent = await EventModel.findByPk(id_event);
 
         if(!existingEvent) {
@@ -22,7 +22,10 @@ export const createBooking = async (request, response) => {
         };
 
         const updatedAvalaiblePlaces = existingEvent.capacity - people;
-        await EventModel.update({...existingEvent.toJSON(), avalaible_places: updatedAvalaiblePlaces}, {where: {id: id_event}});
+        await EventModel.update(
+            { avalaible_places: updatedAvalaiblePlaces },
+            { where: { id: id_event } }
+        );
 
         response.status(201).json({
             message: "Booking created succesfully",
@@ -58,32 +61,33 @@ export const getBookingById = async (request, response) => {
 
 export const updateBooking = async (request, response) => {
     try {
-        const { id } = request.params
+        const { id } = request.params;
         const existingBooking = await BookingModel.findByPk(id);
 
-        if(!existingBooking) {
-            response.status(404).json({message: 'Booking not found'})
+        if (!existingBooking) {
+            return response.status(404).json({ message: 'Booking not found' });
         }
 
         const diffPeople = request.body.people - existingBooking.people;
-        await BookingModel.update(request.body, {where: {id}})
+        await BookingModel.update(request.body, { where: { id } });
 
-        const existingEvent = await EventModel.findByPk(existingBooking.id_event)
-        if(!existingEvent) {
-            response.status(404).json({message: 'Event not found'})
+        const existingEvent = await EventModel.findByPk(existingBooking.id_event);
+        if (!existingEvent) {
+            return response.status(404).json({ message: 'Event not found' });
         }
 
         const updatedAvalaiblePlaces = existingEvent.avalaible_places - diffPeople;
+        await EventModel.update({ avalaible_places: updatedAvalaiblePlaces }, { where: { id: existingEvent.id } });
 
-        await EventModel.update({...existingEvent.toJSON(), avalaible_places: updatedAvalaiblePlaces}, {where: {id: existingEvent.id}});
+        const updatedBooking = await BookingModel.findByPk(id);
 
-        response.status(200).json({
+        return response.status(200).json({
             message: 'Booking updated succesfully',
-            booking: existingBooking,
-            message: 'Event updated succesfully',
+            booking: updatedBooking,
+            eventMessage: 'Event updated succesfully',
             event: existingEvent
-        })
+        });
     } catch (error) {
-        response.status(500).json({message: error.message})
+        response.status(500).json({ message: error.message });
     }
-}
+};
