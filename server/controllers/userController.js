@@ -32,8 +32,8 @@ export const deleteUser = async (request, response) => {
 }
 
 export const updateUser = async (request, response) => {
-    const { id } = request.params;
     try {
+        const { id } = request.params;
         const hashedPassword = await bcrypt.hash(request.body.password, 10);
         request.body.password = hashedPassword;
         const existingUser = await UserModel.findByPk(id)
