@@ -6,11 +6,13 @@ import LocationModel from "./models/LocationModel.js";
 import EventModel from "./models/EventModel.js";
 import BookingModel from "./models/BookingModel.js";
 import userRouter from "./routes/UserRouter.js";
+import locationRouter from "./routes/locationRouter.js";
 
 export const app = express();
 
 app.use(express.json());
-app.use("/user", userRouter)
+app.use("/user", userRouter);
+app.use("/location", locationRouter);
 
     try {
         connection_db.authenticate();
