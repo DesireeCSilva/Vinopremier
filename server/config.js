@@ -1,4 +1,4 @@
-import { config } from 'dotenv';
+import { config } from "dotenv";
 config()
 
 export const DB_DEV_NAME = process.env.DB_DEV_NAME || "";
