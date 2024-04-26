@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
-import connection_db from "../database/connection_db";
-import UserModel from "./UserModel";
-import EventModel from "./EventModel";
+import connection_db from "../database/connection_db.js";
+import UserModel from "./UserModel.js";
+import EventModel from "./EventModel.js";
 
 
 const BookingModel = connection_db.define('Booking', {

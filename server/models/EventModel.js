@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
-import connection_db from "../database/connection_db";
-import LocationModel from "./LocationModel";
+import connection_db from "../database/connection_db.js";
+import LocationModel from "./LocationModel.js";
 
 
 const EventModel = connection_db.define('Event', {
@@ -35,8 +35,7 @@ const EventModel = connection_db.define('Event', {
     },
     available_places: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: capacity
+        allowNull: false
     },
     price: {
         type: DataTypes.DECIMAL,
