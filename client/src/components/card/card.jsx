@@ -6,10 +6,7 @@ export default Card = ({ title, description, image }) => {
         <CardContainer>
             <Image src={image} alt={title} />
             <Title>{title}</Title>
-            <Icons>{}</Icons>
-            <Description>{description}</Description>
-
-        
+            <Counter>AÑADIR <Icon>Carrito</Icon></Counter>
         </CardContainer>
     );
     }
