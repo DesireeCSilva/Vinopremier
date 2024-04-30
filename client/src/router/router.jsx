@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import LayoutPublic from '../layout/LayoutPublic';
 import Home from '../pages/Home/Home';
 import Detail from '../pages/Detail/Detail';
 import CreateForm from '../pages/CreateForm/CreateForm';
