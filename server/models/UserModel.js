@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import connection_db from "../database/connection_db.js";
 
-const UserModel = connection_db.define('User', {
+const UserModel = connection_db.define('User',{
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -9,7 +9,7 @@ const UserModel = connection_db.define('User', {
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull:false
     },
     email: {
         type: DataTypes.STRING,
@@ -18,7 +18,7 @@ const UserModel = connection_db.define('User', {
     },
     phone: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     password: {
         type: DataTypes.STRING,
@@ -26,10 +26,10 @@ const UserModel = connection_db.define('User', {
     },
     role: {
         type: DataTypes.STRING,
-        defaultValue : 'user',
+        defaultValue: 'user',
         allowNull: false
     },
-},{
+}, {
     tableName: 'users',
     timestamps: false
 })

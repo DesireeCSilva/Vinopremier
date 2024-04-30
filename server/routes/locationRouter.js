@@ -1,14 +1,13 @@
 import express from 'express';
-import { getLocations, getOneLocation, createLocation, updateLocation, deleteLocation,   } from '../controllers/locationController.js';
+import { getAllLocations, deleteLocation, updateLocation, createLocation, getLocationById } from '../controllers/locationController.js';
 import { authToken } from '../middlewares/authMiddleware.js';
-
 
 const router = express.Router();
 
-router.get("/", getLocations);
-router.get("/:id", getOneLocation);
+router.get("/", getAllLocations);
 router.post("/", authToken, createLocation);
+router.delete("/:id", authToken, deleteLocation);
 router.put("/:id", authToken, updateLocation);
-router.delete("/:id", deleteLocation);
+router.get("/:id", getLocationById);
 
 export default router;

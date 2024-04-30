@@ -3,7 +3,6 @@ import connection_db from "../database/connection_db.js";
 import UserModel from "./UserModel.js";
 import EventModel from "./EventModel.js";
 
-
 const BookingModel = connection_db.define('Booking', {
     id: {
         type: DataTypes.INTEGER,
@@ -15,7 +14,7 @@ const BookingModel = connection_db.define('Booking', {
         allowNull: false,
         references: {
             model: EventModel,
-            key: 'id' 
+            key: 'id'
         }
     },
     id_user: {
@@ -23,24 +22,38 @@ const BookingModel = connection_db.define('Booking', {
         allowNull: false,
         references: {
             model: UserModel,
-            key: 'id' 
+            key: 'id'
         }
     },
     people: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    english: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+    vegan_version: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+    vegan_people: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
     date_booking: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: false
     },
-},{
+}, {
     tableName: 'bookings',
     timestamps: false
 })
 
-EventModel.hasMany(BookingModel, { foreignKey: 'id_event' });
+EventModel.hasMany(BookingModel, {foreignKey: 'id_event'})
+UserModel.hasMany(BookingModel, {foreignKey: 'id_user'})
 
-UserModel.hasMany(BookingModel, { foreignKey: 'id_user' });
-
-export default BookingModel;
+export default BookingModel

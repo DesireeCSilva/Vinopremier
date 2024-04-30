@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
-import connection_db from "../database/connection_db.js";
+import { DataTypes } from 'sequelize';
+import connection_db from '../database/connection_db.js';
 
 const LocationModel = connection_db.define('Location', {
     id: {
@@ -7,18 +7,16 @@ const LocationModel = connection_db.define('Location', {
         autoIncrement: true,
         primaryKey: true
     },
-    country: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
+    
     city: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     address: {
         type: DataTypes.STRING,
         allowNull: false
     },
+    
 },{
     tableName: 'locations',
     timestamps: false
