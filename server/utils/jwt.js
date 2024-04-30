@@ -5,7 +5,7 @@ import { TK_SECRET } from '../config.js';
 export const createToken = (user) => {
     const data =  { 
         role: user.role, 
-        id: user.id 
+        userId: user.id 
     };
     const token = jwt.sign(data, TK_SECRET,{ expiresIn: '1h' });
     return token;
