@@ -6,7 +6,7 @@ import EventModel from "./models/EventModel.js";
 import LocationModel from "./models/LocationModel.js";
 import UserModel from "./models/UserModel.js";
 import locationRouter from "./routes/locationRouter.js"
-import userRouter from "./routes/userRouter.js"
+import userRouter from './routes/UserRouter.js';
 import eventRouter from "./routes/eventRouter.js"
 import bookingRouter from "./routes/bookingRouter.js"
 import authRouter from "./routes/authRouter.js";
