@@ -3,9 +3,20 @@ import Swal from 'sweetalert2'
 
 const URL_BOOKING = 'http://localhost:8000/booking';
 
+const getHeaders = () => {
+    const userToken = localStorage.getItem('token');
+    if (!userToken) {
+        throw new Error('Token no encontrado en el almacenamiento local')
+    }
+    return {
+        'Authorization': `Bearer ${userToken}`
+    };
+}
+
 export const getAllBookings = async () => {
     try {
-        const response = await axios.get(URL_BOOKING);
+        const headers = getHeaders();
+        const response = await axios.get(URL_BOOKING, { headers });
         const data = response.data;
         return data;
     } catch (error) {
@@ -16,7 +27,8 @@ export const getAllBookings = async () => {
 
 export const getBookingById = async (id) => {
     try {
-        const response = await axios.get(`${URL_BOOKING}/${id}`);
+        const headers = getHeaders();
+        const response = await axios.get(`${URL_BOOKING}/${id}`, { headers });
         const data = response.data;
         return data;
     } catch (error) {
@@ -27,7 +39,8 @@ export const getBookingById = async (id) => {
 
 export const postBooking = async (data) => {
     try {
-        const booking = await axios.post(URL_BOOKING, data);
+        const headers = getHeaders();
+        const booking = await axios.post(URL_BOOKING, data, { headers });
         Swal.fire('Reserva creada correctamente');
         return booking;
     } catch (error) {
@@ -38,7 +51,8 @@ export const postBooking = async (data) => {
 
 export const updateBooking = async (id, newData) => {
     try {
-        const response = await axios.put(`${URL_BOOKING}/${id}`, newData);
+        const headers = getHeaders();
+        const response = await axios.put(`${URL_BOOKING}/${id}`, newData, { headers });
         const data = response.data;
         Swal.fire("Reserva actualizada correctamente");
         return data;
@@ -59,13 +73,15 @@ export const deleteBooking = async (id) => {
     })
     if(confirmDelete.isConfirmed) {
         try {
-            const response = await axios.delete(`${URL_BOOKING}/${id}`);
+            const headers = getHeaders();
+            const response = await axios.delete(`${URL_BOOKING}/${id}`, { headers });
             if (response.status === 200) {
                 Swal.fire("Reserva eliminada correctamente");
             }
         } catch (error) {
-            console.error("Error al eliminar la reserva", error);
-            throw error;
+            if (error.response && error.response.status === 401) {
+                Swal.fire('No estás autorizada para realizar esta acción. Por favor, inicie sesión nuevamente');
+            }
         }
     }
 }
