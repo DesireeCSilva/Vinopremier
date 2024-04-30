@@ -1,6 +1,7 @@
 import express from 'express';
 import { getLocations, getOneLocation, createLocation, updateLocation, deleteLocation,   } from '../controllers/locationController.js';
 
+
 const router = express.Router();
 
 router.get("/", getLocations);

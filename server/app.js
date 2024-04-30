@@ -7,12 +7,14 @@ import EventModel from "./models/EventModel.js";
 import BookingModel from "./models/BookingModel.js";
 import userRouter from "./routes/UserRouter.js";
 import locationRouter from "./routes/locationRouter.js";
+import authRouter from "./routes/authRouter.js";
 
 export const app = express();
 
 app.use(express.json());
 app.use("/user", userRouter);
 app.use("/location", locationRouter);
+app.use("/auth", authRouter)
 
     try {
         connection_db.authenticate();
