@@ -29,6 +29,21 @@ const BookingModel = connection_db.define('Booking', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    english: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+    vegan_version: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+    vegan_people: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
     date_booking: {
         type: DataTypes.DATE,
         allowNull: false
