@@ -12,26 +12,28 @@ export const getAllBookings = async (request, response) => {
 }
 
 export const createBooking = async (request, response) => {
+    const actualDate = new Date()
     try {
         const {id_event, people} = request.body;
-        const newBooking = await BookingModel.create({...request.body, date_booking: new Date()});
+        const newBooking = await BookingModel.create({...request.body, date_booking: actualDate});
         const existingEvent = await EventModel.findByPk(id_event);
 
         if(!existingEvent) {
             response.status(404).json({message: 'Event not found'})
         };
 
-        const updatedAvalaiblePlaces = existingEvent.capacity - people;
+        const updatedAvalaiblePlaces = existingEvent.avalaible_places - people;
         await EventModel.update(
             { avalaible_places: updatedAvalaiblePlaces },
             { where: { id: id_event } }
         );
+        const updatedEvent = await EventModel.findByPk(id_event)
 
         response.status(201).json({
             message: "Booking created succesfully",
             booking: newBooking,
             eventMessage: "Event updated",
-            event: existingEvent
+            event: updatedEvent
         });
 
     } catch (error) {
@@ -79,13 +81,14 @@ export const updateBooking = async (request, response) => {
         const updatedAvalaiblePlaces = existingEvent.avalaible_places - diffPeople;
         await EventModel.update({ avalaible_places: updatedAvalaiblePlaces }, { where: { id: existingEvent.id } });
 
+        const updatedEvent = await EventModel.findByPk(existingEvent.id)
         const updatedBooking = await BookingModel.findByPk(id);
 
         return response.status(200).json({
             message: 'Booking updated succesfully',
             booking: updatedBooking,
             eventMessage: 'Event updated succesfully',
-            event: existingEvent
+            event: updatedEvent
         });
     } catch (error) {
         response.status(500).json({ message: error.message });
