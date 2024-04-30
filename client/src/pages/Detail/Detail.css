@@ -1,0 +1,97 @@
+
+ .page-detail__subtitle {
+    font-family: 'Gotham';
+    font-size: 0.8rem;
+    margin-left: 3%;
+ }
+
+ .page-detail__subtitlegold {
+    font-family: 'Gotham';
+    color: #AC946A;
+ }
+
+ .page-detail__title {
+    font-family: 'Gotham';
+    color: #AC946A;
+    font-weight: 900;
+    font-size: 2.8rem;
+    margin-left: 3%;
+ }
+
+ .page-detail__section01 {
+    display: grid; /*solucionar los grid a la vuelta*/
+ }
+
+ .page-detail__section01__left {
+    margin-left: 3%;
+ }
+
+ .page-detail__left__image {
+    width: 30rem;
+    height: 30rem;
+ }
+
+ .page-detail__left__prize {
+    font-family: 'Gotham';
+    font-size: 4.4rem;
+    font-weight: 900;
+ }
+
+ .page-detail__left__iva {
+    font-family: 'Gotham';
+    font-size: 1rem;
+    margin-top: -3rem;
+ }
+
+ .page-detail__left__supplement {
+    display: flex;
+    align-items: center;
+ }
+
+ .page-detail__left__check {
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-right: 1rem;
+ }
+
+ .page-detail__left__suptext {
+    font-family: 'Gotham';
+    font-size: 1rem;
+ }
+
+ .page-detail__left__cart {
+    display: flex;
+    align-items: center;
+ }
+
+ .page-detail__left__add {
+    font-family: 'Gotham';
+    font-size: 1.9rem;
+    font-weight: 900;
+ }
+
+ .page-detail__left__extra {
+    width: 27rem;
+    height: 16.5rem;
+    background: #AC946A;
+    padding: 3rem;
+ }
+
+ .page-detail__left__extratext {
+    font-family: 'Gotham';
+    font-size: 1rem;
+    margin-left: 1rem;
+ }
+
+ .page-detail__left__extracontent {
+    display: flex;
+    align-items: center;
+ }
+
+ .page-detail__right__description {
+    font-family: 'Gotham';
+    font-size: 1rem;
+ }
+
+
+ 
