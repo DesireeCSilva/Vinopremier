@@ -17,6 +17,7 @@ const Detail = () => {
             <img className='page-detail__left__check' src="src/assets/images/check-icon.png" alt="" />
             <p className='page-detail__left__suptext'>Añadir suplemento de cata privada: 60€</p>
           </div>
+
           <div className='page-detail__left__supplement'>
             <img className='page-detail__left__check' src="src/assets/images/check-icon.png" alt="" />
             <p className='page-detail__left__suptext'>Añadir suplemento de ibéricos</p>
@@ -28,9 +29,23 @@ const Detail = () => {
             <img src="src/assets/images/cart.png" alt="" />
           </div>
 
+          <div className='page-detail__left__extra'>
+              <img className='page-detail__left__extraicon' src="src/assets/images/o-icon.png" alt="" /><p className='page-detail__left__extratext' >Se puede asistir con niños: no</p>
+              <img className='page-detail__left__extraicon' src="src/assets/images/o-icon.png" alt="" /><p className='page-detail__left__extratext' >Disponible versión vegana: sí</p>
+              <img className='page-detail__left__extraicon' src="src/assets/images/o-icon.png" alt="" /><p className='page-detail__left__extratext' >Disponible en inglés: si, con consulta previa</p>
+              <img className='page-detail__left__extraicon' src="src/assets/images/o-icon.png" alt="" /><p className='page-detail__left__extratext' >Se puede asistir con mascotas: no</p>
+              <img className='page-detail__left__extraicon' src="src/assets/images/o-icon.png" alt="" /><p className='page-detail__left__extratext' >Pueden asistir más personas a la cata de las que compraron las entradas: no</p>
+         </div>
+
+          <div className='page-detail__left__calendar' >
+            <p className='page-detail__left__add'>Seleccionar fecha</p>
+            <Calendar />
+          </div>
+
         </div>
 
         <div className='page-detail__right'>
+          
 
         </div>
 
