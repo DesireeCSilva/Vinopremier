@@ -2,7 +2,7 @@ import express from 'express';
 import { getAllLocations, deleteLocation, updateLocation, createLocation, getLocationById } from '../controllers/locationController.js';
 import { authToken } from '../middlewares/authMiddleware.js';
 
-const locationRouter = express.locationRouter();
+const locationRouter = express.Router();
 
 locationRouter.get("/", getAllLocations);
 locationRouter.post("/", authToken, createLocation);
