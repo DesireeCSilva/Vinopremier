@@ -15,7 +15,8 @@ export const createBooking = async (request, response) => {
     const actualDate = new Date()
     try {
         const {id_event, people} = request.body;
-        const newBooking = await BookingModel.create({...request.body, date_booking: actualDate});
+        const id_user = request.user.id;
+        const newBooking = await BookingModel.create({...request.body, id_user, date_booking: actualDate});
         const existingEvent = await EventModel.findByPk(id_event);
 
         if(!existingEvent) {
