@@ -1,8 +1,27 @@
 import React from 'react'
+import Styled from "styled-components";
+
+const NavContainer = Styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+
+  img {
+    
+    width: 100%;
+    height: 100%;
+  }
+
+`;
 
 const Nav = () => {
   return (
-    <img src="src/assets/images/header.png" alt="" />
+    <NavContainer>
+      
+<img src="src/assets/images/header.png" alt="imagen navbar" />
+    </NavContainer>
   )
 }
 

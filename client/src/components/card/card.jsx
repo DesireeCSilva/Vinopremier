@@ -1,16 +1,6 @@
 import React from "react";
 import Styled from "styled-components";
 
-export default Card = ({ title, description, image }) => {
-    return (
-        <CardContainer>
-            <Image src={image} alt={title} />
-            <Title>{title}</Title>
-            <Counter>AÑADIR <Icon>Carrito</Icon></Counter>
-        </CardContainer>
-    );
-    }
-
 const CardContainer = Styled.div`
     display: flex;
     flex-direction: column;
@@ -25,3 +15,16 @@ const CardContainer = Styled.div`
 
 
 `;
+
+
+export default Card = ({ title, description, image }) => {
+    return (
+        <CardContainer>
+            <Image src={image} alt={title} />
+            <Title>{title}</Title>
+            <Counter>AÑADIR <Icon>Carrito</Icon></Counter>
+        </CardContainer>
+    );
+    }
+
+
