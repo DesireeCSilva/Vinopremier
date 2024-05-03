@@ -42,7 +42,7 @@ export const postBooking = async (data) => {
         const headers = getHeaders();
         const booking = await axios.post(URL_BOOKING, data, { headers });
         Swal.fire('Reserva creada correctamente');
-        return booking;
+        return booking.data;
     } catch (error) {
         console.error("Error al crear la reserva", error);
         throw error;
