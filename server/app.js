@@ -10,9 +10,11 @@ import userRouter from './routes/UserRouter.js';
 import eventRouter from "./routes/eventRouter.js"
 import bookingRouter from "./routes/bookingRouter.js"
 import authRouter from "./routes/authRouter.js";
+import cors from 'cors';
 
 export const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use('/location', locationRouter);
 app.use('/user', userRouter);
