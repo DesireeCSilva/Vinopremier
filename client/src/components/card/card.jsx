@@ -46,7 +46,6 @@ function Card() {
 
     };
        
-    
         fetchData();
       }, []);
       
