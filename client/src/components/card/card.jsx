@@ -40,7 +40,7 @@ function Card() {
     const [events, setEvents] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios('c');
+            const result = await axios.get('http://localhost:8000/event');
 
         setEvents(result.data);
 
@@ -49,6 +49,7 @@ function Card() {
     
         fetchData();
       }, []);
+      
     
       return (
         <>
