@@ -9,6 +9,7 @@ import RegisterForm from '../pages/RegisterForm/RegisterForm';
 import Payment from '../pages/Payment/Payment';
 
 
+
 export const router = createBrowserRouter ([
     {
         path: "/",
