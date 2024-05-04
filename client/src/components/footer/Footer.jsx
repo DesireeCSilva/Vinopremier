@@ -4,14 +4,16 @@ import Styled from "styled-components";
 const FooterContainer = Styled.div`
   display: flex;
   justify-content: center;
-  width: 100%;
-  position: fixed;
+  width: auto;
+  height: auto;
   bottom: 0;
 
   img {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 30%;
   }
+
+
 `;
 
 const Footer = () => {

@@ -5,7 +5,6 @@ const NavContainer = Styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  position: fixed;
   top: 0;
 
   img {
