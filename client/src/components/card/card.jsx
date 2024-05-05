@@ -166,16 +166,29 @@ const CardContainer = Styled.div`
       justify-content: center;
     }
 
+    .adding-cart {
+      background-color: #AC946A;
+      color: #00000;
+      font-size: 1vw;
+      font-weight: bold;
+      margin: 1vw;
+      border: none;
+    }
 
+    .adding-cart:hover {
+      transition: 0.5s;
+      transform: scale(1.4);
+    }
 
 `;
 
 function Card() {
 
+  const [buttonTexts, setButtonTexts] = useState({});
   const [eventsCount, setEventsCount] = useState({}); 
-
-    const [city, setCity] = useState([]);
-    const [events, setEvents] = useState([]);
+  const [city, setCity] = useState([]);
+  const [events, setEvents] = useState([]);
+    
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios.get('http://localhost:8000/event');
@@ -203,9 +216,14 @@ function Card() {
       });
     };
 
-
-    ;
-       
+    const handleClick = (id) => {
+      setButtonTexts(prevState => ({ ...prevState, [id]: "Añadido" }));
+  
+      setTimeout(() => {
+        setButtonTexts(prevState => ({ ...prevState, [id]: "Añadir" }));
+      }, 2000); // Cambia el texto de vuelta a "AÑADIR" después de 2 segundos
+    };
+     
     
       return (
         <>
@@ -217,9 +235,9 @@ function Card() {
       <li key={event.id} className="card-list-item">
         <section className="card-bg">
           <article className="button-controler">
-            <button className="card-button-edit" a href="">Editar</button>
+            <button className="card-button-edit" onClick={() => navigate(`edit/:${id}`)}>Editar</button>
             <button className="card-button-delete" >Eliminar</button>
-            <button className="card-button-add" a href="">Añadir</button>
+            <button className="card-button-add" onClick={() => navigate (`/create`)}>Añadir</button>
           </article>
           <img className="card-img" src={event.image} alt={event.name} width="50" height="50" />
           <div className="card-information">
@@ -236,7 +254,8 @@ function Card() {
                       <p style={{fontSize:"2rem", justifyContent:'center'}}>-</p>
                       </button>
             </article> 
-            <span>AÑADIR</span>
+            <button className="adding-cart" onClick={() => handleClick(event.id)}>
+                  {buttonTexts[event.id] || "AÑADIR"}</button>
             <img src="../../src/assets/images/cart.png"/>
           </section>
         </section>
