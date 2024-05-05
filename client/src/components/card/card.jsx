@@ -45,19 +45,12 @@ const CardContainer = Styled.div`
 
   }
 
-  .card-button-add {
-    background-color: #BDBDBD;
-    color: #000000;
-    font-size: 1.25vw;
-
-  }
-
   .card-list {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-around;
-    gap: 1rem;
+    gap: 0.75vw;
     list-style: none;
         
   }
@@ -68,7 +61,7 @@ const CardContainer = Styled.div`
     flex-wrap: wrap;
     align-items: center;
     background-color: #AC946A;
-    width: 25vw;
+    width: 17vw;
     gap: 1rem;
     overflow: hidden;
     border:none;
@@ -77,19 +70,23 @@ const CardContainer = Styled.div`
     }
 
   .card-img {
-    width: 98%;
-    height: 50%;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
     
   }
 
   .card-information {
-      
-    justify-content: center;
+    min-height: 100px;
+    max-height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     gap: 1rem;
     background-color: #AC946A;
     overflow: hidden;
-    height: 220px;
+    height: 200px;
 
   }
 
@@ -100,7 +97,7 @@ const CardContainer = Styled.div`
     min-height: 2em;
     max-height: 5em;
     padding: 5px;
-    font-size: 2vw;
+    font-size: 1.5vw;
     background-color: #AC946A;
     
   }
@@ -120,56 +117,34 @@ const CardContainer = Styled.div`
       
     }
 
-   
-
     .card-counter {
       display: flex;
-      justify-content: space-around;
+      align-items: center;
+      justify-content: center;
       background-color: #AC946A;
-      width: 100%;
+      
       height: 100%;
       margin-bottom: 1vw;
-      
       
     }
 
     .card-counter button:hover {
       
       transition: 0.5s;
-      transform: scale(1.4);
+      transform: scale(0.9);
     }
 
-    .card-counter span {
-      font-size: 2vw;
-      font-weight: bold;
-      background-color: #AC946A;
-    }
-    
-
-    .card-counter img {
-      width: 3vw;
-      height: 3vh;
+    img {
+      width: 2vw;
+      height: 2vw;
       background-color: #AC946A;
     }
 
-    .card-qty {
-      justify-content: center;
-      font-size: 2vw;
-      font-weight: bold;
-      border: 1px solid #000;
-      padding: 0.5vw;
-    }
-
-    .add-cart, .less-cart {
-      border: 1px solid #000;
-      align-items: center;
-      justify-content: center;
-    }
-
+   
     .adding-cart {
       background-color: #AC946A;
       color: #00000;
-      font-size: 1vw;
+      font-size: 1.75vw;
       font-weight: bold;
       margin: 1vw;
       border: none;
@@ -217,10 +192,10 @@ function Card() {
     };
 
     const handleClick = (id) => {
-      setButtonTexts(prevState => ({ ...prevState, [id]: "Añadido" }));
+      setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIDO" }));
   
       setTimeout(() => {
-        setButtonTexts(prevState => ({ ...prevState, [id]: "Añadir" }));
+        setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIR" }));
       }, 2000); // Cambia el texto de vuelta a "AÑADIR" después de 2 segundos
     };
      
@@ -228,32 +203,34 @@ function Card() {
       return (
         <>
 
-<h1 className="card-list-title">LAS MEJORES CATAS DE {city}</h1>       
+<h1 className="card-list-title" style={{ textAlign: 'center', paddingTop:'2vw' }}>LAS MEJORES CATAS DE {city}</h1>       
+<button className="card-button-add" style={{ float: 'right', padding:'1vw', margin:'1vw', backgroundColor:'#bdbdbd', fontWeight:'bold' }} onClick={() => navigate (`/create`)}>Añadir Cata</button>
+          
 <CardContainer>
    <ul className="card-list">
+   
     {events.map((event) => (
       <li key={event.id} className="card-list-item">
         <section className="card-bg">
           <article className="button-controler">
             <button className="card-button-edit" onClick={() => navigate(`edit/:${id}`)}>Editar</button>
             <button className="card-button-delete" >Eliminar</button>
-            <button className="card-button-add" onClick={() => navigate (`/create`)}>Añadir</button>
-          </article>
+            </article>
           <img className="card-img" src={event.image} alt={event.name} width="50" height="50" />
           <div className="card-information">
             <article className="card-name">{event.name}</article>
             <article className="card-price">{event.price}€<p className="card-tax">IVA incluido</p></article>
           </div>
           <section className="card-counter"> 
-           <article clasName="buttons-counter" style={{ display:'flex', flexDirection:'row' }}>
-              <button className="add-cart" style={{ width: '2vw' }} onClick={() => handleCountChange(event.id, 1)}>
-                      <p style={{ fontSize: '2rem', justifyContent: 'center' }}>+</p>
-                    </button>
-                    <div className="card-qty">{eventsCount[event.id] || 0}</div>
-                    <button className="less-cart" style={{ width: '2vw' }} onClick={() => handleCountChange(event.id, -1)}>
-                      <p style={{fontSize:"2rem", justifyContent:'center'}}>-</p>
-                      </button>
-            </article> 
+          <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black' }}>
+            <button className="add-cart" style={{ width: '1.5vw',border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
+              <p style={{fontSize: '2vw', justifyContent: 'center'}}>+</p>
+            </button>
+            <div className="card-qty" style={{fontSize:'1.5vw',borderBottom:'none', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
+            <button className="less-cart" style={{ width: '1.5vw', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
+              <p style={{fontSize:'2vw', justifyContent:'center'}}>-</p>
+            </button>
+          </article> 
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
                   {buttonTexts[event.id] || "AÑADIR"}</button>
             <img src="../../src/assets/images/cart.png"/>
