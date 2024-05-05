@@ -171,7 +171,9 @@ const CardContainer = Styled.div`
 `;
 
 function Card() {
-    const [count, setCount] = useState(1);
+
+  const [eventsCount, setEventsCount] = useState({}); 
+
     const [city, setCity] = useState([]);
     const [events, setEvents] = useState([]);
     useEffect(() => {
@@ -182,14 +184,28 @@ function Card() {
 
             const locationResult = await axios.get('http://localhost:8000/location');
         setCity(locationResult.city);
-      
-   
 
+        const initialCount = {};
+        result.data.forEach((event) => {
+          initialCount[event.id] = 1; 
+        });
+        setEventsCount(initialCount);
+      };
+  
+      fetchData();
+    }, []);
+  
+    const handleCountChange = (eventId, delta) => {
+      setEventsCount((prevCount) => {
+        const currentCount = prevCount[eventId] || 0;
+        const newCount = currentCount + delta;
+        return { ...prevCount, [eventId]: newCount >= 0 ? newCount : 0 };
+      });
     };
+
+
+    ;
        
-        fetchData();
-      }, []);
-      
     
       return (
         <>
@@ -212,9 +228,13 @@ function Card() {
           </div>
           <section className="card-counter"> 
            <article clasName="buttons-counter" style={{ display:'flex', flexDirection:'row' }}>
-              <button className="add-cart" style={{width:'2vw' }} onClick={() => setCount((count) => count + 1)}><p style={{fontSize:"2rem", justifyContent:'center'}}>+</p></button>
-              <div className="card-qty">{count}</div>
-              <button className="less-cart" style={{width:'2vw'}} onClick={() => setCount((count) => count > 0 ? count - 1 : 0)}><p style={{fontSize:"2rem", justifyContent:'center'}}>-</p></button>
+              <button className="add-cart" style={{ width: '2vw' }} onClick={() => handleCountChange(event.id, 1)}>
+                      <p style={{ fontSize: '2rem', justifyContent: 'center' }}>+</p>
+                    </button>
+                    <div className="card-qty">{eventsCount[event.id] || 0}</div>
+                    <button className="less-cart" style={{ width: '2vw' }} onClick={() => handleCountChange(event.id, -1)}>
+                      <p style={{fontSize:"2rem", justifyContent:'center'}}>-</p>
+                      </button>
             </article> 
             <span>AÑADIR</span>
             <img src="../../src/assets/images/cart.png"/>
@@ -224,10 +244,8 @@ function Card() {
       ))}
     </ul>
   </CardContainer>
-</>
+  </>
   );
 }
-    
+
 export default Card;
-
-
