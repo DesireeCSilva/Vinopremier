@@ -69,16 +69,28 @@ const CardContainer = Styled.div`
     align-items: center;
     background-color: #AC946A;
     width: 25vw;
-    
+    gap: 1rem;
     overflow: hidden;
     border:none;
+    
 
     }
 
   .card-img {
-    width: 100%;
+    width: 98%;
     height: 50%;
     
+  }
+
+  .card-information {
+      
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: #AC946A;
+    overflow: hidden;
+    height: 220px;
+
   }
 
   .card-name {
@@ -88,12 +100,13 @@ const CardContainer = Styled.div`
     min-height: 2em;
     max-height: 5em;
     padding: 5px;
+    font-size: 2vw;
     background-color: #AC946A;
     
   }
 
   .card-price {
-    
+    align-items: center;
     justify-content: center;
     padding: 1px;
     font-size: 3vw;
@@ -107,34 +120,15 @@ const CardContainer = Styled.div`
       
     }
 
-    
-
-    .card-information {
-      
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      background-color: #AC946A;
-      overflow: hidden;
-      height: 100%;
-
-    }
+   
 
     .card-counter {
-      display:flex;
-      flex-direction: row;
-      background-color: #AC946A;
-      
-    }
-
-    .card-counter button, .card-counter span, .card-counter img{
-      
-      font-size: 1vw;
-      font-weight: bold;
-      cursor: pointer;
-      flex-direction: row;
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
+      background-color: #AC946A;
+      width: 100%;
+      height: 100%;
+      margin-bottom: 1vw;
       
       
     }
@@ -153,16 +147,26 @@ const CardContainer = Styled.div`
     
 
     .card-counter img {
-      width: 2vw;
-      height: 2vh;
+      width: 3vw;
+      height: 3vh;
       background-color: #AC946A;
     }
 
     .card-qty {
-      font-size: 1vw;
+      justify-content: center;
+      font-size: 2vw;
       font-weight: bold;
       border: 1px solid #000;
+      padding: 0.5vw;
     }
+
+    .add-cart, .less-cart {
+      border: 1px solid #000;
+      align-items: center;
+      justify-content: center;
+    }
+
+
 
 `;
 
@@ -176,7 +180,7 @@ function Card() {
 
         setEvents(result.data);
 
-            const locationResult = await axios('http://localhost:8000/location');
+            const locationResult = await axios.get('http://localhost:8000/location');
         setCity(locationResult.city);
       
    
@@ -197,20 +201,20 @@ function Card() {
       <li key={event.id} className="card-list-item">
         <section className="card-bg">
           <article className="button-controler">
-            <button className="card-button-edit">Editar</button>
-            <button className="card-button-delete">Eliminar</button>
-            <button className="card-button-add">Añadir</button>
+            <button className="card-button-edit" a href="">Editar</button>
+            <button className="card-button-delete" >Eliminar</button>
+            <button className="card-button-add" a href="">Añadir</button>
           </article>
           <img className="card-img" src={event.image} alt={event.name} width="50" height="50" />
           <div className="card-information">
             <article className="card-name">{event.name}</article>
             <article className="card-price">{event.price}€<p className="card-tax">IVA incluido</p></article>
           </div>
-          <section className="card-counter">
-           <article clasName="buttons-counter">
-              <button className="add-cart" onClick={() => setCount((count) => count + 1)}>+</button>
+          <section className="card-counter"> 
+           <article clasName="buttons-counter" style={{ display:'flex', flexDirection:'row' }}>
+              <button className="add-cart" style={{width:'2vw' }} onClick={() => setCount((count) => count + 1)}><p style={{fontSize:"2rem", justifyContent:'center'}}>+</p></button>
               <div className="card-qty">{count}</div>
-              <button className="add-cart" onClick={() => setCount((count) => count - 1)}>-</button>
+              <button className="less-cart" style={{width:'2vw'}} onClick={() => setCount((count) => count > 0 ? count - 1 : 0)}><p style={{fontSize:"2rem", justifyContent:'center'}}>-</p></button>
             </article> 
             <span>AÑADIR</span>
             <img src="../../src/assets/images/cart.png"/>
