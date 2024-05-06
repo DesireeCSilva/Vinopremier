@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Styled from "styled-components";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 
 
 const CardContainer = Styled.div`
@@ -157,8 +157,8 @@ const CardContainer = Styled.div`
 
 `;
 
-function Card() {
-
+function Card({ id }) {
+  const navigate = useNavigate();
   const [buttonTexts, setButtonTexts] = useState({});
   const [eventsCount, setEventsCount] = useState({}); 
   const [city, setCity] = useState([]);
@@ -196,7 +196,15 @@ function Card() {
   
       setTimeout(() => {
         setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIR" }));
-      }, 2000); // Cambia el texto de vuelta a "AÑADIR" después de 2 segundos
+      }, 2000);
+    };
+
+    const handleDelete = async (id) => {
+        await axios.delete(`http://localhost:8000/event/${id}`);
+
+        const updatedEvents = events.filter(event => event.id !== id);
+        setEvents(updatedEvents);
+     
     };
      
     
@@ -204,7 +212,7 @@ function Card() {
         <>
 
 <h1 className="card-list-title" style={{ textAlign: 'center', paddingTop:'2vw' }}>LAS MEJORES CATAS DE {city}</h1>       
-<button className="card-button-add" style={{ float: 'right', padding:'1vw', margin:'1vw', backgroundColor:'#bdbdbd', fontWeight:'bold' }} onClick={() => navigate (`/create`)}>Añadir Cata</button>
+<button className="card-button-add" style={{ float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/create`)}>Añadir Cata</button>
           
 <CardContainer>
    <ul className="card-list">
@@ -213,8 +221,8 @@ function Card() {
       <li key={event.id} className="card-list-item">
         <section className="card-bg">
           <article className="button-controler">
-            <button className="card-button-edit" onClick={() => navigate(`edit/:${id}`)}>Editar</button>
-            <button className="card-button-delete" >Eliminar</button>
+            <button className="card-button-edit" onClick={() => navigate(`edit/${id}`)}>Editar</button>
+            <button className="card-button-delete" onClick={() =>  handleDelete(event.id)} >Eliminar</button>
             </article>
           <img className="card-img" src={event.image} alt={event.name} width="50" height="50" />
           <div className="card-information">
