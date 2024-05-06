@@ -141,7 +141,7 @@ const CardContainer = Styled.div`
       background-color: #AC946A;
     }
 
-   
+
     .adding-cart {
       background-color: #AC946A;
       color: #00000;
@@ -164,93 +164,99 @@ function Card({ id }) {
   const [eventsCount, setEventsCount] = useState({}); 
   const [city, setCity] = useState([]);
   const [events, setEvents] = useState([]);
-    
-    useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios.get('http://localhost:8000/event');
 
-        setEvents(result.data);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get('http://localhost:8000/event');
+      // Filtrar eventos únicos
+      const uniqueEvents = result.data.reduce((acc, event) => {
+        if (!acc[event.id]) {
+          acc[event.id] = event;
+        }
+        return acc;
+      }, {});
+      setEvents(Object.values(uniqueEvents));
 
-            const locationResult = await axios.get('http://localhost:8000/location');
-        setCity(locationResult.city);
+      const locationResult = await axios.get('http://localhost:8000/location');
+      setCity(locationResult.city);
 
-        const initialCount = {};
-        result.data.forEach((event) => {
-          initialCount[event.id] = 1; 
-        });
-        setEventsCount(initialCount);
-      };
-  
-      fetchData();
-    }, []);
-  
-    const handleCountChange = (eventId, delta) => {
-      setEventsCount((prevCount) => {
-        const currentCount = prevCount[eventId] || 0;
-        const newCount = currentCount + delta;
-        return { ...prevCount, [eventId]: newCount >= 0 ? newCount : 0 };
+      const initialCount = {};
+      result.data.forEach((event) => {
+        initialCount[event.id] = 1; 
       });
+      setEventsCount(initialCount);
     };
 
-    const handleClick = (id) => {
-      setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIDO" }));
-  
-      setTimeout(() => {
-        setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIR" }));
-      }, 2000);
-    };
+    fetchData();
+  }, []);
 
-    const handleDelete = async (id) => {
-      try {
-        await deleteEvent(id);
-        setEvents(events.filter(event => event.id !== id));
-      } catch (error) {
-        console.error('Error al eliminar el evento:', error);
-      }
-    };
-     
-    
-      return (
-        <>
+  const handleCountChange = (eventId, delta) => {
+    setEventsCount((prevCount) => {
+      const currentCount = prevCount[eventId] || 0;
+      const newCount = currentCount + delta;
+      return {...prevCount, [eventId]: newCount >= 0? newCount : 0 };
+    });
+  };
 
-<h1 className="card-list-title" style={{ textAlign: 'center', paddingTop:'2vw' }}>LAS MEJORES CATAS DE {city}</h1>       
-<button className="card-button-add" style={{ float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/create`)}>Añadir Cata</button>
+  const handleClick = (id) => {
+    setButtonTexts(prevState => ({...prevState, [id]: "AÑADIDO" }));
+
+    setTimeout(() => {
+      setButtonTexts(prevState => ({...prevState, [id]: "AÑADIR" }));
+    }, 2000);
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteEvent(id);
+      setEvents(events.filter(event => event.id!== id));
+    } catch (error) {
+      console.error('Error al eliminar el evento:', error);
+    }
+  };
+
+  return (
+    <>
+      <h1 className="card-list-title" style={{ textAlign: 'center', paddingTop:'2vw' }}>LAS MEJORES CATAS DE {city}</h1>       
+      <button className="card-button-add" style={{ float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A', fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/create`)}>Añadir Cata</button>
           
-<CardContainer>
-   <ul className="card-list">
-   
-    {events.map((event) => (
-      <li key={event.id} className="card-list-item">
-        <section className="card-bg">
-          <article className="button-controler">
-            <button className="card-button-edit" onClick={() => navigate(`edit/${id}`)}>Editar</button>
-            <button className="card-button-delete" onClick={() =>  handleDelete(event.id)} >Eliminar</button>
-            </article>
-          <img className="card-img" src={event.image} alt={event.name} width="50" height="50" />
-          <div className="card-information">
-            <article className="card-name">{event.name}</article>
-            <article className="card-price">{event.price}€<p className="card-tax">IVA incluido</p></article>
-          </div>
-          <section className="card-counter"> 
-          <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black' }}>
-            <button className="add-cart" style={{ width: '1.5vw',border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
-              <p style={{fontSize: '2vw', justifyContent: 'center'}}>+</p>
-            </button>
-            <div className="card-qty" style={{fontSize:'1.5vw',borderBottom:'none', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
-            <button className="less-cart" style={{ width: '1.5vw', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
-              <p style={{fontSize:'2vw', justifyContent:'center'}}>-</p>
-            </button>
-          </article> 
-            <button className="adding-cart" onClick={() => handleClick(event.id)}>
-                  {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../../src/assets/images/cart.png"/>
-          </section>
-        </section>
-      </li>
-      ))}
-    </ul>
-  </CardContainer>
-  </>
+      <CardContainer>
+        <ul className="card-list">
+
+          {events.map((event) => (
+            <li key={event.id} className="card-list-item">
+              <section className="card-bg">
+                <article className="button-controler">
+                  <button className="card-button-edit" onClick={() => navigate(`edit/${id}`)}>Editar</button>
+                  <button className="card-button-delete" onClick={() =>  handleDelete(event.id)} >Eliminar</button>
+                </article>
+                {event.image && typeof event.image === 'string' && (
+                  <img className="card-img" src={event.image} alt={event.name} width="50" height="50" />
+                )}  
+                <div className="card-information">
+                  <article className="card-name">{event.name}</article>
+                  <article className="card-price">{event.price}€<p className="card-tax">IVA incluido</p></article>
+                </div>
+                <section className="card-counter"> 
+                <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black' }}>
+                  <button className="add-cart" style={{ width: '1.5vw',border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
+                    <p style={{fontSize: '2vw', justifyContent: 'center'}}>+</p>
+                  </button>
+                  <div className="card-qty" style={{fontSize:'1.5vw',borderBottom:'none', borderTop:'none', paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
+                  <button className="less-cart" style={{ width: '1.5vw', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
+                    <p style={{fontSize:'2vw', justifyContent: 'center'}}>-</p>
+                  </button>
+                </article> 
+                  <button className="adding-cart" onClick={() => handleClick(event.id)}>
+                        {buttonTexts[event.id] || "AÑADIR"}</button>
+                  <img src="../../src/assets/images/cart.png"/>
+                </section>
+              </section>
+            </li>
+            ))}
+          </ul>
+        </CardContainer>
+      </>
   );
 }
 
