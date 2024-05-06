@@ -61,7 +61,7 @@ const CardContainer = Styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
-    background-color: #AC946A;
+   
     width: 17vw;
     gap: 1rem;
     overflow: hidden;
@@ -71,7 +71,7 @@ const CardContainer = Styled.div`
     }
 
   .card-img {
-    width: 100%;
+    width: 90%;
     height: auto;
     object-fit: cover;
     
@@ -85,7 +85,7 @@ const CardContainer = Styled.div`
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    background-color: #AC946A;
+    
     overflow: hidden;
     height: 200px;
 
@@ -99,7 +99,7 @@ const CardContainer = Styled.div`
     max-height: 5em;
     padding: 5px;
     font-size: 1.5vw;
-    background-color: #AC946A;
+    
     
   }
 
@@ -108,13 +108,12 @@ const CardContainer = Styled.div`
     justify-content: center;
     padding: 1px;
     font-size: 3vw;
-    background-color: #AC946A;
-
+    
     }
 
     .card-tax  {
       font-size: 1vw;
-      background-color: #AC946A;
+      
       
     }
 
@@ -123,9 +122,9 @@ const CardContainer = Styled.div`
       align-items: center;
       justify-content: center;
       background-color: #AC946A;
-      
+      width: 100%;
       height: 100%;
-      margin-bottom: 1vw;
+      margin-bottom: 
       
     }
 
@@ -221,7 +220,7 @@ function Card({ id }) {
    
     {events.map((event) => (
       <li key={event.id} className="card-list-item">
-        <section className="card-bg">
+        <section className="card-bg" style={{border:'2px solid #AC946A', borderBottom:'none'}}>
           <article className="button-controler">
             <button className="card-button-edit" onClick={() => navigate(`edit/${id}`)}>Editar</button>
             <button className="card-button-delete" onClick={() =>  handleDelete(event.id)} >Eliminar</button>
