@@ -68,7 +68,7 @@ const Detail = () => {
                 <p className='page-detail__right__iconstext'>1 hora 30min</p>
               </div>
               <div className='page-detail__right__iconscontainer'>
-                <img className='page-detail__right__iconsimage' src="/src/assets/images/icons/cupsbottle-icon.png" alt="" />
+                <img className='page-detail__right__iconsimage' src="/src/assets/images/icons/cupsbottle2.png" alt="" />
                 <p className='page-detail__right__iconstext'>2 Vinos Blancos, 1 vino rosados, 3 vinos tintos</p>
               </div>
               <div className='page-detail__right__iconscontainer'>

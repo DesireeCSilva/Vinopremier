@@ -96,6 +96,7 @@
     font-family: 'Gotham';
     font-size: 1rem;
     margin-left: 1rem;
+    font-weight: 500;
  }
 
  .page-detail__left__extracontent {
@@ -108,29 +109,37 @@
     font-size: 1rem;
  }
 
+ .page-detail__right__icons {
+    display: grid;
+    grid-template-columns: 47% 47%;
+    grid-template-rows: 10rem;
+    grid-column-gap: 2.5rem;
+    grid-row-gap: 10rem;
+ }
  .page-detail__right__iconscontainer{
     display: flex;
     align-items: center;
+    margin-bottom: 2rem;
  }
 
  .page-detail__right__iconsimage {
-    width: 2rem;
-    height: 2rem;
+    width: 4rem;
+    height: auto;
  }
- .page-detail__right__iconscolumn {
+.page-detail__right__iconscolumn{
     display: grid;
-    grid-template-columns: 1fr 1fr;
- }
-
- .page-detail__right__description {
-    margin-top: 20rem;
-    text-align: justify;
- }
+ grid-auto-rows: 7rem;
+}
 
  .page-detail__right__iconstext {
     font-family: 'Gotham';
     font-size: 1rem;
+    margin-left: 1rem;
+    font-weight: 500;
  }
 
-
+ .page-detail__right__description {
+    margin-top: 30rem;
+    text-align: justify;
+ }
  
