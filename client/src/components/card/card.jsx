@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { deleteEvent } from "../../services/eventServices";
 
 
 const CardContainer = Styled.div`
@@ -200,11 +201,12 @@ function Card({ id }) {
     };
 
     const handleDelete = async (id) => {
-        await axios.delete(`http://localhost:8000/event/${id}`);
-
-        const updatedEvents = events.filter(event => event.id !== id);
-        setEvents(updatedEvents);
-     
+      try {
+        await deleteEvent(id);
+        setEvents(events.filter(event => event.id !== id));
+      } catch (error) {
+        console.error('Error al eliminar el evento:', error);
+      }
     };
      
     
