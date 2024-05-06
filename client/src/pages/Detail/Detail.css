@@ -19,7 +19,8 @@
  }
 
  .page-detail__section01 {
-    display: grid; /*solucionar los grid a la vuelta*/
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
  }
 
  .page-detail__section01__left {
