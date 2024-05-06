@@ -20,28 +20,38 @@
 
  .page-detail__section01 {
     display: grid;
-    grid-template-columns: 1fr 1fr; 
+    grid-template-columns: 40% 50%; 
+    gap: 6rem;
  }
 
  .page-detail__section01__left {
-    margin-left: 3%;
+    margin-left: 6%;
  }
 
  .page-detail__left__image {
     width: 30rem;
-    height: 30rem;
+    height: 33rem;
+    border-color: #AC946A;
+    border-top-width: 2rem; 
+    border-bottom-width: 4rem;
+    border-left-width: 0.5rem; 
+    border-right-width: 0.5rem; 
+    border-style: solid;
+    display: inline-block;
  }
 
  .page-detail__left__prize {
     font-family: 'Gotham';
     font-size: 4.4rem;
     font-weight: 900;
+    text-align: center;
  }
 
  .page-detail__left__iva {
     font-family: 'Gotham';
     font-size: 1rem;
     margin-top: -3rem;
+    text-align: center;
  }
 
  .page-detail__left__supplement {
@@ -58,11 +68,15 @@
  .page-detail__left__suptext {
     font-family: 'Gotham';
     font-size: 1rem;
+    font-weight: 700;
  }
 
  .page-detail__left__cart {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
  }
 
  .page-detail__left__add {
@@ -72,7 +86,7 @@
  }
 
  .page-detail__left__extra {
-    width: 27rem;
+    width: 25rem;
     height: 16.5rem;
     background: #AC946A;
     padding: 3rem;
@@ -90,6 +104,30 @@
  }
 
  .page-detail__right__description {
+    font-family: 'Gotham';
+    font-size: 1rem;
+ }
+
+ .page-detail__right__iconscontainer{
+    display: flex;
+    align-items: center;
+ }
+
+ .page-detail__right__iconsimage {
+    width: 2rem;
+    height: 2rem;
+ }
+ .page-detail__right__iconscolumn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+ }
+
+ .page-detail__right__description {
+    margin-top: 20rem;
+    text-align: justify;
+ }
+
+ .page-detail__right__iconstext {
     font-family: 'Gotham';
     font-size: 1rem;
  }
