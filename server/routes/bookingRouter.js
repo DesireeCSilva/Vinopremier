@@ -1,7 +1,7 @@
 import express from 'express';
 import { getAllBookings, createBooking, deleteBooking, updateBooking, getBookingById } from '../controllers/bookingController.js';
 
-const bookingRouter = express.bookingRouter();
+const bookingRouter = express.Router();
 
 bookingRouter.get("/", getAllBookings);
 bookingRouter.post("/", createBooking);

@@ -1,7 +1,7 @@
 import express from 'express';
 import { getAllEvents, createEvent, deleteEvent, updateEvent, getEventById } from "../controllers/eventController.js";
 
-const eventRouter = express.eventRouter();
+const eventRouter = express.Router();
 
 eventRouter.get("/", getAllEvents);
 eventRouter.post("/", createEvent);
