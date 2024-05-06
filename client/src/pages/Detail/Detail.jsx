@@ -133,6 +133,8 @@ const Detail = () => {
       </section>
       
     </article>
+    <hr className="page-detail__hr"/>
+    <img className="page-detail__opinion" src="/src/assets/images/banners/section03.png" alt="" />
 
     </>
   )
