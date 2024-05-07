@@ -66,6 +66,10 @@ const CreateForm = () => {
         <label htmlFor="iberian_supplement">Suplemento de ibéricos</label>
         <input type="number" id="iberian_supplement" name="iberian_supplement" {...register('iberian_supplement', {required: true})}/>
       </div>
+      <div className="formDate">
+        <label htmlFor="date">Fecha</label>
+        <input type="text" id="date" name="date" {...register('date', {required: true})}/>
+      </div>
       <div className="formTime">
         <label htmlFor="time">Hora</label>
         <input type="text" id="time" name="time" {...register('time', {required: true})}/>
