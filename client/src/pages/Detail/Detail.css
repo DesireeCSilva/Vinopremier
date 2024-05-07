@@ -190,7 +190,7 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      border: 1px solid #000000;
+      border: 3px solid #000000;
 }
 
 .buttons-counter button:hover {

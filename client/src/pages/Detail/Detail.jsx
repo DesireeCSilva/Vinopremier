@@ -70,7 +70,7 @@ const Detail = () => {
           <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
               <p style={{fontSize: '2vw', justifyContent: 'center'}}>+</p>
             </button>
-            <div style={{padding:'19px',border:'1px solid black', borderRight:'none',borderLeft:'none',fontWeight:'bold', fontSize:'22px'}}>{eventsCount[event.id] || 0}</div>
+            <div style={{padding:'18px',border:'2px solid black',fontWeight:'bold', fontSize:'22px'}}>{eventsCount[event.id] || 0}</div>
             <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
               <p style={{fontSize:'2vw', justifyContent:'center'}}>-</p>
             </button>
