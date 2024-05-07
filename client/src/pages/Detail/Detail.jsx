@@ -4,6 +4,9 @@ import { getEventById } from '../../services/eventServices.js'
 import '../Detail/Detail.css'
 import Calendar from '../../components/Calendar/Calendar.jsx'
 
+
+
+
 const Detail = () => {
   const { id } = useParams(); 
   const [event, setEvent] = useState(null);
@@ -39,7 +42,9 @@ const Detail = () => {
 
 
   return (
+    
     <>
+    
     {event && (
     <article className='page-detail'>
       <p className='page-detail__subtitle'>Inicio / <span className='page-detail__subtitlegold'>{event.name}</span></p>
@@ -61,18 +66,18 @@ const Detail = () => {
           </div>
 
           <section className="card-counter"> 
-          <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black' }}>
-            <button className="add-cart" style={{ width: '1.5vw',border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
+          <article className="buttons-counter" >
+          <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
               <p style={{fontSize: '2vw', justifyContent: 'center'}}>+</p>
             </button>
-            <div className="card-qty" style={{fontSize:'1.5vw',borderBottom:'none', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
-            <button className="less-cart" style={{ width: '1.5vw', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
+            <div style={{padding:'19px',border:'1px solid black', borderRight:'none',borderLeft:'none',fontWeight:'bold', fontSize:'22px'}}>{eventsCount[event.id] || 0}</div>
+            <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
               <p style={{fontSize:'2vw', justifyContent:'center'}}>-</p>
             </button>
           </article> 
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
                   {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../../src/assets/images/cart.png"/>
+            <img src="../../src/assets/images/icons/cart.png"/>
           </section>
 
           <div className='page-detail__left__extra'>
@@ -167,7 +172,9 @@ const Detail = () => {
       <img className="page-detail__opinion" src="/src/assets/images/banners/section03.png" alt="" />
     </article> 
     </>
+  
   )
 }
+
 
 export default Detail
