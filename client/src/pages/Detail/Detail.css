@@ -97,11 +97,13 @@
     font-size: 1rem;
     margin-left: 1rem;
     font-weight: 500;
+    background: #AC946A;
  }
 
  .page-detail__left__extracontent {
     display: flex;
     align-items: center;
+    background: #AC946A;
  }
 
  .page-detail__right__description {
@@ -144,7 +146,7 @@
  }
  
  .page-detail__opinion {
-    width: 80%;
+    width: 75%;
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -152,5 +154,5 @@
  }
 
  .page-detail__hr {
-    width: 80%;
+    width: 95%;
  }
