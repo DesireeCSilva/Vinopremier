@@ -1,4 +1,5 @@
 import React from 'react'
+import './CreateForm.css'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { postEvent } from '../../services/eventServices'
@@ -30,9 +31,9 @@ const CreateForm = () => {
     };
 
   return (
-    <div>
+    <div className="createFormContainer">
       <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>Formulario de creación de catas</h2>
+      <h2 className="createFormTitle">Formulario de creación de catas</h2>
       <div className="formCity">
         <label htmlFor="id_location">Id de la localización</label>
         <input type="number" id="id_location" name="id_location" {...register('id_location', {required: true})}/>
