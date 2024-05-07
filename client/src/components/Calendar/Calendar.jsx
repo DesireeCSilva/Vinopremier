@@ -2,6 +2,10 @@ import React from 'react'
 import Calendar from 'react-calendar'
 import { useState, useEffect } from 'react';
 import mysql from 'mysql2';
+import { getAllEvents,  } from '../../services/eventServices';
+import { getAllBookings, postBooking, updateBooking, deleteBooking } from '../../services/bookingServices';
+import '../Calendar/customcalendar.css';
+
 
 
 
@@ -58,13 +62,16 @@ const App = () => {
   };
 
   return (
-    <div>
-      <Calendar
-        onChange={handleEventChange}
-        events={events}
+    <>
+      
+      <Calendar style={{width: '50vw',margin:'30px', display:'flex', backgroundColor: 'black'}}
+       onChange={handleEventChange}
+       events={events}
       />
-      <button onClick={addEvent}>Añadir evento</button>
-    </div>
+      <AddEventButton onClick={addEvent}>Añadir evento</AddEventButton>
+    
+
+    </>
   );
 };
 

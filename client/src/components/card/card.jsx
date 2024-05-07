@@ -124,7 +124,7 @@ const CardContainer = Styled.div`
       background-color: #AC946A;
       width: 100%;
       height: 100%;
-      margin-bottom: 
+      
       
     }
 
