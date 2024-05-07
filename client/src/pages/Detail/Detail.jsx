@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getEventById } from '../../services/eventServices.js'
 import '../Detail/Detail.css'
 import Calendar from '../../components/Calendar/Calendar.jsx'
@@ -7,42 +7,69 @@ import Calendar from '../../components/Calendar/Calendar.jsx'
 const Detail = () => {
   const { id } = useParams(); 
   const [event, setEvent] = useState(null)
-  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchEventById = async () => {
       try {
-        const response = await getEventById 
-      }
-    }
-  })
+        const response = await getEventById(id);
+        setEvent(response)
+      } catch (error) {
+        console.error('Error al cargar los datos del evento:', error);
+      }};
+      fetchEventById();
+    }, [id]);
+
+    const handleCountChange = (eventId, delta) => {
+      setEventsCount((prevCount) => {
+        const currentCount = prevCount[eventId] || 0;
+        const newCount = currentCount + delta;
+        return { ...prevCount, [eventId]: newCount >= 0 ? newCount : 0 };
+      });
+    };
+
+    const handleClick = (id) => {
+      setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIDO" }));
+  
+      setTimeout(() => {
+        setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIR" }));
+      }, 2000);
+    };
+
+    const [buttonTexts, setButtonTexts] = useState({});
+    const [eventsCount, setEventsCount] = useState({})
+
   return (
     <>
-    
+    {event && (
     <article className='page-detail'>
-      <p className='page-detail__subtitle'>Inicio / <span className='page-detail__subtitlegold'>Cata de Vinos Internacionales con degustación de ibéricos en Madrid</span></p>
-      <h1 className='page-detail__title'>Cata de Vinos Internacionales con degustación de ibéricos en Madrid</h1>
+      <p className='page-detail__subtitle'>Inicio / <span className='page-detail__subtitlegold'>{event.name}</span></p>
+      <h1 className='page-detail__title'>{event.name}</h1>
 
       <section className='page-detail__section01'>
         <div className='page-detail__section01__left'>
-          <img className='page-detail__left__image' src="/src/assets/images/cards-edited/card-04.png" alt="cartel de la cata" />
-          <p className='page-detail__left__prize'>95,00€</p>
+          <img className='page-detail__left__image' src={event.image} alt="cartel del tipo de cata" />
+          <p className='page-detail__left__price'>{event.price}</p>
           <p className='page-detail__left__iva'>IVA INCLUIDO</p>
           <div className='page-detail__left__supplement'>
             <img className='page-detail__left__check' src="/src/assets/images/icons/check-icon.png" alt="" />
-            <p className='page-detail__left__suptext'>Añadir suplemento de cata privada: 60€</p>
+            <p className='page-detail__left__suptext'>Añadir suplemento de cata privada: {event.private_tasting_supplement}</p>
           </div>
 
           <div className='page-detail__left__supplement'>
             <img className='page-detail__left__check' src="/src/assets/images/icons/check-icon.png" alt="" />
-            <p className='page-detail__left__suptext'>Añadir suplemento de ibéricos</p>
+            <p className='page-detail__left__suptext'>Añadir suplemento de ibéricos{event.iberian_supplement}</p>
           </div>
 
-          <div className='page-detail__left__cart'>
-            <img className='page-detail__left__counter' src="/src/assets/images/icons/counter.png" alt="" />
-            <p className='page-detail__left__add'>AÑADIR</p>
-            <img src="/src/assets/images/icons/cart.png" alt="" />
-          </div>
+          <div className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black' }}>
+            <button className="add-cart" style={{ width: '1.5vw',border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
+              <p style={{fontSize: '2vw', justifyContent: 'center'}}>+</p>
+            </button>
+            <div className="card-qty" style={{fontSize:'1.5vw',borderBottom:'none', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}
+            </div>
+            <button className="less-cart" style={{ width: '1.5vw', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
+              <p style={{fontSize:'2vw', justifyContent:'center'}}>-</p>
+            </button>
+          </div> 
 
           <div className='page-detail__left__extra'>
               <div className='page-detail__left__extracontent'>
@@ -147,9 +174,10 @@ const Detail = () => {
       </section>
       
     </article>
+    )}
     <hr className="page-detail__hr"/>
     <img className="page-detail__opinion" src="/src/assets/images/banners/section03.png" alt="" />
-
+      
     </>
   )
 }
