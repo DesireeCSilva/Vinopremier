@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom';
+import { getEventById } from '../../services/eventServices.js'
 import '../Detail/Detail.css'
 import Calendar from '../../components/Calendar/Calendar.jsx'
 
 const Detail = () => {
+  const { id } = useParams(); 
+  const [event, setEvent] = useState(null)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const fetchEventById = async () => {
+      try {
+        const response = await getEventById 
+      }
+    }
+  })
   return (
     <>
+    
     <article className='page-detail'>
       <p className='page-detail__subtitle'>Inicio / <span className='page-detail__subtitlegold'>Cata de Vinos Internacionales con degustación de ibéricos en Madrid</span></p>
       <h1 className='page-detail__title'>Cata de Vinos Internacionales con degustación de ibéricos en Madrid</h1>
