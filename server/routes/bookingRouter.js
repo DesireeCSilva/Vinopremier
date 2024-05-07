@@ -1,12 +1,12 @@
 import express from 'express';
 import { getAllBookings, createBooking, deleteBooking, updateBooking, getBookingById } from '../controllers/bookingController.js';
+import { authToken } from '../middlewares/authMiddleware.js';
+const bookingRouter = express.Router();
 
-const router = express.Router();
+bookingRouter.get("/", authToken, getAllBookings);
+bookingRouter.post("/", authToken, createBooking);
+bookingRouter.delete("/:id", authToken, deleteBooking);
+bookingRouter.put("/:id", authToken, updateBooking);
+bookingRouter.get("/:id", authToken, getBookingById)
 
-router.get("/", getAllBookings);
-router.post("/", createBooking);
-router.delete("/:id", deleteBooking);
-router.put("/:id", updateBooking);
-router.get("/:id", getBookingById)
-
-export default router;
+export default bookingRouter;

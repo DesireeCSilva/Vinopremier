@@ -16,6 +16,10 @@ const EventModel = connection_db.define('Event', {
             key: 'id'
         }
     },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     name: {
         type: DataTypes.STRING,
         allowNull: false
