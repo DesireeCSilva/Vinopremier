@@ -1,22 +1,44 @@
 .register-form {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 40% 40%;
+    justify-content: center;
+
+}
+.register-form_titlebox {
+    display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .register-form_title {
     font-family: 'Gotham';
     font-weight: 00;
     background: #EEEEEE;
-    display: flex;
     width: 70rem;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2rem;
+    height: 4rem;
+    padding: 2rem;
     margin-bottom: 4rem;
+    text-align: center;
 }
 
 .register-form_label {
     font-family: 'Gotham';
+}
+
+.register-form_input {
+    border: solid 1px;
+    border-color: #EEEEEE;
+    width: 30rem;
+    height: 1.8rem;
+    margin-top: 0.5rem;
+}
+
+.register_form-button {
+    font-family: 'Gotham';
+    font-size: 1rem;
+    color: white;
+    background: #000;
+    border: none;
+    width: 30.4rem;
+    height: 4.4rem;
+    margin: 2rem 0rem 0rem 8.3rem
 }
