@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createUser } from '../../services/authServices';
 import { Link, useNavigate } from 'react-router-dom';
+import '../RegisterForm/RegisterForm.css'
 
 const RegisterForm = () => {
   const [name, setName] = useState('');
@@ -24,41 +25,51 @@ const RegisterForm = () => {
   return (
     <>
     <form onSubmit={handleSubmit}>
-      <div>
+      <div className='register-form_title'>
+        <h2 className='register-form_title'>CREAR NUEVA CUENTA DE CLIENTE</h2>
+      </div>
+
+      <section className='register-form' >
+        <div className='register-form_column'>
+      <div className='register-form_label'>
         <label htmlFor="name">
           Nombre y Apellidos
-          <input type="text" value={name} onChange={(e) => {
+          <br /><input type="text" value={name} onChange={(e) => {
             setName(e.target.value)}} required></input>
         </label>
       </div>
 
-      <div>
+      <div className='register-form_label'>
         <label htmlFor='email'>
           Email
-          <input type="email" value={email} onChange={(e) =>{
+          <br /><input type="email" value={email} onChange={(e) =>{
             setEmail(e.target.value);
           }} required></input>
         </label>
       </div>
+        </div>
 
-      <div>
+        <div className='register-form_column'>
+      <div className='register-form_label'>
         <label htmlFor='phone'>
           Teléfono
-          <input type="text" value={phone} onChange={(e) => {
+          <br /><input type="text" value={phone} onChange={(e) => {
             setPhone(e.target.value);
           }} required></input>
         </label>
       </div>
 
-      <div>
+      <div className='register-form_label'>
         <label htmlFor='password'>
           Contraseña
-          <input type="password" value={password} onChange={(e) => {
+          <br /><input type="password" value={password} onChange={(e) => {
             setPassword(e.target.password);
           }} required></input>
         </label>
       </div>
-      <button type="submit">Regístrate</button>
+        </div>
+      </section>
+      <button className='register_form-button' type="submit">Regístrate</button>
     </form>
     </>
   )

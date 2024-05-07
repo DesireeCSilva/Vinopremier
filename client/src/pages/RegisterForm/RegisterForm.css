@@ -1,0 +1,22 @@
+.register-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-form_title {
+    font-family: 'Gotham';
+    font-weight: 00;
+    background: #EEEEEE;
+    display: flex;
+    width: 70rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+.register-form_label {
+    font-family: 'Gotham';
+}
