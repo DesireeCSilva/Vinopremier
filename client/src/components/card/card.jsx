@@ -61,13 +61,10 @@ const CardContainer = Styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
-   
     width: 17vw;
     gap: 1rem;
     overflow: hidden;
-    border:none;
-    
-
+    border: 2px solid #AC946A;
     }
 
   .card-img {
@@ -114,18 +111,17 @@ const CardContainer = Styled.div`
     .card-tax  {
       font-size: 1vw;
       
-      
     }
 
     .card-counter {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-evenly;
+      margin-bottom: 0vw;
+      bottom: 0;
       background-color: #AC946A;
       width: 100%;
-      height: 100%;
-      
-      
+
     }
 
     .card-counter button:hover {
@@ -139,8 +135,6 @@ const CardContainer = Styled.div`
       height: 2vw;
       background-color: #AC946A;
     }
-
-   
     .adding-cart {
       background-color: #AC946A;
       color: #00000;
@@ -207,7 +201,6 @@ function Card({ id }) {
         console.error('Error al eliminar el evento:', error);
       }
     };
-     
     
       return (
         <>
@@ -216,11 +209,10 @@ function Card({ id }) {
 <button className="card-button-add" style={{ float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/create`)}>Añadir Cata</button>
           
 <CardContainer>
-   <ul className="card-list">
-   
+  <ul className="card-list">
     {events.map((event) => (
       <li key={event.id} className="card-list-item">
-        <section className="card-bg" style={{border:'2px solid #AC946A', borderBottom:'none'}}>
+        <section className="card-bg" style={{border:'2px solid #AC946'}}>
           <article className="button-controler">
             <button className="card-button-edit" onClick={() => navigate(`edit/${id}`)}>Editar</button>
             <button className="card-button-delete" onClick={() =>  handleDelete(event.id)} >Eliminar</button>
@@ -231,7 +223,7 @@ function Card({ id }) {
             <article className="card-price">{event.price}€<p className="card-tax">IVA incluido</p></article>
           </div>
           <section className="card-counter"> 
-          <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black' }}>
+          <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black', marginBottom:'0'}}>
             <button className="add-cart" style={{ width: '1.5vw',border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
               <p style={{fontSize: '2vw', justifyContent: 'center'}}>+</p>
             </button>
@@ -242,7 +234,7 @@ function Card({ id }) {
           </article> 
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
                   {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../../src/assets/images/cart.png"/>
+            <img src="../src/assets/images/icons/cart.png"/>
           </section>
         </section>
       </li>

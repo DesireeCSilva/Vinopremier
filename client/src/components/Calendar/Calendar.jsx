@@ -1,10 +1,12 @@
 import React from 'react'
 import Calendar from 'react-calendar'
 import { useState, useEffect } from 'react';
+import '../Calendar/customcalendar.css';
 
 import { getAllEvents,  } from '../../services/eventServices';
 import { getAllBookings, postBooking, updateBooking, deleteBooking } from '../../services/bookingServices';
-import '../Calendar/customcalendar.css';
+
+
 
 
 
@@ -65,8 +67,8 @@ const App = () => {
     <>
       
       <Calendar style={{width: '50vw',margin:'30px', display:'flex', backgroundColor: 'black'}}
-       onChange={handleEventChange}
-       events={events}
+        onChange={handleEventChange}
+        events={events}
       />
       <AddEventButton onClick={addEvent}>Añadir evento</AddEventButton>
     
