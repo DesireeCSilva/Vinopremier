@@ -1,4 +1,6 @@
-
+ .page-detail {
+   margin-top: 3rem;
+ }
  .page-detail__subtitle {
     font-family: 'Gotham';
     font-size: 0.8rem;
