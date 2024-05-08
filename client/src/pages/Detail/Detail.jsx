@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { getEventById } from '../../services/eventServices.js'
 import '../Detail/Detail.css'
-import Calendar from '../../components/Calendar/Calendar.jsx'
+
 
 
 
@@ -105,7 +105,7 @@ const Detail = () => {
 
           <div className='page-detail__left__calendar' >
             <p className='page-detail__left__add'>Seleccionar fecha</p>
-            <Calendar />
+            
           </div>
 
         </div>

@@ -20,7 +20,7 @@ const Footer = () => {
   return (
     
     <FooterContainer>
-    <img src="src/assets/images/footer.PNG" alt="" />
+    <img src="../../src/assets/images/footer.PNG" alt="" />
     </FooterContainer>
     
   )
