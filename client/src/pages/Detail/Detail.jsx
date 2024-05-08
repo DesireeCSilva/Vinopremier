@@ -87,12 +87,12 @@ const Detail = () => {
 
           <section className="card-counter"> 
           <article className="buttons-counter" >
-          <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
-              <p style={{fontSize: '2vw', justifyContent: 'center'}}>+</p>
+            <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
+              <p style={{fontFamily:'Gotham', fontSize: '2vw', justifyContent: 'center'}}>+</p>
             </button>
-            <div style={{padding:'18px',border:'2px solid black',fontWeight:'bold', fontSize:'22px'}}>{eventsCount[event.id] || 0}</div>
+            <div style={{fontFamily:'Gotham', padding:'16.5px',border:'3px solid black',fontWeight:'bold', fontSize:'21px'}}>{eventsCount[event.id] || 0}</div>
             <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
-              <p style={{fontSize:'2vw', justifyContent:'center'}}>-</p>
+              <p style={{fontFamily:'Gotham', fontSize:'2vw', justifyContent:'center'}}>-</p>
             </button>
           </article> 
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
