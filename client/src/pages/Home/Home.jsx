@@ -7,6 +7,7 @@ import  '../../components/Calendar/customcalendar.css';
 const Home = () => {
   return (
     <>
+    
     <Calendar/>  
     <Card/>
     
