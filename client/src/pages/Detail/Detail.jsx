@@ -41,6 +41,26 @@ const Detail = () => {
     };
 
 
+  // Función para dividir el texto "event.description" en párrafos
+  const splitTextByRule = (text) => {
+
+    const regex = /(\. )/g;
+    let match;
+    let result = [];
+    let lastIndex = 0;
+
+    while ((match = regex.exec(text))!== null) {
+      
+      result.push(text.slice(lastIndex, match.index));
+      result.push(match[2]);
+      lastIndex = match.index + match[0].length;
+    }
+
+    result.push(text.slice(lastIndex));
+    return result.join('<br />');
+  };
+
+
   return (
     
     <>
@@ -160,7 +180,7 @@ const Detail = () => {
           </div>
 
           <div className='page-detail__right__description'>
-            <p>{event.description}</p>
+          <p dangerouslySetInnerHTML={{ __html: splitTextByRule(event.description) }}></p>
           </div>
         </div>
       </section>
