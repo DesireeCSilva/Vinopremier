@@ -24,6 +24,6 @@ export const createUser = async (data) => {
         }
         return response.data;
     } catch (error) {
-        console.error('Error en la solicitud de inicio de sesión: ' + error.message)};
+        console.error('Error en la solicitud de inicio de sesión: ',  error.message)};
         throw error; 
 };
