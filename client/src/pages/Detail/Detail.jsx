@@ -191,11 +191,9 @@ const Detail = () => {
           <div className='page-detail__right__description'>
             <p dangerouslySetInnerHTML={{ __html: splitTextByRule(event.description) }}></p>
         </div>
-          </div>
-        </div>
-      </section>
-      
-    </article>
+      </div>
+    </section>
+  </article>
     )}
     <article className="page-detail__section02">
       <hr className="page-detail__hr"/>
