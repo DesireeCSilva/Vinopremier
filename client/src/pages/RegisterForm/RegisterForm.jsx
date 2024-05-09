@@ -37,8 +37,8 @@ const RegisterForm = () => {
       </div>
 
       <div>
-        <label className='register-form_label'  htmlFor='email'>
-          Email
+        <label className='register-form_label' htmlFor='email'>
+          Correo electrónico
           <br /><input className='register-form_input' type="email" {...register('email')}required />
         </label>
       </div>
@@ -46,21 +46,21 @@ const RegisterForm = () => {
 
         <div className='register-form_column'>
         <div>
-        <label className='register-form_label'  htmlFor='phone'>
+        <label className='register-form_label' htmlFor='phone'>
           Teléfono
           <br /><input className='register-form_input' type="text" {...register('phone')} required />
         </label>
       </div>
 
       <div>
-        <label className='register-form_label'  htmlFor='password'>
+        <label className='register-form_label' htmlFor='password'>
           Contraseña
           <br /><input className='register-form_input' type="password" {...register('password')} required />
         </label>
       </div>
         </div>
       </section>
-      <button className='register_form-button' type="submit">Regístrate</button>
+      <button className='register-form_button' type="submit">Regístrate</button>
     </form>
     </>
   )

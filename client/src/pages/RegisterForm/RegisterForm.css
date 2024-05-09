@@ -3,7 +3,6 @@
     grid-template-columns: 40% 40%;
     justify-content: center;
     align-content: center;
-
 }
 .register-form_titlebox {
     display: flex;
@@ -11,6 +10,7 @@
     justify-content: center;
     margin-top: 2rem;
 }
+
 .register-form_title {
     font-family: 'Gotham';
     font-weight: 00;
@@ -35,7 +35,7 @@
     margin-bottom: 0.5rem;
 }
 
-.register_form-button {
+.register-form_button {
     font-family: 'Gotham';
     font-size: 1.2rem;
     color: white;
