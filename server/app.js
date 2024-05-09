@@ -27,17 +27,21 @@ try {
     connection_db.authenticate();
     console.log('Connection has been established successfully.👏👏');
 
-    BookingModel.sync();
-    console.log('Model Booking connected correctly 📆📆')
+    UserModel.sync();
+    console.log('Model User connected correctly 👤👤');
+    
+    LocationModel.sync();
+    console.log('Model Location connected correctly 📍📍')
 
     EventModel.sync();
     console.log('Model Event connected correctly 🍷🍷')
 
-    LocationModel.sync();
-    console.log('Model Location connected correctly 📍📍')
+    BookingModel.sync();
+    console.log('Model Booking connected correctly 📆📆')
 
-    UserModel.sync();
-    console.log('Model User connected correctly 👤👤');
+
+
+
 
     deleteCaducateEvents();
 
