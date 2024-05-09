@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { getEventById } from '../../services/eventServices.js'
+import { getLocationById } from '../../services/locationServices.js';
 import '../Detail/Detail.css'
 
 
@@ -10,6 +11,7 @@ import '../Detail/Detail.css'
 const Detail = () => {
   const { id } = useParams(); 
   const [event, setEvent] = useState(null);
+  const [location, setLocation] = useState(null);
   const [buttonTexts, setButtonTexts] = useState({});
   const [eventsCount, setEventsCount] = useState({});
 
@@ -18,6 +20,10 @@ const Detail = () => {
       try {
         const response = await getEventById(id);
         setEvent(response)
+        const responseLocation = await getLocationById(response.id_location);
+        console.log(responseLocation);
+        console.log(responseLocation.address)
+        setLocation(responseLocation)
       } catch (error) {
         console.error('Error al cargar los datos del evento:', error);
       }};
@@ -178,7 +184,7 @@ const Detail = () => {
               </div>
               <div className='page-detail__right__iconscontainer'>
                 <img className='page-detail__right__iconsimage' src="/src/assets/images/icons/diana.png" alt="" />
-                <p className='page-detail__right__iconstext'>{location.address}</p> {/*investigar*/}
+                <p className='page-detail__right__iconstext'>{location && location.address}</p> {/*investigar*/}
               </div>
             </div>
           </div>
