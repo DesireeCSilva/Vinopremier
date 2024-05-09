@@ -6,8 +6,6 @@ import '../Detail/Detail.css'
 
 
 
-
-
 const Detail = () => {
   const { id } = useParams(); 
   const [event, setEvent] = useState(null);
@@ -16,7 +14,8 @@ const Detail = () => {
   const [eventsCount, setEventsCount] = useState({});
 
   useEffect(() => {
-    const fetchEventById = async () => {
+  
+  const fetchEventById = async () => {
       try {
         const response = await getEventById(id);
         setEvent(response)
@@ -30,7 +29,7 @@ const Detail = () => {
       fetchEventById();
     }, [id]);
 
-    const handleCountChange = (eventId, delta) => {
+  const handleCountChange = (eventId, delta) => {
       setEventsCount((prevCount) => {
         const currentCount = prevCount[eventId] || 0;
         const newCount = currentCount + delta;
@@ -38,7 +37,7 @@ const Detail = () => {
       });
     };
 
-    const handleClick = (id) => {
+  const handleClick = (id) => {
       setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIDO" }));
   
       setTimeout(() => {
@@ -46,12 +45,12 @@ const Detail = () => {
       }, 2000);
     };
 
-    const [isChecked, setIsChecked] = useState({
+  const [isChecked, setIsChecked] = useState({
       private: false,
       iberian: false,
     });
     
-    const handleCheckboxChange = (event) => {
+  const handleCheckboxChange = (event) => {
       const { name, checked } = event.target;
       setIsChecked(prevState => ({ ...prevState, [name]: checked }));
 
@@ -67,7 +66,29 @@ const Detail = () => {
     price = 0;
   }
     setExtraFeaturePrice(prevState => ({ ...prevState, [name]: price }));
+
 };
+    
+const splitTextByRule = (text) => {
+
+    const regex = /(\. )/g;
+    let match;
+    let result = [];
+    let lastIndex = 0;
+
+    while ((match = regex.exec(text))!== null) {
+      
+      result.push(text.slice(lastIndex, match.index));
+      result.push(match[2]);
+      lastIndex = match.index + match[0].length;
+    }
+
+    result.push(text.slice(lastIndex));
+    return result.join('<br />');
+  };
+
+
+
 
   return (
     
@@ -84,24 +105,24 @@ const Detail = () => {
           <p className='page-detail__left__price'>{event.price}€</p>
           <p className='page-detail__left__iva'>IVA INCLUIDO</p>
 
-          <div className='page-detail__left__supplement-private'>
+          <div className='page-detail__left__supplement-prvate'>
             <input type="checkbox" id="private" name="private" onChange={handleCheckboxChange} checked={isChecked.private}/>
-            <label for="add-extra-feature-private">Añadir suplemento de cata privada:(+€{event.private_tasting_supplement})</label>
+            <label className='page-detail__left__suptext' for="add-extra-feature-private">Añadir suplemento de cata privada ({event.private_tasting_supplement}€)</label>
           </div>
 
-          <div className='page-detail__left__supplement'>
+          <div className='page-detail__left__supplement-private'>
           <input type="checkbox" id="iberian" name="iberian" onChange={handleCheckboxChange} checked={isChecked.iberian}/>
-            <label for="add-extra-feature">Añadir suplemento de Ibéricos:(+€{event.iberian_supplement})</label>
+            <label className='page-detail__left__suptext' for="add-extra-feature">Añadir suplemento de Ibéricos ({event.iberian_supplement}€)</label>
           </div>
 
           <section className="card-counter"> 
           <article className="buttons-counter" >
-          <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
-              <p style={{fontSize: '2vw', justifyContent: 'center'}}>+</p>
+            <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
+              <p style={{fontFamily:'Gotham', fontSize: '2vw', justifyContent: 'center'}}>+</p>
             </button>
-            <div style={{padding:'18px',border:'2px solid black',fontWeight:'bold', fontSize:'22px'}}>{eventsCount[event.id] || 0}</div>
+            <div style={{fontFamily:'Gotham', padding:'16.5px',border:'3px solid black',fontWeight:'bold', fontSize:'21px'}}>{eventsCount[event.id] || 0}</div>
             <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
-              <p style={{fontSize:'2vw', justifyContent:'center'}}>-</p>
+              <p style={{fontFamily:'Gotham', fontSize:'2vw', justifyContent:'center'}}>-</p>
             </button>
           </article> 
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
@@ -130,15 +151,12 @@ const Detail = () => {
                 <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
                 <p className='page-detail__left__extratext' >Pueden asistir más personas a la cata de las que compraron las entradas: {event.extra_people? "Sí" : "No"}</p>
               </div>
-         </div>
+        </div>
 
           <div className='page-detail__left__calendar' >
             <p className='page-detail__left__add'>Seleccionar fecha</p>
-            
           </div>
-
         </div>
-
       <div className='page-detail__section01__right'>
           <div className='page-detail__right__icons'>
             <div className='page-detail__right__iconscolumn'>
@@ -183,7 +201,7 @@ const Detail = () => {
               </div>
               <div className='page-detail__right__iconscontainer'>
                 <img className='page-detail__right__iconsimage' src="/src/assets/images/icons/diana.png" alt="" />
-                <p className='page-detail__right__iconstext'>{location && location.address}</p> {/*investigar*/}
+                <p className='page-detail__right__iconstext'>{location && location.address}</p>
               </div>
             </div>
           </div>
@@ -200,9 +218,7 @@ const Detail = () => {
       <img className="page-detail__opinion" src="/src/assets/images/banners/section03.png" alt="" />
     </article> 
     </>
-  
-  )
+);
 }
-
 
 export default Detail
