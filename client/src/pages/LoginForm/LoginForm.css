@@ -33,10 +33,15 @@
 
 .register_form-button-login {
     font-family: 'Gotham';
-    font-size: 1.2rem;
+    font-size: 1rem;
+    letter-spacing: 0.09em;
     color: white;
     background: #000;
     border: none;
     height: 4.4rem;
     margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }

@@ -39,8 +39,8 @@ const LoginForm = () => {
           <input className='login-form_input' type="password" {...register('password')} required />
         </label>
       </div>
-      <button className='register_form-button-login' type="submit">Iniciar sesión</button>
-      <button className='register_form-button-login' type="submit">Regístrate</button>
+      <button className='register_form-button-login' type="submit">INICIAR SESIÓN</button>
+      <Link className='register_form-button-login' to="/register">REGÍSTRATE</Link>
     </form>
     </>
   )

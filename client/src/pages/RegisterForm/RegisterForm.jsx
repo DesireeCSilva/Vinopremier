@@ -60,7 +60,7 @@ const RegisterForm = () => {
       </div>
         </div>
       </section>
-      <button className='register-form_button' type="submit">Regístrate</button>
+      <button className='register-form_button' type="submit">REGÍSTRATE</button>
     </form>
     </>
   )
