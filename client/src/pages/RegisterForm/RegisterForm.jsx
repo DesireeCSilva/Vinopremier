@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
 import { createUser } from '../../services/authServices';
 import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import '../RegisterForm/RegisterForm.css'
 
 const RegisterForm = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { handleSubmit, register, formState: { errors }} = useForm()
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
+  const onSubmit = async(data) => {
     try {
-      const data = await createUser(name, email, phone, password);
+      const response = await createUser(data);
       alert('Usuario registrado correctamente');
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('token', response.token);
       console.log(localStorage.getItem('token'));
+      navigate('/')
 
     } catch (error) {
       console.error('Error:', error)
@@ -24,7 +22,7 @@ const RegisterForm = () => {
   }
   return (
     <>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className='register-form_titlebox'>
         <h2 className='register-form_title'>CREAR NUEVA CUENTA DE CLIENTE</h2>
       </div>
@@ -34,17 +32,14 @@ const RegisterForm = () => {
       <div>
         <label className='register-form_label' htmlFor="name">
           Nombre y Apellidos
-          <br /><input className='register-form_input' type="text" value={name} onChange={(e) => {
-            setName(e.target.value)}} required></input>
+          <br /><input className='register-form_input' type="text" {...register('name')} required />
         </label>
       </div>
 
       <div>
         <label className='register-form_label'  htmlFor='email'>
           Email
-          <br /><input className='register-form_input' type="email" value={email} onChange={(e) =>{
-            setEmail(e.target.value);
-          }} required></input>
+          <br /><input className='register-form_input' type="email" {...register('email')}required />
         </label>
       </div>
         </div>
@@ -53,18 +48,14 @@ const RegisterForm = () => {
         <div>
         <label className='register-form_label'  htmlFor='phone'>
           Teléfono
-          <br /><input className='register-form_input' type="text" value={phone} onChange={(e) => {
-            setPhone(e.target.value);
-          }} required></input>
+          <br /><input className='register-form_input' type="text" {...register('phone')} required />
         </label>
       </div>
 
       <div>
         <label className='register-form_label'  htmlFor='password'>
           Contraseña
-          <br /><input className='register-form_input' type="password" value={password} onChange={(e) => {
-            setPassword(e.target.password);
-          }} required></input>
+          <br /><input className='register-form_input' type="password" {...register('password')} required />
         </label>
       </div>
         </div>
