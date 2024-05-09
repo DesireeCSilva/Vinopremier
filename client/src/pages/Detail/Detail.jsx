@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { RouterProvider, useParams } from 'react-router-dom';
 import { getEventById } from '../../services/eventServices.js'
 import '../Detail/Detail.css'
-import Calendar from '../../components/Calendar/Calendar.jsx'
+
 
 
 
@@ -40,6 +40,31 @@ const Detail = () => {
       }, 2000);
     };
 
+    const [isChecked, setIsChecked] = useState({
+      private: false,
+      iberian: false,
+    });
+    
+    const handleCheckboxChange = (event) => {
+      const { name, checked } = event.target;
+      setIsChecked(prevState => ({ ...prevState, [name]: checked }));
+
+      let price;
+        switch (name) {
+    case 'private':
+      price = checked ? 60 : 0;
+      break;
+    case 'iberian':
+      price = checked ? 25 : 0;
+      break;
+    default:
+      price = 0;
+  }
+
+  setExtraFeaturePrice(prevState => ({ ...prevState, [name]: price }));
+};
+
+ 
 
   // Función para dividir el texto "event.description" en párrafos
   const splitTextByRule = (text) => {
@@ -60,6 +85,7 @@ const Detail = () => {
     return result.join('<br />');
   };
 
+    
 
   return (
     
@@ -75,14 +101,15 @@ const Detail = () => {
           <img className='page-detail__left__image' src={event.image} alt="cartel del tipo de cata" />
           <p className='page-detail__left__price'>{event.price}€</p>
           <p className='page-detail__left__iva'>IVA INCLUIDO</p>
-          <div className='page-detail__left__supplement'>
-            <img className='page-detail__left__check' src="/src/assets/images/icons/check-icon.png" alt="" />
-            <p className='page-detail__left__suptext'>Añadir suplemento de cata privada: {event.private_tasting_supplement}€</p>
+
+          <div className='page-detail__left__supplement-private'>
+            <input type="checkbox" id="private" name="private" onChange={handleCheckboxChange} checked={isChecked.private}/>
+            <label for="add-extra-feature-private">Añadir suplemento de cata privada:(+€{event.private_tasting_supplement})</label>
           </div>
 
           <div className='page-detail__left__supplement'>
-            <img className='page-detail__left__check' src="/src/assets/images/icons/check-icon.png" alt="" />
-            <p className='page-detail__left__suptext'>Añadir suplemento de ibéricos: {event.iberian_supplement}€</p>
+          <input type="checkbox" id="iberian" name="iberian" onChange={handleCheckboxChange} checked={isChecked.iberian}/>
+            <label for="add-extra-feature">Añadir suplemento de Ibéricos:(+€{event.iberian_supplement})</label>
           </div>
 
           <section className="card-counter"> 
@@ -121,10 +148,10 @@ const Detail = () => {
                 <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
                 <p className='page-detail__left__extratext' >Pueden asistir más personas a la cata de las que compraron las entradas: {event.extra_people? "Sí" : "No"}</p>
               </div>
-          </div>
+         </div>
 
           <div className='page-detail__left__calendar' >
-            <p className="adding-cart">Seleccionar fecha</p>
+            <p className='page-detail__left__add'>Seleccionar fecha</p>
             <Calendar />
           </div>
 
