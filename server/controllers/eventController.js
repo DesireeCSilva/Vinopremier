@@ -54,3 +54,28 @@ export const getEventById = async (request, response) => {
         response.status(500).json({message: error.message})
     }
 }
+
+export const getEventByName = async(request, response) => {
+    try {
+        const names = await EventModel.findAll({
+            attributes: { exclude: ['date', 'time']},
+            group: ['name']
+        });
+        response.status(200).json(names)
+    } catch (error) {
+        response.status(500).json({message: error.message})
+    }
+}
+
+export const getEventDatesByName = async (request, response) => {
+    try {
+        const { cataName } = request.params;
+        const dates = EventModel.findAll({
+            attributes: ['date', 'time'],
+            where: { name: cataName }
+        })
+        response.status(200).json(dates)
+    } catch (error) {
+        response.status(500).json({message: error.message})
+    }
+}
