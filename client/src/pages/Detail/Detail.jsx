@@ -125,7 +125,7 @@ const Detail = () => {
                 <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
                 <p className='page-detail__left__extratext' >Pueden asistir más personas a la cata de las que compraron las entradas: {event.extra_people? "Sí" : "No"}</p>
               </div>
-         </div>
+          </div>
 
           <div className='page-detail__left__calendar' >
             <p className='page-detail__left__add'>Seleccionar fecha</p>
