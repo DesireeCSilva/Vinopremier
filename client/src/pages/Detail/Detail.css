@@ -168,7 +168,6 @@
    height: fit-content;      
 }
 
-
 .buttons-counter {
    display: flex;
    align-items: center;
@@ -180,7 +179,6 @@
    font-weight: 800;
 }
 
-
 .buttons-counter button {
    width: 4rem;
    height: 4rem;
@@ -191,7 +189,6 @@
    cursor: pointer;
    border: 3px solid #000000;
 }
-
 
 .adding-cart {
    display: flex;
