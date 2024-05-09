@@ -1,0 +1,12 @@
+.payment-page {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.payment-page_right-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #000;
+    width: 40rem;
+    height: 30rem;
+}
