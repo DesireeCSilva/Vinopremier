@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { RouterProvider, useParams } from 'react-router-dom';
 import { getEventById } from '../../services/eventServices.js'
 import '../Detail/Detail.css'
 import Calendar from '../../components/Calendar/Calendar.jsx'
@@ -124,7 +124,7 @@ const Detail = () => {
           </div>
 
           <div className='page-detail__left__calendar' >
-            <p className='page-detail__left__add'>Seleccionar fecha</p>
+            <p className="adding-cart">Seleccionar fecha</p>
             <Calendar />
           </div>
 
@@ -187,7 +187,7 @@ const Detail = () => {
       
     </article>
     )}
-    <article className="page-detail__section02">
+    <article>
       <hr className="page-detail__hr"/>
       <img className="page-detail__opinion" src="/src/assets/images/banners/section03.png" alt="" />
     </article> 
