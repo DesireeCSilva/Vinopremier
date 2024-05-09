@@ -102,14 +102,14 @@ const Detail = () => {
           <p className='page-detail__left__price'>{event.price}€</p>
           <p className='page-detail__left__iva'>IVA INCLUIDO</p>
 
-          <div className='page-detail__left__supplement-private'>
+          <div className='page-detail__left__supplement-prvate'>
             <input type="checkbox" id="private" name="private" onChange={handleCheckboxChange} checked={isChecked.private}/>
-            <label for="add-extra-feature-private">Añadir suplemento de cata privada:(+€{event.private_tasting_supplement})</label>
+            <label className='page-detail__left__suptext' for="add-extra-feature-private">Añadir suplemento de cata privada ({event.private_tasting_supplement}€)</label>
           </div>
 
-          <div className='page-detail__left__supplement'>
+          <div className='page-detail__left__supplement-private'>
           <input type="checkbox" id="iberian" name="iberian" onChange={handleCheckboxChange} checked={isChecked.iberian}/>
-            <label for="add-extra-feature">Añadir suplemento de Ibéricos:(+€{event.iberian_supplement})</label>
+            <label className='page-detail__left__suptext' for="add-extra-feature">Añadir suplemento de Ibéricos ({event.iberian_supplement}€)</label>
           </div>
 
           <section className="card-counter"> 
@@ -148,11 +148,11 @@ const Detail = () => {
                 <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
                 <p className='page-detail__left__extratext' >Pueden asistir más personas a la cata de las que compraron las entradas: {event.extra_people? "Sí" : "No"}</p>
               </div>
-         </div>
+        </div>
 
           <div className='page-detail__left__calendar' >
-            <p className='page-detail__left__add'>Seleccionar fecha</p>
-            <Calendar />
+            <p className='page-detail__left__calendartext'>Seleccionar fecha</p>
+            {/* <Calendar /> */}
           </div>
 
         </div>
