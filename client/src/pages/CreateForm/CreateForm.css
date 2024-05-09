@@ -23,7 +23,7 @@
 }
 
 .formCreate > div {
-    margin-bottom: 10px; /* Espacio entre cada campo */
+    margin-bottom: 10px;
 }
 
 .createFormTitle {
@@ -32,7 +32,7 @@
 
 .formCreate label {
     flex: 1;
-    margin-bottom: 10px; /* Mover un poco el espacio entre la etiqueta y el input */
+    margin-bottom: 10px;
 }
 
 .formCreate input {
@@ -45,7 +45,7 @@
 }
 
 .formCreate input[type="checkbox"] {
-   width: auto; /* Para que el ancho sea ajustado por el contenido */
+   width: auto;
 }
 
 .buttonCreate {

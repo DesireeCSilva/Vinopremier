@@ -11,15 +11,14 @@ const CreateForm = () => {
     const navigate = useNavigate();
     
     
-    const onSubmit = async (data) =>{
+    const handleForm = async (data) =>{
       try{
-
         //Convertir campos númericos a números decimales
         data.price = parseFloat(data.price)
         data.private_tasting_supplement = parseFloat(data.private_tasting_supplement)
         data.iberian_supplement = parseFloat(data.iberian_supplement)
 
-
+        
         const response = await postEvent(data)
         console.log(response)
         alert("Evento creado correctamente")
@@ -33,12 +32,12 @@ const CreateForm = () => {
   return (
     <div className="createFormContainer">
       <h2 className="createFormTitle">Formulario de creación de catas</h2>
-      <form className="formCreate" onSubmit={handleSubmit(onSubmit)}>
+      <form className="formCreate" onSubmit={handleSubmit(handleForm)}>
           <div>
             <label htmlFor="id_location">Id de la localización</label>
             <input type="number" id="id_location" name="id_location" {...register('id_location', {required: true})}/>
           </div>
-          <div>
+           <div>
             <label htmlFor="name">Nombre de la cata</label>
             <input type="text" id="name" name="name" {...register('name', {required: true})}/>
           </div>
@@ -92,34 +91,34 @@ const CreateForm = () => {
           </div>
           <div>
             <label htmlFor='extra_people'>Pueden asistir más personas a la cata de las que compraron las entradas</label>
-            <input type="checkbox" id="extra_people" name="extra_people" {...register('extra_people', {required: true})} defaultChecked={false}/>
+            <input type="checkbox" id="extra_people" name="extra_people" {...register('extra_people')} />
           </div>
           <div>
             <label htmlFor='possibility_dinner'>Es posible cenar en el establecimiento</label>
-            <input type="checkbox" id="possibility_dinner" name="posibility_dinner" {...register('possibility_dinner', {required: true})} defaultChecked={true}/>
+            <input type="checkbox" id="possibility_dinner" name="posibility_dinner" {...register('possibility_dinner')}/>
           </div>
           <div>
             <label htmlFor='kids'>Se puede asistir con niños</label>
-            <input type="checkbox" id="kids" name="kids" {...register('kids', {required: true})} defaultChecked={false}/>
+            <input type="checkbox" id="kids" name="kids" {...register('kids')}/>
           </div>
           <div>
             <label htmlFor='pets'>Se puede asistir con mascotas</label>
-            <input type="checkbox" id="pets" name="pets" {...register('pets', {required: true})} defaultChecked={false}/>
+            <input type="checkbox" id="pets" name="pets" {...register('pets')}/>
           </div>
           <div>
             <label htmlFor='accesibility'>Accesibilidad</label>
-            <input type="checkbox" id="accesibility" name="accesibility" {...register('accesibility', { required: true})} defaultChecked={false}/>
+            <input type="checkbox" id="accesibility" name="accesibility" {...register('accesibility')}/>
           </div>
           <div>
             <label htmlFor='vegan_version'>Opción vegana</label>
-            <input type="checkbox" id="vegan_version" name="vegan_version" {...register('vegan_version', { required: true})} defaultChecked={false}/>
+            <input type="checkbox" id="vegan_version" name="vegan_version" {...register('vegan_version')}/>
           </div>
           <div>
             <label htmlFor="english">Disponibilidad en inglés</label>
-            <input type="checkbox" id="english" name="english" {...register('english', { required: true})} defaultChecked={false}/>
-          </div> 
+            <input type="checkbox" id="english" name="english" {...register('english')}/>
+          </div>
+        <input className="buttonCreate" type="submit" value="PUBLICAR"/> 
     </form>
-    <button className="buttonCreate" type="submit">PUBLICAR</button> 
   </div>
   )
 }
