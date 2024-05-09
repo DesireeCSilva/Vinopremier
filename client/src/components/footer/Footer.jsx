@@ -18,15 +18,11 @@ const FooterContainer = Styled.div`
 
 const Footer = () => {
   return (
-<<<<<<< HEAD
-    <img src="src/assets/images/footer.PNG" alt="" style={{width:'100%', alignContent:'center'}}/>
-=======
     
     <FooterContainer>
     <img src="../../src/assets/images/footer.PNG" alt="" />
     </FooterContainer>
     
->>>>>>> feature-card
   )
 }
 

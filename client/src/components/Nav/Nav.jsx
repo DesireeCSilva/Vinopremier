@@ -17,13 +17,9 @@ const NavContainer = Styled.div`
 
 const Nav = () => {
   return (
-<<<<<<< HEAD
-    <img src="src/assets/images/header.png" alt="" style={{width:'100%', alignContent:'center'}}/>
-=======
     <NavContainer>
       <img src="../../src/assets/images/header.png" alt="imagen navbar" />
     </NavContainer>
->>>>>>> feature-card
   )
 }
 
