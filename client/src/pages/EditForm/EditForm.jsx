@@ -1,13 +1,65 @@
 import React from 'react'
 import './EditForm.css'
+import { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { getEventById, updateEvent } from '../../services/eventServices';
+import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const EditForm = () => {
 
+    const{id} = useParams();
+    const { register, handleSubmit, reset, setValue, watch } = useForm();
+    const navigate = useNavigate()
+    const [loading, setLoading] = useState(false);
+    const [eventData, setEventData] = useState();
 
+    useEffect(() => {
+      const fetchData = async () => {
+      const eventData = await getEventById(id);
+          setEventData(eventData);
 
-
-
-
+              setValue('id_location', eventData.id_location),
+              setValue('name', eventData.name),
+              setValue('image', eventData.image),
+              setValue('description', eventData.description),
+              setValue('cata_type', eventData.cata_type),
+              setValue('products', eventData.products),
+              setValue('price', eventData.price),
+              setValue('private_tasting_supplement', eventData.private_tasting_supplement),
+              setValue('iberian_supplement', eventData.iberian_supplement),
+              setValue('date', eventData.date),
+              setValue('time', eventData.time),
+              setValue('duration', eventData.duration),
+              setValue('capacity', eventData.capacity),
+              setValue('parking', eventData.parking),
+              setValue('extra_people', eventData.extra_people),
+              setValue('possibility_dinner', eventData.possibility_dinner),
+              setValue('kids', eventData.kids),
+              setValue('pets', eventData.pets),
+              setValue('accesibility', eventData.accesibility),
+              setValue('vegan_version', eventData.vegan_version),
+              setValue('english', eventData.english)
+            };
+        fetchData();
+        },
+      [id, setValue]
+   );
+const onSubmit = async (editEvent) => {
+  console.log("Evento editado", editEvent);
+  setLoading(true);
+      try{
+        await updateEvent(id, editEvent);
+        alert("Datos actualizados correctamente");
+        navigate(`/detail/${id}`)
+      }
+      catch (error) {
+        console.error("Error al actualizar el evento", error);
+      }
+      finally{
+        setLoading(false);
+      }
+}
 
   return (
     <div className="editFormContainer">
