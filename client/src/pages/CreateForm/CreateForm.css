@@ -1,0 +1,63 @@
+.createFormContainer {
+    font-family: 'Gotham', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.formCreate {
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid black;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    background-color: black;
+    color: white;
+}
+
+.formCreate > div {
+    margin-bottom: 10px;
+}
+
+.createFormTitle {
+    text-align: center;
+}
+
+.formCreate label {
+    flex: 1;
+    margin-bottom: 10px;
+}
+
+.formCreate input {
+    background-color: #AC946A;
+    padding: 10px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.formCreate input[type="checkbox"] {
+   width: auto;
+}
+
+.buttonCreate {
+    background-color: #AC946A;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Gotham', sans-serif;
+    color: white;
+    width: 100%;
+    max-width: 500px;
+    font-weight:bold;
+    border: none;
+    cursor: pointer;
+}

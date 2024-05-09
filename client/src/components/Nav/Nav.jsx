@@ -18,8 +18,7 @@ const NavContainer = Styled.div`
 const Nav = () => {
   return (
     <NavContainer>
-      
-<img src="src/assets/images/header.png" alt="imagen navbar" />
+      <img src="../../src/assets/images/header.png" alt="imagen navbar" />
     </NavContainer>
   )
 }
