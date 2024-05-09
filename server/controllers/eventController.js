@@ -54,7 +54,6 @@ export const getEventById = async (request, response) => {
         response.status(500).json({message: error.message})
     }
 }
-
 export const getEventByName = async(request, response) => {
     try {
         const names = await EventModel.findAll({
@@ -69,13 +68,15 @@ export const getEventByName = async(request, response) => {
 
 export const getEventDatesByName = async (request, response) => {
     try {
-        const { cataName } = request.params;
-        const dates = EventModel.findAll({
+        const encodedEventName = request.params.eventName;
+        const decodedEventName = decodeURIComponent(encodedEventName);
+
+        const eventDates = await EventModel.findAll({
             attributes: ['date', 'time'],
-            where: { name: cataName }
-        })
-        response.status(200).json(dates)
+            where: { name: decodedEventName }
+        });
+        response.status(200).json(eventDates)
     } catch (error) {
-        response.status(500).json({message: error.message})
+        response.status(500).json({ message: error.message });
     }
 }
