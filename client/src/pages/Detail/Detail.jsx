@@ -50,18 +50,17 @@ const Detail = () => {
       setIsChecked(prevState => ({ ...prevState, [name]: checked }));
 
       let price;
-        switch (name) {
-    case 'private':
-      price = checked ? 60 : 0;
-      break;
-    case 'iberian':
-      price = checked ? 25 : 0;
-      break;
-    default:
-      price = 0;
+      switch (name) {
+  case 'private':
+    price = checked ? 60 : 0;
+    break;
+  case 'iberian':
+    price = checked ? 25 : 0;
+    break;
+  default:
+    price = 0;
   }
-
-  setExtraFeaturePrice(prevState => ({ ...prevState, [name]: price }));
+    setExtraFeaturePrice(prevState => ({ ...prevState, [name]: price }));
 };
 
   return (
@@ -125,7 +124,7 @@ const Detail = () => {
                 <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
                 <p className='page-detail__left__extratext' >Pueden asistir más personas a la cata de las que compraron las entradas: {event.extra_people? "Sí" : "No"}</p>
               </div>
-          </div>
+         </div>
 
           <div className='page-detail__left__calendar' >
             <p className='page-detail__left__add'>Seleccionar fecha</p>
@@ -184,8 +183,8 @@ const Detail = () => {
           </div>
 
           <div className='page-detail__right__description'>
-          <p dangerouslySetInnerHTML={{ __html: splitTextByRule(event.description) }}></p>
-        </div>
+            <p>{event.description}</p>
+          </div>
         </div>
       </section>
       
