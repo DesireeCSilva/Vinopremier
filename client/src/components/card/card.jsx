@@ -135,8 +135,6 @@ const CardContainer = Styled.div`
       height: 2vw;
       background-color: #AC946A;
     }
-
-
     .adding-cart {
       background-color: #AC946A;
       color: #00000;
@@ -159,47 +157,52 @@ function Card({ id }) {
   const [eventsCount, setEventsCount] = useState({}); 
   const [city, setCity] = useState([]);
   const [events, setEvents] = useState([]);
+  const [filterType, setFilterType] = useState('');
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios.get('http://localhost:8000/event');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get('http://localhost:8000/event');
-      // Filtrar eventos únicos
-      const uniqueEvents = result.data.reduce((acc, event) => {
-        if (!acc[event.id]) {
-          acc[event.id] = event;
-        }
-        return acc;
-      }, {});
-      setEvents(Object.values(uniqueEvents));
+        setEvents(result.data);
 
-      const locationResult = await axios.get('http://localhost:8000/location');
-      setCity(locationResult.city);
+            const locationResult = await axios.get('http://localhost:8000/location');
+        setCity(locationResult.city);
 
-      const initialCount = {};
-      result.data.forEach((event) => {
-        initialCount[event.id] = 1; 
+        const initialCount = {};
+        result.data.forEach((event) => {
+          initialCount[event.id] = 1; 
+        });
+        setEventsCount(initialCount);
+      };
+  
+      fetchData();
+    }, []);
+
+
+    // Función para filtrar eventos por cata_type
+  const filterEvents = () => {
+    if (!filterType) {
+      return events; // Si no hay filtro, muestra todos los eventos
+    }
+    return events.filter(event => event.cata_type === filterType); // Aplica el filtro
+  };
+  
+
+    const handleCountChange = (eventId, delta) => {
+      setEventsCount((prevCount) => {
+        const currentCount = prevCount[eventId] || 0;
+        const newCount = currentCount + delta;
+        return { ...prevCount, [eventId]: newCount >= 0 ? newCount : 0 };
       });
-      setEventsCount(initialCount);
     };
 
-    fetchData();
-  }, []);
-
-  const handleCountChange = (eventId, delta) => {
-    setEventsCount((prevCount) => {
-      const currentCount = prevCount[eventId] || 0;
-      const newCount = currentCount + delta;
-      return {...prevCount, [eventId]: newCount >= 0? newCount : 0 };
-    });
-  };
-
-  const handleClick = (id) => {
-    setButtonTexts(prevState => ({...prevState, [id]: "AÑADIDO" }));
-
-    setTimeout(() => {
-      setButtonTexts(prevState => ({...prevState, [id]: "AÑADIR" }));
-    }, 2000);
-  };
+    const handleClick = (id) => {
+      setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIDO" }));
+  
+      setTimeout(() => {
+        setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIR" }));
+      }, 2000);
+    };
 
     const handleDelete = async (id) => {
       try {
@@ -218,7 +221,7 @@ function Card({ id }) {
           
 <CardContainer>
   <ul className="card-list">
-    {events.map((event) => (
+    {filterEvents().map((event) => (
       <li key={event.id} className="card-list-item">
         <section className="card-bg" style={{border:'2px solid #AC946'}}>
           <article className="button-controler">

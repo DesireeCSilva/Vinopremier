@@ -7,6 +7,7 @@ import EditForm from '../pages/EditForm/EditForm';
 import LoginForm from '../pages/LoginForm/LoginForm';
 import RegisterForm from '../pages/RegisterForm/RegisterForm';
 import Payment from '../pages/Payment/Payment';
+import SearchBar from '../components/SearchBar/SearchBar';
 
 
 
@@ -18,6 +19,10 @@ export const router = createBrowserRouter ([
             {
                 path: "/",
                 element: <Home/>,
+            },
+            {
+                path: "/filter",
+                element: <SearchBar/>
             },
             {
                 path: "/detail/:id",

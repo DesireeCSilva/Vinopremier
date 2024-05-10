@@ -67,3 +67,14 @@ export const deleteEvent = async (id) => {
         }
     }
 }
+
+export const getEventsByFilter = async (searchQuery) => {
+    try {
+        const response = await axios.get(`${URL_EVENT}/filter?searchQuery=${searchQuery}`);
+        const data = response.data;
+        return data;
+    } catch (error) {
+        console.log('Error al obtener eventos por filtro', error);
+        throw error;
+    }
+}
