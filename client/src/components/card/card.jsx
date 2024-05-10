@@ -217,7 +217,7 @@ function Card({ id }) {
             <button className="card-button-edit" onClick={() => navigate(`edit/${id}`)}>Editar</button>
             <button className="card-button-delete" onClick={() =>  handleDelete(event.id)} >Eliminar</button>
             </article>
-          <img className="card-img" src={event.image} alt={event.name} width="50" height="50" />
+          <img className="card-img" src={event.image} onClick={() => navigate(`Detail/${id}`)} alt={event.name} width="50" height="50" />
           <div className="card-information">
             <article className="card-name">{event.name}</article>
             <article className="card-price">{event.price}€<p className="card-tax">IVA incluido</p></article>
@@ -234,7 +234,7 @@ function Card({ id }) {
           </article> 
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
                   {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../src/assets/images/icons/cart.png"/>
+            <img src="../src/assets/images/icons/cart.png" onClick={() => navigate(`Payment/`)}/>
           </section>
         </section>
       </li>
