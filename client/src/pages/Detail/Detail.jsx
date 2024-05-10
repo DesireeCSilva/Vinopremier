@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { RouterProvider, useParams } from 'react-router-dom';
-import { getEventById } from '../../services/eventServices.js'
+import { getEventById } from '../../services/eventServices.js';
+import { getLocationById} from '../../services/locationServices.js'
 import '../Detail/Detail.css'
 
 
@@ -19,7 +20,7 @@ const Detail = () => {
       try {
         const response = await getEventById(id);
       setEvent(response)
-         const responseLocation = await getLocationById(response.id_location);
+        const responseLocation = await getLocationById(response.id_location);
         console.log(responseLocation);
         console.log(responseLocation.address)
         setLocation(responseLocation)
