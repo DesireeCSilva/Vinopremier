@@ -1,10 +1,25 @@
 import { useState } from 'react';
-const SearchBar = ({ onSearch }) => {
+import { getEventsByFilter } from '../../services/eventServices.js';
+
+const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const handleSearch = (event) => {
+    const [filteredEvents, setFilteredEvents] = useState([]);
+
+    const handleSearch = async (event) => {
+        
         setSearchTerm(event.target.value);
-        onSearch(event.target.value); 
+        
+        try {
+            const filteredResults = await getEventsByFilter(searchTerm);
+            setFilteredEvents(filteredResults); 
+            console.log(filteredResults);
+        } catch (error) {
+            console.error('Error fetching filtered events:', error);
+            setError('No se pudieron cargar los eventos filtrados. Por favor, inténtalo de nuevo más tarde.');
+        }
     };
+    
+    
     return (
         <div className="search-bar">
         <input
