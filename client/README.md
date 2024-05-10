@@ -1,5 +1,10 @@
 # Vinopremier 🍷🍇
-Este proyecto 
+Este proyecto ha sido desarrollado para la empresa Vinopremier, una empresa que nace en Segovia como una tienda online en el 2008. Ofrece una experiencia a través de un catálogo de referencia, Catas formativas, degustaciones y un servicio de venta online, tanto en España como a nivel internacional. El proyecto ha sido construido respetando la imagen corporativa de la empresa, con el objetivo de mejorar la experiencia del usuario. Nuestro trabajo ha consistido en: 
+* Mejoras en la visualización de la screen de las Catas: se ha rediseñado la pantalla de Catas y Eventos, modificando las cards y el filtrado por ciudades, para proporcionar una experiencia más atractiva e intuitiva para el usuario.
+* Sistema de gestión de reserva de Catas: el usuario puede explorar y reservar fácilmente Catas disponibles en Vinopremier gracias a la implementación de un calendario funcional. Ha sido diseñada para facilitar la reserva de Catas en línea, y hacer más llevadera la gestión de las mismas. 
+* Filtrado de Catas mejorado: se han ideado e implementado mejoras en el sistema de filtrado de Catas, para ayudar al usuario a encontrar las Catas que mejor se adapten a sus preferencias y necesidades.
+* Mejoras en la página de detalle de cada Cata: se ha rediseñado la screen mostrando los datos a través de iconos y una card informativa, incluyendo el mencionado calendario y organizando los componentes de una forma más adecuada para la experiencia de usuario.
+* Elaboración de formularios de creación, edición y borrado de Catas para la parte del Admin: siempre con el objetivo de hacer más fácil el trabajo del equipo de Vinopremier.
 
 
 # Index
