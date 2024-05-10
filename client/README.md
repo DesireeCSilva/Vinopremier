@@ -72,7 +72,7 @@ CREATE DATABASE vino_premier;
 cd server
 ```
 
-##### Para instalar todas las dependencias de Backend, copie la siguiente línea
+##### Para instalar todas las dependencias de Backend, copia la siguiente línea
  ```bash
 npm i
 ```
@@ -93,12 +93,12 @@ npm run dev
 cd server
 ```
 
-##### Para instalar todas las dependencias de prueba, copie la siguiente línea
+##### Para instalar todas las dependencias de prueba, copia la siguiente línea
  ```bash
 npm i
 ```
 
-##### Copie el código para iniciar el Jest Server
+##### Copia el código para iniciar el Jest Server
 ```bash
 npm run test
 ```
@@ -117,26 +117,26 @@ https://albamartinmz.postman.co/workspace/My-Workspace~1d37aef0-5e05-4f4d-8aa0-e
 Hemos construido el ecosistema de carpetas para nuestro proyecto en el Front-end y Back-end de forma ordenada y metódica. Hemos dividido el proyecto en dos carpetas llamadas _client_ y _server_, y en cada una de ellas hemos organizado los archivos apropiadamente para el correcto comportamiento y funcionamiento del repositorio. Vamos a mencionar los más importantes.
 
 En la carpeta _client_: 
-* __node_modules:__ contains all the dependencies of your project. When you install packages using npm, they are stored here.
-* __db_server:__ plays a crucial role in ensuring the proper functioning and security of the database server.
-* __src:__ this is where the source code of your React application resides. It typically contains the following subfolders:
-1. *components:* contains reusable React components that make up our application's UI. Each component folder contains the subfolders of styles, CSS files or preprocessor files for styling your components.
-2. *pages:* contains React components that represent different pages of our application.
-3. *assets:* holds static assets like images, fonts, or other media files used in your application.
-4. *services:* contains modules for interacting with external services or APIs, in this case an archive of JavaScript.
-5. *context:* contains information about the context or environment in which the application operates.
-6. *routes:* defines the various routes or endpoints available in the application's API or web server.
+* __node_modules:__ contiene todas las dependencias del proyecto. Cuando instalamos paquetes usando npm, se almacenan aquí.
+* __db_server:__ juega un papel crucial para garantizar el correcto funcionamiento y la seguridad del servidor de la base de datos.
+* __src:__ aquí es donde reside el código fuente de la aplicación React. Normalmente contiene las siguientes subcarpetas:
+1. *components:* son literalmente los componentes React reutilizables que conforman la interfaz de usuario de nuestra aplicación. Cada carpeta del componente contiene subcarpetas de estilos o archivos CSS.
+2. *pages:* contiene diferentes páginas de nuestra aplicación compuestas con los componentes de React que requieren renderizar.
+3. *assets:* contiene activos estáticos como imágenes, fuentes u otros archivos multimedia utilizados en la app.
+4. *services:* contiene módulos para interactuar con servicios externos o API, en este caso archivos de JavaScript.
+5. *layout:* define la estructura principal de la página incluyendo el header, footer y el contenido principal.
+6. *router:* define las diversas rutas o endpoints disponibles en la API o el servidor web de la aplicación.
 
-On the _server_ folder: 
-* __controllers:__ to handle HTTP requests.
-* __database:__ configuration of connections with the database.
-* __helpers:__ contains the import and export validations from express-validator.
-* __interfaces__: define data structures for consistent communication.
-* __middlewares:__ handle request processing and control flow.
-* __models:__ contains the models of the News and User.
-* __utils:__ provide reusable functionalities.
-* __validators:__ contains the validations of the News and User.
-* __routes:__ organize API endpoint definitions.
+En la carpeta _server_: 
+* __controllers__: para manejar solicitudes HTTP.
+* __database__: configuración de conexiones con la base de datos.
+* __helpers__: contiene las validaciones de importación y exportación de express-validator.
+* __interfaces__: define estructuras de datos para una comunicación consistente.
+* __middlewares__: maneja el procesamiento de solicitudes y controla el flujo.
+* __models__: contiene los modelos de Booking, Events, Location y User.
+* __utils__: proporciona funcionalidades reutilizables.
+* __validators__: contiene las validaciones de Booking, Events, Location y User.
+* __routes__: organiza las definiciones de los endpoints de la API.
 
 
 # Technologies
@@ -161,21 +161,21 @@ On the _server_ folder:
 
 
 # Authors
- - Scrum Master: [Leite L.](https://github.com/leiteway)
- - Product Owner: [Fátima Cosme](https://github.com/pointfs)
+ - Scrum Master: [Fátima Cosme](https://github.com/pointfs)
+ - Product Owner: [Andrea Martín](https://github.com/Andreamartinn17)
  - Web Developer: [Desirée Carrizosa](https://github.com/DesireeCSilva)
  - Web Developer: [Alba Martín](https://github.com/albamartinmz)
- - Web Developer: [Kristy Neiras](https://github.com/krisneiras)
+ - Web Developer: [Saray Anta](hhttps://github.com/SarayAnta)
 
 
-# Next Steps
-In our team we have several goals to meet and we are going to list them. We are working on improving our project and we have it under construction:
-* The like button: in the future this button will be able to add the user's favorite news to another page
-* The search bar: we will make this bar useful to search for keywords of the news that we want to see
-* On the SideBar: the profile icon doesn´t have functionality, and we want to develop a profile screen to our users
-* On the app in general: we will develop that the administrator can manage the roles of the users
+# Póximos pasos
+En este proyecto final de nuestro Bootcamp en Factoría F5 hemos contado con un tiempo determinado, pero tenemos algunas ideas más para seguir mejorando esta website. Algunas de ellas son:
+
+* Mejorar la calidad de algunos textos de detalle de las Catas, jugando mejor con el posicionamiento SEO.
+* Crear una navegación más intuitiva para que la experiencia de usuario sea óptima.
+* En la Side-Bar, afinar los filtros para que las Catas mostradas sean exactamente lo que el usuario busca.
 
 # Contributions
-Contributions are welcome! If you find any problems or have suggestions for improvement, please create an issue or make a pull request.
+¡Las contribuciones son siempre bienvenidas! Si encuentras algún problema o tienes sugerencias para mejorar nuestro repositorio, realiza un _pull request_.
    
-**[⬆️ Back to Index](#index)**
+**[⬆️ Volver al índice](#index)**
