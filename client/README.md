@@ -9,7 +9,7 @@ Este proyecto ha sido desarrollado para la empresa Vinopremier, una empresa que 
 
 # Index
 
-+ [Descripcion](#descripcion)
++ [Descripción](#descripcion)
 + [Configuración del proyecto](#configuracion-proyecto)
 + [Inicialización del Postman](#initialización-postman)
 + [Tests](#tests)
@@ -19,105 +19,104 @@ Este proyecto ha sido desarrollado para la empresa Vinopremier, una empresa que 
 + [Próximos pasos](#proximos-pasos)
 + [Contribuciones](#contribuciones)
 
-# Descripcion
-The project has been built with two roles: admin and user. We have encrypted user sessions with username and password. On the one hand the *admin* is able to create, delete, edit and view news articles, and on the other hand the *user* can browse articles and also can use the like button which increment the news they really love.
+# Descripción
+El proyecto se ha construido con dos roles: administrador y usuario. Disponemos de sesiones de usuario cifradas con nombre de usuario y contraseña. Por un lado, el *admin* puede crear, eliminar, editar y ver las Catas, así como gestionar el Sistema de reservas y el calendario. Por otro lado, el *usuario* puede explorar las Catas y añadirlas al carrito de compra si está interesado en ella.
 
 
 # Configuración del proyecto
 
-### Clone the Repository
+### Clona el Repositorio
  ```bash
-git clone https://github.com/pointfs/NEWSPAPER.git
+git clone https://github.com/SarayAnta/VINO-PREMIER.git
 ```
-##### To enter the repository folder
+##### Para entrar a la carpeta del repositorio
 ```bash
-cd NEWSPAPER
+cd VINO-PREMIER
 ```
 **** 
-## For the Frontend, you have to follow the next steps:
-##### First enter into the folder
+## Para la parte del Front-end, debes seguir los siguientes pasos:
+##### Primero entra a la carpeta
 ```bash
 cd client
 ```
 
-##### For install all dependencies of Frontend, copy the next line
+##### Para instalar todas las dependencias del Front-end, copia la siguiente línea
  ```bash
 npm i
 ```
 
-##### Make the server run
+##### Para hacer funcionar el servidor
 ```bash
 npm run dev
 ```
 
-##### This will start the server __http://localhost:5173__ using Vite with React.
+##### Esto iniciará el servidor __http://localhost:5173__ usando Vite con React.
 
 ****
-## For the Backend, you have to follow the next steps:
+## Para la parte del Back-end, debes seguir los siguientes pasos:
 ### .env:
-* First create the file __.env__ located in the folder _server_.
-* Copy the information placed on _.env_example_ and fill it with your personal data.
+* Primero crea el archivo __.env__ situado en la carpeta _server_.
+* Copia la información existente en _.env_example_ y rellénala con tus datos personales.
 
-### Let's get started with MySQL Workbench.
+### Comencemos con MySQL Workbench
 
-If you already have your Workbench environment set up, we can create a __Database:__
-<br> To do this, paste the following command into the Workbench sheet
+Si ya tiene configurado su entorno Workbench, podemos crear una __Base de datos__.
+<br> Para hacer esto, pegue el siguiente comando en la hoja de Workbench:
 ```sql
-CREATE DATABASE tech_today;
+CREATE DATABASE vino_premier;
 ```
-#### Once we have our Database created, we can proceed with the next commands.
+#### Una vez que tengamos nuestra Base de Datos creada, podemos proceder con los siguientes comandos.
  
-##### First enter into the folder
+##### Primero entra a la carpeta
 ```bash
 cd server
 ```
 
-##### For install all dependencies of Backend, copy the next line
+##### Para instalar todas las dependencias de Backend, copie la siguiente línea
  ```bash
 npm i
 ```
 
-##### Make the server run
+##### Para hacer funcionar el servidor
 ```bash
 npm run dev
 ```
 
-##### This will start the connection to the Database on Workbench.
+##### Esto iniciará la conexión a la base de datos en Workbench.
 
 ****
 
 # Tests
-### For this part you have to follow the next steps:
-##### First enter into the folder
+### Para esta parte tienes que seguir los siguientes pasos:
+##### Primero entra a la carpeta
 ```bash
 cd server
 ```
 
-##### For install all Test dependencies, copy the next line
+##### Para instalar todas las dependencias de prueba, copie la siguiente línea
  ```bash
 npm i
 ```
 
-##### Copy code to start the Jest Server
+##### Copie el código para iniciar el Jest Server
 ```bash
 npm run test
 ```
 
-##### This will run the tests.
+##### Esto ejecutará los tests.
 
 ****
 
 # Initialización del Postman
-Click on this link to obtain our Postman information about the methods of the CRUD in our database. You can view, add, edit, and delete the articles of our website on it.<br>
+Haga clic en este enlace para obtener información de nuestro Postman sobre los métodos del CRUD en nuestra base de datos. Puede ver, agregar, editar y eliminar las Catas de nuestro sitio web en él.<br>
 https://albamartinmz.postman.co/workspace/My-Workspace~1d37aef0-5e05-4f4d-8aa0-e702b0ca00bc/collection/32563763-1112c32c-0d93-4046-a71e-6813616cd5b7?action=share&creator=32563763
 
 
 
-
 # Estructura del proyecto
-We have built the folder ecosystem for our project in the Front-end and Back-end in an orderly and methodical way. We have divided the project in two folders called _client_ and _server_, and we have organized the files in each one correctly for the proper behaviour and understanding of the repository. We are going to mention the most important ones.
+Hemos construido el ecosistema de carpetas para nuestro proyecto en el Front-end y Back-end de forma ordenada y metódica. Hemos dividido el proyecto en dos carpetas llamadas _client_ y _server_, y en cada una de ellas hemos organizado los archivos apropiadamente para el correcto comportamiento y funcionamiento del repositorio. Vamos a mencionar los más importantes.
 
-On the _client_ folder: 
+En la carpeta _client_: 
 * __node_modules:__ contains all the dependencies of your project. When you install packages using npm, they are stored here.
 * __db_server:__ plays a crucial role in ensuring the proper functioning and security of the database server.
 * __src:__ this is where the source code of your React application resides. It typically contains the following subfolders:
