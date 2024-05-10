@@ -1,4 +1,4 @@
-.createFormContainer {
+.dateFormContainer {
     font-family: 'Gotham', sans-serif;
     min-height: 100vh;
     display: flex;
@@ -9,7 +9,7 @@
     font-size: 20px;
 }
 
-.formCreate {
+.formDate {
     width: 90%;
     max-width: 65%;
     padding: 20px;
@@ -23,21 +23,21 @@
     color: white;
 }
 
-.formCreate > div {
+.formDate > div {
     margin-bottom: 10px;
 }
 
-.createFormTitle {
+.dateFormTitle {
     text-align: center;
 }
 
-.formCreate label {
+.formDate label {
     flex: 1;
     margin-bottom: 10px;
 }
 
-.formCreate input,
-.formEdit textarea {
+.formDate input,
+.formDate textarea {
     background-color: #AC946A;
     padding: 10px;
     width: 100%;
@@ -49,26 +49,38 @@
     border:none;
 }
 
-.formEdit textarea {
+.formDate textarea {
     resize: vertical;
     min-height: 150px;
 }
 
-.formCreate input[type="checkbox"] {
-   width: auto;
-   margin-right: 20px;
+.formDate input[type="checkbox"] {
+    width: auto;
+    margin-right: 20px;
 }
 
-.buttonCreate {
+.buttonDate {
     background-color: #AC946A;
     padding: 10px;
-    margin-top: 20px;
+    margin-top: 50px;
     margin-bottom: 20px;
     font-family: 'Gotham', sans-serif;
     color: white;
     width: 100%;
-    font-weight:bold;
+    font-weight: bold;
     border: none;
     cursor: pointer;
     font-size: 20px;
+}
+
+.newData {
+    background-color: #EEEEEE;
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid black;
+}
+
+.newData + .oldData {
+    margin-top: 15px;
 }

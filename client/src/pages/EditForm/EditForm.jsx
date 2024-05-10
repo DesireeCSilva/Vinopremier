@@ -63,7 +63,7 @@ const onSubmit = async (editEvent) => {
 
   return (
     <div className="editFormContainer">
-      <h2 className="editFormTitle">Formulario de edición de catas</h2>
+      <h2 className="editFormTitle">FORMULARIO DE EDICIÓN DE CATAS</h2>
       <form className="formEdit" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label htmlFor="id_location">Id de la localización</label>
@@ -79,7 +79,7 @@ const onSubmit = async (editEvent) => {
           </div>
           <div>
             <label htmlFor="description">Descripción</label>
-            <input type="text" id="description" name="description" {...register('description', {required: true})}/>
+            <textarea type="text" id="description" name="description" {...register('description', {required: true})}/>
           </div>
           <div>
             <label htmlFor="cata_type">Tipo de cata</label>
@@ -122,32 +122,32 @@ const onSubmit = async (editEvent) => {
             <input type="text" id="parking" name="parking" {...register('parking', { required: true})}/>
           </div>
           <div>
-            <label htmlFor='extra_people'>Pueden asistir más personas a la cata de las que compraron las entradas</label>
             <input type="checkbox" id="extra_people" name="extra_people" {...register('extra_people')}/>
+            <label htmlFor='extra_people'>Pueden asistir más personas a la cata de las que compraron las entradas</label>
           </div>
           <div>
-            <label htmlFor='possibility_dinner'>Es posible cenar en el establecimiento</label>
             <input type="checkbox" id="possibility_dinner" name="posibility_dinner" {...register('possibility_dinner')}/>
+            <label htmlFor='possibility_dinner'>Es posible cenar en el establecimiento</label>
           </div>
           <div>
-            <label htmlFor='kids'>Se puede asistir con niños</label>
             <input type="checkbox" id="kids" name="kids" {...register('kids')}/>
+            <label htmlFor='kids'>Se puede asistir con niños</label>
           </div>
           <div>
-            <label htmlFor='pets'>Se puede asistir con mascotas</label>
             <input type="checkbox" id="pets" name="pets" {...register('pets')}/>
+            <label htmlFor='pets'>Se puede asistir con mascotas</label>
           </div>
           <div>
-            <label htmlFor='accesibility'>Accesibilidad</label>
             <input type="checkbox" id="accesibility" name="accesibility" {...register('accesibility')}/>
+            <label htmlFor='accesibility'>Accesibilidad</label>
           </div>
           <div>
-            <label htmlFor='vegan_version'>Opción vegana</label>
             <input type="checkbox" id="vegan_version" name="vegan_version" {...register('vegan_version')}/>
+            <label htmlFor='vegan_version'>Opción vegana</label>
           </div>
           <div>
-            <label htmlFor="english">Disponibilidad en inglés</label>
             <input type="checkbox" id="english" name="english" {...register('english')}/>
+            <label htmlFor="english">Disponibilidad en inglés</label>
           </div> 
         <input className="buttonEdit" type="submit" value="PUBLICAR"/>
       </form>
