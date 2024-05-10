@@ -160,7 +160,7 @@ function Card({ id }) {
     
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get('http://localhost:8000/event');
+            const result = await axios.get('http://localhost:8000/event/name');
 
         setEvents(result.data);
 
