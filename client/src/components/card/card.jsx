@@ -1,9 +1,10 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import Styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { deleteEvent } from "../../services/eventServices";
+
+
 
 
 const CardContainer = Styled.div`
@@ -17,7 +18,8 @@ const CardContainer = Styled.div`
     height: auto;
     font-family: 'Gotham', sans-serif;
     text-align: center;
-    
+  
+  
   .button-controler   {
     display: flex;
     justify-content: space-around;
@@ -36,7 +38,6 @@ const CardContainer = Styled.div`
     font-size: 1.25vw;
     margin: 1vw;
     
-
   }
 
   .card-button-delete {
@@ -54,7 +55,7 @@ const CardContainer = Styled.div`
     justify-content: space-around;
     gap: 0.75vw;
     list-style: none;
-        
+    
   }
 
   .card-bg {
@@ -72,6 +73,7 @@ const CardContainer = Styled.div`
     width: 90%;
     height: auto;
     object-fit: cover;
+    cursor: pointer;
     
   }
 
@@ -85,7 +87,6 @@ const CardContainer = Styled.div`
     gap: 1rem;
     overflow: hidden;
     
-
   }
 
   .card-name {
@@ -104,56 +105,58 @@ const CardContainer = Styled.div`
     padding: 1px;
     font-size: 2.5vw;
     
-    }
+  }
 
     .card-tax  {
-      font-size: 0.5vw;
-      
-    }
+    font-size: 0.5vw;
+    
+  }
 
-    .card-counter {
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      margin-bottom: 0vw;
-      bottom: 0;
-      background-color: #AC946A;
-      width: 100%;
-      
+  .card-counter {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 0vw;
+    bottom: 0;
+    background-color: #AC946A;
+    width: 100%;
+    
+  }
 
-    }
+  .buttons-counter {
+    background-color: #ffffff;
+  
+  }
 
-    .buttons-counter {
-      background-color: #ffffff;
+  .card-counter button:hover {
+    transition: 0.5s;
+    transform: scale(0.9);
+  
+  }
 
-    }
+  img {
+    width: 2vw;
+    height: 2vw;
+    background-color: #AC946A;
+  
+  }
+  
+  .adding-cart {
+    background-color: #AC946A;
+    color: #00000;
+    font-size: 1.25vw;
+    font-weight: bold;
+    margin: 1vw;
+    border: none;
+    height: 3vw;
+    
+  }
 
-    .card-counter button:hover {
-      
-      transition: 0.5s;
-      transform: scale(0.9);
-    }
-
-    img {
-      width: 2vw;
-      height: 2vw;
-      background-color: #AC946A;
-    }
-    .adding-cart {
-      background-color: #AC946A;
-      color: #00000;
-      font-size: 1.25vw;
-      font-weight: bold;
-      margin: 1vw;
-      border: none;
-      height: 3vw;
-    }
-
-    .adding-cart:hover {
-      transition: 0.5s;
-      transform: scale(1.4);
-    }
-
+  .adding-cart:hover {
+    transition: 0.5s;
+    transform: scale(1.4);
+    
+  }
 `;
 
 function Card({id}) {
@@ -174,7 +177,7 @@ function Card({id}) {
 
         const initialCount = {};
         result.data.forEach((id) => {
-          initialCount[id.event] = 1; 
+          initialCount[id] = 1; 
         });
         setEventsCount(initialCount);
       };
@@ -223,7 +226,7 @@ function Card({id}) {
             <button className="card-button-edit" onClick={() => navigate(`edit/${id}`)}>Editar</button>
             <button className="card-button-delete" onClick={() =>  handleDelete(event.id)} >Eliminar</button>
             </article>
-          <img className="card-img" src={event.image} onClick={() => navigate(`Detail/${id}`)} alt={event.name} width="50" height="50" />
+          <img className="card-img" src={event.image} onClick={() => navigate(`Detail/`)} alt={event.name} width="50" height="50" />
           <div className="card-information">
             <article className="card-name">{event.name}</article>
             <article className="card-price">{event.price}€<p className="card-tax">IVA incluido</p></article>
