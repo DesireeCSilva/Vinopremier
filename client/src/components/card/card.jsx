@@ -14,6 +14,7 @@ const CardContainer = Styled.div`
     margin-top: 10%;
     margin-bottom: 3%;
     width: 80%;
+    height: auto;
     font-family: 'Gotham', sans-serif;
     text-align: center;
     
@@ -75,16 +76,15 @@ const CardContainer = Styled.div`
   }
 
   .card-information {
+    height: 150px;
     min-height: 100px;
-    max-height: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    
     overflow: hidden;
-    height: 200px;
+    
 
   }
 
@@ -92,11 +92,9 @@ const CardContainer = Styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    min-height: 2em;
-    max-height: 5em;
-    padding: 5px;
-    font-size: 1.5vw;
-    
+    align-items: center;
+    padding:0.25em;
+    font-size: 1vw;
     
   }
 
@@ -104,12 +102,12 @@ const CardContainer = Styled.div`
     align-items: center;
     justify-content: center;
     padding: 1px;
-    font-size: 3vw;
+    font-size: 2.5vw;
     
     }
 
     .card-tax  {
-      font-size: 1vw;
+      font-size: 0.5vw;
       
     }
 
@@ -121,6 +119,12 @@ const CardContainer = Styled.div`
       bottom: 0;
       background-color: #AC946A;
       width: 100%;
+      
+
+    }
+
+    .buttons-counter {
+      background-color: #ffffff;
 
     }
 
@@ -138,10 +142,11 @@ const CardContainer = Styled.div`
     .adding-cart {
       background-color: #AC946A;
       color: #00000;
-      font-size: 1.75vw;
+      font-size: 1.25vw;
       font-weight: bold;
       margin: 1vw;
       border: none;
+      height: 3vw;
     }
 
     .adding-cart:hover {
@@ -151,7 +156,7 @@ const CardContainer = Styled.div`
 
 `;
 
-function Card({ id }) {
+function Card({id}) {
   const navigate = useNavigate();
   const [buttonTexts, setButtonTexts] = useState({});
   const [eventsCount, setEventsCount] = useState({}); 
@@ -168,8 +173,8 @@ function Card({ id }) {
         setCity(locationResult.city);
 
         const initialCount = {};
-        result.data.forEach((event) => {
-          initialCount[event.id] = 1; 
+        result.data.forEach((id) => {
+          initialCount[id.event] = 1; 
         });
         setEventsCount(initialCount);
       };
@@ -203,15 +208,16 @@ function Card({ id }) {
     };
     
       return (
-        <>
 
-<h1 className="card-list-title" style={{ textAlign: 'center', paddingTop:'2vw' }}>LAS MEJORES CATAS DE {city}</h1>       
+<>
+
+<h1 className="card-list-title" style={{ textAlign: 'center', paddingTop:'2vw' }}>LAS MEJORES CATAS DE VINOSPREMIER{city}</h1>
 <button className="card-button-add" style={{ float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/create`)}>Añadir Cata</button>
           
 <CardContainer>
   <ul className="card-list">
     {events.map((event) => (
-      <li key={event.id} className="card-list-item">
+      <li key={event.name} className="card-list-item">
         <section className="card-bg" style={{border:'2px solid #AC946'}}>
           <article className="button-controler">
             <button className="card-button-edit" onClick={() => navigate(`edit/${id}`)}>Editar</button>
@@ -224,12 +230,12 @@ function Card({ id }) {
           </div>
           <section className="card-counter"> 
           <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black', marginBottom:'0'}}>
-            <button className="add-cart" style={{ width: '1.5vw',border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
-              <p style={{fontSize: '2vw', justifyContent: 'center'}}>+</p>
+            <button className="add-cart" style={{ width: '20px', height:'30px',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
+              <p style={{fontSize: '1vw', justifyContent: 'center'}}>+</p>
             </button>
-            <div className="card-qty" style={{fontSize:'1.5vw',borderBottom:'none', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
-            <button className="less-cart" style={{ width: '1.5vw', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
-              <p style={{fontSize:'2vw', justifyContent:'center'}}>-</p>
+            <div className="card-qty" style={{fontSize:'1vw',borderBottom:'none', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
+            <button className="less-cart" style={{ width: '20px', height:'30px',backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
+              <p style={{fontSize:'1vw', justifyContent:'center'}}>-</p>
             </button>
           </article> 
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
