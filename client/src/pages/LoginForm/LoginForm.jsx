@@ -40,7 +40,12 @@ const LoginForm = () => {
         </label>
       </div>
       <button className='register_form-button-login' type="submit">INICIAR SESIÓN</button>
-      <Link className='register_form-button-login' to="/register">REGÍSTRATE</Link>
+      <p style={{ marginTop: '20px' }}>
+        ¿Aún no tienes cuenta?{' '}
+        <span style={{ color: 'blue', cursor: 'pointer' }} onClick={() => navigate (`/register`)}>
+          Regístrate
+        </span>
+      </p>
     </form>
     </>
   )
