@@ -165,7 +165,7 @@ En la carpeta _server_:
  - Product Owner: [Andrea Martín](https://github.com/Andreamartinn17)
  - Web Developer: [Desirée Carrizosa](https://github.com/DesireeCSilva)
  - Web Developer: [Alba Martín](https://github.com/albamartinmz)
- - Web Developer: [Saray Anta](hhttps://github.com/SarayAnta)
+ - Web Developer: [Saray Anta](https://github.com/SarayAnta)
 
 
 # Póximos pasos
