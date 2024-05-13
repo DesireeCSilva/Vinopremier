@@ -1,9 +1,10 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import Styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { deleteEvent } from "../../services/eventServices";
+
+
 
 
 const CardContainer = Styled.div`
@@ -14,9 +15,11 @@ const CardContainer = Styled.div`
     margin-top: 10%;
     margin-bottom: 3%;
     width: 80%;
+    height: auto;
     font-family: 'Gotham', sans-serif;
     text-align: center;
-    
+  
+  
   .button-controler   {
     display: flex;
     justify-content: space-around;
@@ -35,7 +38,6 @@ const CardContainer = Styled.div`
     font-size: 1.25vw;
     margin: 1vw;
     
-
   }
 
   .card-button-delete {
@@ -53,7 +55,7 @@ const CardContainer = Styled.div`
     justify-content: space-around;
     gap: 0.75vw;
     list-style: none;
-        
+    
   }
 
   .card-bg {
@@ -71,32 +73,29 @@ const CardContainer = Styled.div`
     width: 90%;
     height: auto;
     object-fit: cover;
+    cursor: pointer;
     
   }
 
   .card-information {
+    height: 150px;
     min-height: 100px;
-    max-height: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    
     overflow: hidden;
-    height: 200px;
-
+    
   }
 
   .card-name {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    min-height: 2em;
-    max-height: 5em;
-    padding: 5px;
-    font-size: 1.5vw;
-    
+    align-items: center;
+    padding:0.25em;
+    font-size: 1vw;
     
   }
 
@@ -104,54 +103,63 @@ const CardContainer = Styled.div`
     align-items: center;
     justify-content: center;
     padding: 1px;
-    font-size: 3vw;
+    font-size: 2.5vw;
     
-    }
+  }
 
     .card-tax  {
-      font-size: 1vw;
-      
-    }
+    font-size: 0.5vw;
+    
+  }
 
-    .card-counter {
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
-      margin-bottom: 0vw;
-      bottom: 0;
-      background-color: #AC946A;
-      width: 100%;
+  .card-counter {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 0vw;
+    bottom: 0;
+    background-color: #AC946A;
+    width: 100%;
+    
+  }
 
-    }
+  .buttons-counter {
+    background-color: #ffffff;
+  
+  }
 
-    .card-counter button:hover {
-      
-      transition: 0.5s;
-      transform: scale(0.9);
-    }
+  .card-counter button:hover {
+    transition: 0.5s;
+    transform: scale(0.9);
+  
+  }
 
-    img {
-      width: 2vw;
-      height: 2vw;
-      background-color: #AC946A;
-    }
-    .adding-cart {
-      background-color: #AC946A;
-      color: #00000;
-      font-size: 1.75vw;
-      font-weight: bold;
-      margin: 1vw;
-      border: none;
-    }
+  img {
+    width: 2vw;
+    height: 2vw;
+    background-color: #AC946A;
+  
+  }
+  
+  .adding-cart {
+    background-color: #AC946A;
+    color: #00000;
+    font-size: 1.25vw;
+    font-weight: bold;
+    margin: 1vw;
+    border: none;
+    height: 3vw;
+    
+  }
 
-    .adding-cart:hover {
-      transition: 0.5s;
-      transform: scale(1.4);
-    }
-
+  .adding-cart:hover {
+    transition: 0.5s;
+    transform: scale(1.4);
+    
+  }
 `;
 
-function Card({ id }) {
+function Card({id}) {
   const navigate = useNavigate();
   const [buttonTexts, setButtonTexts] = useState({});
   const [eventsCount, setEventsCount] = useState({}); 
@@ -160,7 +168,8 @@ function Card({ id }) {
     
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get('http://localhost:8000/event');
+            const result = await axios.get('http://localhost:8000/event/name');
+            
 
         setEvents(result.data);
 
@@ -168,8 +177,8 @@ function Card({ id }) {
         setCity(locationResult.city);
 
         const initialCount = {};
-        result.data.forEach((event) => {
-          initialCount[event.id] = 1; 
+        result.data.forEach((id) => {
+          initialCount[id] = 1; 
         });
         setEventsCount(initialCount);
       };
@@ -203,38 +212,39 @@ function Card({ id }) {
     };
     
       return (
-        <>
 
-<h1 className="card-list-title" style={{ textAlign: 'center', paddingTop:'2vw' }}>LAS MEJORES CATAS DE {city}</h1>       
+<>
+
+<h1 className="card-list-title" style={{ textAlign: 'center', paddingTop:'2vw' }}>LAS MEJORES CATAS DE VINOSPREMIER{city}</h1>
 <button className="card-button-add" style={{ float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/create`)}>Añadir Cata</button>
           
 <CardContainer>
   <ul className="card-list">
     {events.map((event) => (
-      <li key={event.id} className="card-list-item">
+      <li key={event.name} className="card-list-item">
         <section className="card-bg" style={{border:'2px solid #AC946'}}>
           <article className="button-controler">
             <button className="card-button-edit" onClick={() => navigate(`edit/${id}`)}>Editar</button>
             <button className="card-button-delete" onClick={() =>  handleDelete(event.id)} >Eliminar</button>
             </article>
-          <img className="card-img" src={event.image} alt={event.name} width="50" height="50" />
+          <img className="card-img" src={event.image} onClick={() => navigate(`detail/${encodeURIComponent(event.name)}`)} alt={event.name} width="50" height="50" />
           <div className="card-information">
             <article className="card-name">{event.name}</article>
             <article className="card-price">{event.price}€<p className="card-tax">IVA incluido</p></article>
           </div>
           <section className="card-counter"> 
           <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black', marginBottom:'0'}}>
-            <button className="add-cart" style={{ width: '1.5vw',border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
-              <p style={{fontSize: '2vw', justifyContent: 'center'}}>+</p>
+            <button className="add-cart" style={{ width: '20px', height:'30px',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
+              <p style={{fontSize: '1vw', justifyContent: 'center'}}>+</p>
             </button>
-            <div className="card-qty" style={{fontSize:'1.5vw',borderBottom:'none', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
-            <button className="less-cart" style={{ width: '1.5vw', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
-              <p style={{fontSize:'2vw', justifyContent:'center'}}>-</p>
+            <div className="card-qty" style={{fontSize:'1vw',borderBottom:'none', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
+            <button className="less-cart" style={{ width: '20px', height:'30px',backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
+              <p style={{fontSize:'1vw', justifyContent:'center'}}>-</p>
             </button>
           </article> 
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
                   {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../src/assets/images/icons/cart.png"/>
+            <img src="../src/assets/images/icons/cart.png" onClick={() => navigate(`Payment/`)}/>
           </section>
         </section>
       </li>
