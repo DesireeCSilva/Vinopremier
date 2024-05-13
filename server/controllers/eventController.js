@@ -1,11 +1,24 @@
 import EventModel from "../models/EventModel.js";
+import searchModel from "../helpers/filterHelper.js";
+
 
 export const getAllEvents = async (request, response) => {
     try {
         const events = await EventModel.findAll();
-        response.status(201).json(events)
+        response.status(200).json(events)
     } catch (error) {
         response.status(500).json({message: error.message})
+    }
+}
+
+export const getEventsByFilter = async (request, response) => {
+    try {
+        const searchQuery = request.query.searchQuery;
+        console.log(request.query);
+        const events = await searchModel(EventModel, 'cata_type', searchQuery);
+        response.json(events);
+    } catch (error) {
+        response.status(500).json({ message: error.message });
     }
 }
 
@@ -49,7 +62,7 @@ export const getEventById = async (request, response) => {
     try {
         const { id } = request.params;
         const event = await EventModel.findByPk(id)
-        response.status(201).json(event)
+        response.status(200).json(event)
     } catch (error) {
         response.status(500).json({message: error.message})
     }
