@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { deleteEvent } from "../../services/eventServices";
+import { deleteEvent, deleteEventByName } from "../../services/eventServices";
 
 
 
@@ -202,10 +202,11 @@ function Card({id}) {
       }, 2000);
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (name) => {
       try {
-        await deleteEvent(id);
-        setEvents(events.filter(event => event.id !== id));
+        const decodedName = decodeURIComponent(name)
+        await deleteEventByName(decodedName);
+        setEvents(events.filter(event => event.name !== name));
       } catch (error) {
         console.error('Error al eliminar el evento:', error);
       }
@@ -225,7 +226,7 @@ function Card({id}) {
         <section className="card-bg" style={{border:'2px solid #AC946'}}>
           <article className="button-controler">
             <button className="card-button-edit" onClick={() => navigate(`edit/${encodeURIComponent(event.name)}`)}>Editar</button>
-            <button className="card-button-delete" onClick={() =>  handleDelete(event.id)} >Eliminar</button>
+            <button className="card-button-delete" onClick={() =>  handleDelete(event.name)} >Eliminar</button>
             </article>
           <img className="card-img" src={event.image} onClick={() => navigate(`detail/${encodeURIComponent(event.name)}`)} alt={event.name} width="50" height="50" />
           <div className="card-information">

@@ -90,3 +90,23 @@ export const deleteEvent = async (id) => {
         }
     }
 }
+
+export const deleteEventByName = async (name) => {
+    const confirmDelete = await Swal.fire({
+        title: '¿Estás seguro que deseas eliminar el evento?',
+        showCancelButton: true,
+        confirmButtonColor: '#fb005a',
+        cancelButtonColor: '#171717',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    });
+    if(confirmDelete.isConfirmed) {
+        try {
+            const response = await axios.delete(`${URL_EVENT}/${encodeURIComponent(name)}`);
+            Swal.fire("Evento eliminado correctamente");
+        } catch (error) {
+            console.log('Error al eliminar el evento', error);
+            throw error;
+        }
+    }
+}
