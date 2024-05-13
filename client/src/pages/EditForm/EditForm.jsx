@@ -8,16 +8,17 @@ import { useNavigate } from 'react-router-dom'
 
 const EditForm = () => {
 
-    const{ name } = useParams();
+    const{ name: initialName } = useParams();
     const { register, handleSubmit, reset, setValue, watch } = useForm();
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false);
     const [eventData, setEventData] = useState();
+    const [previousName, setPreviousName] = useState(initialName);
 
     useEffect(() => {
       const fetchData = async () => {
       try {
-      const decodedName = decodeURIComponent(name);
+      const decodedName = decodeURIComponent(initialName);
       console.log(decodedName)
       const response = await getEventByName(decodedName);
       const  { eventInstance } = response;
@@ -49,15 +50,16 @@ const EditForm = () => {
             }};
         fetchData();
         },
-      [name, setValue]
+      [initialName, setValue]
    );
 const onSubmit = async (editEvent) => {
   console.log("Evento editado", editEvent);
   setLoading(true);
       try{
-        await updateEventByName(name, editEvent);
+        await updateEventByName(previousName, editEvent);
         alert("Datos actualizados correctamente");
-        navigate(`/detail/${encodeURIComponent(name)}`)
+        const newName = editEvent.name;
+        navigate(`/detail/${encodeURIComponent(newName || previousName)}`)
       }
       catch (error) {
         console.error("Error al actualizar el evento", error);
