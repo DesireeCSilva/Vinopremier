@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import { useParams } from 'react-router-dom';
-import { getEventById } from '../../services/eventServices.js'
+import { getEventById, getEventByName } from '../../services/eventServices.js'
 import { getLocationById } from '../../services/locationServices.js';
 import '../Detail/Detail.css'
 
 
 
 const Detail = () => {
-  const { id } = useParams(); 
+  const { name } = useParams(); 
   const [event, setEvent] = useState(null);
   const [location, setLocation] = useState(null);
+  const [eventDates, setEventDates] = useState(null);
   const [buttonTexts, setButtonTexts] = useState({});
   const [eventsCount, setEventsCount] = useState({});
 
@@ -17,17 +20,33 @@ const Detail = () => {
   
   const fetchEventById = async () => {
       try {
-        const response = await getEventById(id);
-        setEvent(response)
-        const responseLocation = await getLocationById(response.id_location);
-        console.log(responseLocation);
-        console.log(responseLocation.address)
+        const decodedName = decodeURIComponent(name);
+        const response = await getEventByName(decodedName);
+        console.log(response)
+        const { eventInstance } = response;
+        setEvent(eventInstance);
+        const { eventDates } = response;
+        setEventDates(eventDates);
+        const responseLocation = await getLocationById(eventInstance.id_location);
         setLocation(responseLocation)
       } catch (error) {
         console.error('Error al cargar los datos del evento:', error);
       }};
       fetchEventById();
-    }, [id]);
+    }, [name]);
+  
+  const tileContent = ({date, view}) => {
+    if (view === 'month') {
+      const formattedDate = formatDate(date);
+      const isAvailable = eventDates.some(eventDate => eventDate.date === formattedDate);
+      return isAvailable ? <div className="green-dot"></div> : null;
+    }
+    return null;
+  };
+
+  const formatDate = date => {
+    return (`${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`);
+  };
 
   const handleCountChange = (eventId, delta) => {
       setEventsCount((prevCount) => {
@@ -155,6 +174,7 @@ const splitTextByRule = (text) => {
 
           <div className='page-detail__left__calendar' >
             <p className='page-detail__left__add'>Seleccionar fecha</p>
+            <Calendar tileContent={tileContent}/>
           </div>
         </div>
       <div className='page-detail__section01__right'>
@@ -213,7 +233,7 @@ const splitTextByRule = (text) => {
     </section>
   </article>
     )}
-    <article className="page-detail__section02">
+    <article>
       <hr className="page-detail__hr"/>
       <img className="page-detail__opinion" src="/src/assets/images/banners/section03.png" alt="" />
     </article> 

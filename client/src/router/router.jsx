@@ -4,6 +4,7 @@ import Home from '../pages/Home/Home';
 import Detail from '../pages/Detail/Detail';
 import CreateForm from '../pages/CreateForm/CreateForm';
 import EditForm from '../pages/EditForm/EditForm';
+import DateForm from '../pages/DateForm/DateForm';
 import LoginForm from '../pages/LoginForm/LoginForm';
 import RegisterForm from '../pages/RegisterForm/RegisterForm';
 import Payment from '../pages/Payment/Payment';
@@ -25,7 +26,7 @@ export const router = createBrowserRouter ([
                 element: <SearchBar/>
             },
             {
-                path: "/detail/:id",
+                path: "/detail/:name",
                 element: <Detail/>
             },
             {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter ([
             {
                 path: "/edit/:id",
                 element: <EditForm/>
+            },
+            {
+                path: "/date/:id",
+                element: <DateForm/>
             },
             {
                 path: "/login",

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../../components/card/card.jsx';
+import CityFilterContainer from '../../components/CityFilter/CityFilter';
 import SearchBar from '../../components/SearchBar/SearchBar.jsx';
 import { getAllEvents, getEventsByFilter } from '../../services/eventServices.js';
 
@@ -32,6 +33,7 @@ const Home = () => {
   return (
     <>
       <div className="home-container">
+      <CityFilterContainer/>
       <label htmlFor="filterType">Filtrar por tipo de cata:</label>
         <SearchBar />
         <div className="gallery-items">

@@ -11,6 +11,7 @@ import eventRouter from "./routes/eventRouter.js"
 import bookingRouter from "./routes/bookingRouter.js"
 import authRouter from "./routes/authRouter.js";
 import cors from 'cors';
+import { deleteCaducateEvents } from './utils/caducateEvents.js';
 
 export const app = express();
 
@@ -38,6 +39,11 @@ try {
     BookingModel.sync();
     console.log('Model Booking connected correctly 📆📆')
 
+
+
+
+
+    deleteCaducateEvents();
 
    } catch (error) {
     console.error('Unable to connect to the database:', error);

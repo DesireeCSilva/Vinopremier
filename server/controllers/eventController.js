@@ -67,3 +67,35 @@ export const getEventById = async (request, response) => {
         response.status(500).json({message: error.message})
     }
 }
+export const getEventByName = async(request, response) => {
+    try {
+        const names = await EventModel.findAll({
+            attributes: { exclude: ['date', 'time']},
+            group: ['name']
+        });
+        response.status(200).json(names)
+    } catch (error) {
+        response.status(500).json({message: error.message})
+    }
+}
+
+export const getEventDatesByName = async (request, response) => {
+    try {
+        const encodedEventName = request.params.eventName;
+        const decodedEventName = decodeURIComponent(encodedEventName);
+
+        const eventDates = await EventModel.findAll({
+            attributes: ['date', 'time', 'avalaible_places'],
+            where: { name: decodedEventName }
+        });
+
+        const eventInstance = await EventModel.findOne({
+            attributes: {exclude: ['date', 'time', 'avalaible_places']},
+            where: { name: decodedEventName }
+        });
+
+        response.status(200).json({eventDates, eventInstance})
+    } catch (error) {
+        response.status(500).json({ message: error.message });
+    }
+}

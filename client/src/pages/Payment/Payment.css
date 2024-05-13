@@ -1,0 +1,69 @@
+.payment-page {
+    display: grid;
+    grid-template-columns: 60% 30%;
+    justify-items: center;
+    margin-top: 3rem;
+    font-family: 'Gotham';
+}
+
+.payment-page_right-container {
+    display: flex;
+    flex-direction: column;
+    background: #000;
+    width: 30rem;
+    height: 33rem;
+}
+
+.payment-page_right-title {
+    font-size: 2rem;
+    color: #AC946A;
+    border: solid 2px;
+    width: fit-content;
+    padding: 0.7rem;
+    margin-bottom: 2rem;
+}
+
+.payment-page_right-hr {
+    color: #fff;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    width: 27rem;
+    display: flex;
+    align-self: center;
+}
+
+.payment-page_right-text {
+    font-family: 'Gotham Light';
+    color: #fff;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;	
+    margin: 1rem 1.5rem 0.5rem 1.5rem;
+}
+
+.payment-page_right-text02 {
+    color: #fff;
+    font-weight: 400;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;	
+    margin: 1rem 1.5rem 0.5rem 1.5rem;
+}
+
+.payment-page_right-img02 {
+    width: 7rem;
+    height: auto;
+    margin: 1.5rem;
+}
+
+.payment-page_right-article {
+    display: flex;
+    color: #fff;
+}
+
+.payment-page_right-article-text {
+    font-size: 1.4rem;
+    margin: 1rem 1.5rem 0.5rem 1.5rem;
+}

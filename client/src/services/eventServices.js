@@ -25,6 +25,17 @@ export const getEventById = async (id) => {
     }
 }
 
+export const getEventByName = async(name) => {
+    try {
+        const response = await axios.get(`${URL_EVENT}/${encodeURIComponent(name)}/dates`);
+        const data = response.data;
+        return data;
+    } catch (error) {
+        console.log('Error al obtener el evento por nombre', error);
+        throw error;
+    }
+}
+
 export const postEvent = async(data) => {
     try {
         const event = await axios.post(URL_EVENT, data);
