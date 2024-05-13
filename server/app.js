@@ -29,7 +29,7 @@ try {
 
     UserModel.sync();
     console.log('Model User connected correctly 👤👤');
-    
+
     LocationModel.sync();
     console.log('Model Location connected correctly 📍📍')
 

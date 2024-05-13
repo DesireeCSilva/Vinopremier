@@ -1,36 +1,54 @@
-import React, { useEffect, useState } from 'react'
-import { RouterProvider, useParams } from 'react-router-dom';
-import { getEventById } from '../../services/eventServices.js';
-import { getLocationById} from '../../services/locationServices.js'
+import React, { useEffect, useState } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import { useParams } from 'react-router-dom';
+import { getEventById, getEventByName } from '../../services/eventServices.js'
+import { getLocationById } from '../../services/locationServices.js';
 import '../Detail/Detail.css'
 
 
 
-
-
 const Detail = () => {
-  const { id } = useParams(); 
+  const { name } = useParams(); 
   const [event, setEvent] = useState(null);
   const [location, setLocation] = useState(null);
+  const [eventDates, setEventDates] = useState(null);
   const [buttonTexts, setButtonTexts] = useState({});
   const [eventsCount, setEventsCount] = useState({});
 
   useEffect(() => {
-    const fetchEventById = async () => {
+  
+  const fetchEventById = async () => {
       try {
-        const response = await getEventById(id);
-      setEvent(response)
-        const responseLocation = await getLocationById(response.id_location);
-        console.log(responseLocation);
-        console.log(responseLocation.address)
+        const decodedName = decodeURIComponent(name);
+        const response = await getEventByName(decodedName);
+        console.log(response)
+        const { eventInstance } = response;
+        setEvent(eventInstance);
+        const { eventDates } = response;
+        setEventDates(eventDates);
+        const responseLocation = await getLocationById(eventInstance.id_location);
         setLocation(responseLocation)
       } catch (error) {
         console.error('Error al cargar los datos del evento:', error);
       }};
       fetchEventById();
-    }, [id]);
+    }, [name]);
+  
+  const tileContent = ({date, view}) => {
+    if (view === 'month') {
+      const formattedDate = formatDate(date);
+      const isAvailable = eventDates.some(eventDate => eventDate.date === formattedDate);
+      return isAvailable ? <div className="green-dot"></div> : null;
+    }
+    return null;
+  };
 
-    const handleCountChange = (eventId, delta) => {
+  const formatDate = date => {
+    return (`${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`);
+  };
+
+  const handleCountChange = (eventId, delta) => {
       setEventsCount((prevCount) => {
         const currentCount = prevCount[eventId] || 0;
         const newCount = currentCount + delta;
@@ -38,7 +56,7 @@ const Detail = () => {
       });
     };
 
-    const handleClick = (id) => {
+  const handleClick = (id) => {
       setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIDO" }));
   
       setTimeout(() => {
@@ -46,34 +64,31 @@ const Detail = () => {
       }, 2000);
     };
 
-    const [isChecked, setIsChecked] = useState({
+  const [isChecked, setIsChecked] = useState({
       private: false,
       iberian: false,
     });
     
-    const handleCheckboxChange = (event) => {
+  const handleCheckboxChange = (event) => {
       const { name, checked } = event.target;
       setIsChecked(prevState => ({ ...prevState, [name]: checked }));
 
       let price;
-        switch (name) {
-    case 'private':
-      price = checked ? 60 : 0;
-      break;
-    case 'iberian':
-      price = checked ? 25 : 0;
-      break;
-    default:
-      price = 0;
+      switch (name) {
+  case 'private':
+    price = checked ? 60 : 0;
+    break;
+  case 'iberian':
+    price = checked ? 25 : 0;
+    break;
+  default:
+    price = 0;
   }
+    setExtraFeaturePrice(prevState => ({ ...prevState, [name]: price }));
 
-  setExtraFeaturePrice(prevState => ({ ...prevState, [name]: price }));
 };
-
- 
-
-  // Función para dividir el texto "event.description" en párrafos
-  const splitTextByRule = (text) => {
+    
+const splitTextByRule = (text) => {
 
     const regex = /(\. )/g;
     let match;
@@ -91,7 +106,8 @@ const Detail = () => {
     return result.join('<br />');
   };
 
-    
+
+
 
   return (
     
@@ -157,12 +173,10 @@ const Detail = () => {
         </div>
 
           <div className='page-detail__left__calendar' >
-            <p className='page-detail__left__calendartext'>Seleccionar fecha</p>
-            {/* <Calendar /> */}
+            <p className='page-detail__left__add'>Seleccionar fecha</p>
+            <Calendar tileContent={tileContent}/>
           </div>
-
         </div>
-
       <div className='page-detail__section01__right'>
           <div className='page-detail__right__icons'>
             <div className='page-detail__right__iconscolumn'>
@@ -213,21 +227,18 @@ const Detail = () => {
           </div>
 
           <div className='page-detail__right__description'>
-          <p dangerouslySetInnerHTML={{ __html: splitTextByRule(event.description) }}></p>
-          </div>
+            <p dangerouslySetInnerHTML={{ __html: splitTextByRule(event.description) }}></p>
         </div>
-      </section>
-      
-    </article>
+      </div>
+    </section>
+  </article>
     )}
     <article>
       <hr className="page-detail__hr"/>
       <img className="page-detail__opinion" src="/src/assets/images/banners/section03.png" alt="" />
     </article> 
     </>
-  
-  )
+);
 }
-
 
 export default Detail
