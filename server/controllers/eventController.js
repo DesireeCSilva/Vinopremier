@@ -70,7 +70,7 @@ export const deleteEventByName = async (request, response) => {
     try {
         const { name } = request.params;
         const decodedName = decodeURIComponent(name);
-        const event = await EventModel.destroy({where: {name}})
+        const event = await EventModel.destroy({where: {name: decodedName}})
         response.status(200).json(event)
     } catch (error) {
         response.status(500).json({message: error.message})
