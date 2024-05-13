@@ -124,7 +124,7 @@ const splitTextByRule = (text) => {
           <p className='page-detail__left__price'>{event.price}€</p>
           <p className='page-detail__left__iva'>IVA INCLUIDO</p>
 
-          <div className='page-detail__left__supplement-prvate'>
+          <div className='page-detail__left__supplement-private'>
             <input type="checkbox" id="private" name="private" onChange={handleCheckboxChange} checked={isChecked.private}/>
             <label className='page-detail__left__suptext' for="add-extra-feature-private">Añadir suplemento de cata privada ({event.private_tasting_supplement}€)</label>
           </div>
@@ -137,11 +137,11 @@ const splitTextByRule = (text) => {
           <section className="card-counter"> 
           <article className="buttons-counter" >
             <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
-              <p style={{fontFamily:'Gotham', fontSize: '2vw', justifyContent: 'center'}}>+</p>
+              <p style={{fontFamily:'Gotham', fontSize: '2rem', justifyContent: 'center'}}>+</p>
             </button>
             <div style={{fontFamily:'Gotham', padding:'16.5px',border:'3px solid black',fontWeight:'bold', fontSize:'21px'}}>{eventsCount[event.id] || 0}</div>
             <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
-              <p style={{fontFamily:'Gotham', fontSize:'2vw', justifyContent:'center'}}>-</p>
+              <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
             </button>
           </article> 
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
@@ -233,9 +233,9 @@ const splitTextByRule = (text) => {
     </section>
   </article>
     )}
-    <article>
+    <article className="page-detail__opinion" >
       <hr className="page-detail__hr"/>
-      <img className="page-detail__opinion" src="/src/assets/images/banners/section03.png" alt="" />
+      <img className="page-detail__opinion-image" src="/src/assets/images/banners/section03.png" alt="" />
     </article> 
     </>
 );

@@ -3,7 +3,7 @@
 }
 
 .page-detail {
-   margin: 3em 2rem 5rem 2rem;
+   margin: 3em 2rem 5rem 1rem;
 
 }
 .page-detail__subtitle {
@@ -56,6 +56,7 @@
    font-size: 4.4rem;
    font-weight: 900;
    text-align: center;
+   margin-top: 1rem;
 }
 
 .page-detail__left__iva {
@@ -76,7 +77,6 @@
    font-size: 1rem;
    font-weight: 500;
    margin-left: 1rem;
-   
 }
 
 .page-detail__left__extra {
@@ -123,6 +123,8 @@
 .page-detail__right__description {
    font-family: 'Gotham';
    font-size: 1rem;
+   margin-top: 28rem;
+   text-align: justify;
 }
 
 .page-detail__right__icons {
@@ -131,6 +133,7 @@
    grid-template-rows: 10rem;
    grid-column-gap: 2.5rem;
    grid-row-gap: 10rem;
+   margin-left: 1.5rem;
 }
 .page-detail__right__iconscontainer{
    display: flex;
@@ -154,21 +157,27 @@
    font-weight: 500;
 }
 
-.page-detail__right__description {
-   margin-top: 28rem;
-   text-align: justify;
+.page-detail__opinion {
+   width: 95%;
+   margin: 0 auto;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-top: 3rem;
 }
 
-.page-detail__opinion {
+.page-detail__opinion-image {
    width: 75%;
    margin: 0 auto;
    display: flex;
    justify-content: center;
+   align-items: center;
    margin-top: 3rem;
 }
 
 .page-detail__hr {
-   width: 95%;
+   width: 99%;
 }
 
 .card-counter {
@@ -230,7 +239,7 @@
 @media only screen and (max-width: 768px){
    .page-detail__section01 {
       grid-template-columns: 1fr;
-      align-content: center;
+      align-items: center;
    }
 
    .page-detail {
@@ -241,17 +250,19 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-content: center;
+      align-items: center;
+      margin-left: auto;
    }
 
    .page-detail__title, .page-detail__subtitle {
       font-family: 'Gotham';
       margin-top: 2rem;
       margin-bottom: 2rem;
+      margin-left: 2rem;
    }
 
    .page-detail__title {
-      font-size: 2rem;
+      font-size: 1.8rem;
    }
 
    .page-detail__left__image {
@@ -288,21 +299,22 @@
 
    .page-detail__left__supplement-private {
       display: flex;
-      align-content: center;
+      flex-direction: row;
+      align-items: center;
       margin-top: 1rem;
    }
    
    .page-detail__left__suptext {
       font-family: 'Gotham';
-      font-size: 1rem;
+      font-size: .9rem;
       font-weight: 500;
       margin-left: 1rem;
       
    }
    
    .page-detail__left__extra {
-      width: 24.9rem;
-      height: 12rem;
+      width: 22em;
+      height: 10rem;
       background: #AC946A;
       padding: 2rem;
       display: flex;
@@ -313,7 +325,7 @@
    
    .page-detail__left__extratext {
       font-family: 'Gotham';
-      font-size: 0.98rem;
+      font-size: 0.85rem;
       margin-left: 0.8rem;
       padding: 0.4rem;
       font-weight: 500;
@@ -343,15 +355,19 @@
    
    .page-detail__right__description {
       font-family: 'Gotham';
-      font-size: 1rem;
+      font-size: .9rem;
+      margin: 2rem;
+      margin-top: 28rem;
+      text-align: justify;
    }
-   
+
    .page-detail__right__icons {
       display: grid;
-      grid-template-columns: 47% 47%;
+      grid-template-columns: 45% 45%;
       grid-template-rows: 10rem;
-      grid-column-gap: 2.5rem;
+      grid-column-gap: 2rem;
       grid-row-gap: 10rem;
+      margin-left: 2rem;
    }
    .page-detail__right__iconscontainer{
       display: flex;
@@ -360,7 +376,7 @@
    }
    
    .page-detail__right__iconsimage {
-      width: 4rem;
+      width: 3.5rem;
       height: auto;
    }
    .page-detail__right__iconscolumn{
@@ -370,26 +386,22 @@
    
    .page-detail__right__iconstext {
       font-family: 'Gotham';
-      font-size: 1rem;
+      font-size: .9rem;
       margin-left: 1rem;
       font-weight: 500;
    }
    
-   .page-detail__right__description {
-      margin-top: 28rem;
-      text-align: justify;
-   }
-   
    .page-detail__opinion {
-      width: 75%;
+      width: 90%;
       margin: 0 auto;
       display: flex;
       justify-content: center;
       margin-top: 3rem;
+      align-items: center;
    }
    
    .page-detail__hr {
-      width: 95%;
+      width: 90vw;      
    }
    
    .card-counter {
@@ -431,7 +443,7 @@
       font-size: 1.5rem;
       font-weight: 800;
       border: none;
-      padding: 3.4rem;
+      padding: 2rem;
       background: #fff;
    }
    
@@ -447,7 +459,15 @@
       background-color: green;
       border-radius: 50%;
    }
-   
+
+   .page-detail__opinion-image {
+      width: 95%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+   }
    
 }
 
