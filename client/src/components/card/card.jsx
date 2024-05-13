@@ -63,7 +63,7 @@ const CardContainer = Styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
-    width: 17vw;
+    width: 19vw;
     gap: 1rem;
     overflow: hidden;
     border: 2px solid #AC946A;
@@ -78,8 +78,9 @@ const CardContainer = Styled.div`
   }
 
   .card-information {
-    height: 150px;
+    
     min-height: 100px;
+    max-height: 125px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -95,7 +96,7 @@ const CardContainer = Styled.div`
     flex-wrap: wrap;
     align-items: center;
     padding:0.25em;
-    font-size: 1vw;
+    font-size: 1.10vw;
     
   }
 
@@ -146,7 +147,7 @@ const CardContainer = Styled.div`
     color: #00000;
     font-size: 1.25vw;
     font-weight: bold;
-    margin: 1vw;
+    margin: 0.5vw;
     border: none;
     height: 3vw;
     
@@ -234,11 +235,11 @@ function Card({id}) {
           </div>
           <section className="card-counter"> 
           <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black', marginBottom:'0'}}>
-            <button className="add-cart" style={{ width: '20px', height:'30px',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
+            <button className="add-cart" style={{ width: '15px', height:'30px',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
               <p style={{fontSize: '1vw', justifyContent: 'center'}}>+</p>
             </button>
-            <div className="card-qty" style={{fontSize:'1vw',borderBottom:'none', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
-            <button className="less-cart" style={{ width: '20px', height:'30px',backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
+            <div className="card-qty" style={{fontSize:'1vw',borderBottom:'none', display: 'flex', alignItems: 'center',  width: '8px', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
+            <button className="less-cart" style={{ width: '15px', height:'30px',backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
               <p style={{fontSize:'1vw', justifyContent:'center'}}>-</p>
             </button>
           </article> 

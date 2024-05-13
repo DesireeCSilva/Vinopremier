@@ -79,40 +79,8 @@ const CityFilter = () => {
     <img src='../../src/assets/images/cities/zaragoza.png' alt='Zaragoza' />
     </div> 
     </CityFilterContainer>
-  {location.length === 0 && <div>
-    {location.map((loc, index) => (
-     <li key={event.name} className="card-list-item">
-    <section className="card-bg" style={{border:'2px solid #AC946'}}>
-      <article className="button-controler">
-        <button className="card-button-edit" onClick={() => navigate(`edit/${id}`)}>Editar</button>
-        <button className="card-button-delete" onClick={() =>  handleDelete(event.id)} >Eliminar</button>
-        </article>
-      <img className="card-img" src={event.image} onClick={() => navigate(`Detail/`)} alt={event.name} width="50" height="50" />
-      <div className="card-information">
-        <article className="card-name">{event.name}</article>
-        <article className="card-price">{event.price}€<p className="card-tax">IVA incluido</p></article>
-      </div>
-      <section className="card-counter"> 
-      <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black', marginBottom:'0'}}>
-        <button className="add-cart" style={{ width: '20px', height:'30px',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
-          <p style={{fontSize: '1vw', justifyContent: 'center'}}>+</p>
-        </button>
-        <div className="card-qty" style={{fontSize:'1vw',borderBottom:'none', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
-        <button className="less-cart" style={{ width: '20px', height:'30px',backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
-          <p style={{fontSize:'1vw', justifyContent:'center'}}>-</p>
-        </button>
-      </article> 
-        <button className="adding-cart" onClick={() => handleClick(event.id)}>
-              {buttonTexts[event.id] || "AÑADIR"}</button>
-        <img src="../src/assets/images/icons/cart.png" onClick={() => navigate(`Payment/`)}/>
-      </section>
-    </section>
-  </li>
-    ))}
-  </div>}
     </>
-  )
+  );
 }
-
 
 export default CityFilter
