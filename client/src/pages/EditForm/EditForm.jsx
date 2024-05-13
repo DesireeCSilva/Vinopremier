@@ -49,7 +49,7 @@ const onSubmit = async (editEvent) => {
   console.log("Evento editado", editEvent);
   setLoading(true);
       try{
-        await updateEvent(id, editEvent);
+        await updateEvent(name, editEvent);
         alert("Datos actualizados correctamente");
         navigate(`/detail/${id}`)
       }

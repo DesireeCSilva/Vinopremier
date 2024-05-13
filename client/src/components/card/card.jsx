@@ -224,7 +224,7 @@ function Card({id}) {
       <li key={event.name} className="card-list-item">
         <section className="card-bg" style={{border:'2px solid #AC946'}}>
           <article className="button-controler">
-            <button className="card-button-edit" onClick={() => navigate(`edit/${id}`)}>Editar</button>
+            <button className="card-button-edit" onClick={() => navigate(`edit/${encodeURIComponent(event.name)}`)}>Editar</button>
             <button className="card-button-delete" onClick={() =>  handleDelete(event.id)} >Eliminar</button>
             </article>
           <img className="card-img" src={event.image} onClick={() => navigate(`detail/${encodeURIComponent(event.name)}`)} alt={event.name} width="50" height="50" />
