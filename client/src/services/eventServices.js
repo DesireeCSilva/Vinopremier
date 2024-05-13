@@ -61,7 +61,7 @@ export const updateEvent = async (id, newData) => {
 
 export const updateEventByName = async(name, newData) => {
     try {
-        const response = await axios.put(`${URL_EVENT}/${encodeURIComponent(name)}`);
+        const response = await axios.put(`${URL_EVENT}/${encodeURIComponent(name)}`, newData);
         const data = response.data;
         Swal.fire('Evento actualizado correctamente');
         return data;
