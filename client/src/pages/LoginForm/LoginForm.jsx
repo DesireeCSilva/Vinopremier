@@ -3,16 +3,19 @@ import { loginUser } from '../../services/authServices';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import '../LoginForm/LoginForm.css';
+import { useUserContext } from '../../context/UserContext';
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const { handleSubmit, register, formState: { errors }} = useForm();
+  const { setIsAuthenticated } = useUserContext();
 
   const onSubmit = async(data) => {
     try {
       const response = await loginUser(data);
       alert(`Inicio de sesión correcto, bienvenido ${response.data.name}`);
       localStorage.setItem('token', response.token);
+      setIsAuthenticated (true);
       console.log(localStorage.getItem('token'));
       navigate('/')
 
