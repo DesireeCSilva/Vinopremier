@@ -59,6 +59,18 @@ export const updateEvent = async (id, newData) => {
     }
 }
 
+export const updateEventByName = async(name, newData) => {
+    try {
+        const response = await axios.put(`${URL_EVENT}/${encodeURIComponent(name)}`);
+        const data = response.data;
+        Swal.fire('Evento actualizado correctamente');
+        return data;
+    } catch (error) {
+        console.log('Error al actualizar el evento', error);
+        throw error;
+    }
+}
+
 export const deleteEvent = async (id) => {
     const confirmDelete = await Swal.fire({
         title: '¿Estás seguro que deseas eliminar el evento?',
