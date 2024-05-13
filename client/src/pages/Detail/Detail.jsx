@@ -173,7 +173,7 @@ const splitTextByRule = (text) => {
         </div>
 
           <div className='page-detail__left__calendar' >
-            <p className='page-detail__left__add'>Seleccionar fecha</p>
+            <p className='page-detail__left__calendartext'>Seleccionar fecha</p>
             <Calendar tileContent={tileContent}/>
           </div>
         </div>
