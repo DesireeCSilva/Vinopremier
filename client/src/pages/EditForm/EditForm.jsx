@@ -2,13 +2,13 @@ import React from 'react'
 import './EditForm.css'
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { getEventById, updateEvent } from '../../services/eventServices';
+import { getEventById, getEventByName, updateEvent, updateEventByName } from '../../services/eventServices';
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 const EditForm = () => {
 
-    const{id} = useParams();
+    const{ name } = useParams();
     const { register, handleSubmit, reset, setValue, watch } = useForm();
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false);
@@ -16,42 +16,48 @@ const EditForm = () => {
 
     useEffect(() => {
       const fetchData = async () => {
-      const eventData = await getEventById(id);
-          setEventData(eventData);
+      try {
+      const decodedName = decodeURIComponent(name);
+      console.log(decodedName)
+      const response = await getEventByName(decodedName);
+      const  { eventInstance } = response;
+          setEventData(eventInstance);
 
-              setValue('id_location', eventData.id_location),
-              setValue('name', eventData.name),
-              setValue('image', eventData.image),
-              setValue('description', eventData.description),
-              setValue('cata_type', eventData.cata_type),
-              setValue('products', eventData.products),
-              setValue('price', eventData.price),
-              setValue('private_tasting_supplement', eventData.private_tasting_supplement),
-              setValue('iberian_supplement', eventData.iberian_supplement),
-              setValue('date', eventData.date),
-              setValue('time', eventData.time),
-              setValue('duration', eventData.duration),
-              setValue('capacity', eventData.capacity),
-              setValue('parking', eventData.parking),
-              setValue('extra_people', eventData.extra_people),
-              setValue('possibility_dinner', eventData.possibility_dinner),
-              setValue('kids', eventData.kids),
-              setValue('pets', eventData.pets),
-              setValue('accesibility', eventData.accesibility),
-              setValue('vegan_version', eventData.vegan_version),
-              setValue('english', eventData.english)
-            };
+              setValue('id_location', eventInstance.id_location),
+              setValue('name', eventInstance.name),
+              setValue('image', eventInstance.image),
+              setValue('description', eventInstance.description),
+              setValue('cata_type', eventInstance.cata_type),
+              setValue('products', eventInstance.products),
+              setValue('price', eventInstance.price),
+              setValue('private_tasting_supplement', eventInstance.private_tasting_supplement),
+              setValue('iberian_supplement', eventInstance.iberian_supplement),
+              // setValue('date', eventData.date),
+              // setValue('time', eventData.time),
+              setValue('duration', eventInstance.duration),
+              setValue('capacity', eventInstance.capacity),
+              setValue('parking', eventInstance.parking),
+              setValue('extra_people', eventInstance.extra_people),
+              setValue('possibility_dinner', eventInstance.possibility_dinner),
+              setValue('kids', eventInstance.kids),
+              setValue('pets', eventInstance.pets),
+              setValue('accesibility', eventInstance.accesibility),
+              setValue('vegan_version', eventInstance.vegan_version),
+              setValue('english', eventInstance.english)
+            } catch (error) {
+              console.error('Error al cargar los datos del evento', error)
+            }};
         fetchData();
         },
-      [id, setValue]
+      [name, setValue]
    );
 const onSubmit = async (editEvent) => {
   console.log("Evento editado", editEvent);
   setLoading(true);
       try{
-        await updateEvent(id, editEvent);
+        await updateEventByName(name, editEvent);
         alert("Datos actualizados correctamente");
-        navigate(`/detail/${id}`)
+        navigate(`/detail/${encodeURIComponent(name)}`)
       }
       catch (error) {
         console.error("Error al actualizar el evento", error);
@@ -101,14 +107,14 @@ const onSubmit = async (editEvent) => {
             <label htmlFor="iberian_supplement">Suplemento de ibéricos</label>
             <input type="number" id="iberian_supplement" name="iberian_supplement" {...register('iberian_supplement', {required: true})}/>
           </div>
-          <div>
+          {/* <div>
             <label htmlFor="date">Fecha</label>
             <input type="text" id="date" name="date" {...register('date', {required: true})}/>
           </div>
           <div>
             <label htmlFor="time">Hora</label>
             <input type="text" id="time" name="time" {...register('time', {required: true})}/>
-          </div>
+          </div> */}
           <div>
             <label htmlFor="duration">Duración</label>
             <input type="text" id="duration" name="duration" {...register('duration', {required: true})}/>

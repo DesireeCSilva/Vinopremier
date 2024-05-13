@@ -34,7 +34,7 @@ export const router = createBrowserRouter ([
                 element: <CreateForm/>
             },
             {
-                path: "/edit/:id",
+                path: "/edit/:name",
                 element: <EditForm/>
             },
             {
