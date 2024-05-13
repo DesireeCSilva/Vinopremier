@@ -1,43 +1,81 @@
 import React from 'react'
-import './CreateForm.css'
-import { useForm } from 'react-hook-form'
+import './DateForm.css'
+import { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { getEventById, postEvent } from '../../services/eventServices';
+import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { postEvent } from '../../services/eventServices'
 
+const DateForm = () => {
 
+    const{id} = useParams();
+    const { register, handleSubmit, setValue} = useForm();
+    const navigate = useNavigate()
+    //const [loading, setLoading] = useState(false);
+    const [eventData, setEventData] = useState();
 
-const CreateForm = () => {
-    const { register, formState: { errors }, handleSubmit, reset } = useForm();
-    const navigate = useNavigate();
-    
-    
-    const handleForm = async (data) =>{
-      try{
-        //Convertir campos númericos a números decimales
-        data.price = parseFloat(data.price)
-        data.private_tasting_supplement = parseFloat(data.private_tasting_supplement)
-        data.iberian_supplement = parseFloat(data.iberian_supplement)
+    useEffect(() => {
+      const fetchData = async () => {
+      const eventData = await getEventById(id);
+          setEventData(eventData);
 
-        
-        const response = await postEvent(data)
-        console.log(response)
-        alert("Evento creado correctamente")
-        navigate("/") 
-      }
-      catch(error){
-        console.error("Error al crear el evento")
-      }
-    };
+              setValue('id_location', eventData.id_location),
+              setValue('name', eventData.name),
+              setValue('image', eventData.image),
+              setValue('description', eventData.description),
+              setValue('cata_type', eventData.cata_type),
+              setValue('products', eventData.products),
+              setValue('price', eventData.price),
+              setValue('private_tasting_supplement', eventData.private_tasting_supplement),
+              setValue('iberian_supplement', eventData.iberian_supplement),
+              setValue('duration', eventData.duration),
+              setValue('capacity', eventData.capacity),
+              setValue('parking', eventData.parking),
+              setValue('extra_people', eventData.extra_people),
+              setValue('possibility_dinner', eventData.possibility_dinner),
+              setValue('kids', eventData.kids),
+              setValue('pets', eventData.pets),
+              setValue('accesibility', eventData.accesibility),
+              setValue('vegan_version', eventData.vegan_version),
+              setValue('english', eventData.english)
+            };
+        fetchData();
+        },
+      [setValue]);
+
+const handleForm = async (data) => {
+    try{
+        const response = await postEvent(data);
+            console.log(response);
+            alert("Fecha añadida correctamente");
+            navigate(`/detail/${id}`)
+    }
+    catch (error){
+        console.error("Error al añadir fecha", error)
+    }
+}
 
   return (
-    <div className="createFormContainer">
-      <h2 className="createFormTitle">FORMULARIO DE CREACIÓN DE CATAS</h2>
-      <form className="formCreate" onSubmit={handleSubmit(handleForm)}>
+    <div className="dateFormContainer">
+      <h2 className="dateFormTitle">AÑADIR NUEVA FECHA</h2>
+      <form className="formDate" onSubmit={handleSubmit(handleForm)}>
+        <div className="newData">
+        <div>
+            <label htmlFor="date">Fecha</label>
+            <input type="text" id="date" name="date" {...register('date', {required: true})}/>
+          </div>
+          <div>
+            <label htmlFor="time">Hora</label>
+            <input type="text" id="time" name="time" {...register('time', {required: true})}/>
+          </div>
+          <input className="buttonEdit" type="submit" value="AÑADIR"/>
+        </div>
+        <div className="oldData">
           <div>
             <label htmlFor="id_location">Id de la localización</label>
             <input type="number" id="id_location" name="id_location" {...register('id_location', {required: true})}/>
           </div>
-           <div>
+          <div>
             <label htmlFor="name">Nombre de la cata</label>
             <input type="text" id="name" name="name" {...register('name', {required: true})}/>
           </div>
@@ -47,7 +85,7 @@ const CreateForm = () => {
           </div>
           <div>
             <label htmlFor="description">Descripción</label>
-            <input type="text" id="description" name="description" {...register('description', {required: true})}/>
+            <textarea type="text" id="description" name="description" {...register('description', {required: true})}/>
           </div>
           <div>
             <label htmlFor="cata_type">Tipo de cata</label>
@@ -70,14 +108,6 @@ const CreateForm = () => {
             <input type="number" id="iberian_supplement" name="iberian_supplement" {...register('iberian_supplement', {required: true})}/>
           </div>
           <div>
-            <label htmlFor="date">Fecha</label>
-            <input type="text" id="date" name="date" {...register('date', {required: true})}/>
-          </div>
-          <div>
-            <label htmlFor="time">Hora</label>
-            <input type="text" id="time" name="time" {...register('time', {required: true})}/>
-          </div>
-          <div>
             <label htmlFor="duration">Duración</label>
             <input type="text" id="duration" name="duration" {...register('duration', {required: true})}/>
           </div>
@@ -90,7 +120,7 @@ const CreateForm = () => {
             <input type="text" id="parking" name="parking" {...register('parking', { required: true})}/>
           </div>
           <div>
-            <input type="checkbox" id="extra_people" name="extra_people" {...register('extra_people')} />
+            <input type="checkbox" id="extra_people" name="extra_people" {...register('extra_people')}/>
             <label htmlFor='extra_people'>Pueden asistir más personas a la cata de las que compraron las entradas</label>
           </div>
           <div>
@@ -116,11 +146,11 @@ const CreateForm = () => {
           <div>
             <input type="checkbox" id="english" name="english" {...register('english')}/>
             <label htmlFor="english">Disponibilidad en inglés</label>
-          </div>
-        <input className="buttonCreate" type="submit" value="PUBLICAR"/> 
-    </form>
+          </div> 
+        </div>
+      </form>
   </div>
   )
 }
 
-export default CreateForm;
+export default DateForm

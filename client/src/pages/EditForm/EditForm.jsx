@@ -1,17 +1,69 @@
 import React from 'react'
 import './EditForm.css'
+import { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { getEventById, updateEvent } from '../../services/eventServices';
+import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const EditForm = () => {
 
+    const{id} = useParams();
+    const { register, handleSubmit, reset, setValue, watch } = useForm();
+    const navigate = useNavigate()
+    const [loading, setLoading] = useState(false);
+    const [eventData, setEventData] = useState();
 
+    useEffect(() => {
+      const fetchData = async () => {
+      const eventData = await getEventById(id);
+          setEventData(eventData);
 
-
-
-
+              setValue('id_location', eventData.id_location),
+              setValue('name', eventData.name),
+              setValue('image', eventData.image),
+              setValue('description', eventData.description),
+              setValue('cata_type', eventData.cata_type),
+              setValue('products', eventData.products),
+              setValue('price', eventData.price),
+              setValue('private_tasting_supplement', eventData.private_tasting_supplement),
+              setValue('iberian_supplement', eventData.iberian_supplement),
+              setValue('date', eventData.date),
+              setValue('time', eventData.time),
+              setValue('duration', eventData.duration),
+              setValue('capacity', eventData.capacity),
+              setValue('parking', eventData.parking),
+              setValue('extra_people', eventData.extra_people),
+              setValue('possibility_dinner', eventData.possibility_dinner),
+              setValue('kids', eventData.kids),
+              setValue('pets', eventData.pets),
+              setValue('accesibility', eventData.accesibility),
+              setValue('vegan_version', eventData.vegan_version),
+              setValue('english', eventData.english)
+            };
+        fetchData();
+        },
+      [id, setValue]
+   );
+const onSubmit = async (editEvent) => {
+  console.log("Evento editado", editEvent);
+  setLoading(true);
+      try{
+        await updateEvent(id, editEvent);
+        alert("Datos actualizados correctamente");
+        navigate(`/detail/${id}`)
+      }
+      catch (error) {
+        console.error("Error al actualizar el evento", error);
+      }
+      finally{
+        setLoading(false);
+      }
+}
 
   return (
     <div className="editFormContainer">
-      <h2 className="editFormTitle">Formulario de edición de catas</h2>
+      <h2 className="editFormTitle">FORMULARIO DE EDICIÓN DE CATAS</h2>
       <form className="formEdit" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label htmlFor="id_location">Id de la localización</label>
@@ -27,7 +79,7 @@ const EditForm = () => {
           </div>
           <div>
             <label htmlFor="description">Descripción</label>
-            <input type="text" id="description" name="description" {...register('description', {required: true})}/>
+            <textarea type="text" id="description" name="description" {...register('description', {required: true})}/>
           </div>
           <div>
             <label htmlFor="cata_type">Tipo de cata</label>
@@ -70,32 +122,32 @@ const EditForm = () => {
             <input type="text" id="parking" name="parking" {...register('parking', { required: true})}/>
           </div>
           <div>
-            <label htmlFor='extra_people'>Pueden asistir más personas a la cata de las que compraron las entradas</label>
             <input type="checkbox" id="extra_people" name="extra_people" {...register('extra_people')}/>
+            <label htmlFor='extra_people'>Pueden asistir más personas a la cata de las que compraron las entradas</label>
           </div>
           <div>
-            <label htmlFor='possibility_dinner'>Es posible cenar en el establecimiento</label>
             <input type="checkbox" id="possibility_dinner" name="posibility_dinner" {...register('possibility_dinner')}/>
+            <label htmlFor='possibility_dinner'>Es posible cenar en el establecimiento</label>
           </div>
           <div>
-            <label htmlFor='kids'>Se puede asistir con niños</label>
             <input type="checkbox" id="kids" name="kids" {...register('kids')}/>
+            <label htmlFor='kids'>Se puede asistir con niños</label>
           </div>
           <div>
-            <label htmlFor='pets'>Se puede asistir con mascotas</label>
             <input type="checkbox" id="pets" name="pets" {...register('pets')}/>
+            <label htmlFor='pets'>Se puede asistir con mascotas</label>
           </div>
           <div>
-            <label htmlFor='accesibility'>Accesibilidad</label>
             <input type="checkbox" id="accesibility" name="accesibility" {...register('accesibility')}/>
+            <label htmlFor='accesibility'>Accesibilidad</label>
           </div>
           <div>
-            <label htmlFor='vegan_version'>Opción vegana</label>
             <input type="checkbox" id="vegan_version" name="vegan_version" {...register('vegan_version')}/>
+            <label htmlFor='vegan_version'>Opción vegana</label>
           </div>
           <div>
-            <label htmlFor="english">Disponibilidad en inglés</label>
             <input type="checkbox" id="english" name="english" {...register('english')}/>
+            <label htmlFor="english">Disponibilidad en inglés</label>
           </div> 
         <input className="buttonEdit" type="submit" value="PUBLICAR"/>
       </form>
