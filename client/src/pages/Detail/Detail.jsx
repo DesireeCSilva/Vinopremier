@@ -44,6 +44,13 @@ const Detail = () => {
     }
     return null;
   };
+  const tileDisabled = ({ date, view }) => {
+    if (view === 'month') {
+      const formattedDate = formatDate(date);
+      return !eventDates.some(eventDate => eventDate.date === formattedDate);
+    }
+    return false;
+  };
 
   const onClickDay = async (date) => {
     setSelectedDate(date)
@@ -187,7 +194,7 @@ const splitTextByRule = (text) => {
 
           <div className='page-detail__left__calendar' >
             <p className='page-detail__left__add'>Seleccionar fecha</p>
-            <Calendar tileContent={tileContent} onClickDay={onClickDay}/>
+            <Calendar tileContent={tileContent} tileDisabled={tileDisabled} onClickDay={onClickDay}/>
             {selectedDate && (
               <div>
                  <p>
