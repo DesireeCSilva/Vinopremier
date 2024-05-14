@@ -149,33 +149,13 @@ const splitTextByRule = (text) => {
             <img src="../../src/assets/images/icons/cart.png"/>
           </section>
 
-          <div className='page-detail__left__extra'>
-              <div className='page-detail__left__extracontent'>
-                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}}/>
-                <p className='page-detail__left__extratext' >Se puede asistir con niños: {event.kids? "Sí" : "No"}</p>
-              </div>
-              <div className='page-detail__left__extracontent'>
-                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
-                <p className='page-detail__left__extratext' >Disponible versión vegana: {event.vegan_version? "Sí" : "No"}</p>
-              </div>
-              <div className='page-detail__left__extracontent'>
-                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
-                <p className='page-detail__left__extratext' >Disponible en inglés: {event.english? "Sí" : "No"} con consulta previa</p>
-              </div>
-              <div className='page-detail__left__extracontent'>
-                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
-              <p className='page-detail__left__extratext' >Se puede asistir con mascotas: {event.pets? "Sí" : "No"}</p>
-              </div>
-              <div className='page-detail__left__extracontent'>
-                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
-                <p className='page-detail__left__extratext' >Pueden asistir más personas a la cata de las que compraron las entradas: {event.extra_people? "Sí" : "No"}</p>
-              </div>
-        </div>
+
 
           <div className='page-detail__left__calendar' >
             <p className='page-detail__left__calendartext'>Seleccionar fecha</p>
             <Calendar tileContent={tileContent}/>
           </div>
+
         </div>
       <div className='page-detail__section01__right'>
           <div className='page-detail__right__icons'>
@@ -224,6 +204,29 @@ const splitTextByRule = (text) => {
                 <p className='page-detail__right__iconstext'>{location && location.address}</p>
               </div>
             </div>
+          </div>
+
+          <div className='page-detail__left__extra'>
+              <div className='page-detail__left__extracontent'>
+                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}}/>
+                <p className='page-detail__left__extratext' >Se puede asistir con niños: {event.kids? "Sí" : "No"}</p>
+              </div>
+              <div className='page-detail__left__extracontent'>
+                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
+                <p className='page-detail__left__extratext' >Disponible versión vegana: {event.vegan_version? "Sí" : "No"}</p>
+              </div>
+              <div className='page-detail__left__extracontent'>
+                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
+                <p className='page-detail__left__extratext' >Disponible en inglés: {event.english? "Sí" : "No"} con consulta previa</p>
+              </div>
+              <div className='page-detail__left__extracontent'>
+                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
+              <p className='page-detail__left__extratext' >Se puede asistir con mascotas: {event.pets? "Sí" : "No"}</p>
+              </div>
+              <div className='page-detail__left__extracontent'>
+                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
+                <p className='page-detail__left__extratext' >Pueden asistir más personas a la cata de las que compraron las entradas: {event.extra_people? "Sí" : "No"}</p>
+              </div>
           </div>
 
           <div className='page-detail__right__description'>
