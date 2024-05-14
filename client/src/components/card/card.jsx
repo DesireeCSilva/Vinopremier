@@ -14,7 +14,7 @@ const CardContainer = Styled.div`
     margin-left: 20%;
     margin-top: 10%;
     margin-bottom: 3%;
-    width: 80%;
+    width: 75%;
     height: auto;
     font-family: 'Gotham', sans-serif;
     text-align: center;
@@ -67,7 +67,8 @@ const CardContainer = Styled.div`
     gap: 1rem;
     overflow: hidden;
     border: 2px solid #AC946A;
-    }
+  
+  }
 
   .card-img {
     width: 90%;
@@ -79,8 +80,7 @@ const CardContainer = Styled.div`
 
   .card-information {
     
-    min-height: 100px;
-    max-height: 125px;
+    max-height: 130px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -216,12 +216,13 @@ function Card({id}) {
 
 <>
 
-<h1 className="card-list-title" style={{ textAlign: 'center', paddingTop:'2vw' }}>LAS MEJORES CATAS DE VINOSPREMIER{city}</h1>
-<button className="card-button-add" style={{ float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/create`)}>Añadir Cata</button>
-          
+<h1 className="card-list-title" style={{ marginLeft:'20px', paddingTop:'2vw' }}>LAS MEJORES CATAS DE VINOSPREMIER<button className="card-button-add" style={{ float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/create`)}>Añadir Cata</button></h1>
+
 <CardContainer>
-  <ul className="card-list">
+
+<ul className="card-list">
     {events.map((event) => (
+
       <li key={event.name} className="card-list-item">
         <section className="card-bg" style={{border:'2px solid #AC946'}}>
           <article className="button-controler">
@@ -250,8 +251,10 @@ function Card({id}) {
         </section>
       </li>
       ))}
-    </ul>
+      </ul>
+
   </CardContainer>
+
   </>
   );
 }

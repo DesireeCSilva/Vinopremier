@@ -5,21 +5,21 @@ import styled from 'styled-components';
 const SelectTypeEvent = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 0;
+  justify-content: space-between;
+  margin-left: 3px;
   padding: 2vh;
-  border: 1px solid #AC946A;
+  border: 3px solid #AC946A;
   border-radius: 5px;
-  width: 15vw;
-  font-size: 2vh;
+  width: 20vw;
+  height: 15vh;
+  font-size: 1.25vw;
+
+
+.title-select-type-event h1 { 
+  
   margin-bottom: 1vh;
 
-  :hover {
-    cursor: pointer;
-  }
-
-.title-select-type-event { 
-  font-size: 2vh;
-  margin-bottom: 1vh;
+  
   }
 
 select {
@@ -27,7 +27,8 @@ select {
   margin-bottom: 1;
   border: 1px solid #AC946A;
   border-radius: 5px;
-  font-size: 1.75vh;
+  font-size: 1.25vw;
+  
 
 }
 
@@ -35,19 +36,17 @@ select:hover {
   cursor: pointer;
 }
 
-
 `;
 
 
-
-
-const TypeFilter = () => {
+const TypeFilter = (onTypeChange) => {
   const [selectedType, setSelectedType] = useState('');
   const [eventTypes, setEventTypes] = useState([]);
+  
 
   useEffect(() => {
     const fetchEventTypes = async () => {
-      const result = await axios.get('http://localhost:8000/event/name');
+      const result = await axios.get('http://localhost:8000/event/cata_types');
       setEventTypes(result.data);
     };
 
@@ -62,7 +61,6 @@ const TypeFilter = () => {
     }
   };
   
-
   return (
     <SelectTypeEvent>
       <h1 class="title-select-type-event">Tipo de Cata</h1>

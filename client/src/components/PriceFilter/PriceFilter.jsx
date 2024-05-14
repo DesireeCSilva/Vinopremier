@@ -4,14 +4,17 @@ import styled from 'styled-components';
 const PriceFilterContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 0;
+  justify-content: space-between;
+  margin-top: 2vh;
+  margin-left: 3px;
   padding: 2vh;
-  border: 1px solid #AC946A;
+  border: 3px solid #AC946A;
   border-radius: 5px;
-  width: 15vw;
-  font-size: 1.5vh;
+  width: 20vw;
+  height: 15vh;
+  font-size: 1.25vw;
   margin-bottom: 1vh;
-
+  
 `;
 
 const PriceRangeInput = styled.input`
@@ -21,7 +24,7 @@ const PriceRangeInput = styled.input`
   step="5"
   padding: 1vw;
   margin-bottom: 1;
-  border: 1px solid #AC946A;
+  border: 3px solid #AC946A;
   border-radius: 5px;
 `;
 
@@ -55,7 +58,7 @@ const ProductPrice = styled.p`
 `;
 
 const PriceFilter = () => {
-  const [events, setEvents] = useState([]);
+  
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(500);
   const [filteredProducts, setFilteredProducts] = useState([]);
