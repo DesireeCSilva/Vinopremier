@@ -110,3 +110,14 @@ export const deleteEventByName = async (name) => {
         }
     }
 }
+
+export const getEventByNameAndDate = async(name, date) => {
+    try {
+        const response = await axios.get(`${URL_EVENT}/${encodeURIComponent(name)}/${date}`);
+        const event = response.data;
+        return event;
+    } catch (error) {
+        console.log('Error al obtener el evento por fecha', error);
+        throw error;
+    }
+}
