@@ -95,21 +95,21 @@ const CardContainer = Styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    padding:0.25em;
-    font-size: 1.10vw;
+    padding:0.1em;
+    font-size: 1.2vw;
     
   }
 
   .card-price {
     align-items: center;
     justify-content: center;
-    padding: 1px;
-    font-size: 2.5vw;
+    padding: px;
+    font-size: 2vw;
     
   }
 
     .card-tax  {
-    font-size: 0.5vw;
+    font-size: 0.65vw;
     
   }
 
@@ -231,7 +231,7 @@ function Card({id}) {
           <img className="card-img" src={event.image} onClick={() => navigate(`detail/${encodeURIComponent(event.name)}`)} alt={event.name} width="50" height="50" />
           <div className="card-information">
             <article className="card-name">{event.name}</article>
-            <article className="card-price">{event.price}€<p className="card-tax">IVA incluido</p></article>
+            <article className="card-price">{event.price}€<p className="card-tax">IVA incluido (Precio por persona)</p></article>
           </div>
           <section className="card-counter"> 
           <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black', marginBottom:'0'}}>
