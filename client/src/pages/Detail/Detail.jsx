@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { useParams } from 'react-router-dom';
+import { useParams , Link } from 'react-router-dom';
 import { getEventById, getEventByName } from '../../services/eventServices.js'
 import { getLocationById } from '../../services/locationServices.js';
 import '../Detail/Detail.css'
@@ -232,6 +232,8 @@ const splitTextByRule = (text) => {
           <div className='page-detail__right__description'>
             <p dangerouslySetInnerHTML={{ __html: splitTextByRule(event.description) }}></p>
         </div>
+
+        <Link to="/"><button className='page-detail_back-button'>Volver a Catas y Eventos</button></Link>
       </div>
     </section>
   </article>

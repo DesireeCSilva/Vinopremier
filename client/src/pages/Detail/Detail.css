@@ -80,7 +80,7 @@
 }
 
 .page-detail__left__extra {
-   width: 24.9rem;
+   width: 36.5rem;
    height: 12rem;
    background: #AC946A;
    padding: 2rem;
@@ -93,8 +93,8 @@
 
 .page-detail__left__extratext {
    font-family: 'Gotham';
-   font-size: 0.98rem;
-   margin-left: 0.8rem;
+   font-size: 1.1rem;
+   margin-left: 1rem;
    padding: 0.4rem;
    font-weight: 500;
    background: #AC946A;
@@ -124,7 +124,7 @@
 .page-detail__right__description {
    font-family: 'Gotham';
    font-size: 1rem;
-   margin-top: 28rem;
+   margin-top: 5rem;
    text-align: justify;
 }
 
@@ -179,6 +179,18 @@
 
 .page-detail__hr {
    width: 99%;
+}
+
+.page-detail_back-button {
+   font-family: 'Gotham';
+   font-size: 1rem;
+   color: white;
+   background: #000;
+   border: none;
+   width: 24.5rem;
+   margin-top: 2rem;
+   height: 4.4rem;
+   cursor: pointer;
 }
 
 .card-counter {
@@ -322,6 +334,7 @@
       flex-direction: column;
       align-content: center;
       justify-content: center;
+      margin-left: 2.1rem;
    }
    
    .page-detail__left__extratext {
