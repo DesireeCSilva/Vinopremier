@@ -168,7 +168,7 @@ En la carpeta _server_:
  - Web Developer: [Saray Anta](https://github.com/SarayAnta)
 
 
-# Póximos pasos
+# Próximos pasos
 En este proyecto final de nuestro Bootcamp en Factoría F5 hemos contado con un tiempo determinado, pero tenemos algunas ideas más para seguir mejorando esta website. Algunas de ellas son:
 
 * Mejorar la calidad de algunos textos de detalle de las Catas, jugando mejor con el posicionamiento SEO.
