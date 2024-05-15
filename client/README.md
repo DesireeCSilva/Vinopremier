@@ -4,6 +4,7 @@ Este proyecto ha sido desarrollado para la empresa Vinopremier, una empresa que 
 * Sistema de gestión de reserva de Catas: el usuario puede explorar y reservar fácilmente Catas disponibles en Vinopremier gracias a la implementación de un calendario funcional. Ha sido diseñada para facilitar la reserva de Catas en línea, y hacer más llevadera la gestión de las mismas. 
 * Filtrado de Catas mejorado: se han ideado e implementado mejoras en el sistema de filtrado de Catas, para ayudar al usuario a encontrar las Catas que mejor se adapten a sus preferencias y necesidades.
 * Mejoras en la página de detalle de cada Cata: se ha rediseñado la screen mostrando los datos a través de iconos y una card informativa, incluyendo el mencionado calendario y organizando los componentes de una forma más adecuada para la experiencia de usuario.
+* Reformulación del diseño de las screens de Login y Register para los clientes de la web de Vinopremier.
 * Elaboración de formularios de creación, edición y borrado de Catas para la parte del Admin: siempre con el objetivo de hacer más fácil el trabajo del equipo de Vinopremier.
 
 
@@ -109,7 +110,7 @@ npm run test
 
 # Initialización del Postman
 Haga clic en este enlace para obtener información de nuestro Postman sobre los métodos del CRUD en nuestra base de datos. Puede ver, agregar, editar y eliminar las Catas de nuestro sitio web en él.<br>
-https://albamartinmz.postman.co/workspace/My-Workspace~1d37aef0-5e05-4f4d-8aa0-e702b0ca00bc/collection/32563763-1112c32c-0d93-4046-a71e-6813616cd5b7?action=share&creator=32563763
+https://documenter.getpostman.com/view/32563829/2sA3JQ4KAU
 
 
 
@@ -165,10 +166,10 @@ En la carpeta _server_:
  - Product Owner: [Andrea Martín](https://github.com/Andreamartinn17)
  - Web Developer: [Desirée Carrizosa](https://github.com/DesireeCSilva)
  - Web Developer: [Alba Martín](https://github.com/albamartinmz)
- - Web Developer: [Saray Anta](hhttps://github.com/SarayAnta)
+ - Web Developer: [Saray Anta](https://github.com/SarayAnta)
 
 
-# Póximos pasos
+# Próximos pasos
 En este proyecto final de nuestro Bootcamp en Factoría F5 hemos contado con un tiempo determinado, pero tenemos algunas ideas más para seguir mejorando esta website. Algunas de ellas son:
 
 * Mejorar la calidad de algunos textos de detalle de las Catas, jugando mejor con el posicionamiento SEO.
