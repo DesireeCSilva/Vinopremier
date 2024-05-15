@@ -2,6 +2,8 @@ import React from 'react'
 import { loginUser } from '../../services/authServices';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import '../LoginForm/LoginForm.css';
+
 const LoginForm = () => {
   const navigate = useNavigate();
   const { handleSubmit, register, formState: { errors }} = useForm();
@@ -21,21 +23,24 @@ const LoginForm = () => {
 
   return (
     <>
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className='login-form' onSubmit={handleSubmit(onSubmit)}>
+      <p className='login-form_title' >Clientes registrados</p>
+      <p className='login-form_subtitle'>Si tienes una cuenta inicia sesión con tu dirección de correo electrónico</p>
       <div>
-        <label htmlFor="email">
-          Email
-          <input type="email" {...register('email')} required />
+        <label className='register-form_label' htmlFor="email">
+          Correo electrónico <br />
+          <input className='login-form_input' type="email" {...register('email')} required />
         </label>
       </div>
 
       <div>
-        <label htmlFor="password">
-          Contraseña
-          <input type="password" {...register('password')} required />
+        <label className='register-form_label' htmlFor="password">
+          Contraseña <br />
+          <input className='login-form_input' type="password" {...register('password')} required />
         </label>
       </div>
-      <button type="submit">Iniciar sesión</button>
+      <button className='register_form-button-login' type="submit">INICIAR SESIÓN</button>
+      <Link className='register_form-button-login' to="/register">REGÍSTRATE</Link>
     </form>
     </>
   )
