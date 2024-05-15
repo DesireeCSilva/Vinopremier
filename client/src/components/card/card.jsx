@@ -169,12 +169,12 @@ function Card({id}) {
     
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get('http://localhost:8000/event/name');
+          const result = await axios.get('http://localhost:8000/event/name');
             
 
         setEvents(result.data);
 
-            const locationResult = await axios.get('http://localhost:8000/location');
+          const locationResult = await axios.get('http://localhost:8000/location');
         setCity(locationResult.city);
 
         const initialCount = {};
@@ -216,12 +216,19 @@ function Card({id}) {
 
 <>
 
-<h1 className="card-list-title" style={{ marginLeft:'20px', paddingTop:'2vw' }}>LAS MEJORES CATAS DE VINOSPREMIER<button className="card-button-add" style={{ float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/create`)}>Añadir Cata</button></h1>
+<h1 style={{textAlign:'center', fontSize:'4vw', color:'#AC946A', fontWeight:'bold', marginTop:'4vw'}}>Catas y Eventos de Vinopremier
+    <button className="card-button-add" style={{ float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/create`)}>
+      Añadir Cata
+    </button>
+  </h1>
+
 
 <CardContainer>
 
 <ul className="card-list">
     {events.map((event) => (
+
+      
 
       <li key={event.name} className="card-list-item">
         <section className="card-bg" style={{border:'2px solid #AC946'}}>

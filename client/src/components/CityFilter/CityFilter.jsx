@@ -46,17 +46,40 @@ const CityFilterContainer = styled.div`
 
 const CityFilter = () => {
   const [location, setLocations] = useState([]); 
+
+  const getLocationById = async (city) => {
+    try {
+      const response = await fetch(`https://localhost:8000/locations/${city}`);
+      const data = await response.json();
+
+      // Si data no es un array, conviértelo en un array
+      if (!Array.isArray(data)) {
+        return [data];
+      }
+
+      return data;
+    } catch (error) {
+      console.error('Hubo un error al obtener los datos:', error);
+      // Si hay un error, devuelve un array vacío
+      return [];
+    }
+  }
+
   const handleCityClick = async (city) => {
     try {
-      
       const responseLocation = await getLocationById(city);
       console.log(responseLocation);
-      setLocations(responseLocation);
+
+      if (!Array.isArray(responseLocation)) {
+        console.error('responseLocation debe ser un array, pero obtuve:', responseLocation);
+        setLocations([]);
+      } else {
+        setLocations(responseLocation);
+      }
     } catch (error) {
       console.error('Hubo un error al obtener los datos:', error);
     }
   };
-
 
 
   return (

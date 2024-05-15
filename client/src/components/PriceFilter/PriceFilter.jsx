@@ -58,6 +58,7 @@ const ProductPrice = styled.p`
 `;
 
 const PriceFilter = () => {
+  const [events, setEvents] = useState([]);
   
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(500);
@@ -73,7 +74,7 @@ const PriceFilter = () => {
   };
 
   const filterProducts = () => {
-    const filtered = products.filter((event) => event.price >= minPrice && event.price <= maxPrice);
+    const filtered = events.filter((event) => event.price >= minPrice && event.price <= maxPrice);
     setFilteredProducts(filtered);
   };
 

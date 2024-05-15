@@ -3,34 +3,33 @@ import TypeFilter from '../../components/TypeFilter/TypeFilter';
 import CityFilter from '../../components/CityFilter/CityFilter';
 import PriceFilter from '../../components/PriceFilter/PriceFilter'; 
 import Card from '../../components/card/card';
-import { getEventByNameArray } from '../../services/eventServices';
+import {getEventByName, getLocationById } from '../../services/eventServices';
+
 
 
 
 const Home = () => {
   const [events, setEvents] = useState([]);
   const [filters, setFilters] = useState({
-    cata_type: '',
-    city: '',
+    cata_type: 'all',
+    city: 'all',
     price: 'all',
-    // cata_type: '',
+    
   });
+  
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const initialEvents = await getEventByNameArray();
-      console.log(initialEvents);
-
-      if (Array.isArray(initialEvents)) {
-        setEvents(initialEvents);
-      } else {
-        console.error('getEventByNameArray did not return an array:', initialEvents);
-      }
+      const initialEvents = await getEventByName();
+      const eventsWithCity = await Promise.all(initialEvents.map(async event => {
+        const location = await getLocationById(event.id.location);
+        return { ...event, city: location.city };
+      }));
+      setEvents(eventsWithCity);
     };
-
+  
     fetchEvents();
   }, []);
-
   const handleFilterChange = (filterName, filterValue) => {
     setFilters(prevFilters => ({
       ...prevFilters,
@@ -38,28 +37,47 @@ const Home = () => {
     }));
   };
 
+  const handleCataTypeChange = (event) => {
+    handleFilterChange('cata_type', event.target.value);
+  };
+  
+  const handlePriceChange = (event) => {
+    handleFilterChange('price', event.target.value);
+  };
+
   const filterEvents = (events) => {
+    if (!Array.isArray(events)) {
+      return events;
+    } else if (events && typeof events === 'object') {
+      return Object.values(events);
+    } else {
+      console.error('API did not return an array or an object:', events);
+      return [];
+    }
+  
     return events.filter(event => {
       return (
-        (filters.category === '' || event.category === filters.category) //&&
-        //(filters.cata_type === '' || event.cata_type === filters.cata_type)
+        (filters.cata_type === 'all' || event.cata_type === filters.cata_type) &&
+        (filters.city === 'all' || event.city === filters.city) &&
+        (filters.price === 'all' || Number(event.price) <= Number(filters.price))
       );
     });
   };
-
   const filteredEvents = filterEvents(events);
 
   return (
     
   <>
     <CityFilter onCityChange={(event) => handleFilterChange('city', event.target.value)} />
+    
     <div className="bar-filters" style={{display: "flex", float:"left", marginTop: "275px", flexDirection:"column", "justify-content": "space-between"}}>
-      <TypeFilter onTypeChange={(event) => handleFilterChange('category', event.target.value)} />
-      <PriceFilter onPriceChange={(event) => handleFilterChange('minPrice', event.target.value)} />
+      <TypeFilter onTypeChange={(event) => handleCataTypeChange(event.target.value)} />
+      <PriceFilter onPriceChange={(event) => handlePriceChange('price', event.target.value)} />
     </div>
     <Card events={filteredEvents} />
   </>
   );
 };
+
 
 export default Home;
