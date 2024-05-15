@@ -1,7 +1,6 @@
 import React from 'react'
 import '../Payment/Payment.css'
 
-// const handleCheckboxChange = (event) => {
 //   const { name, checked } = event.target;
 //   setIsChecked(prevState => ({ ...prevState, [name]: checked }));
 // }
