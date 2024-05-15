@@ -15,7 +15,8 @@ const Detail = () => {
   const [eventDates, setEventDates] = useState(null);
   const [buttonTexts, setButtonTexts] = useState({});
   const [eventsCount, setEventsCount] = useState({});
-  const [selectedDate, setSelectedDate] = useState(null)
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [veganPeople, setVeganPeople] = useState(0);
 
   useEffect(() => {
   
@@ -87,6 +88,7 @@ const Detail = () => {
   const [isChecked, setIsChecked] = useState({
       private: false,
       iberian: false,
+      vegan: false
     });
     
   const handleCheckboxChange = (event) => {
@@ -107,6 +109,10 @@ const Detail = () => {
     setExtraFeaturePrice(prevState => ({ ...prevState, [name]: price }));
 
 };
+
+const handleVeganPeopleChange = (event) => {
+  setVeganPeople(event.target.value);
+}
     
 const splitTextByRule = (text) => {
 
@@ -153,6 +159,22 @@ const splitTextByRule = (text) => {
           <input type="checkbox" id="iberian" name="iberian" onChange={handleCheckboxChange} checked={isChecked.iberian}/>
             <label className='page-detail__left__suptext' for="add-extra-feature">Añadir suplemento de Ibéricos ({event.iberian_supplement}€)</label>
           </div>
+
+          <div className='page-detail__left__supplement-private'>
+                <input type="checkbox" id="vegan" name="vegan" onChange={handleCheckboxChange} checked={isChecked.vegan} />
+                <label className='page-detail__left__suptext' htmlFor="vegan">Quiero opción vegana</label>
+          </div>
+
+          {isChecked.vegan && (
+                <div className='page-detail__left__supplement-private'>
+                  <label className='page-detail__left__suptext' htmlFor="vegan-people">Número de personas veganas</label>
+                  <select id="vegan-people" value={veganPeople} onChange={handleVeganPeopleChange}>
+                    {[...Array(Math.max(eventsCount[event.id] +1 || 0, 1)).keys()].map(num => (
+                      <option key={num} value={num}>{num}</option>
+                    ))}
+                  </select>
+                </div>
+          )}
 
           <section className="card-counter"> 
           <article className="buttons-counter" >
