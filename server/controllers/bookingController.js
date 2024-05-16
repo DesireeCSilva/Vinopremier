@@ -95,3 +95,13 @@ export const updateBooking = async (request, response) => {
         response.status(500).json({ message: error.message });
     }
 };
+
+export const getAllBookingsByUser = async (request, response) => {
+    try {
+        const { id_user } = request.params;
+        const bookings = await BookingModel.findAll({where: {id_user: id_user}})
+        response.status(201).json(bookings)
+    } catch (error) {
+        response.status(500).json({message: error.message})
+    }
+}
