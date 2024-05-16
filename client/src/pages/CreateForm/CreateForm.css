@@ -55,8 +55,8 @@
 }
 
 .formCreate input[type="checkbox"] {
-   width: auto;
-   margin-right: 20px;
+    width: auto;
+    margin-right: 20px;
 }
 
 .buttonCreate {
@@ -71,4 +71,8 @@
     border: none;
     cursor: pointer;
     font-size: 20px;
+}
+
+.error-message {
+    color: red;
 }
