@@ -72,10 +72,10 @@ const Home = () => {
     <CityFilter onCityChange={(event) => handleFilterChange('city', event.target.value)} />
     
     <div className="bar-filters" style={{display: "flex", float:"left", marginTop: "275px", flexDirection:"column", "justify-content": "space-between"}}>
-      
     
     <PriceFilter onPriceChange={(event) => handlePriceChange('price', event.target.value)} />
     <TypeFilter onTypeChange={(event) => handleCataTypeChange(event.target.value)} />
+    
     </div>
     <Card events={filteredEvents} />
   </>
