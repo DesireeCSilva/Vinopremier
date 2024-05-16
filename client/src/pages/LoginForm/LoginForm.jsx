@@ -3,16 +3,19 @@ import { loginUser } from '../../services/authServices';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import '../LoginForm/LoginForm.css';
+import { useUserContext } from '../../context/UserContext';
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const { handleSubmit, register, formState: { errors }} = useForm();
+  const { setIsAuthenticated } = useUserContext();
 
   const onSubmit = async(data) => {
     try {
       const response = await loginUser(data);
       alert(`Inicio de sesión correcto, bienvenido ${response.data.name}`);
       localStorage.setItem('token', response.token);
+      setIsAuthenticated(true);
       console.log(localStorage.getItem('token'));
       navigate('/')
 
@@ -40,7 +43,12 @@ const LoginForm = () => {
         </label>
       </div>
       <button className='register_form-button-login' type="submit">INICIAR SESIÓN</button>
-      <Link className='register_form-button-login' to="/register">REGÍSTRATE</Link>
+      <p style={{ marginTop: '20px' }}>
+        ¿Aún no tienes cuenta?{' '}
+        <span style={{ color: 'blue', cursor: 'pointer' }} onClick={() => navigate (`/register`)}>
+          Regístrate
+        </span>
+      </p>
     </form>
     </>
   )

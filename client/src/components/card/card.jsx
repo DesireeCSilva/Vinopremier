@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import Styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { deleteEvent } from "../../services/eventServices";
+import { deleteEvent, deleteEventByName } from "../../services/eventServices";
+import LogoutButton from '../../components/LogoutButton/LogoutButton.jsx';
+import { useUserContext } from '../../context/UserContext.jsx'
 
 
 
@@ -14,7 +16,7 @@ const CardContainer = Styled.div`
     margin-left: 20%;
     margin-top: 10%;
     margin-bottom: 3%;
-    width: 80%;
+    width: 75%;
     height: auto;
     font-family: 'Gotham', sans-serif;
     text-align: center;
@@ -63,11 +65,12 @@ const CardContainer = Styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
-    width: 17vw;
+    width: 19vw;
     gap: 1rem;
     overflow: hidden;
     border: 2px solid #AC946A;
-    }
+  
+  }
 
   .card-img {
     width: 90%;
@@ -78,8 +81,8 @@ const CardContainer = Styled.div`
   }
 
   .card-information {
-    height: 150px;
-    min-height: 100px;
+    
+    max-height: 130px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -94,21 +97,21 @@ const CardContainer = Styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    padding:0.25em;
-    font-size: 1vw;
+    padding:0.1em;
+    font-size: 1.2vw;
     
   }
 
   .card-price {
     align-items: center;
     justify-content: center;
-    padding: 1px;
-    font-size: 2.5vw;
+    padding: px;
+    font-size: 2vw;
     
   }
 
     .card-tax  {
-    font-size: 0.5vw;
+    font-size: 0.65vw;
     
   }
 
@@ -146,7 +149,7 @@ const CardContainer = Styled.div`
     color: #00000;
     font-size: 1.25vw;
     font-weight: bold;
-    margin: 1vw;
+    margin: 0.5vw;
     border: none;
     height: 3vw;
     
@@ -165,15 +168,16 @@ function Card({id}) {
   const [eventsCount, setEventsCount] = useState({}); 
   const [city, setCity] = useState([]);
   const [events, setEvents] = useState([]);
+  const { isAuthenticated } = useUserContext();
     
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios.get('http://localhost:8000/event/name');
+          const result = await axios.get('http://localhost:8000/event/name');
             
 
         setEvents(result.data);
 
-            const locationResult = await axios.get('http://localhost:8000/location');
+          const locationResult = await axios.get('http://localhost:8000/location');
         setCity(locationResult.city);
 
         const initialCount = {};
@@ -202,43 +206,61 @@ function Card({id}) {
       }, 2000);
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (name) => {
       try {
-        await deleteEvent(id);
-        setEvents(events.filter(event => event.id !== id));
+        const decodedName = decodeURIComponent(name)
+        await deleteEventByName(decodedName);
+        setEvents(events.filter(event => event.name !== name));
       } catch (error) {
         console.error('Error al eliminar el evento:', error);
       }
     };
-    
+    console.log(isAuthenticated)
       return (
 
 <>
 
-<h1 className="card-list-title" style={{ textAlign: 'center', paddingTop:'2vw' }}>LAS MEJORES CATAS DE VINOSPREMIER{city}</h1>
-<button className="card-button-add" style={{ float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/create`)}>Añadir Cata</button>
+<h1 className="card-list-title" style={{ textAlign: 'left', marginLeft:'25px', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS{city}</h1>
+<div className="button-list">
+  {isAuthenticated ? (
+    <>
+  <LogoutButton/>,
+  <button className="card-button-add" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/privateArea/create`)}>Añadir Cata</button>
+  </>
+  ) : (
+    <button className="card-button-login" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/login`)} >INICIA SESIÓN</button>
+  )}
+</div>
           
 <CardContainer>
-  <ul className="card-list">
+
+<ul className="card-list">
     {events.map((event) => (
+
+      
+
       <li key={event.name} className="card-list-item">
         <section className="card-bg" style={{border:'2px solid #AC946'}}>
           <article className="button-controler">
-            <button className="card-button-edit" onClick={() => navigate(`edit/${id}`)}>Editar</button>
-            <button className="card-button-delete" onClick={() =>  handleDelete(event.id)} >Eliminar</button>
-            </article>
-            <img className="card-img" src={event.image} onClick={() => navigate(`detail/${encodeURIComponent(event.name)}`)} alt={event.name} width="50" height="50" />
+            {isAuthenticated && (
+              <>
+                <button className="card-button-edit" onClick={() => navigate(`edit/${encodeURIComponent(event.name)}`)}>Editar</button>
+                <button className="card-button-delete" onClick={() =>  handleDelete(event.name)} >Eliminar</button>
+              </>
+            )}
+          </article>
+          <img className="card-img" src={event.image} onClick={() => navigate(`detail/${encodeURIComponent(event.name)}`)} alt={event.name} width="50" height="50" />
           <div className="card-information">
             <article className="card-name">{event.name}</article>
-            <article className="card-price">{event.price}€<p className="card-tax">IVA incluido</p></article>
+            <article className="card-price">{event.price}€<p className="card-tax">IVA incluido (Precio por persona)</p></article>
           </div>
           <section className="card-counter"> 
           <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black', marginBottom:'0'}}>
-            <button className="add-cart" style={{ width: '20px', height:'30px',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
+            <button className="add-cart" style={{ width: '15px', height:'30px',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
               <p style={{fontSize: '1vw', justifyContent: 'center'}}>+</p>
             </button>
-            <div className="card-qty" style={{fontSize:'1vw',borderBottom:'none', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
-            <button className="less-cart" style={{ width: '20px', height:'30px',backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
+            <div className="card-qty" style={{fontSize:'1vw',borderBottom:'none', display: 'flex', alignItems: 'center',  width: '8px', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
+            <button className="less-cart" style={{ width: '15px', height:'30px',backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
               <p style={{fontSize:'1vw', justifyContent:'center'}}>-</p>
             </button>
           </article> 
@@ -249,8 +271,10 @@ function Card({id}) {
         </section>
       </li>
       ))}
-    </ul>
+      </ul>
+
   </CardContainer>
+
   </>
   );
 }

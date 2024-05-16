@@ -7,7 +7,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 2rem;
 }
+
 .register-form_title {
     font-family: 'Gotham';
     font-size: 2rem;
@@ -26,11 +28,13 @@
     width: 30rem;
     height: 1.8rem;
     margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.register_form-button {
+.register-form_button {
     font-family: 'Gotham';
     font-size: 1rem;
+    letter-spacing: 0.09em;
     color: white;
     background: #000;
     border: none;
