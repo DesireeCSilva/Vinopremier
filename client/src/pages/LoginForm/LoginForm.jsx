@@ -15,7 +15,7 @@ const LoginForm = () => {
       const response = await loginUser(data);
       alert(`Inicio de sesión correcto, bienvenido ${response.data.name}`);
       localStorage.setItem('token', response.token);
-      setIsAuthenticated (true);
+      setIsAuthenticated(true);
       console.log(localStorage.getItem('token'));
       navigate('/')
 
