@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 const DateForm = () => {
-
     const{ name } = useParams();
     const { register, handleSubmit, setValue} = useForm();
     const navigate = useNavigate()
@@ -23,25 +22,25 @@ const DateForm = () => {
           console.log(eventInstance)
               setEventData(eventInstance);
     
-                  setValue('id_location', eventData.id_location),
-                  setValue('name', eventData.name),
-                  setValue('image', eventData.image),
-                  setValue('description', eventData.description),
-                  setValue('cata_type', eventData.cata_type),
-                  setValue('products', eventData.products),
-                  setValue('price', eventData.price),
-                  setValue('private_tasting_supplement', eventData.private_tasting_supplement),
-                  setValue('iberian_supplement', eventData.iberian_supplement),
-                  setValue('duration', eventData.duration),
-                  setValue('capacity', eventData.capacity),
-                  setValue('parking', eventData.parking),
-                  setValue('extra_people', eventData.extra_people),
-                  setValue('possibility_dinner', eventData.possibility_dinner),
-                  setValue('kids', eventData.kids),
-                  setValue('pets', eventData.pets),
-                  setValue('accesibility', eventData.accesibility),
-                  setValue('vegan_version', eventData.vegan_version),
-                  setValue('english', eventData.english)
+                  setValue('id_location', eventInstance.id_location),
+                  setValue('name', eventInstance.name),
+                  setValue('image', eventInstance.image),
+                  setValue('description', eventInstance.description),
+                  setValue('cata_type', eventInstance.cata_type),
+                  setValue('products', eventInstance.products),
+                  setValue('price', eventInstance.price),
+                  setValue('private_tasting_supplement', eventInstance.private_tasting_supplement),
+                  setValue('iberian_supplement', eventInstance.iberian_supplement),
+                  setValue('duration', eventInstance.duration),
+                  setValue('capacity', eventInstance.capacity),
+                  setValue('parking', eventInstance.parking),
+                  setValue('extra_people', eventInstance.extra_people),
+                  setValue('possibility_dinner', eventInstance.possibility_dinner),
+                  setValue('kids', eventInstance.kids),
+                  setValue('pets', eventInstance.pets),
+                  setValue('accesibility', eventInstance.accesibility),
+                  setValue('vegan_version', eventInstance.vegan_version),
+                  setValue('english', eventInstance.english)
 
         } catch (error) {
           console.error('Error al cargar los datos del evento:', error);
