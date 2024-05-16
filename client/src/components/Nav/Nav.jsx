@@ -1,5 +1,7 @@
-import React from 'react'
-import Styled from "styled-components";
+import React from 'react';
+import Styled from 'styled-components';
+import imageMobile from '/src/assets/images/header-mobile.png';
+import imageDesktop from '/src/assets/images/header.png';
 
 const NavContainer = Styled.div`
   display: flex;
@@ -8,19 +10,27 @@ const NavContainer = Styled.div`
   top: 0;
 
   img {
-    
     width: 100%;
     height: 100%;
   }
 
+  @media (max-width: 768px) {
+    img.navbar {
+      content: url(${imageMobile});
+      display: flex;
+      justify-content: center;
+      top: 0;
+      width: 100%;
+    }
+  }
 `;
 
 const Nav = () => {
   return (
     <NavContainer>
-      <img src="../../src/assets/images/header.png" alt="imagen navbar" />
+      <img className='navbar' src={imageDesktop} alt="imagen navbar" />
     </NavContainer>
-  )
+  );
 }
 
-export default Nav
+export default Nav;

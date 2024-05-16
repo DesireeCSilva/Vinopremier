@@ -80,7 +80,7 @@
 }
 
 .page-detail__left__extra {
-   width: 36.5rem;
+   width: 36rem;
    height: 12rem;
    background: #AC946A;
    padding: 2rem;
@@ -89,6 +89,7 @@
    align-content: center;
    justify-content: center;
    margin-top: 25rem;
+   margin-left: 1rem;
 }
 
 .page-detail__left__extratext {
@@ -197,6 +198,7 @@
    display: flex;
    flex-direction: row;
    justify-content: space-between;
+   align-content: center;
    align-items: center;
    height: fit-content;      
 }
@@ -234,6 +236,7 @@
    border: none;
    padding: 3.4rem;
    background: #fff;
+   margin-top: 2rem;
 }
 
 .adding-cart:hover {
@@ -265,6 +268,7 @@
       justify-content: center;
       align-items: center;
       margin-left: auto;
+      margin-right: 5%;
    }
 
    .page-detail__title, .page-detail__subtitle {
@@ -334,7 +338,7 @@
       flex-direction: column;
       align-content: center;
       justify-content: center;
-      margin-left: 2.1rem;
+      margin-left: 2.7rem;
    }
    
    .page-detail__left__extratext {
@@ -370,8 +374,9 @@
    .page-detail__right__description {
       font-family: 'Gotham';
       font-size: .9rem;
-      margin: 2rem;
-      margin-top: 28rem;
+      margin-right: 1.6rem;
+      margin-left: 2.7rem;
+      margin-top: 3rem;
       text-align: justify;
    }
 
@@ -381,12 +386,13 @@
       grid-template-rows: 10rem;
       grid-column-gap: 2rem;
       grid-row-gap: 10rem;
-      margin-left: 2rem;
+      margin-left: 2.5rem;
    }
    .page-detail__right__iconscontainer{
       display: flex;
       align-items: center;
       margin-bottom: 2rem;
+      margin-top: -6rem;
    }
    
    .page-detail__right__iconsimage {
@@ -400,7 +406,7 @@
    
    .page-detail__right__iconstext {
       font-family: 'Gotham';
-      font-size: .9rem;
+      font-size: .8rem;
       margin-left: 1rem;
       font-weight: 500;
    }
@@ -483,6 +489,18 @@
       margin-top: 2rem;
    }
    
+   .page-detail_back-button {
+      font-family: 'Gotham';
+      font-size: 1rem;
+      color: white;
+      background: #000;
+      border: none;
+      width: 22rem;
+      margin-top: 2rem;
+      margin-left: 2.5rem;
+      height: 4rem;
+      cursor: pointer;
+   }
 }
 
 
