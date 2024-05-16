@@ -18,42 +18,43 @@ export const router = createBrowserRouter ([
         element: <LayoutPublic/>,
         children: [
             {
-                path: "/",
+                index: true,
                 element: <Home/>,
             },
             {
-                path: "/detail/:name",
+                path: "detail/:name",
                 element: <Detail/>
             },
             {
-                path: "/login",
+                path: "login",
                 element: <LoginForm/>
             },
             {
-                path: "/register",
+                path: "register",
                 element: <RegisterForm/>
-            },
-            {
-                path: "/payment",
-                element: <Payment/>
             }
         ]
     },
+
     {
-        path: "/",
+        path: "privateArea",
         element: <LayoutPrivate/>,
         children: [
             {
-                path: "/create",
+                path: "create",
                 element: <CreateForm/>
             },
             {
-                path: "/edit/:name",
+                path: "edit/:name",
                 element: <EditForm/>
             },
             {
-                path: "/date/:id",
+                path: "date/:id",
                 element: <DateForm/>
+            },
+            {
+                path: "payment",
+                element: <Payment/>
             }
         ]
     }

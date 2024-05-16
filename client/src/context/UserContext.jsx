@@ -7,7 +7,7 @@ export const UserProvider = ({children}) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     return (
-        <UserContext.Provider value={{setIsAuthenticated}}>
+        <UserContext.Provider value={{setIsAuthenticated, isAuthenticated}}>
             {children}
         </UserContext.Provider>
     );

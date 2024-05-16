@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { deleteEvent, deleteEventByName } from "../../services/eventServices";
 import LogoutButton from '../../components/LogoutButton/LogoutButton.jsx';
+import { useUserContext } from '../../context/UserContext.jsx'
 
 
 
@@ -166,6 +167,7 @@ function Card({id}) {
   const [eventsCount, setEventsCount] = useState({}); 
   const [city, setCity] = useState([]);
   const [events, setEvents] = useState([]);
+  const { isAuthenticated } = useUserContext();
     
     useEffect(() => {
         const fetchData = async () => {
@@ -212,14 +214,14 @@ function Card({id}) {
         console.error('Error al eliminar el evento:', error);
       }
     };
-    
+    console.log(isAuthenticated)
       return (
 
 <>
 
 <h1 className="card-list-title" style={{ textAlign: 'left', marginLeft:'25px', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS{city}</h1>
 <button className="card-button-login" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/login`)} >INICIA SESIÓN</button>
-<button className="card-button-add" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/create`)}>Añadir Cata</button>
+<button className="card-button-add" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/privateArea/create`)}>Añadir Cata</button>
 <LogoutButton/>
           
 <CardContainer>
