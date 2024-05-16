@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useParams , Link } from 'react-router-dom';
-import { getEventById, getEventByName } from '../../services/eventServices.js'
+import { getEventByName } from '../../services/eventServices.js'
 import { getLocationById } from '../../services/locationServices.js';
 import '../Detail/Detail.css'
 

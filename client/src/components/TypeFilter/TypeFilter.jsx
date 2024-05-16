@@ -6,33 +6,44 @@ const SelectTypeEvent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-left: 3px;
+  margin-left: 2vw;
+  margin-top: 3vh;
   padding: 2vh;
   border: 3px solid #AC946A;
   border-radius: 5px;
   width: 20vw;
-  height: 15vh;
   font-size: 1.25vw;
 
 
-.title-select-type-event h1 { 
-  
+
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
+  width: 100%;
+  height: 100%;
   margin-bottom: 1vh;
-
-  
-  }
-
-select {
-  padding: 1vw;
-  margin-bottom: 1;
-  border: 1px solid #AC946A;
-  border-radius: 5px;
-  font-size: 1.25vw;
-  
-
 }
 
-select:hover {
+button {
+  margin: 1vh;
+  padding: 1vh;
+  border: 2px solid #AC946A;
+  border-radius: 5px;
+  background-color: #AC946A;
+  color: #fff;
+  font-size: 1.25vw;
+  cursor: pointer;
+}
+
+
+
+li :hover {
   cursor: pointer;
 }
 
@@ -64,20 +75,22 @@ const TypeFilter = (onTypeChange) => {
   return (
     <SelectTypeEvent>
       <h1 class="title-select-type-event">Tipo de Cata</h1>
-      <select value={selectedType} onChange={handleTypeChange}>
-        <option value="">Todos los tipos</option>
-        <option value="Vino">Vino</option>
-        <option value="Cerveza">Cervezas</option>
-        <option value="Vermout">Vermout</option>
-        <option value="Cava">Cava</option>
-        <option value="Gin">Gin</option>
-        <option value="Whisky">Whisky</option>
-        <option value="Ron">Ron</option>
-        <option value="Tequila">Tequila</option>
-        <option value="Brandy">Brandy</option>
-        <option value="Cognac">Cognac</option>
-        <option value="Otros">Otros</option>
-      </select>
+      <ul value={selectedType} onChange={handleTypeChange}>
+        
+        <button>Todos los tipos</button>
+        <button>Vino</button>
+        <button>Cerveza</button>
+        <button>Vermout</button>
+        <button>Cava</button>
+        <button>Gin</button>
+        <button>Whisky</button>
+        <button>Ron</button>
+        <button>Tequila</button>
+        <button>Brandy</button>
+        <button>Cognac</button>
+        <button>Otros</button>
+        
+      </ul>
     </SelectTypeEvent>
   );
 };

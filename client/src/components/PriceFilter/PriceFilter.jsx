@@ -5,15 +5,15 @@ const PriceFilterContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 2vh;
-  margin-left: 3px;
+  margin-top: 1vh;
+  margin-left: 2vw;
   padding: 2vh;
   border: 3px solid #AC946A;
   border-radius: 5px;
   width: 20vw;
-  height: 15vh;
+  
   font-size: 1.25vw;
-  margin-bottom: 1vh;
+  margin-bottom: 5px;
   
 `;
 
