@@ -109,9 +109,10 @@ const Detail = () => {
 };
 
 const calculateFinalPrice = () => {
-  let finalPrice = event.price;
-  if (isChecked.private) finalPrice += event.private_tasting_supplement;
-  if (isChecked.iberian) finalPrice += event.iberian_supplement;
+  let finalPrice = parseFloat(event.price);
+  finalPrice *= eventsCount[event.id];
+  if (isChecked.private) finalPrice += parseFloat(event.private_tasting_supplement);
+  if (isChecked.iberian) finalPrice += parseFloat(event.iberian_supplement);
   return finalPrice;
 }
 
