@@ -1,12 +1,27 @@
-import React from 'react'
-import '../Payment/Payment.css'
-
-
+import React, { useEffect } from 'react';
+import '../Payment/Payment.css';
+import { getAllBookingsByUser } from '../../services/bookingServices.js';
+import { useParams } from 'react-router-dom';
 
 const Payment = () => {
+  const { id_user } = useParams();
+  const [bookingData, setBookingData] = useState(null);
+
+  useEffect(() => {
+
+    const fetchBookingByUser = async () => {
+      try {
+        const response = await getAllBookingsByUser(id_user);
+        setBookingData(response);
+      } catch(error) {
+        console.error("Error al cargar los datos de la reserva", error);
+
+      }
+    };
+    fetchBookingByUser();
+  }, [id_user]);
   return (
     <>
-
     <section className='payment-page'>
       <img className='payment-page_img' src="/src/assets/images/banners/payment-left.PNG" alt="" />
       
