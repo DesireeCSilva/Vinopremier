@@ -4,11 +4,15 @@ import 'react-calendar/dist/Calendar.css';
 import { useParams , Link } from 'react-router-dom';
 import { getEventById, getEventByName, getEventByNameAndDate } from '../../services/eventServices.js'
 import { getLocationById } from '../../services/locationServices.js';
-import '../Detail/Detail.css'
+import '../Detail/Detail.css';
+import { useUserContext } from '../../context/UserContext.jsx';
+import { useNavigate } from "react-router-dom";
+import { postBooking } from '../../services/bookingServices.js';
 
 
 
 const Detail = () => {
+  const navigate = useNavigate();
   const { name } = useParams(); 
   const [event, setEvent] = useState(null);
   const [location, setLocation] = useState(null);
@@ -17,6 +21,8 @@ const Detail = () => {
   const [eventsCount, setEventsCount] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
   const [veganPeople, setVeganPeople] = useState(0);
+  const { isAuthenticated } = useUserContext();
+  const [extraFeaturePrice, setExtraFeaturePrice] = useState({private: 0, iberian: 0})
 
   useEffect(() => {
   
@@ -24,7 +30,6 @@ const Detail = () => {
       try {
         const decodedName = decodeURIComponent(name);
         const response = await getEventByName(decodedName);
-        console.log(response)
         const { eventInstance } = response;
         setEvent(eventInstance);
         const { eventDates } = response;
@@ -64,7 +69,7 @@ const Detail = () => {
     } catch (error) {
       console.error('Error al obtener el evento por fecha', error)
     }
-  }
+ }
   const formatDate = date => {
     return (`${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`);
   };
@@ -77,38 +82,38 @@ const Detail = () => {
       });
     };
 
-  const handleClick = (id) => {
-      setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIDO" }));
-  
-      setTimeout(() => {
-        setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIR" }));
-      }, 2000);
-    };
-
   const [isChecked, setIsChecked] = useState({
       private: false,
       iberian: false,
-      vegan: false
+      vegan: false,
+      english_version: false
     });
     
   const handleCheckboxChange = (event) => {
       const { name, checked } = event.target;
       setIsChecked(prevState => ({ ...prevState, [name]: checked }));
 
-      let price;
+      let price = 0;
       switch (name) {
   case 'private':
-    price = checked ? 60 : 0;
+    price = checked ? event.private_tasting_supplement : 0;
     break;
   case 'iberian':
-    price = checked ? 25 : 0;
+    price = checked ? event.iberian_supplement : 0;
     break;
   default:
-    price = 0;
+    break;
   }
     setExtraFeaturePrice(prevState => ({ ...prevState, [name]: price }));
 
 };
+
+const calculateFinalPrice = () => {
+  let finalPrice = event.price;
+  if (isChecked.private) finalPrice += event.private_tasting_supplement;
+  if (isChecked.iberian) finalPrice += event.iberian_supplement;
+  return finalPrice;
+}
 
 const handleVeganPeopleChange = (event) => {
   setVeganPeople(event.target.value);
@@ -132,8 +137,41 @@ const splitTextByRule = (text) => {
     return result.join('<br />');
   };
 
+const handleDateForm = () => {
+    navigate(`/privateArea/date/${encodeURIComponent(event.name)}`);
+};  
 
+const handleClick = async (id) => {
+    setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIDO" }));
 
+    setTimeout(() => {
+      setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIR" }));
+    }, 2000);
+
+    try {
+      const token = localStorage.getItem('token');
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      const idUser = decodedToken.id;
+
+      const bookingData = {
+        id_user: idUser,
+        id_event: selectedDate.id,
+        people: eventsCount[event.id],
+        vegan_version: isChecked.vegan,
+        vegan_people: veganPeople,
+        private_tasting_supplement: isChecked.private,
+        iberian_supplement: isChecked.iberian,
+        final_price: calculateFinalPrice()
+      };
+
+      const newBooking = await postBooking(bookingData);
+      console.log(newBooking)
+      alert('Reserva añadida al carrito.')
+    } catch (error) {
+      console.error('Error al crear la reserva', error);
+      alert('Error al añadir la reserva al carrito.')
+    }
+  };
 
   return (
     
@@ -141,7 +179,7 @@ const splitTextByRule = (text) => {
     
     {event && (
     <article className='page-detail'>
-      <p className='page-detail__subtitle'>Inicio / <span className='page-detail__subtitlegold'>{event.name}</span></p>
+      <p className='page-detail__subtitle'><Link to="/" className='page-detail__subtitle-link'>Inicio</Link> / <span className='page-detail__subtitlegold'>{event.name}</span></p>
       <h1 className='page-detail__title'>{event.name}</h1>
 
       <section className='page-detail__section01'>
@@ -160,22 +198,32 @@ const splitTextByRule = (text) => {
             <label className='page-detail__left__suptext' for="add-extra-feature">Añadir suplemento de Ibéricos ({event.iberian_supplement}€)</label>
           </div>
 
+          {event.english && (
           <div className='page-detail__left__supplement-private'>
-                <input type="checkbox" id="vegan" name="vegan" onChange={handleCheckboxChange} checked={isChecked.vegan} />
-                <label className='page-detail__left__suptext' htmlFor="vegan">Quiero opción vegana</label>
+            <input type="checkbox" id="english_version" name="english_version" onChange={handleCheckboxChange} checked={isChecked.english_version} />
+            <label className='page-detail__left__suptext' htmlFor="vegan">Versión en inglés</label>
           </div>
-
-          {isChecked.vegan && (
-                <div className='page-detail__left__supplement-private'>
-                  <label className='page-detail__left__suptext' htmlFor="vegan-people">Número de personas veganas</label>
-                  <select id="vegan-people" value={veganPeople} onChange={handleVeganPeopleChange}>
-                    {[...Array(Math.max(eventsCount[event.id] +1 || 0, 1)).keys()].map(num => (
-                      <option key={num} value={num}>{num}</option>
-                    ))}
-                  </select>
-                </div>
           )}
 
+          {event.vegan_version && (
+            <>
+          <div className='page-detail__left__supplement-private'>
+                <input type="checkbox" id="vegan" name="vegan" onChange={handleCheckboxChange} checked={isChecked.vegan} />
+                <label className='page-detail__left__suptext' htmlFor="vegan">Opción vegana</label>
+          </div>
+            {isChecked.vegan && (
+              
+              <div className='page-detail__left__supplement-private'>
+                <label className='page-detail__left__suptext' htmlFor="vegan-people">Número de personas veganas</label>
+                    <select id="vegan-people" value={veganPeople} onChange={handleVeganPeopleChange}>
+                      {[...Array(Math.max(eventsCount[event.id] +1 || 0, 1)).keys()].map(num => (
+                        <option key={num} value={num}>{num}</option>
+                      ))}
+                    </select>
+              </div>
+            )}
+            </>
+          )}
           <section className="card-counter"> 
           <article className="buttons-counter" >
             <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
@@ -185,10 +233,17 @@ const splitTextByRule = (text) => {
             <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
               <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
             </button>
-          </article> 
+          </article>
+          <p>Número de personas</p>
+          {isAuthenticated ? (
+            <div>
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
                   {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../../src/assets/images/icons/cart.png"/>
+            <img src="../../src/assets/images/icons/cart.png"/></div>
+            
+          ) : (
+            <button className="card-button-login" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
+          )} 
           </section>
 
 
@@ -202,6 +257,11 @@ const splitTextByRule = (text) => {
                   Fecha: {selectedDate.date}, Hora: {selectedDate.time}, Plazas disponibles: {selectedDate.avalaible_places}
                 </p>
               </div>
+            )}
+            {isAuthenticated && (
+              <>
+            <button onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>
+            </>
             )}
           </div>
 
