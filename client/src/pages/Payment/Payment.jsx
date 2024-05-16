@@ -33,8 +33,8 @@ const Payment = () => {
           <hr className='payment-page_right-hr' />
           <div className='payment-page_right-article'>
             <img className='payment-page_right-img02' src="/src/assets/images/cards-original/card01.jpg" alt="" />
-            <p className='payment-page_right-article-text'>Cata de Iniciación al mundo del vino + Degustación de Ibéricos en Madrid
-            <p>29€</p>
+            <p className='payment-page_right-article-text'>Nombre Cata
+            <p>€</p>
             </p>
             
           </div>
