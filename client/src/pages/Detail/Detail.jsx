@@ -7,6 +7,7 @@ import { getLocationById } from '../../services/locationServices.js';
 import '../Detail/Detail.css';
 import { useUserContext } from '../../context/UserContext.jsx';
 import { useNavigate } from "react-router-dom";
+import { postBooking } from '../../services/bookingServices.js';
 
 
 
@@ -21,6 +22,7 @@ const Detail = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [veganPeople, setVeganPeople] = useState(0);
   const { isAuthenticated } = useUserContext();
+  const [extraFeaturePrice, setExtraFeaturePrice] = useState({private: 0, iberian: 0})
 
   useEffect(() => {
   
@@ -28,7 +30,6 @@ const Detail = () => {
       try {
         const decodedName = decodeURIComponent(name);
         const response = await getEventByName(decodedName);
-        console.log(response)
         const { eventInstance } = response;
         setEvent(eventInstance);
         const { eventDates } = response;
@@ -68,7 +69,7 @@ const Detail = () => {
     } catch (error) {
       console.error('Error al obtener el evento por fecha', error)
     }
-  }
+ }
   const formatDate = date => {
     return (`${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`);
   };
@@ -79,14 +80,6 @@ const Detail = () => {
         const newCount = currentCount + delta;
         return { ...prevCount, [eventId]: newCount >= 0 ? newCount : 0 };
       });
-    };
-
-  const handleClick = (id) => {
-      setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIDO" }));
-  
-      setTimeout(() => {
-        setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIR" }));
-      }, 2000);
     };
 
   const [isChecked, setIsChecked] = useState({
@@ -136,8 +129,33 @@ const splitTextByRule = (text) => {
     return result.join('<br />');
   };
 
+  const handleClick = async (id) => {
+    setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIDO" }));
 
+    setTimeout(() => {
+      setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIR" }));
+    }, 2000);
 
+    try {
+      const token = localStorage.getItem('token');
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      const id_user = decodedToken.id;
+
+      const bookingData = {
+        id_event: selectedDate.id,
+        people: eventsCount[event.id],
+        vegan_version: isChecked.vegan,
+        vegan_people: veganPeople
+      };
+
+      const newBooking = await postBooking(bookingData);
+      console.log(newBooking)
+      alert('Reserva añadida al carrito.')
+    } catch (error) {
+      console.error('Error al crear la reserva', error);
+      alert('Error al añadir la reserva al carrito.')
+    }
+  };
 
   return (
     
@@ -190,6 +208,7 @@ const splitTextByRule = (text) => {
               <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
             </button>
           </article>
+          <p>Número de personas</p>
           {isAuthenticated ? (
             <div>
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
