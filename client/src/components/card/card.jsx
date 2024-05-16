@@ -220,7 +220,7 @@ function Card({id}) {
 
 <>
 
-<h1 className="card-list-title" style={{ textAlign: 'left', marginLeft:'25px', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS{city}</h1>
+<h1 className="card-list-title" style={{ textAlign: 'left', marginLeft:'25px', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS DE VINOPREMIER</h1>
 <div className="button-list">
   {isAuthenticated ? (
     <>
