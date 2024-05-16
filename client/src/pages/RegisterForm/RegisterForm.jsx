@@ -2,17 +2,20 @@ import React, { useState } from 'react';
 import { createUser } from '../../services/authServices';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import '../RegisterForm/RegisterForm.css'
+import '../RegisterForm/RegisterForm.css';
+import { useUserContext } from '../../context/UserContext';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
-  const { handleSubmit, register, formState: { errors }} = useForm()
+  const { handleSubmit, register, formState: { errors }} = useForm();
+  const { setIsAuthenticated } = useUserContext();
 
   const onSubmit = async(data) => {
     try {
       const response = await createUser(data);
       alert('Usuario registrado correctamente');
       localStorage.setItem('token', response.token);
+      setIsAuthenticated (true);
       console.log(localStorage.getItem('token'));
       navigate('/')
 
