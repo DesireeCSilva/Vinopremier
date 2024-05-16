@@ -145,7 +145,7 @@ const splitTextByRule = (text) => {
     
     {event && (
     <article className='page-detail'>
-      <p className='page-detail__subtitle'>Inicio / <span className='page-detail__subtitlegold'>{event.name}</span></p>
+      <p className='page-detail__subtitle'><Link to="/" className='page-detail__subtitle-link'>Inicio</Link> / <span className='page-detail__subtitlegold'>{event.name}</span></p>
       <h1 className='page-detail__title'>{event.name}</h1>
 
       <section className='page-detail__section01'>
