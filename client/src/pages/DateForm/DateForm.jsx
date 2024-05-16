@@ -8,46 +8,55 @@ import { useNavigate } from 'react-router-dom'
 
 const DateForm = () => {
 
-    const{name: initialName} = useParams();
+    const{ name } = useParams();
     const { register, handleSubmit, setValue} = useForm();
     const navigate = useNavigate()
     const [eventData, setEventData] = useState();
 
     useEffect(() => {
       const fetchData = async () => {
-      const eventData = await getEventById(id);
-          setEventData(eventData);
+        try {
+          const decodedName = decodeURIComponent(name);
+          const response = await getEventByName(decodedName);
+          console.log(response)
+          const { eventInstance } = response;
+          console.log(eventInstance)
+              setEventData(eventInstance);
+    
+                  setValue('id_location', eventData.id_location),
+                  setValue('name', eventData.name),
+                  setValue('image', eventData.image),
+                  setValue('description', eventData.description),
+                  setValue('cata_type', eventData.cata_type),
+                  setValue('products', eventData.products),
+                  setValue('price', eventData.price),
+                  setValue('private_tasting_supplement', eventData.private_tasting_supplement),
+                  setValue('iberian_supplement', eventData.iberian_supplement),
+                  setValue('duration', eventData.duration),
+                  setValue('capacity', eventData.capacity),
+                  setValue('parking', eventData.parking),
+                  setValue('extra_people', eventData.extra_people),
+                  setValue('possibility_dinner', eventData.possibility_dinner),
+                  setValue('kids', eventData.kids),
+                  setValue('pets', eventData.pets),
+                  setValue('accesibility', eventData.accesibility),
+                  setValue('vegan_version', eventData.vegan_version),
+                  setValue('english', eventData.english)
 
-              setValue('id_location', eventData.id_location),
-              setValue('name', eventData.name),
-              setValue('image', eventData.image),
-              setValue('description', eventData.description),
-              setValue('cata_type', eventData.cata_type),
-              setValue('products', eventData.products),
-              setValue('price', eventData.price),
-              setValue('private_tasting_supplement', eventData.private_tasting_supplement),
-              setValue('iberian_supplement', eventData.iberian_supplement),
-              setValue('duration', eventData.duration),
-              setValue('capacity', eventData.capacity),
-              setValue('parking', eventData.parking),
-              setValue('extra_people', eventData.extra_people),
-              setValue('possibility_dinner', eventData.possibility_dinner),
-              setValue('kids', eventData.kids),
-              setValue('pets', eventData.pets),
-              setValue('accesibility', eventData.accesibility),
-              setValue('vegan_version', eventData.vegan_version),
-              setValue('english', eventData.english)
+        } catch (error) {
+          console.error('Error al cargar los datos del evento:', error);
+        }
             };
         fetchData();
         },
-      [setValue]);
+      [name]);
 
 const handleForm = async (data) => {
     try{
         const response = await postEvent(data);
             console.log(response);
             alert("Fecha añadida correctamente");
-            navigate(`/detail/${id}`)
+            navigate(`/detail/${encodeURIComponent(eventData.name)}`)
     }
     catch (error){
         console.error("Error al añadir fecha", error)
@@ -76,7 +85,7 @@ const handleForm = async (data) => {
           </div>
           <div>
             <label htmlFor="name">Nombre de la cata</label>
-            <input type="text" id="name" name="name" {...register('name', {required: true})}/>
+            <input type="text" id="name" name="name" {...register('name', {required: true})} readOnly/>
           </div>
           <div>
             <label htmlFor="image">Añadir imagen de la cata</label>
