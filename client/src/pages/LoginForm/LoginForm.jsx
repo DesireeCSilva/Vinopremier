@@ -30,14 +30,14 @@ const LoginForm = () => {
       <p className='login-form_title' >Clientes registrados</p>
       <p className='login-form_subtitle'>Si tienes una cuenta inicia sesión con tu dirección de correo electrónico</p>
       <div>
-        <label htmlFor="email">
+        <label className='register-form_label' htmlFor="email">
           Correo electrónico <br />
           <input className='login-form_input' type="email" {...register('email')} required />
         </label>
       </div>
 
       <div>
-        <label htmlFor="password">
+        <label className='register-form_label' htmlFor="password">
           Contraseña <br />
           <input className='login-form_input' type="password" {...register('password')} required />
         </label>

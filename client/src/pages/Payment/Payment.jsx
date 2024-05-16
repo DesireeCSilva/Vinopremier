@@ -1,10 +1,7 @@
 import React from 'react'
 import '../Payment/Payment.css'
 
-// const handleCheckboxChange = (event) => {
-//   const { name, checked } = event.target;
-//   setIsChecked(prevState => ({ ...prevState, [name]: checked }));
-// }
+
 
 const Payment = () => {
   return (
@@ -25,7 +22,7 @@ const Payment = () => {
           <hr className='payment-page_right-hr' />
           <div className='payment-page_right-text'>
             <p>Impuestos</p>
-            <p>€</p>
+            <p>21%</p>
           </div>
           <hr className='payment-page_right-hr' />
           <div className='payment-page_right-text02'>

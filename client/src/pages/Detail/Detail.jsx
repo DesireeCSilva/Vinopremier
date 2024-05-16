@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { useParams } from 'react-router-dom';
-import { getEventById, getEventByName } from '../../services/eventServices.js'
+import { useParams , Link } from 'react-router-dom';
+import { getEventById, getEventByName, getEventByNameAndDate } from '../../services/eventServices.js'
 import { getLocationById } from '../../services/locationServices.js';
 import '../Detail/Detail.css'
 
@@ -15,6 +15,8 @@ const Detail = () => {
   const [eventDates, setEventDates] = useState(null);
   const [buttonTexts, setButtonTexts] = useState({});
   const [eventsCount, setEventsCount] = useState({});
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [veganPeople, setVeganPeople] = useState(0);
 
   useEffect(() => {
   
@@ -43,7 +45,26 @@ const Detail = () => {
     }
     return null;
   };
+  const tileDisabled = ({ date, view }) => {
+    if (view === 'month') {
+      const formattedDate = formatDate(date);
+      return !eventDates.some(eventDate => eventDate.date === formattedDate);
+    }
+    return false;
+  };
 
+  const onClickDay = async (date) => {
+    setSelectedDate(date)
+    try {
+      const decodedName = decodeURIComponent(name);
+      const formattedDate = formatDate(date);
+      const eventData = await getEventByNameAndDate(decodedName, formattedDate);
+      console.log(eventData);
+      setSelectedDate(eventData);
+    } catch (error) {
+      console.error('Error al obtener el evento por fecha', error)
+    }
+  }
   const formatDate = date => {
     return (`${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`);
   };
@@ -67,6 +88,7 @@ const Detail = () => {
   const [isChecked, setIsChecked] = useState({
       private: false,
       iberian: false,
+      vegan: false
     });
     
   const handleCheckboxChange = (event) => {
@@ -87,6 +109,10 @@ const Detail = () => {
     setExtraFeaturePrice(prevState => ({ ...prevState, [name]: price }));
 
 };
+
+const handleVeganPeopleChange = (event) => {
+  setVeganPeople(event.target.value);
+}
     
 const splitTextByRule = (text) => {
 
@@ -124,7 +150,7 @@ const splitTextByRule = (text) => {
           <p className='page-detail__left__price'>{event.price}€</p>
           <p className='page-detail__left__iva'>IVA INCLUIDO</p>
 
-          <div className='page-detail__left__supplement-prvate'>
+          <div className='page-detail__left__supplement-private'>
             <input type="checkbox" id="private" name="private" onChange={handleCheckboxChange} checked={isChecked.private}/>
             <label className='page-detail__left__suptext' for="add-extra-feature-private">Añadir suplemento de cata privada ({event.private_tasting_supplement}€)</label>
           </div>
@@ -134,14 +160,30 @@ const splitTextByRule = (text) => {
             <label className='page-detail__left__suptext' for="add-extra-feature">Añadir suplemento de Ibéricos ({event.iberian_supplement}€)</label>
           </div>
 
+          <div className='page-detail__left__supplement-private'>
+                <input type="checkbox" id="vegan" name="vegan" onChange={handleCheckboxChange} checked={isChecked.vegan} />
+                <label className='page-detail__left__suptext' htmlFor="vegan">Quiero opción vegana</label>
+          </div>
+
+          {isChecked.vegan && (
+                <div className='page-detail__left__supplement-private'>
+                  <label className='page-detail__left__suptext' htmlFor="vegan-people">Número de personas veganas</label>
+                  <select id="vegan-people" value={veganPeople} onChange={handleVeganPeopleChange}>
+                    {[...Array(Math.max(eventsCount[event.id] +1 || 0, 1)).keys()].map(num => (
+                      <option key={num} value={num}>{num}</option>
+                    ))}
+                  </select>
+                </div>
+          )}
+
           <section className="card-counter"> 
           <article className="buttons-counter" >
             <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
-              <p style={{fontFamily:'Gotham', fontSize: '2vw', justifyContent: 'center'}}>+</p>
+              <p style={{fontFamily:'Gotham', fontSize: '2rem', justifyContent: 'center'}}>+</p>
             </button>
             <div style={{fontFamily:'Gotham', padding:'16.5px',border:'3px solid black',fontWeight:'bold', fontSize:'21px'}}>{eventsCount[event.id] || 0}</div>
             <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
-              <p style={{fontFamily:'Gotham', fontSize:'2vw', justifyContent:'center'}}>-</p>
+              <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
             </button>
           </article> 
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
@@ -149,33 +191,20 @@ const splitTextByRule = (text) => {
             <img src="../../src/assets/images/icons/cart.png"/>
           </section>
 
-          <div className='page-detail__left__extra'>
-              <div className='page-detail__left__extracontent'>
-                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}}/>
-                <p className='page-detail__left__extratext' >Se puede asistir con niños: {event.kids? "Sí" : "No"}</p>
-              </div>
-              <div className='page-detail__left__extracontent'>
-                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
-                <p className='page-detail__left__extratext' >Disponible versión vegana: {event.vegan_version? "Sí" : "No"}</p>
-              </div>
-              <div className='page-detail__left__extracontent'>
-                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
-                <p className='page-detail__left__extratext' >Disponible en inglés: {event.english? "Sí" : "No"} con consulta previa</p>
-              </div>
-              <div className='page-detail__left__extracontent'>
-                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
-              <p className='page-detail__left__extratext' >Se puede asistir con mascotas: {event.pets? "Sí" : "No"}</p>
-              </div>
-              <div className='page-detail__left__extracontent'>
-                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
-                <p className='page-detail__left__extratext' >Pueden asistir más personas a la cata de las que compraron las entradas: {event.extra_people? "Sí" : "No"}</p>
-              </div>
-        </div>
+
 
           <div className='page-detail__left__calendar' >
-            <p className='page-detail__left__add'>Seleccionar fecha</p>
-            <Calendar tileContent={tileContent}/>
+            <p className='page-detail__left__calendartext'>Seleccionar fecha</p>
+            <Calendar tileContent={tileContent} tileDisabled={tileDisabled} onClickDay={onClickDay}/>
+            {selectedDate && (
+              <div>
+                 <p>
+                  Fecha: {selectedDate.date}, Hora: {selectedDate.time}, Plazas disponibles: {selectedDate.avalaible_places}
+                </p>
+              </div>
+            )}
           </div>
+
         </div>
       <div className='page-detail__section01__right'>
           <div className='page-detail__right__icons'>
@@ -226,16 +255,41 @@ const splitTextByRule = (text) => {
             </div>
           </div>
 
+          <div className='page-detail__left__extra'>
+              <div className='page-detail__left__extracontent'>
+                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}}/>
+                <p className='page-detail__left__extratext' >Se puede asistir con niños: {event.kids? "Sí" : "No"}</p>
+              </div>
+              <div className='page-detail__left__extracontent'>
+                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
+                <p className='page-detail__left__extratext' >Disponible versión vegana: {event.vegan_version? "Sí" : "No"}</p>
+              </div>
+              <div className='page-detail__left__extracontent'>
+                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
+                <p className='page-detail__left__extratext' >Disponible en inglés: {event.english? "Sí" : "No"} con consulta previa</p>
+              </div>
+              <div className='page-detail__left__extracontent'>
+                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
+              <p className='page-detail__left__extratext' >Se puede asistir con mascotas: {event.pets? "Sí" : "No"}</p>
+              </div>
+              <div className='page-detail__left__extracontent'>
+                <img src="/src/assets/images/icons/o-icon.png" alt="" style={{background:'#AC946A'}} />
+                <p className='page-detail__left__extratext' >Pueden asistir más personas a la cata de las que compraron las entradas: {event.extra_people? "Sí" : "No"}</p>
+              </div>
+          </div>
+
           <div className='page-detail__right__description'>
             <p dangerouslySetInnerHTML={{ __html: splitTextByRule(event.description) }}></p>
         </div>
+
+        <Link to="/"><button className='page-detail_back-button'>Volver a Catas y Eventos</button></Link>
       </div>
     </section>
   </article>
     )}
-    <article>
+    <article className="page-detail__opinion" >
       <hr className="page-detail__hr"/>
-      <img className="page-detail__opinion" src="/src/assets/images/banners/section03.png" alt="" />
+      <img className="page-detail__opinion-image" src="/src/assets/images/banners/section03.png" alt="" />
     </article> 
     </>
 );
