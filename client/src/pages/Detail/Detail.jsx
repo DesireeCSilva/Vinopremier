@@ -85,27 +85,35 @@ const Detail = () => {
   const [isChecked, setIsChecked] = useState({
       private: false,
       iberian: false,
-      vegan: false
+      vegan: false,
+      english_version: false
     });
     
   const handleCheckboxChange = (event) => {
       const { name, checked } = event.target;
       setIsChecked(prevState => ({ ...prevState, [name]: checked }));
 
-      let price;
+      let price = 0;
       switch (name) {
   case 'private':
-    price = checked ? 60 : 0;
+    price = checked ? event.private_tasting_supplement : 0;
     break;
   case 'iberian':
-    price = checked ? 25 : 0;
+    price = checked ? event.iberian_supplement : 0;
     break;
   default:
-    price = 0;
+    break;
   }
     setExtraFeaturePrice(prevState => ({ ...prevState, [name]: price }));
 
 };
+
+const calculateFinalPrice = () => {
+  let finalPrice = event.price;
+  if (isChecked.private) finalPrice += event.private_tasting_supplement;
+  if (isChecked.iberian) finalPrice += event.iberian_supplement;
+  return finalPrice;
+}
 
 const handleVeganPeopleChange = (event) => {
   setVeganPeople(event.target.value);
@@ -139,13 +147,17 @@ const splitTextByRule = (text) => {
     try {
       const token = localStorage.getItem('token');
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
-      const id_user = decodedToken.id;
+      const idUser = decodedToken.id;
 
       const bookingData = {
+        id_user: idUser,
         id_event: selectedDate.id,
         people: eventsCount[event.id],
         vegan_version: isChecked.vegan,
-        vegan_people: veganPeople
+        vegan_people: veganPeople,
+        private_tasting_supplement: isChecked.private,
+        iberian_supplement: isChecked.iberian,
+        final_price: calculateFinalPrice()
       };
 
       const newBooking = await postBooking(bookingData);
@@ -182,22 +194,32 @@ const splitTextByRule = (text) => {
             <label className='page-detail__left__suptext' for="add-extra-feature">Añadir suplemento de Ibéricos ({event.iberian_supplement}€)</label>
           </div>
 
+          {event.english && (
           <div className='page-detail__left__supplement-private'>
-                <input type="checkbox" id="vegan" name="vegan" onChange={handleCheckboxChange} checked={isChecked.vegan} />
-                <label className='page-detail__left__suptext' htmlFor="vegan">Quiero opción vegana</label>
+            <input type="checkbox" id="english_version" name="english_version" onChange={handleCheckboxChange} checked={isChecked.english_version} />
+            <label className='page-detail__left__suptext' htmlFor="vegan">Versión en inglés</label>
           </div>
-
-          {isChecked.vegan && (
-                <div className='page-detail__left__supplement-private'>
-                  <label className='page-detail__left__suptext' htmlFor="vegan-people">Número de personas veganas</label>
-                  <select id="vegan-people" value={veganPeople} onChange={handleVeganPeopleChange}>
-                    {[...Array(Math.max(eventsCount[event.id] +1 || 0, 1)).keys()].map(num => (
-                      <option key={num} value={num}>{num}</option>
-                    ))}
-                  </select>
-                </div>
           )}
 
+          {event.vegan_version && (
+            <>
+          <div className='page-detail__left__supplement-private'>
+                <input type="checkbox" id="vegan" name="vegan" onChange={handleCheckboxChange} checked={isChecked.vegan} />
+                <label className='page-detail__left__suptext' htmlFor="vegan">Opción vegana</label>
+          </div>
+            {isChecked.vegan && (
+              
+              <div className='page-detail__left__supplement-private'>
+                <label className='page-detail__left__suptext' htmlFor="vegan-people">Número de personas veganas</label>
+                    <select id="vegan-people" value={veganPeople} onChange={handleVeganPeopleChange}>
+                      {[...Array(Math.max(eventsCount[event.id] +1 || 0, 1)).keys()].map(num => (
+                        <option key={num} value={num}>{num}</option>
+                      ))}
+                    </select>
+              </div>
+            )}
+            </>
+          )}
           <section className="card-counter"> 
           <article className="buttons-counter" >
             <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
