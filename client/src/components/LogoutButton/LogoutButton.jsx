@@ -11,7 +11,6 @@ const LogoutButton = () => {
         localStorage.removeItem('rol');
         localStorage.removeItem('id')
         
-        setUser(null);
         setIsAuthenticated(false);
 
         alert("Se ha cerrado sesión correctamente");
