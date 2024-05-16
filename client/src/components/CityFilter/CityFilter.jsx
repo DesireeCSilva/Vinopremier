@@ -87,7 +87,7 @@ const CityFilter = () => {
   return (
     <>
     <CityFilterContainer>
-    <div className='name-filter' styled: onClick={() => handleCityClick('Madrid')}>
+    <div className='name-filter' onClick={() => handleCityClick('Madrid')}>
       <h1 className='tittle-filter'>Catas y Eventos en Madrid</h1>
       <img src='../../src/assets/images/cities/madrid.png' alt='Madrid' />
 
