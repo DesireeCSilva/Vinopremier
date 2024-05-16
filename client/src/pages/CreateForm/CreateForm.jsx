@@ -35,7 +35,13 @@ const CreateForm = () => {
       <form className="formCreate" onSubmit={handleSubmit(handleForm)}>
           <div>
             <label htmlFor="id_location">Id de la localización</label>
-            <input type="number" id="id_location" name="id_location" {...register('id_location', {required: true})}/>
+            <select id="id_location" name="id_location" {...register('id_location', {required: true})}>
+              <option value="silvela"></option>
+              <option value="rios-rosas"></option>
+              <option value="boadilla"></option>
+              <option value="zaragoza"></option>
+              <option value="palma"></option>
+            </select>
           </div>
            <div>
             <label htmlFor="name">Nombre de la cata</label>
@@ -51,7 +57,18 @@ const CreateForm = () => {
           </div>
           <div>
             <label htmlFor="cata_type">Tipo de cata</label>
-            <input type="text" id="cata_type" name="cata_type" {...register('cata_type', {required: true})}/>
+            <select id="cata_type" name="cata_type" {...register('cata_type', {required: true})}>
+              <option value="">Selecciona un tipo de cata</option>
+              <option value="vino">Vino</option>
+              <option value="cerveza">Cerveza</option>
+              <option value="cava">Cava</option>
+              <option value="gin">Gin</option>
+              <option value="whisky">Whisky</option>
+              <option value="ron">Ron</option>
+              <option value="tequila">Tequila</option>
+              <option value="brandy">Brandy</option>
+              <option value="cognac">Cognac</option>
+              </select>
           </div>
           <div>
             <label htmlFor="products">Productos a catar</label>
