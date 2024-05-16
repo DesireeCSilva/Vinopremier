@@ -59,6 +59,18 @@ export const updateEvent = async (id, newData) => {
     }
 }
 
+export const updateEventByName = async(name, newData) => {
+    try {
+        const response = await axios.put(`${URL_EVENT}/${encodeURIComponent(name)}`, newData);
+        const data = response.data;
+        Swal.fire('Evento actualizado correctamente');
+        return data;
+    } catch (error) {
+        console.log('Error al actualizar el evento', error);
+        throw error;
+    }
+}
+
 export const deleteEvent = async (id) => {
     const confirmDelete = await Swal.fire({
         title: '¿Estás seguro que deseas eliminar el evento?',
@@ -76,5 +88,36 @@ export const deleteEvent = async (id) => {
             console.log('Error al eliminar el evento', error);
             throw error;
         }
+    }
+}
+
+export const deleteEventByName = async (name) => {
+    const confirmDelete = await Swal.fire({
+        title: '¿Estás seguro que deseas eliminar el evento?',
+        showCancelButton: true,
+        confirmButtonColor: '#fb005a',
+        cancelButtonColor: '#171717',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    });
+    if(confirmDelete.isConfirmed) {
+        try {
+            const response = await axios.delete(`${URL_EVENT}/${encodeURIComponent(name)}`);
+            Swal.fire("Evento eliminado correctamente");
+        } catch (error) {
+            console.log('Error al eliminar el evento', error);
+            throw error;
+        }
+    }
+}
+
+export const getEventByNameAndDate = async(name, date) => {
+    try {
+        const response = await axios.get(`${URL_EVENT}/${encodeURIComponent(name)}/${date}`);
+        const event = response.data;
+        return event;
+    } catch (error) {
+        console.log('Error al obtener el evento por fecha', error);
+        throw error;
     }
 }
