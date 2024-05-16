@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LayoutPublic from '../layout/LayoutPublic';
+import LayoutPrivate from '../layout/LayoutPrivate';
 import Home from '../pages/Home/Home';
 import Detail from '../pages/Detail/Detail';
 import CreateForm from '../pages/CreateForm/CreateForm';
@@ -25,18 +26,6 @@ export const router = createBrowserRouter ([
                 element: <Detail/>
             },
             {
-                path: "/create",
-                element: <CreateForm/>
-            },
-            {
-                path: "/edit/:name",
-                element: <EditForm/>
-            },
-            {
-                path: "/date/:id",
-                element: <DateForm/>
-            },
-            {
                 path: "/login",
                 element: <LoginForm/>
             },
@@ -47,6 +36,24 @@ export const router = createBrowserRouter ([
             {
                 path: "/payment",
                 element: <Payment/>
+            }
+        ]
+    },
+    {
+        path: "/",
+        element: <LayoutPrivate/>,
+        children: [
+            {
+                path: "/create",
+                element: <CreateForm/>
+            },
+            {
+                path: "/edit/:name",
+                element: <EditForm/>
+            },
+            {
+                path: "/date/:id",
+                element: <DateForm/>
             }
         ]
     }

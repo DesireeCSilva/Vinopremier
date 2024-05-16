@@ -2,16 +2,15 @@ import React from 'react'
 import './DateForm.css'
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { getEventById, postEvent } from '../../services/eventServices';
+import { getEventByName, postEvent } from '../../services/eventServices';
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 const DateForm = () => {
 
-    const{id} = useParams();
+    const{name: initialName} = useParams();
     const { register, handleSubmit, setValue} = useForm();
     const navigate = useNavigate()
-    //const [loading, setLoading] = useState(false);
     const [eventData, setEventData] = useState();
 
     useEffect(() => {

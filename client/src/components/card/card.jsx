@@ -3,6 +3,7 @@ import Styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { deleteEvent, deleteEventByName } from "../../services/eventServices";
+import LogoutButton from '../../components/LogoutButton/LogoutButton.jsx';
 
 
 
@@ -216,8 +217,10 @@ function Card({id}) {
 
 <>
 
-<h1 className="card-list-title" style={{ textAlign: 'center', paddingTop:'2vw' }}>LAS MEJORES CATAS DE VINOSPREMIER{city}</h1>
-<button className="card-button-add" style={{ float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/create`)}>Añadir Cata</button>
+<h1 className="card-list-title" style={{ textAlign: 'left', marginLeft:'25px', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS{city}</h1>
+<button className="card-button-login" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/login`)} >INICIA SESIÓN</button>
+<button className="card-button-add" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/create`)}>Añadir Cata</button>
+<LogoutButton/>
           
 <CardContainer>
   <ul className="card-list">
