@@ -6,6 +6,7 @@ import { getEventById, getEventByName, getEventByNameAndDate } from '../../servi
 import { getLocationById } from '../../services/locationServices.js';
 import { useNavigate } from 'react-router-dom'
 import '../Detail/Detail.css'
+import { useUserContext } from '../../context/UserContext.jsx'
 
 
 
@@ -19,6 +20,7 @@ const Detail = () => {
   const [eventsCount, setEventsCount] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
   const [veganPeople, setVeganPeople] = useState(0);
+  const { isAuthenticated } = useUserContext();
 
   useEffect(() => {
   
@@ -207,7 +209,11 @@ const handleDateForm = () => {
                 </p>
               </div>
             )}
+            {isAuthenticated && (
+              <>
             <button onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>
+            </>
+            )}
           </div>
 
         </div>
