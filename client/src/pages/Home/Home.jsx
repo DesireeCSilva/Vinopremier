@@ -3,7 +3,8 @@ import TypeFilter from '../../components/TypeFilter/TypeFilter';
 import CityFilter from '../../components/CityFilter/CityFilter';
 import PriceFilter from '../../components/PriceFilter/PriceFilter'; 
 import Card from '../../components/card/card';
-import {getEventByName, getLocationById } from '../../services/eventServices';
+import {getEventByName } from '../../services/eventServices';
+import { getLocationById } from '../../services/locationServices';
 
 
 

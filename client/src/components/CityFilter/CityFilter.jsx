@@ -36,8 +36,10 @@ const CityFilterContainer = styled.div`
   }
 
   img {
-    width: 50%;
+    width: 90%;
     height: auto;
+    object-fit: cover;
+    border: 2px solid #AC946A;
     border-radius: 10px;
     cursor: pointer;
 
@@ -99,7 +101,7 @@ const CityFilter = () => {
 
     <div className='name-filter' onClick={() => handleCityClick('Zaragoza')}>
     <h1 className='tittle-filter'>Catas y Eventos en Zaragoza</h1>
-    <img src='../../src/assets/images/cities/zaragoza.png' alt='Zaragoza' />
+    <img src='../../src/assets/images/cities/zaragoza-noche.jpg' alt='Zaragoza' />
     </div> 
     </CityFilterContainer>
     </>
