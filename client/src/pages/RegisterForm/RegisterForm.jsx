@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { createUser } from '../../services/authServices';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import '../RegisterForm/RegisterForm.css'
+import '../RegisterForm/RegisterForm.css';
+import { useUserContext } from '../../context/UserContext';
 
 const RegisterForm = () => {
   const navigate = useNavigate();

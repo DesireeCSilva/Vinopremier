@@ -4,11 +4,14 @@ import 'react-calendar/dist/Calendar.css';
 import { useParams , Link } from 'react-router-dom';
 import { getEventById, getEventByName, getEventByNameAndDate } from '../../services/eventServices.js'
 import { getLocationById } from '../../services/locationServices.js';
-import '../Detail/Detail.css'
+import '../Detail/Detail.css';
+import { useUserContext } from '../../context/UserContext.jsx';
+import { useNavigate } from "react-router-dom";
 
 
 
 const Detail = () => {
+  const navigate = useNavigate();
   const { name } = useParams(); 
   const [event, setEvent] = useState(null);
   const [location, setLocation] = useState(null);
@@ -17,6 +20,7 @@ const Detail = () => {
   const [eventsCount, setEventsCount] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
   const [veganPeople, setVeganPeople] = useState(0);
+  const { isAuthenticated } = useUserContext();
 
   useEffect(() => {
   
@@ -185,10 +189,16 @@ const splitTextByRule = (text) => {
             <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
               <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
             </button>
-          </article> 
+          </article>
+          {isAuthenticated ? (
+            <div>
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
                   {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../../src/assets/images/icons/cart.png"/>
+            <img src="../../src/assets/images/icons/cart.png"/></div>
+            
+          ) : (
+            <button className="card-button-login" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
+          )} 
           </section>
 
 
