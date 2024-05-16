@@ -87,15 +87,16 @@ const CityFilter = () => {
   return (
     <>
     <CityFilterContainer>
-    <div className='name-filter' styled: onClick={() => handleCityClick('Madrid')}>
-      <h1 className='tittle-filter'>Catas y Eventos en Madrid</h1>
-      <img src='../../src/assets/images/cities/madrid.png' alt='Madrid' />
-
-    </div>
 
     <div className='name-filter' onClick={() => handleCityClick('Palma de Mallorca')}>
       <h1 className='tittle-filter'>Catas y Eventos en Mallorca</h1>
       <img src='../../src/assets/images/cities/mallorca.png' alt='Mallorca' />
+
+    </div>
+
+    <div className='name-filter' onClick={() => handleCityClick('Madrid')}>
+      <h1 className='tittle-filter'>Catas y Eventos en Madrid</h1>
+      <img src='../../src/assets/images/cities/madrid.png' alt='Madrid' />
 
     </div>
 
