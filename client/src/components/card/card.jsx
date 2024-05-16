@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { deleteEvent, deleteEventByName } from "../../services/eventServices";
 import LogoutButton from '../../components/LogoutButton/LogoutButton.jsx';
+import LoginButton from '../../components/LoginButton/LoginButton.jsx'
 import { useUserContext } from '../../context/UserContext.jsx'
 
 
@@ -225,10 +226,10 @@ function Card({id}) {
   {isAuthenticated ? (
     <>
   <LogoutButton/>,
-  <button className="card-button-add" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/privateArea/create`)}>Añadir Cata</button>
+  <button className="card-button-add" style={{ cursor:'pointer', float: 'right', fontFamily: 'Gotham', fontSize: '1rem', color:'#fff', background:'#000', border: 'none', padding:'2%', marginTop: '2rem', height: '4.4rem', cursor: 'pointer', letterSpacing: '0.09em', marginRight:'2.1rem', background:'#AC946A'}} onClick={() => navigate (`/privateArea/create`)}>AÑADIR CATA</button>
   </>
   ) : (
-    <button className="card-button-login" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/login`)} >INICIA SESIÓN</button>
+  <LoginButton />
   )}
 </div>
           
