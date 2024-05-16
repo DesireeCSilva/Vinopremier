@@ -4,12 +4,14 @@ import 'react-calendar/dist/Calendar.css';
 import { useParams , Link } from 'react-router-dom';
 import { getEventById, getEventByName, getEventByNameAndDate } from '../../services/eventServices.js'
 import { getLocationById } from '../../services/locationServices.js';
+import { useNavigate } from 'react-router-dom'
 import '../Detail/Detail.css'
 
 
 
 const Detail = () => {
   const { name } = useParams(); 
+  const navigate = useNavigate();
   const [event, setEvent] = useState(null);
   const [location, setLocation] = useState(null);
   const [eventDates, setEventDates] = useState(null);
@@ -132,7 +134,9 @@ const splitTextByRule = (text) => {
     return result.join('<br />');
   };
 
-
+const handleDateForm = () => {
+    navigate(`/privateArea/date/${encodeURIComponent(event.name)}`);
+};
 
 
   return (
@@ -203,6 +207,7 @@ const splitTextByRule = (text) => {
                 </p>
               </div>
             )}
+            <button onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>
           </div>
 
         </div>

@@ -49,7 +49,7 @@ export const router = createBrowserRouter ([
                 element: <EditForm/>
             },
             {
-                path: "date/:id",
+                path: "date/:name",
                 element: <DateForm/>
             },
             {
