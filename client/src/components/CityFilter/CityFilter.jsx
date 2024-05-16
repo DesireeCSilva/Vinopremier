@@ -36,8 +36,10 @@ const CityFilterContainer = styled.div`
   }
 
   img {
-    width: 50%;
+    width: 90%;
     height: auto;
+    object-fit: cover;
+    border: 2px solid #AC946A;
     border-radius: 10px;
     cursor: pointer;
 
@@ -46,17 +48,40 @@ const CityFilterContainer = styled.div`
 
 const CityFilter = () => {
   const [location, setLocations] = useState([]); 
+
+  const getLocationById = async (city) => {
+    try {
+      const response = await fetch(`https://localhost:8000/locations/${city}`);
+      const data = await response.json();
+
+      // Si data no es un array, conviértelo en un array
+      if (!Array.isArray(data)) {
+        return [data];
+      }
+
+      return data;
+    } catch (error) {
+      console.error('Hubo un error al obtener los datos:', error);
+      // Si hay un error, devuelve un array vacío
+      return [];
+    }
+  }
+
   const handleCityClick = async (city) => {
     try {
-      
       const responseLocation = await getLocationById(city);
       console.log(responseLocation);
-      setLocations(responseLocation);
+
+      if (!Array.isArray(responseLocation)) {
+        console.error('responseLocation debe ser un array, pero obtuve:', responseLocation);
+        setLocations([]);
+      } else {
+        setLocations(responseLocation);
+      }
     } catch (error) {
       console.error('Hubo un error al obtener los datos:', error);
     }
   };
-
 
 
   return (
@@ -76,43 +101,11 @@ const CityFilter = () => {
 
     <div className='name-filter' onClick={() => handleCityClick('Zaragoza')}>
     <h1 className='tittle-filter'>Catas y Eventos en Zaragoza</h1>
-    <img src='../../src/assets/images/cities/zaragoza.png' alt='Zaragoza' />
+    <img src='../../src/assets/images/cities/zaragoza-noche.jpg' alt='Zaragoza' />
     </div> 
     </CityFilterContainer>
-  {location.length === 0 && <div>
-    {location.map((loc, index) => (
-     <li key={event.name} className="card-list-item">
-    <section className="card-bg" style={{border:'2px solid #AC946'}}>
-      <article className="button-controler">
-        <button className="card-button-edit" onClick={() => navigate(`edit/${id}`)}>Editar</button>
-        <button className="card-button-delete" onClick={() =>  handleDelete(event.id)} >Eliminar</button>
-        </article>
-      <img className="card-img" src={event.image} onClick={() => navigate(`Detail/`)} alt={event.name} width="50" height="50" />
-      <div className="card-information">
-        <article className="card-name">{event.name}</article>
-        <article className="card-price">{event.price}€<p className="card-tax">IVA incluido</p></article>
-      </div>
-      <section className="card-counter"> 
-      <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black', marginBottom:'0'}}>
-        <button className="add-cart" style={{ width: '20px', height:'30px',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
-          <p style={{fontSize: '1vw', justifyContent: 'center'}}>+</p>
-        </button>
-        <div className="card-qty" style={{fontSize:'1vw',borderBottom:'none', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
-        <button className="less-cart" style={{ width: '20px', height:'30px',backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
-          <p style={{fontSize:'1vw', justifyContent:'center'}}>-</p>
-        </button>
-      </article> 
-        <button className="adding-cart" onClick={() => handleClick(event.id)}>
-              {buttonTexts[event.id] || "AÑADIR"}</button>
-        <img src="../src/assets/images/icons/cart.png" onClick={() => navigate(`Payment/`)}/>
-      </section>
-    </section>
-  </li>
-    ))}
-  </div>}
     </>
-  )
+  );
 }
-
 
 export default CityFilter

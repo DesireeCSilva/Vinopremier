@@ -137,7 +137,11 @@ const splitTextByRule = (text) => {
     return result.join('<br />');
   };
 
-  const handleClick = async (id) => {
+const handleDateForm = () => {
+    navigate(`/privateArea/date/${encodeURIComponent(event.name)}`);
+};  
+
+const handleClick = async (id) => {
     setButtonTexts(prevState => ({ ...prevState, [id]: "AÑADIDO" }));
 
     setTimeout(() => {
@@ -253,6 +257,11 @@ const splitTextByRule = (text) => {
                   Fecha: {selectedDate.date}, Hora: {selectedDate.time}, Plazas disponibles: {selectedDate.avalaible_places}
                 </p>
               </div>
+            )}
+            {isAuthenticated && (
+              <>
+            <button onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>
+            </>
             )}
           </div>
 
