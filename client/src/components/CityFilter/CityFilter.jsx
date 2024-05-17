@@ -1,7 +1,5 @@
 
 import styled from 'styled-components'
-import { useState } from 'react'
-import { getLocationById } from '../../services/locationServices'
 
 
 const CityFilterContainer = styled.div`
@@ -10,6 +8,13 @@ const CityFilterContainer = styled.div`
   align-items: center;
   margin-top: 50px;
   margin-bottom: 50px;
+
+
+  :hover {
+    transform: scale(0.95);
+    transition: transform 0.3s ease-in-out;
+  }
+
 
   .name-filter {
     display: flex;
@@ -44,66 +49,35 @@ const CityFilterContainer = styled.div`
     cursor: pointer;
 
   }
+
 `
+const CityFilter = ({setEvents, events}) => {
 
-const CityFilter = () => {
-  const [location, setLocations] = useState([]); 
-
-  const getLocationById = async (city) => {
-    try {
-      const response = await fetch(`https://localhost:8000/locations/${city}`);
-      const data = await response.json();
-
-      // Si data no es un array, conviértelo en un array
-      if (!Array.isArray(data)) {
-        return [data];
-      }
-
-      return data;
-    } catch (error) {
-      console.error('Hubo un error al obtener los datos:', error);
-      // Si hay un error, devuelve un array vacío
-      return [];
-    }
-  }
-
-  const handleCityClick = async (city) => {
-    try {
-      const responseLocation = await getLocationById(city);
-      console.log(responseLocation);
-
-      if (!Array.isArray(responseLocation)) {
-        console.error('responseLocation debe ser un array, pero obtuve:', responseLocation);
-        setLocations([]);
-      } else {
-        setLocations(responseLocation);
-      }
-    } catch (error) {
-      console.error('Hubo un error al obtener los datos:', error);
-    }
-  };
-
-
+  const onButtonClick = (id_location) => {
+          const filteredLocation = events.filter((event) => event.id_location === id_location);
+          setEvents(filteredLocation);
+        };
+      
   return (
     <>
     <CityFilterContainer>
 
-    <div className='name-filter' onClick={() => handleCityClick('Palma de Mallorca')}>
+    <button className='name-filter' id_location='2' onClick={() => onButtonClick('2')}>
       <h1 className='tittle-filter'>Catas y Eventos en Mallorca</h1>
       <img src='../../src/assets/images/cities/mallorca.png' alt='Mallorca' />
 
-    </div>
+    </button>
 
-    <div className='name-filter' onClick={() => handleCityClick('Madrid')}>
+    <button className='name-filter'id_location='1' onClick={() =>onButtonClick('1')}>
       <h1 className='tittle-filter'>Catas y Eventos en Madrid</h1>
       <img src='../../src/assets/images/cities/madrid.png' alt='Madrid' />
 
-    </div>
+    </button>
 
-    <div className='name-filter' onClick={() => handleCityClick('Zaragoza')}>
+    <button className='name-filter' onClick={() => onButtonClick('3')}>
     <h1 className='tittle-filter'>Catas y Eventos en Zaragoza</h1>
-    <img src='../../src/assets/images/cities/zaragoza-noche.jpg' alt='Zaragoza' />
-    </div> 
+    <img src='../../src/assets/images/cities/zaragoza.jpeg' alt='Zaragoza' />
+    </button> 
     </CityFilterContainer>
     </>
   );
