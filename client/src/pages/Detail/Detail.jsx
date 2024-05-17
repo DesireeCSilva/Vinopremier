@@ -22,7 +22,8 @@ const Detail = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [veganPeople, setVeganPeople] = useState(0);
   const { isAuthenticated } = useUserContext();
-  const [extraFeaturePrice, setExtraFeaturePrice] = useState({private: 0, iberian: 0});
+  const { isUserRole } = useUserContext();
+  const [extraFeaturePrice, setExtraFeaturePrice] = useState({private: 0, iberian: 0})
 
   useEffect(() => {
   
@@ -258,7 +259,7 @@ const handlePayment = () => {
             )}
             {isAuthenticated && (
               <>
-            <button className='page-detail_back-button' onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>
+            {(isUserRole === "admin" || isUserRole === "superadmin") && <button onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>}
             </>
             )}
           </div>
@@ -279,7 +280,7 @@ const handlePayment = () => {
             <div>
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
                   {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../../src/assets/images/icons/cart.png"/>
+            <img src="../../src/assets/images/icons/cart.png" onClick={handlePayment} style={{cursor:'pointer'}}/>
             </div>
             
           ) : (
@@ -287,6 +288,7 @@ const handlePayment = () => {
               <button className="page-detail_back-button" onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
           )} 
           </section>
+
         </div>
 
       <div className='page-detail__section01__right'>

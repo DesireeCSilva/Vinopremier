@@ -66,7 +66,6 @@ const Payment = () => {
   return (
     <>
       <section className='payment-page'>
-        <img className='payment-page_img' src="/src/assets/images/banners/payment-left.PNG" alt="" />
         <article>
         <p className='payment-page_right-title'>RESUMEN DE COMPRA</p>
         
