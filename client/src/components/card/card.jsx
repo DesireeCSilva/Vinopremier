@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { deleteEvent, deleteEventByName } from "../../services/eventServices";
 import LogoutButton from '../../components/LogoutButton/LogoutButton.jsx';
-import { useUserContext } from '../../context/UserContext.jsx'
+import { useUserContext} from '../../context/UserContext.jsx'
 
 
 
@@ -169,6 +169,7 @@ function Card({id}) {
   const [city, setCity] = useState([]);
   const [events, setEvents] = useState([]);
   const { isAuthenticated } = useUserContext();
+  const { isUserRole } = useUserContext();
     
     useEffect(() => {
         const fetchData = async () => {
@@ -225,7 +226,7 @@ function Card({id}) {
   {isAuthenticated ? (
     <>
   <LogoutButton/>,
-  <button className="card-button-add" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/privateArea/create`)}>Añadir Cata</button>
+  {isUserRole && isUserRole === "superadmin" && <button className="card-button-add" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/privateArea/create`)}>Añadir Cata</button> }
   </>
   ) : (
     <button className="card-button-login" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/login`)} >INICIA SESIÓN</button>
@@ -244,8 +245,8 @@ function Card({id}) {
           <article className="button-controler">
             {isAuthenticated && (
               <>
-                <button className="card-button-edit" onClick={() => navigate(`/privateArea/edit/${encodeURIComponent(event.name)}`)}>Editar</button>
-                <button className="card-button-delete" onClick={() =>  handleDelete(event.name)} >Eliminar</button>
+                {isUserRole && isUserRole === "superadmin" && <button className="card-button-edit" onClick={() => navigate(`/privateArea/edit/${encodeURIComponent(event.name)}`)}>Editar</button>}
+                {isUserRole && isUserRole === "superadmin" &&<button className="card-button-delete" onClick={() =>  handleDelete(event.name)} >Eliminar</button>}
               </>
             )}
           </article>

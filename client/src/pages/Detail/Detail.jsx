@@ -22,6 +22,7 @@ const Detail = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [veganPeople, setVeganPeople] = useState(0);
   const { isAuthenticated } = useUserContext();
+  const { isUserRole } = useUserContext();
   const [extraFeaturePrice, setExtraFeaturePrice] = useState({private: 0, iberian: 0})
 
   useEffect(() => {
@@ -261,7 +262,7 @@ const handleClick = async (id) => {
             )}
             {isAuthenticated && (
               <>
-            <button onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>
+            {(isUserRole === "admin" || isUserRole === "superadmin") && <button onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>}
             </>
             )}
           </div>
