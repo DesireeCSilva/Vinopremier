@@ -224,37 +224,14 @@ const handleClick = async (id) => {
             )}
             </>
           )}
-          <section className="card-counter"> 
-          <article className="buttons-counter" >
-            <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
-              <p style={{fontFamily:'Gotham', fontSize: '2rem', justifyContent: 'center'}}>+</p>
-            </button>
-            <div style={{fontFamily:'Gotham', padding:'16.5px',border:'3px solid black',fontWeight:'bold', fontSize:'21px'}}>{eventsCount[event.id] || 0}</div>
-            <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
-              <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
-            </button>
-          </article>
-          <p>Número de personas</p>
-          {isAuthenticated ? (
-            <div>
-            <button className="adding-cart" onClick={() => handleClick(event.id)}>
-                  {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../../src/assets/images/icons/cart.png"/></div>
-            
-          ) : (
-            <button className="card-button-login" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
-          )} 
-          </section>
-
-
 
           <div className='page-detail__left__calendar' >
             <p className='page-detail__left__calendartext'>Seleccionar fecha</p>
             <Calendar tileContent={tileContent} tileDisabled={tileDisabled} onClickDay={onClickDay}/>
             {selectedDate && (
               <div>
-                 <p>
-                  Fecha: {selectedDate.date}, Hora: {selectedDate.time}, Plazas disponibles: {selectedDate.avalaible_places}
+                <p className='page-detail__left__calendartext'>
+                  Fecha: {selectedDate.date}<br/> Hora: {selectedDate.time}<br/> Plazas disponibles: {selectedDate.avalaible_places}
                 </p>
               </div>
             )}
@@ -264,6 +241,30 @@ const handleClick = async (id) => {
             </>
             )}
           </div>
+          
+          <section className="card-counter"> 
+            <article className="buttons-counter" >
+              <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
+                <p style={{fontFamily:'Gotham', fontSize: '2rem', justifyContent: 'center'}}>+</p>
+              </button>
+              <div style={{fontFamily:'Gotham', padding:'16.5px',border:'3px solid black',fontWeight:'bold', fontSize:'21px'}}>{eventsCount[event.id] || 0}</div>
+              <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
+                <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
+              </button>
+          </article>
+          <p style={{fontFamily:'Gotham', fontSize: '1rem', justifyContent: 'center', marginTop:'1rem'}}>Número de personas</p>
+          
+          {isAuthenticated ? (
+            <div>
+            <button className="adding-cart" onClick={() => handleClick(event.id)}>
+                  {buttonTexts[event.id] || "AÑADIR"}</button>
+            <img src="../../src/assets/images/icons/cart.png"/></div>
+            
+          ) : (
+            
+            <button className="page-detail_back-button"  onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
+          )} 
+          </section>
 
         </div>
       <div className='page-detail__section01__right'>
