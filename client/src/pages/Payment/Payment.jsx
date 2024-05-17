@@ -8,6 +8,8 @@ const Payment = () => {
   const { id_user } = useParams();
   const [bookingData, setBookingData] = useState([]);
   const [eventsData, setEventsData] = useState([]);
+  const [totalCost, setTotalCost] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
 
   useEffect(() => {
 
@@ -15,6 +17,7 @@ const Payment = () => {
       try {
         const response = await getAllBookingsByUser(id_user);
         setBookingData(response);
+        calculateTotals(response);
         console.log(response);
       } catch(error) {
         console.error("Error al cargar los datos de la reserva", error);
@@ -41,11 +44,20 @@ const Payment = () => {
     fetchEventsData();
   }, [bookingData]);
 
+  const calculateTotals = (bookings) => {
+    const total = bookings.reduce((acc, booking) => acc + parseFloat(booking.final_price), 0);
+    const subtotal = total / 1.21;
+    setTotalCost(total.toFixed(2));
+    setSubtotal(subtotal.toFixed(2));
+  };
+
+
   const handleDeleteBooking = async (bookingId) => {
     try {
       await deleteBooking(bookingId);
       const updatedBookings = bookingData.filter(booking => booking.id !== bookingId);
       setBookingData(updatedBookings);
+      calculateTotals(updatedBookings);
     } catch (error) {
       console.error("Error al eliminar la reserva", error);
     }
@@ -62,7 +74,7 @@ const Payment = () => {
           <hr className='payment-page_right-hr' />
           <div className='payment-page_right-text'>
             <p>Subtotal impuestos NO incl. </p>
-            <p>€</p>
+            <p>€{subtotal}</p>
           </div>
           <hr className='payment-page_right-hr' />
           <div className='payment-page_right-text'>
@@ -72,7 +84,7 @@ const Payment = () => {
           <hr className='payment-page_right-hr' />
           <div className='payment-page_right-text02'>
             <p>Total del pedido</p>
-            <p>€</p>
+            <p>€{totalCost}</p>
           </div>
             <p className='payment-page_right-text'>ARTÍCULOS EN EL CARRITO: {bookingData.length}</p>
             <hr className='payment-page_right-hr' />
