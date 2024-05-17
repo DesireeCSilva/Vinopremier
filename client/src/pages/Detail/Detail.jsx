@@ -279,7 +279,7 @@ const handlePayment = () => {
             <div>
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
                   {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../../src/assets/images/icons/cart.png" onClick={handlePayment}/>
+            <img src="../../src/assets/images/icons/cart.png" onClick={handlePayment} style={{cursor:'pointer'}}/>
             </div>
             
           ) : (
