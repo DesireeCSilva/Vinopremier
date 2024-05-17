@@ -36,11 +36,11 @@ const CreateForm = () => {
           <div>
             <label htmlFor="id_location">Id de la localización</label>
             <select id="id_location" name="id_location" {...register('id_location', {required: true})}>
-              <option value="silvela"></option>
-              <option value="rios-rosas"></option>
-              <option value="boadilla"></option>
-              <option value="zaragoza"></option>
-              <option value="palma"></option>
+              <option value="1">Calle Silvela</option>
+              <option value="2">Ríos Rosas</option>
+              <option value="3">Boadilla</option>
+              <option value="4">Zaragoza</option>
+              <option value="5">Palma</option>
             </select>
           </div>
            <div>
@@ -79,19 +79,19 @@ const CreateForm = () => {
             <input type="number" id="price" name="price" {...register('price', {required: true})}/>
           </div>
           <div>
-            <label htmlFor="private_tasting_supplement">Suplemento de cata privada</label>
+            <label htmlFor="private_tasting_supplement">Precio por suplemento de cata privada</label>
             <input type="number" id="private_tasting_supplement" name="private_tasting_supplement" {...register('private_tasting_supplement', {required: true})}/>
           </div>
           <div>
-            <label htmlFor="iberian_supplement">Suplemento de ibéricos</label>
+            <label htmlFor="iberian_supplement">Precio por suplemento de ibéricos</label>
             <input type="number" id="iberian_supplement" name="iberian_supplement" {...register('iberian_supplement', {required: true})}/>
           </div>
           <div>
-            <label htmlFor="date">Fecha</label>
+            <label htmlFor="date">Fecha (YYYY-MM-DD) </label>
             <input type="text" id="date" name="date" {...register('date', {required: true})}/>
           </div>
           <div>
-            <label htmlFor="time">Hora</label>
+            <label htmlFor="time">Hora (HH:mm:ss)</label>
             <input type="text" id="time" name="time" {...register('time', {required: true})}/>
           </div>
           <div>
