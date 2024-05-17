@@ -38,7 +38,7 @@ const CreateForm = () => {
       <h2 className="createFormTitle">FORMULARIO DE CREACIÓN DE CATAS</h2>
       <form className="formCreate" onSubmit={handleSubmit(handleForm)}>
           <div>
-            <label htmlFor="id_location">Id de la localización</label>
+            <label htmlFor="id_location">Localización</label>
             <select id="id_location" name="id_location" {...register('id_location')}>
               <option value="">Selecciona la localización</option>
               <option value="1">Calle Silvela</option>

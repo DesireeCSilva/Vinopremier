@@ -38,7 +38,8 @@
 }
 
 .formCreate input,
-.formEdit textarea {
+.formCreate textarea,
+.formCreate select {
     background-color: #AC946A;
     padding: 10px;
     width: 100%;
@@ -50,7 +51,7 @@
     border:none;
 }
 
-.formEdit textarea {
+.formCreate textarea {
     resize: vertical;
     min-height: 150px;
 }

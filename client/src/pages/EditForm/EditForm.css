@@ -38,7 +38,8 @@
 }
 
 .formEdit input,
-.formEdit textarea {
+.formEdit textarea,
+.formEdit select {
     background-color: #AC946A;
     padding: 10px;
     width: 100%;
