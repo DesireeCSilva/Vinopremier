@@ -183,6 +183,10 @@
    width: 99%;
 }
 
+.page-detail_back {
+   display: flex;
+   flex-direction: column;
+}
 .page-detail_back-button {
    font-family: 'Gotham';
    font-size: 1rem;
@@ -190,8 +194,6 @@
    background: #000;
    border: none;
    width: 24.5rem;
-   margin-top: 2rem;
-   margin-left: 1rem;
    height: 4.4rem;
    cursor: pointer;
 }
@@ -199,7 +201,7 @@
 .card-counter {
    display: flex;
    margin-top: 2rem;
-   flex-direction: column;
+   flex-direction: row;
    justify-content: space-between;
    align-content: center;
    align-items: center;

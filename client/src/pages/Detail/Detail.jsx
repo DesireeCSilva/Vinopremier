@@ -69,7 +69,7 @@ const Detail = () => {
     } catch (error) {
       console.error('Error al obtener el evento por fecha', error)
     }
- }
+}
   const formatDate = date => {
     return (`${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`);
   };
@@ -230,14 +230,14 @@ const handleClick = async (id) => {
             <Calendar tileContent={tileContent} tileDisabled={tileDisabled} onClickDay={onClickDay}/>
             {selectedDate && (
               <div>
-                <p className='page-detail__left__calendartext'>
+                <p className='page-detail__left__calendartext' style={{fontSize:'1.2rem'}}>
                   Fecha: {selectedDate.date}<br/> Hora: {selectedDate.time}<br/> Plazas disponibles: {selectedDate.avalaible_places}
                 </p>
               </div>
             )}
             {isAuthenticated && (
               <>
-            <button onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>
+            <button className='page-detail_back-button' onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>
             </>
             )}
           </div>
@@ -252,21 +252,22 @@ const handleClick = async (id) => {
                 <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
               </button>
           </article>
-          <p style={{fontFamily:'Gotham', fontSize: '1rem', justifyContent: 'center', marginTop:'1rem'}}>Número de personas</p>
           
           {isAuthenticated ? (
+          
             <div>
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
                   {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../../src/assets/images/icons/cart.png"/></div>
+            <img src="../../src/assets/images/icons/cart.png"/>
+            </div>
             
           ) : (
-            
-            <button className="page-detail_back-button"  onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
+
+              <button className="page-detail_back-button" onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
           )} 
           </section>
-
         </div>
+
       <div className='page-detail__section01__right'>
           <div className='page-detail__right__icons'>
             <div className='page-detail__right__iconscolumn'>
@@ -343,7 +344,7 @@ const handleClick = async (id) => {
             <p dangerouslySetInnerHTML={{ __html: splitTextByRule(event.description) }}></p>
         </div>
 
-        <Link to="/"><button className='page-detail_back-button'>Volver a Catas y Eventos</button></Link>
+        <Link to="/"><button className='page-detail_back-button'>VOLVER A CATAS Y EVENTOS</button></Link>
       </div>
     </section>
   </article>
