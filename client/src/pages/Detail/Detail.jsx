@@ -259,7 +259,7 @@ const handlePayment = () => {
             )}
             {isAuthenticated && (
               <>
-            <button className='page-detail_back-button' onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>
+            {(isUserRole === "admin" || isUserRole === "superadmin") && <button onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>}
             </>
             )}
           </div>
@@ -288,25 +288,6 @@ const handlePayment = () => {
               <button className="page-detail_back-button" onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
           )} 
           </section>
-
-
-
-          <div className='page-detail__left__calendar' >
-            <p className='page-detail__left__calendartext'>Seleccionar fecha</p>
-            <Calendar tileContent={tileContent} tileDisabled={tileDisabled} onClickDay={onClickDay}/>
-            {selectedDate && (
-              <div>
-                 <p>
-                  Fecha: {selectedDate.date}, Hora: {selectedDate.time}, Plazas disponibles: {selectedDate.avalaible_places}
-                </p>
-              </div>
-            )}
-            {isAuthenticated && (
-              <>
-            {(isUserRole === "admin" || isUserRole === "superadmin") && <button onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>}
-            </>
-            )}
-          </div>
 
         </div>
 
