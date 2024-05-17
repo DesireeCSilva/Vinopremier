@@ -83,17 +83,6 @@ const PriceFilter = () => {
       <h2>Filtro de Precios</h2>
       <PriceRangeInput type="range" min={0} max={500} step={5} value={maxPrice} onChange={handleMaxPriceChange} />
       <PriceLabel style={{fontSize:'2vw'}}>Precio máx.</PriceLabel><PriceValue>{maxPrice}</PriceValue>
-
-      {filteredProducts.length > 0 && (
-        <ProductList>
-          {filteredProducts.map((event) => (
-            <ProductItem key={event.id}>
-              <ProductName>{event.name}</ProductName>
-              <ProductPrice>{event.price} €</ProductPrice>
-            </ProductItem>
-          ))}
-        </ProductList>
-      )}
     </PriceFilterContainer>
   );
 };

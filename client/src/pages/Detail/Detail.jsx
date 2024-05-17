@@ -37,12 +37,12 @@ const Detail = () => {
         setEventDates(eventDates);
         const responseLocation = await getLocationById(eventInstance.id_location);
         setLocation(responseLocation)
+        
       } catch (error) {
         console.error('Error al cargar los datos del evento:', error);
       }};
       fetchEventById();
     }, [name]);
-  
   const tileContent = ({date, view}) => {
     if (view === 'month') {
       const formattedDate = formatDate(date);
@@ -70,7 +70,7 @@ const Detail = () => {
     } catch (error) {
       console.error('Error al obtener el evento por fecha', error)
     }
- }
+}
   const formatDate = date => {
     return (`${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`);
   };
@@ -154,7 +154,7 @@ const handleClick = async (id) => {
       const token = localStorage.getItem('token');
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
       const idUser = decodedToken.id;
-
+      console.log(idUser)
       const bookingData = {
         id_user: idUser,
         id_event: selectedDate.id,
@@ -173,7 +173,27 @@ const handleClick = async (id) => {
       console.error('Error al crear la reserva', error);
       alert('Error al añadir la reserva al carrito.')
     }
-  };
+    
+};
+
+const handlePayment = () => {
+  try {
+    const token = localStorage.getItem('token');
+    console.log(token)
+    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    console.log(decodedToken)
+    const idUser = decodedToken.userId;
+    console.log(idUser)
+    if (idUser) {
+      navigate(`/privateArea/payment/${idUser}`);
+    } else {
+      alert('Usuario no autenticado. Por favor, inicie sesión.');
+    }
+  } catch (error) {
+    console.error('Error al obtener el token. Lo odio', error)
+  }
+};
+
 
   return (
     
@@ -226,25 +246,46 @@ const handleClick = async (id) => {
             )}
             </>
           )}
+
+          <div className='page-detail__left__calendar' >
+            <p className='page-detail__left__calendartext'>Seleccionar fecha</p>
+            <Calendar tileContent={tileContent} tileDisabled={tileDisabled} onClickDay={onClickDay}/>
+            {selectedDate && (
+              <div>
+                <p className='page-detail__left__calendartext' style={{fontSize:'1.2rem'}}>
+                  Fecha: {selectedDate.date}<br/> Hora: {selectedDate.time}<br/> Plazas disponibles: {selectedDate.avalaible_places}
+                </p>
+              </div>
+            )}
+            {isAuthenticated && (
+              <>
+            <button className='page-detail_back-button' onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>
+            </>
+            )}
+          </div>
+          
           <section className="card-counter"> 
-          <article className="buttons-counter" >
-            <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
-              <p style={{fontFamily:'Gotham', fontSize: '2rem', justifyContent: 'center'}}>+</p>
-            </button>
-            <div style={{fontFamily:'Gotham', padding:'16.5px',border:'3px solid black',fontWeight:'bold', fontSize:'21px'}}>{eventsCount[event.id] || 0}</div>
-            <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
-              <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
-            </button>
+            <article className="buttons-counter" >
+              <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
+                <p style={{fontFamily:'Gotham', fontSize: '2rem', justifyContent: 'center'}}>+</p>
+              </button>
+              <div style={{fontFamily:'Gotham', padding:'16.5px',border:'3px solid black',fontWeight:'bold', fontSize:'21px'}}>{eventsCount[event.id] || 0}</div>
+              <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
+                <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
+              </button>
           </article>
-          <p>Número de personas</p>
+          
           {isAuthenticated ? (
+          
             <div>
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
                   {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../../src/assets/images/icons/cart.png" onClick={() => navigate('/payment')}/></div>
+            <img src="../../src/assets/images/icons/cart.png" onClick={handlePayment} style={{cursor:'pointer'}}/>
+            </div>
             
           ) : (
-            <button className="card-button-login" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
+
+              <button className="page-detail_back-button" onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
           )} 
           </section>
 
@@ -268,6 +309,7 @@ const handleClick = async (id) => {
           </div>
 
         </div>
+
       <div className='page-detail__section01__right'>
           <div className='page-detail__right__icons'>
             <div className='page-detail__right__iconscolumn'>
@@ -344,7 +386,7 @@ const handleClick = async (id) => {
             <p dangerouslySetInnerHTML={{ __html: splitTextByRule(event.description) }}></p>
         </div>
 
-        <Link to="/"><button className='page-detail_back-button'>Volver a Catas y Eventos</button></Link>
+        <Link to="/"><button className='page-detail_back-button'>VOLVER A CATAS Y EVENTOS</button></Link>
       </div>
     </section>
   </article>

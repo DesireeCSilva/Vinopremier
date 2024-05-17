@@ -74,7 +74,7 @@ const onSubmit = async (editEvent) => {
       <h2 className="editFormTitle">FORMULARIO DE EDICIÓN DE CATAS</h2>
       <form className="formEdit" onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label htmlFor="id_location">Id de la localización</label>
+            <label htmlFor="id_location">Localización</label>
             <select id="id_location" name="id_location" {...register('id_location', {required: true})}>
               <option value="">Selecciona la localización</option>
               <option value="1">Calle Silvela</option>

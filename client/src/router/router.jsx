@@ -53,7 +53,7 @@ export const router = createBrowserRouter ([
                 element: <DateForm/>
             },
             {
-                path: "payment",
+                path: "payment/:id_user",
                 element: <Payment/>
             }
         ]

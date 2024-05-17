@@ -2,9 +2,13 @@ import { useState, useEffect } from "react";
 import Styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { deleteEvent, deleteEventByName } from "../../services/eventServices";
+import { deleteEventByName } from "../../services/eventServices";
 import LogoutButton from '../../components/LogoutButton/LogoutButton.jsx';
-import { useUserContext} from '../../context/UserContext.jsx'
+import LoginButton from '../../components/LoginButton/LoginButton.jsx'
+import { useUserContext } from '../../context/UserContext.jsx'
+import FilterButtons from '../../components/TypeFilter/TypeFilter.jsx'
+import CityFilter from "../CityFilter/CityFilter.jsx";
+
 
 
 
@@ -162,11 +166,10 @@ const CardContainer = Styled.div`
   }
 `;
 
-function Card({id}) {
+function Card({}) {
   const navigate = useNavigate();
   const [buttonTexts, setButtonTexts] = useState({});
   const [eventsCount, setEventsCount] = useState({}); 
-  const [city, setCity] = useState([]);
   const [events, setEvents] = useState([]);
   const { isAuthenticated } = useUserContext();
   const { isUserRole } = useUserContext();
@@ -174,13 +177,9 @@ function Card({id}) {
     useEffect(() => {
         const fetchData = async () => {
           const result = await axios.get('http://localhost:8000/event/name');
-            
-
+          
         setEvents(result.data);
-
-          const locationResult = await axios.get('http://localhost:8000/location');
-        setCity(locationResult.city);
-
+        
         const initialCount = {};
         result.data.forEach((id) => {
           initialCount[id] = 1; 
@@ -226,20 +225,18 @@ function Card({id}) {
   {isAuthenticated ? (
     <>
   <LogoutButton/>,
-  {isUserRole && isUserRole === "superadmin" && <button className="card-button-add" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/privateArea/create`)}>Añadir Cata</button> }
+  {isUserRole && isUserRole === "superadmin" && <button className="card-button-add" style={{ cursor:'pointer', float: 'right', fontFamily: 'Gotham', fontSize: '1rem', color:'#fff', background:'#000', border: 'none', padding:'2%', marginTop: '2rem', height: '4.4rem', cursor: 'pointer', letterSpacing: '0.09em', marginRight:'2.1rem', background:'#AC946A'}} onClick={() => navigate (`/privateArea/create`)}>AÑADIR CATA</button>}
   </>
   ) : (
-    <button className="card-button-login" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/login`)} >INICIA SESIÓN</button>
+  <LoginButton />
   )}
 </div>
           
-<CardContainer>
+
 
 <ul className="card-list">
+<CardContainer>
     {events.map((event) => (
-
-      
-
       <li key={event.name} className="card-list-item">
         <section className="card-bg" style={{border:'2px solid #AC946'}}>
           <article className="button-controler">
@@ -272,12 +269,13 @@ function Card({id}) {
         </section>
       </li>
       ))}
-      </ul>
-
   </CardContainer>
-
+</ul>
+<FilterButtons setEvents={setEvents} events={events}/>
+<CityFilter setEvents={setEvents} events={events}/>
   </>
   );
 }
+
 
 export default Card;
