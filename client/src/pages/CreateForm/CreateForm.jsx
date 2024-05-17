@@ -47,6 +47,7 @@ const CreateForm = () => {
               <option value="4">Zaragoza</option>
               <option value="5">Palma</option>
             </select>
+            <p className="error-message">{errors.id_location && <span>{errors.id_location.message}</span>}</p>
           </div>
           <div>
             <label htmlFor="name">Nombre de la cata</label>
@@ -77,6 +78,7 @@ const CreateForm = () => {
               <option value="brandy">Brandy</option>
               <option value="cognac">Cognac</option>
               </select>
+            <p className="error-message">{errors.cata_type && <span>{errors.cata_type.message}</span>}</p>
           </div>
           <div>
             <label htmlFor="products">Productos a catar</label>
