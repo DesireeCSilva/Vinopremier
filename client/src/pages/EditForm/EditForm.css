@@ -1,0 +1,74 @@
+.editFormContainer {
+    font-family: 'Gotham', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.formEdit {
+    width: 90%;
+    max-width: 65%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid black;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    background-color: black;
+    color: white;
+}
+
+.formEdit > div {
+    margin-bottom: 10px;
+}
+
+.editFormTitle {
+    text-align: center;
+}
+
+.formEdit label {
+    flex: 1;
+    margin-bottom: 10px;
+}
+
+.formEdit input,
+.formEdit textarea {
+    background-color: #AC946A;
+    padding: 10px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-family: 'Gotham', sans-serif;
+    border:none;
+}
+
+.formEdit textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.formEdit input[type="checkbox"] {
+    width: auto;
+    margin-right: 20px;
+}
+
+.buttonEdit {
+    background-color: #AC946A;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Gotham', sans-serif;
+    color: white;
+    width: 100%;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}

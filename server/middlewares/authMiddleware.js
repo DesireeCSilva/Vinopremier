@@ -10,7 +10,7 @@ export const authToken = async (request, response, next) => {
         const dataToken = await verifyToken(token);
         console.log(dataToken);
         const userId = dataToken.userId;
-        request.body.id_user = userId;
+        request.user = { id: userId }; 
         
         next();
     } catch (error) {

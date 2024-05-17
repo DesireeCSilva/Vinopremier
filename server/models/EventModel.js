@@ -66,7 +66,7 @@ const EventModel = connection_db.define('Event', {
     },
     kids: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: false, 
         defaultValue: false
     },
     extra_people: {

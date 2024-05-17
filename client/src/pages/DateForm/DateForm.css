@@ -1,0 +1,86 @@
+.dateFormContainer {
+    font-family: 'Gotham', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.formDate {
+    width: 90%;
+    max-width: 65%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid black;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    background-color: black;
+    color: white;
+}
+
+.formDate > div {
+    margin-bottom: 10px;
+}
+
+.dateFormTitle {
+    text-align: center;
+}
+
+.formDate label {
+    flex: 1;
+    margin-bottom: 10px;
+}
+
+.formDate input,
+.formDate textarea {
+    background-color: #AC946A;
+    padding: 10px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-family: 'Gotham', sans-serif;
+    border:none;
+}
+
+.formDate textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.formDate input[type="checkbox"] {
+    width: auto;
+    margin-right: 20px;
+}
+
+.buttonDate {
+    background-color: #AC946A;
+    padding: 10px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    font-family: 'Gotham', sans-serif;
+    color: white;
+    width: 100%;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.newData {
+    background-color: #EEEEEE;
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid black;
+}
+
+.newData + .oldData {
+    margin-top: 15px;
+}

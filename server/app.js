@@ -10,9 +10,12 @@ import userRouter from './routes/UserRouter.js';
 import eventRouter from "./routes/eventRouter.js"
 import bookingRouter from "./routes/bookingRouter.js"
 import authRouter from "./routes/authRouter.js";
+import cors from 'cors';
+import { deleteCaducateEvents } from './utils/caducateEvents.js';
 
 export const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use('/location', locationRouter);
 app.use('/user', userRouter);
@@ -24,17 +27,23 @@ try {
     connection_db.authenticate();
     console.log('Connection has been established successfully.👏👏');
 
-    BookingModel.sync();
-    console.log('Model Booking connected correctly 📆📆')
-
-    EventModel.sync();
-    console.log('Model Event connected correctly 🍷🍷')
+    UserModel.sync();
+    console.log('Model User connected correctly 👤👤');
 
     LocationModel.sync();
     console.log('Model Location connected correctly 📍📍')
 
-    UserModel.sync();
-    console.log('Model User connected correctly 👤👤');
+    EventModel.sync();
+    console.log('Model Event connected correctly 🍷🍷')
+
+    BookingModel.sync();
+    console.log('Model Booking connected correctly 📆📆')
+
+
+
+
+
+    deleteCaducateEvents();
 
    } catch (error) {
     console.error('Unable to connect to the database:', error);

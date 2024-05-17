@@ -6,10 +6,12 @@
   "type": "module",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "debug": "^4.3.4",
     "dotenv": "^16.4.5",
     "dottie": "^2.0.6",
     "express": "^4.19.2",
+    "express-validator": "^7.0.1",
     "inflection": "^1.13.4",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
@@ -19,6 +21,7 @@
     "ms": "^2.1.2",
     "mysql2": "^3.9.7",
     "node": "^18.20.2",
+    "node-cron": "^3.0.3",
     "nodemon": "^3.1.0",
     "pg-connection-string": "^2.6.4",
     "retry-as-promised": "^7.0.4",
@@ -33,10 +36,14 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles",
     "dev": "node app.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  }
 }
