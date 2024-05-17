@@ -39,7 +39,7 @@ const CreateForm = () => {
       <form className="formCreate" onSubmit={handleSubmit(handleForm)}>
           <div>
             <label htmlFor="id_location">Id de la localización</label>
-            <select id="id_location" name="id_location" {...register('id_location', {required: true})}>
+            <select id="id_location" name="id_location" {...register('id_location')}>
               <option value="">Selecciona la localización</option>
               <option value="1">Calle Silvela</option>
               <option value="2">Ríos Rosas</option>
@@ -66,7 +66,7 @@ const CreateForm = () => {
           </div>
           <div>
             <label htmlFor="cata_type">Tipo de cata</label>
-            <select id="cata_type" name="cata_type" {...register('cata_type', {required: true})}>
+            <select id="cata_type" name="cata_type" {...register('cata_type')}>
               <option value="">Selecciona un tipo de cata</option>
               <option value="vino">Vino</option>
               <option value="cerveza">Cerveza</option>
