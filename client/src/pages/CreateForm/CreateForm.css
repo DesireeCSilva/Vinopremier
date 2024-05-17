@@ -29,6 +29,7 @@
 
 .createFormTitle {
     text-align: center;
+    margin-bottom: 30px;
 }
 
 .formCreate label {
@@ -37,7 +38,8 @@
 }
 
 .formCreate input,
-.formEdit textarea {
+.formCreate textarea,
+.formCreate select {
     background-color: #AC946A;
     padding: 10px;
     width: 100%;
@@ -49,14 +51,14 @@
     border:none;
 }
 
-.formEdit textarea {
+.formCreate textarea {
     resize: vertical;
     min-height: 150px;
 }
 
 .formCreate input[type="checkbox"] {
-   width: auto;
-   margin-right: 20px;
+    width: auto;
+    margin-right: 20px;
 }
 
 .buttonCreate {
@@ -71,4 +73,8 @@
     border: none;
     cursor: pointer;
     font-size: 20px;
+}
+
+.error-message {
+    color: red;
 }

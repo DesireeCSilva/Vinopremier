@@ -45,12 +45,36 @@ export const createBooking = async (request, response) => {
 export const deleteBooking = async (request, response) => {
     try {
         const { id } = request.params;
-        const booking = await BookingModel.destroy({where: {id}})
-        response.status(200).json(booking)
+        const booking = await BookingModel.findByPk(id);
+        
+        if (!booking) {
+            return response.status(404).json({ message: 'Booking not found' });
+        }
+
+        const event = await EventModel.findByPk(booking.id_event);
+        
+        if (!event) {
+            return response.status(404).json({ message: 'Event not found' });
+        }
+
+        const updatedAvailablePlaces = event.avalaible_places + booking.people;
+
+        await EventModel.update(
+            { avalaible_places: updatedAvailablePlaces },
+            { where: { id: event.id } }
+        );
+        const updatedEvent = await EventModel.findByPk(booking.id_event)
+        const deleteBooking = await BookingModel.destroy({ where: { id } });
+
+        response.status(200).json({ 
+            message: 'Booking deleted successfully',
+            eventMessage: "Event updated",
+            event: updatedEvent
+         });
     } catch (error) {
-        response.status(500).json({message: error.message})
+        response.status(500).json({ message: error.message });
     }
-}
+};
 
 export const getBookingById = async (request, response) => {
     try {
@@ -95,3 +119,13 @@ export const updateBooking = async (request, response) => {
         response.status(500).json({ message: error.message });
     }
 };
+
+export const getAllBookingsByUser = async (request, response) => {
+    try {
+        const { id_user } = request.params;
+        const bookings = await BookingModel.findAll({where: {id_user: id_user}})
+        response.status(201).json(bookings)
+    } catch (error) {
+        response.status(500).json({message: error.message})
+    }
+}

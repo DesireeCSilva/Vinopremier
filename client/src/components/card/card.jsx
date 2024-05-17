@@ -219,7 +219,7 @@ function Card({}) {
 
 <>
 
-<h1 className="card-list-title" style={{ textAlign: 'left', marginLeft:'25px', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS{city}</h1>
+<h1 className="card-list-title" style={{ textAlign: 'left', marginLeft:'25px', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS DE VINOPREMIER</h1>
 <div className="button-list">
   {isAuthenticated ? (
     <>
@@ -241,7 +241,7 @@ function Card({}) {
           <article className="button-controler">
             {isAuthenticated && (
               <>
-                <button className="card-button-edit" onClick={() => navigate(`edit/${encodeURIComponent(event.name)}`)}>Editar</button>
+                <button className="card-button-edit" onClick={() => navigate(`/privateArea/edit/${encodeURIComponent(event.name)}`)}>Editar</button>
                 <button className="card-button-delete" onClick={() =>  handleDelete(event.name)} >Eliminar</button>
               </>
             )}

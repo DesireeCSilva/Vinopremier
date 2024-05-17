@@ -74,8 +74,15 @@ const onSubmit = async (editEvent) => {
       <h2 className="editFormTitle">FORMULARIO DE EDICIÓN DE CATAS</h2>
       <form className="formEdit" onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label htmlFor="id_location">Id de la localización</label>
-            <input type="number" id="id_location" name="id_location" {...register('id_location', {required: true})}/>
+            <label htmlFor="id_location">Localización</label>
+            <select id="id_location" name="id_location" {...register('id_location', {required: true})}>
+              <option value="">Selecciona la localización</option>
+              <option value="1">Calle Silvela</option>
+              <option value="2">Ríos Rosas</option>
+              <option value="3">Boadilla</option>
+              <option value="4">Zaragoza</option>
+              <option value="5">Palma</option>
+            </select>
           </div>
           <div>
             <label htmlFor="name">Nombre de la cata</label>
@@ -91,7 +98,18 @@ const onSubmit = async (editEvent) => {
           </div>
           <div>
             <label htmlFor="cata_type">Tipo de cata</label>
-            <input type="text" id="cata_type" name="cata_type" {...register('cata_type', {required: true})}/>
+            <select id="cata_type" name="cata_type" {...register('cata_type', {required: true})}>
+              <option value="">Selecciona un tipo de cata</option>
+              <option value="vino">Vino</option>
+              <option value="cerveza">Cerveza</option>
+              <option value="cava">Cava</option>
+              <option value="gin">Gin</option>
+              <option value="whisky">Whisky</option>
+              <option value="ron">Ron</option>
+              <option value="tequila">Tequila</option>
+              <option value="brandy">Brandy</option>
+              <option value="cognac">Cognac</option>
+              </select>
           </div>
           <div>
             <label htmlFor="products">Productos a catar</label>
@@ -102,11 +120,11 @@ const onSubmit = async (editEvent) => {
             <input type="number" id="price" name="price" {...register('price', {required: true})}/>
           </div>
           <div>
-            <label htmlFor="private_tasting_supplement">Suplemento de cata privada</label>
+            <label htmlFor="private_tasting_supplement">Precio por suplemento de cata privada</label>
             <input type="number" id="private_tasting_supplement" name="private_tasting_supplement" {...register('private_tasting_supplement', {required: true})}/>
           </div>
           <div>
-            <label htmlFor="iberian_supplement">Suplemento de ibéricos</label>
+            <label htmlFor="iberian_supplement">Precio por suplemento de ibéricos</label>
             <input type="number" id="iberian_supplement" name="iberian_supplement" {...register('iberian_supplement', {required: true})}/>
           </div>
           {/* <div>

@@ -7,47 +7,55 @@ import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 const DateForm = () => {
-
-    const{name: initialName} = useParams();
+    const{ name } = useParams();
     const { register, handleSubmit, setValue} = useForm();
     const navigate = useNavigate()
     const [eventData, setEventData] = useState();
 
     useEffect(() => {
       const fetchData = async () => {
-      const eventData = await getEventById(id);
-          setEventData(eventData);
+        try {
+          const decodedName = decodeURIComponent(name);
+          const response = await getEventByName(decodedName);
+          console.log(response)
+          const { eventInstance } = response;
+          console.log(eventInstance)
+              setEventData(eventInstance);
+    
+                  setValue('id_location', eventInstance.id_location),
+                  setValue('name', eventInstance.name),
+                  setValue('image', eventInstance.image),
+                  setValue('description', eventInstance.description),
+                  setValue('cata_type', eventInstance.cata_type),
+                  setValue('products', eventInstance.products),
+                  setValue('price', eventInstance.price),
+                  setValue('private_tasting_supplement', eventInstance.private_tasting_supplement),
+                  setValue('iberian_supplement', eventInstance.iberian_supplement),
+                  setValue('duration', eventInstance.duration),
+                  setValue('capacity', eventInstance.capacity),
+                  setValue('parking', eventInstance.parking),
+                  setValue('extra_people', eventInstance.extra_people),
+                  setValue('possibility_dinner', eventInstance.possibility_dinner),
+                  setValue('kids', eventInstance.kids),
+                  setValue('pets', eventInstance.pets),
+                  setValue('accesibility', eventInstance.accesibility),
+                  setValue('vegan_version', eventInstance.vegan_version),
+                  setValue('english', eventInstance.english)
 
-              setValue('id_location', eventData.id_location),
-              setValue('name', eventData.name),
-              setValue('image', eventData.image),
-              setValue('description', eventData.description),
-              setValue('cata_type', eventData.cata_type),
-              setValue('products', eventData.products),
-              setValue('price', eventData.price),
-              setValue('private_tasting_supplement', eventData.private_tasting_supplement),
-              setValue('iberian_supplement', eventData.iberian_supplement),
-              setValue('duration', eventData.duration),
-              setValue('capacity', eventData.capacity),
-              setValue('parking', eventData.parking),
-              setValue('extra_people', eventData.extra_people),
-              setValue('possibility_dinner', eventData.possibility_dinner),
-              setValue('kids', eventData.kids),
-              setValue('pets', eventData.pets),
-              setValue('accesibility', eventData.accesibility),
-              setValue('vegan_version', eventData.vegan_version),
-              setValue('english', eventData.english)
+        } catch (error) {
+          console.error('Error al cargar los datos del evento:', error);
+        }
             };
         fetchData();
         },
-      [setValue]);
+      [name]);
 
 const handleForm = async (data) => {
     try{
         const response = await postEvent(data);
             console.log(response);
             alert("Fecha añadida correctamente");
-            navigate(`/detail/${id}`)
+            navigate(`/detail/${encodeURIComponent(eventData.name)}`)
     }
     catch (error){
         console.error("Error al añadir fecha", error)
@@ -58,68 +66,71 @@ const handleForm = async (data) => {
     <div className="dateFormContainer">
       <h2 className="dateFormTitle">AÑADIR NUEVA FECHA</h2>
       <form className="formDate" onSubmit={handleSubmit(handleForm)}>
+      <div className="catainfo">
+          <div>
+            <label htmlFor="name">Nombre de la cata</label>
+            <input type="text" id="name" name="name" {...register('name', {required: true})} readOnly/>
+          </div>
+        </div>
         <div className="newData">
         <div>
-            <label htmlFor="date">Fecha</label>
+            <label htmlFor="date">Fecha (YYYY-MM-DD)</label>
             <input type="text" id="date" name="date" {...register('date', {required: true})}/>
           </div>
           <div>
-            <label htmlFor="time">Hora</label>
+            <label htmlFor="time">Hora (HH:mm:ss)</label>
             <input type="text" id="time" name="time" {...register('time', {required: true})}/>
           </div>
           <input className="buttonEdit" type="submit" value="AÑADIR"/>
         </div>
-        <div className="oldData">
+        <div className="oldData hidden">
           <div>
             <label htmlFor="id_location">Id de la localización</label>
             <input type="number" id="id_location" name="id_location" {...register('id_location', {required: true})}/>
           </div>
-          <div>
-            <label htmlFor="name">Nombre de la cata</label>
-            <input type="text" id="name" name="name" {...register('name', {required: true})}/>
-          </div>
+          
           <div>
             <label htmlFor="image">Añadir imagen de la cata</label>
-            <input type="url" id="image" name="image" {...register('image', { required: true})}/>
+            <input type="url" id="image" name="image" {...register('image', { required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="description">Descripción</label>
-            <textarea type="text" id="description" name="description" {...register('description', {required: true})}/>
+            <textarea type="text" id="description" name="description" {...register('description', {required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="cata_type">Tipo de cata</label>
-            <input type="text" id="cata_type" name="cata_type" {...register('cata_type', {required: true})}/>
+            <input type="text" id="cata_type" name="cata_type" {...register('cata_type', {required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="products">Productos a catar</label>
-            <input type="text" id="products" name="products" {...register('products', {required: true})}/>
+            <input type="text" id="products" name="products" {...register('products', {required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="price">Precio por persona</label>
-            <input type="number" id="price" name="price" {...register('price', {required: true})}/>
+            <input type="number" id="price" name="price" {...register('price', {required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="private_tasting_supplement">Suplemento de cata privada</label>
-            <input type="number" id="private_tasting_supplement" name="private_tasting_supplement" {...register('private_tasting_supplement', {required: true})}/>
+            <input type="number" id="private_tasting_supplement" name="private_tasting_supplement" {...register('private_tasting_supplement', {required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="iberian_supplement">Suplemento de ibéricos</label>
-            <input type="number" id="iberian_supplement" name="iberian_supplement" {...register('iberian_supplement', {required: true})}/>
+            <input type="number" id="iberian_supplement" name="iberian_supplement" {...register('iberian_supplement', {required: true})} readOnly/>
           </div>
           <div>
             <label htmlFor="duration">Duración</label>
-            <input type="text" id="duration" name="duration" {...register('duration', {required: true})}/>
+            <input type="text" id="duration" name="duration" {...register('duration', {required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="capacity">Aforo máximo</label>
-            <input type="number" id="capacity" name="capacity" {...register('capacity', {required: true})}/>
+            <input type="number" id="capacity" name="capacity" {...register('capacity', {required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="parking">Parking</label>
-            <input type="text" id="parking" name="parking" {...register('parking', { required: true})}/>
+            <input type="text" id="parking" name="parking" {...register('parking', { required: true})}readOnly/>
           </div>
           <div>
-            <input type="checkbox" id="extra_people" name="extra_people" {...register('extra_people')}/>
+            <input type="checkbox" id="extra_people" name="extra_people" {...register('extra_people')}readOnly/>
             <label htmlFor='extra_people'>Pueden asistir más personas a la cata de las que compraron las entradas</label>
           </div>
           <div>

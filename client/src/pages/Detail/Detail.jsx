@@ -22,7 +22,7 @@ const Detail = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [veganPeople, setVeganPeople] = useState(0);
   const { isAuthenticated } = useUserContext();
-  const [extraFeaturePrice, setExtraFeaturePrice] = useState({private: 0, iberian: 0})
+  const [extraFeaturePrice, setExtraFeaturePrice] = useState({private: 0, iberian: 0});
 
   useEffect(() => {
   
@@ -36,12 +36,12 @@ const Detail = () => {
         setEventDates(eventDates);
         const responseLocation = await getLocationById(eventInstance.id_location);
         setLocation(responseLocation)
+        
       } catch (error) {
         console.error('Error al cargar los datos del evento:', error);
       }};
       fetchEventById();
     }, [name]);
-  
   const tileContent = ({date, view}) => {
     if (view === 'month') {
       const formattedDate = formatDate(date);
@@ -109,9 +109,10 @@ const Detail = () => {
 };
 
 const calculateFinalPrice = () => {
-  let finalPrice = event.price;
-  if (isChecked.private) finalPrice += event.private_tasting_supplement;
-  if (isChecked.iberian) finalPrice += event.iberian_supplement;
+  let finalPrice = parseFloat(event.price);
+  finalPrice *= eventsCount[event.id];
+  if (isChecked.private) finalPrice += parseFloat(event.private_tasting_supplement);
+  if (isChecked.iberian) finalPrice += parseFloat(event.iberian_supplement);
   return finalPrice;
 }
 
@@ -152,7 +153,7 @@ const handleClick = async (id) => {
       const token = localStorage.getItem('token');
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
       const idUser = decodedToken.id;
-
+      console.log(idUser)
       const bookingData = {
         id_user: idUser,
         id_event: selectedDate.id,
@@ -171,7 +172,27 @@ const handleClick = async (id) => {
       console.error('Error al crear la reserva', error);
       alert('Error al añadir la reserva al carrito.')
     }
-  };
+    
+};
+
+const handlePayment = () => {
+  try {
+    const token = localStorage.getItem('token');
+    console.log(token)
+    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    console.log(decodedToken)
+    const idUser = decodedToken.userId;
+    console.log(idUser)
+    if (idUser) {
+      navigate(`/privateArea/payment/${idUser}`);
+    } else {
+      alert('Usuario no autenticado. Por favor, inicie sesión.');
+    }
+  } catch (error) {
+    console.error('Error al obtener el token. Lo odio', error)
+  }
+};
+
 
   return (
     
