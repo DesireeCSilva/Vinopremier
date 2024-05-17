@@ -210,6 +210,9 @@ const handlePayment = () => {
           <p className='page-detail__left__price'>{event.price}€</p>
           <p className='page-detail__left__iva'>IVA INCLUIDO</p>
 
+          
+          
+
           <div className='page-detail__left__supplement-private'>
             <input type="checkbox" id="private" name="private" onChange={handleCheckboxChange} checked={isChecked.private}/>
             <label className='page-detail__left__suptext' for="add-extra-feature-private">Añadir suplemento de cata privada ({event.private_tasting_supplement}€)</label>
@@ -266,22 +269,22 @@ const handlePayment = () => {
           
           <section className="card-counter"> 
             <article className="buttons-counter" >
-              <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
-                <p style={{fontFamily:'Gotham', fontSize: '2rem', justifyContent: 'center'}}>+</p>
+            <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
+                <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
               </button>
               <div style={{fontFamily:'Gotham', padding:'16.5px',border:'3px solid black',fontWeight:'bold', fontSize:'21px'}}>{eventsCount[event.id] || 0}</div>
-              <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
-                <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
+              <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
+                <p style={{fontFamily:'Gotham', fontSize: '2rem', justifyContent: 'center'}}>+</p>
               </button>
           </article>
           
           {isAuthenticated ? (
           
-            <div>
+            <>
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
                   {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../../src/assets/images/icons/cart.png" onClick={handlePayment} style={{cursor:'pointer'}}/>
-            </div>
+            <img className="img-cart" src="../../src/assets/images/icons/cart.png" onClick={handlePayment} style={{cursor:'pointer'}}/>
+            </>
             
           ) : (
 

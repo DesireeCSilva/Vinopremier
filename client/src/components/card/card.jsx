@@ -8,8 +8,7 @@ import LoginButton from '../../components/LoginButton/LoginButton.jsx'
 import { useUserContext } from '../../context/UserContext.jsx'
 import FilterButtons from '../../components/TypeFilter/TypeFilter.jsx'
 import CityFilter from "../CityFilter/CityFilter.jsx";
-
-
+import PriceFilter from "../PriceFilter/PriceFilter.jsx";
 
 
 
@@ -132,7 +131,7 @@ const CardContainer = Styled.div`
   .card-counter {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     margin-bottom: 0vw;
     bottom: 0;
     background-color: #AC946A;
@@ -155,6 +154,7 @@ const CardContainer = Styled.div`
     width: 2vw;
     height: 2vw;
     background-color: #AC946A;
+    padding: 0.1vw;
   
   }
   
@@ -166,6 +166,7 @@ const CardContainer = Styled.div`
     margin: 0.5vw;
     border: none;
     height: 3vw;
+    padding: 0.5vw;
     
   }
 
@@ -174,16 +175,8 @@ const CardContainer = Styled.div`
     transform: scale(1.4);
     
   }
-`;
+  `;
 
-const CityFilterContainer = Styled.div`{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  
-
-}
-`;
 
 
 function Card({}) {
@@ -236,14 +229,36 @@ function Card({}) {
       }
     };
     console.log(isAuthenticated)
+
+    const handlePayment = () => {
+      try {
+        const token = localStorage.getItem('token');
+        console.log(token)
+        const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        console.log(decodedToken)
+        const idUser = decodedToken.userId;
+        console.log(idUser)
+        if (idUser) {
+          navigate(`/privateArea/payment/${idUser}`);
+        } else {
+          alert('Usuario no autenticado. Por favor, inicie sesión.');
+        }
+      } catch (error) {
+        console.error('Error al obtener el token. Lo odio', error)
+      }
+    };
       return (
 
 <>
 
 
 <CityFilter setEvents={setEvents} events={events}/>
-<h1 className="card-list-title" style={{ textAlign: 'left', marginLeft:'25px', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS DE VINOPREMIER</h1>
+<h1 className="card-list-title" style={{ textAlign: 'center', fontSize:'3vw', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS DE VINOPREMIER</h1>
+<div className="filter-buttons" style={{ float:'left', marginTop:'230px'}}>
+<PriceFilter setEvents={setEvents} events={events}/>
 <FilterButtons setEvents={setEvents} events={events}/>
+</div>
+
 
 <div className="button-list">
   {isAuthenticated ? (
@@ -278,18 +293,28 @@ function Card({}) {
           <section className="card-counter"> 
           <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black', marginBottom:'0'}}>
             
-            <button className="less-cart" style={{ width: '15px', height:'30px',backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
-              <p style={{fontSize: '1vw', justifyContent: 'center'}}>-</p>
+            <button className="less-cart" style={{ width: '2vw', height:'3vh',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
+              <p style={{fontSize: '2vw', fontWeight:'300', textAlign:'center'}}>-</p>
             </button>
-            <div className="card-qty" style={{fontSize:'1vw',borderBottom:'none', display: 'flex', alignItems: 'center',  width: '8px', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
-            <button className="add-cart" style={{ width: '15px', height:'30px',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
-              <p style={{fontSize:'1vw', justifyContent:'center'}}>+</p>
+            <div className="card-qty" style={{fontSize:'2vw',borderBottom:'none', display: 'flex', alignItems: 'center',  width: '8px', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw'}}>{eventsCount[event.id] || 0}</div>
+            <button className="add-cart" style={{width: '2vw', height:'3vh', backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
+              <p style={{fontSize:'2vw', fontWeight:'300', textAlign:'center'}}>+</p>
             </button>
           </article> 
-            <button className="adding-cart" onClick={() => handleClick(event.id)}>
-                  {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../src/assets/images/icons/cart.png" onClick={() => navigate(`Payment/`)}/>
-          </section>
+          {isAuthenticated ? (
+          
+          <>
+          <button className="adding-cart" onClick={() => handleClick(event.id)}>
+                {buttonTexts[event.id] || "AÑADIR"}</button>
+          <img src="../../src/assets/images/icons/cart.png" onClick={handlePayment} style={{cursor:'pointer'}}/>
+          </>
+          
+        ) : (
+
+          <button className="page-detail_back-button" onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
+          )} 
+          
+           </section>
         </section>
       </li>
       ))}

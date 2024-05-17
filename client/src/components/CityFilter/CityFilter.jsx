@@ -41,8 +41,8 @@ const CityFilterContainer = styled.div`
 }
 
   img {
-    width: 90%;
-    height: auto;
+    width: 25vw;
+    height: 15vw;
     object-fit: cover;
     border: 2px solid #AC946A;
     border-radius: 10px;
@@ -64,7 +64,7 @@ const CityFilter = ({setEvents, events}) => {
 
     <button className='name-filter' id_location='2' onClick={() => onButtonClick('2')}>
       <h1 className='tittle-filter'>Catas y Eventos en Mallorca</h1>
-      <img src='../../src/assets/images/cities/mallorca.png' alt='Mallorca' />
+      <img src='../../src/assets/images/cities/palma.png' alt='Mallorca' />
 
     </button>
 
@@ -76,7 +76,7 @@ const CityFilter = ({setEvents, events}) => {
 
     <button className='name-filter' onClick={() => onButtonClick('3')}>
     <h1 className='tittle-filter'>Catas y Eventos en Zaragoza</h1>
-    <img src='../../src/assets/images/cities/zaragoza.jpeg' alt='Zaragoza' />
+    <img src='../../src/assets/images/cities/zaragoza.png' alt='Zaragoza'/>
 
     </button> 
     </CityFilterContainer>
