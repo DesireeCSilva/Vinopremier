@@ -66,6 +66,12 @@ const handleForm = async (data) => {
     <div className="dateFormContainer">
       <h2 className="dateFormTitle">AÑADIR NUEVA FECHA</h2>
       <form className="formDate" onSubmit={handleSubmit(handleForm)}>
+      <div className="catainfo">
+          <div>
+            <label htmlFor="name">Nombre de la cata</label>
+            <input type="text" id="name" name="name" {...register('name', {required: true})} readOnly/>
+          </div>
+        </div>
         <div className="newData">
         <div>
             <label htmlFor="date">Fecha</label>
@@ -77,15 +83,12 @@ const handleForm = async (data) => {
           </div>
           <input className="buttonEdit" type="submit" value="AÑADIR"/>
         </div>
-        <div className="oldData">
+        <div className="oldData hidden">
           <div>
             <label htmlFor="id_location">Id de la localización</label>
             <input type="number" id="id_location" name="id_location" {...register('id_location', {required: true})}/>
           </div>
-          <div>
-            <label htmlFor="name">Nombre de la cata</label>
-            <input type="text" id="name" name="name" {...register('name', {required: true})} readOnly/>
-          </div>
+          
           <div>
             <label htmlFor="image">Añadir imagen de la cata</label>
             <input type="url" id="image" name="image" {...register('image', { required: true})}readOnly/>
