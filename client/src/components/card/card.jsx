@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { deleteEventByName } from "../../services/eventServices";
 import LogoutButton from '../../components/LogoutButton/LogoutButton.jsx';
+import LoginButton from '../../components/LoginButton/LoginButton.jsx'
 import { useUserContext } from '../../context/UserContext.jsx'
 import FilterButtons from '../../components/TypeFilter/TypeFilter.jsx'
 import CityFilter from "../CityFilter/CityFilter.jsx";
@@ -218,10 +219,19 @@ function Card({}) {
 
 <>
 
-<h1 className="card-list-title" style={{ textAlign: 'left', marginLeft:'25px' ,fontWeight: 'extra-bold,', paddingTop:'2vw' , fontSize:'3vw' , color:'#AC946A' }}>CATAS Y EVENTOS DE VINOPREMIER</h1>
-<button className="card-button-login" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/login`)} >INICIA SESIÓN</button>
-<button className="card-button-add" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/privateArea/create`)}>AÑADIR CATA</button>
-<LogoutButton/>
+<h1 className="card-list-title" style={{ textAlign: 'left', marginLeft:'25px', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS{city}</h1>
+<div className="button-list">
+  {isAuthenticated ? (
+    <>
+  <LogoutButton/>,
+  <button className="card-button-add" style={{ cursor:'pointer', float: 'right', fontFamily: 'Gotham', fontSize: '1rem', color:'#fff', background:'#000', border: 'none', padding:'2%', marginTop: '2rem', height: '4.4rem', cursor: 'pointer', letterSpacing: '0.09em', marginRight:'2.1rem', background:'#AC946A'}} onClick={() => navigate (`/privateArea/create`)}>AÑADIR CATA</button>
+  </>
+  ) : (
+  <LoginButton />
+  )}
+</div>
+          
+
 
 <ul className="card-list">
 <CardContainer>
@@ -229,9 +239,13 @@ function Card({}) {
       <li key={event.name} className="card-list-item">
         <section className="card-bg" style={{border:'2px solid #AC946'}}>
           <article className="button-controler">
-            <button className="card-button-edit" onClick={() => navigate(`edit/${encodeURIComponent(event.name)}`)}>Editar</button>
-            <button className="card-button-delete" onClick={() =>  handleDelete(event.name)} >Eliminar</button>
-            </article>
+            {isAuthenticated && (
+              <>
+                <button className="card-button-edit" onClick={() => navigate(`edit/${encodeURIComponent(event.name)}`)}>Editar</button>
+                <button className="card-button-delete" onClick={() =>  handleDelete(event.name)} >Eliminar</button>
+              </>
+            )}
+          </article>
           <img className="card-img" src={event.image} onClick={() => navigate(`detail/${encodeURIComponent(event.name)}`)} alt={event.name} width="50" height="50" />
           <div className="card-information">
             <article className="card-name">{event.name}</article>
@@ -261,5 +275,6 @@ function Card({}) {
   </>
   );
 }
+
 
 export default Card;

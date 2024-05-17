@@ -34,6 +34,16 @@ const BookingModel = connection_db.define('Booking', {
         allowNull: false,
         defaultValue: false
     },
+    private_tasting_supplement: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+    iberian_supplement: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+        defaultValue: false
+    },
     vegan_version: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
@@ -43,6 +53,10 @@ const BookingModel = connection_db.define('Booking', {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0
+    },
+    final_price: {
+        type: DataTypes.DECIMAL,
+        allowNull: false
     },
     date_booking: {
         type: DataTypes.DATE,
