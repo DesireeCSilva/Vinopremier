@@ -22,7 +22,8 @@ const Detail = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [veganPeople, setVeganPeople] = useState(0);
   const { isAuthenticated } = useUserContext();
-  const [extraFeaturePrice, setExtraFeaturePrice] = useState({private: 0, iberian: 0});
+  const { isUserRole } = useUserContext();
+  const [extraFeaturePrice, setExtraFeaturePrice] = useState({private: 0, iberian: 0})
 
   useEffect(() => {
   
@@ -69,7 +70,7 @@ const Detail = () => {
     } catch (error) {
       console.error('Error al obtener el evento por fecha', error)
     }
- }
+}
   const formatDate = date => {
     return (`${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`);
   };
@@ -245,48 +246,51 @@ const handlePayment = () => {
             )}
             </>
           )}
-          <section className="card-counter"> 
-          <article className="buttons-counter" >
-            <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
-              <p style={{fontFamily:'Gotham', fontSize: '2rem', justifyContent: 'center'}}>+</p>
-            </button>
-            <div style={{fontFamily:'Gotham', padding:'16.5px',border:'3px solid black',fontWeight:'bold', fontSize:'21px'}}>{eventsCount[event.id] || 0}</div>
-            <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
-              <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
-            </button>
-          </article>
-          <p>Número de personas</p>
-          {isAuthenticated ? (
-            <div>
-            <button className="adding-cart" onClick={() => handleClick(event.id)}>
-                  {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../../src/assets/images/icons/cart.png" onClick={handlePayment}/></div>
-            
-          ) : (
-            <button className="card-button-login" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
-          )} 
-          </section>
-
-
 
           <div className='page-detail__left__calendar' >
             <p className='page-detail__left__calendartext'>Seleccionar fecha</p>
             <Calendar tileContent={tileContent} tileDisabled={tileDisabled} onClickDay={onClickDay}/>
             {selectedDate && (
               <div>
-                 <p>
-                  Fecha: {selectedDate.date}, Hora: {selectedDate.time}, Plazas disponibles: {selectedDate.avalaible_places}
+                <p className='page-detail__left__calendartext' style={{fontSize:'1.2rem'}}>
+                  Fecha: {selectedDate.date}<br/> Hora: {selectedDate.time}<br/> Plazas disponibles: {selectedDate.avalaible_places}
                 </p>
               </div>
             )}
             {isAuthenticated && (
               <>
-            <button onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>
+            {(isUserRole === "admin" || isUserRole === "superadmin") && <button onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>}
             </>
             )}
           </div>
+          
+          <section className="card-counter"> 
+            <article className="buttons-counter" >
+              <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
+                <p style={{fontFamily:'Gotham', fontSize: '2rem', justifyContent: 'center'}}>+</p>
+              </button>
+              <div style={{fontFamily:'Gotham', padding:'16.5px',border:'3px solid black',fontWeight:'bold', fontSize:'21px'}}>{eventsCount[event.id] || 0}</div>
+              <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
+                <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
+              </button>
+          </article>
+          
+          {isAuthenticated ? (
+          
+            <div>
+            <button className="adding-cart" onClick={() => handleClick(event.id)}>
+                  {buttonTexts[event.id] || "AÑADIR"}</button>
+            <img src="../../src/assets/images/icons/cart.png" onClick={handlePayment} style={{cursor:'pointer'}}/>
+            </div>
+            
+          ) : (
+
+              <button className="page-detail_back-button" onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
+          )} 
+          </section>
 
         </div>
+
       <div className='page-detail__section01__right'>
           <div className='page-detail__right__icons'>
             <div className='page-detail__right__iconscolumn'>
@@ -363,7 +367,7 @@ const handlePayment = () => {
             <p dangerouslySetInnerHTML={{ __html: splitTextByRule(event.description) }}></p>
         </div>
 
-        <Link to="/"><button className='page-detail_back-button'>Volver a Catas y Eventos</button></Link>
+        <Link to="/"><button className='page-detail_back-button'>VOLVER A CATAS Y EVENTOS</button></Link>
       </div>
     </section>
   </article>

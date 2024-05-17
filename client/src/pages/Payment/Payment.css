@@ -1,6 +1,7 @@
 .payment-page {
     display: flex;
     justify-content: center;
+    align-content: center;
     margin-top: 3rem;
     font-family: 'Gotham';
 }
@@ -8,7 +9,6 @@
 .payment-page_right-container {
     background: #000;
     width: 30rem;
-    margin: 0 1rem; /* Ajuste el margen si es necesario */
 }
 
 .payment-page_right-title {

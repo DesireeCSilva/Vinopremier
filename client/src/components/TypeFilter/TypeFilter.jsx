@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const SelectTypeEvent = styled.div`
@@ -33,67 +32,58 @@ ul {
 button {
   margin: 1vh;
   padding: 1vh;
-  border: 2px solid #AC946A;
+  border:none;
   border-radius: 5px;
-  background-color: #AC946A;
-  color: #fff;
+  color: #AC946A;
+  background-color: #fff;
   font-size: 1.25vw;
   cursor: pointer;
 }
 
-
-
-li :hover {
-  cursor: pointer;
+button:hover {
+  background-color: #AC946A;
+  color: #fff;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 `;
 
 
-const TypeFilter = (onTypeChange) => {
-  const [selectedType, setSelectedType] = useState('');
-  const [eventTypes, setEventTypes] = useState([]);
+const FilterButtons = ({setEvents, events}) => {
+  const [selectedType, setSelectedType] = useState('all'); // Initial selected state
+
   
+  const onButtonClick = (cata_type) => {
+    setSelectedType(cata_type); // Update selected state
 
-  useEffect(() => {
-    const fetchEventTypes = async () => {
-      const result = await axios.get('http://localhost:8000/event/cata_types');
-      setEventTypes(result.data);
-    };
+    const filteredEvents = cata_type === 'all'
+      ? events  // Show all events if "all" is selected
+      : events.filter((event) => event.cata_type === cata_type);
 
-    fetchEventTypes();
-  }, []);
-
-
-  const handleTypeChange = (event) => {
-    setSelectedType(event.target.value);
-    if (onTypeChange) {
-      onTypeChange(event.target.value);
-    }
+    setEvents(filteredEvents);
   };
-  
+
   return (
+  
+    <>
     <SelectTypeEvent>
-      <h1 class="title-select-type-event">Tipo de Cata</h1>
-      <ul value={selectedType} onChange={handleTypeChange}>
-        
-        <button>Todos los tipos</button>
-        <button>Vino</button>
-        <button>Cerveza</button>
-        <button>Vermout</button>
-        <button>Cava</button>
-        <button>Gin</button>
-        <button>Whisky</button>
-        <button>Ron</button>
-        <button>Tequila</button>
-        <button>Brandy</button>
-        <button>Cognac</button>
-        <button>Otros</button>
-        
-      </ul>
-    </SelectTypeEvent>
+      <h1 className="title-select-type-event">Tipo de Cata</h1>
+        <ul className="list-select-type-event">
+        <button onClick={() => onButtonClick('all')} className={selectedType === 'all' ? 'active' : ''}>Todos los tipos</button>
+        <button onClick={() => onButtonClick('Vino')}>Vino</button>
+        <button onClick={() => onButtonClick('Cerveza')}>Cerveza</button>
+        <button onClick={() => onButtonClick('Vermout')}>Vermout</button>
+        <button onClick={() => onButtonClick('Cava')}>Cava</button>
+        <button onClick={() => onButtonClick('Gin')}>Gin</button>
+        <button onClick={() => onButtonClick('Whisky')}>Whisky</button>
+        <button onClick={() => onButtonClick('Tequila')}>Tequila</button>
+        <button onClick={() => onButtonClick('Otro')}>Otro</button>
+        </ul>
+      </SelectTypeEvent>
+    </>
   );
-};
+}
 
 
-export default TypeFilter;
+
+export default FilterButtons;
