@@ -196,6 +196,8 @@
    width: 24.5rem;
    height: 4.4rem;
    cursor: pointer;
+   margin-top: 1.3rem;
+   margin-left: 1rem;
 }
 
 .card-counter {
