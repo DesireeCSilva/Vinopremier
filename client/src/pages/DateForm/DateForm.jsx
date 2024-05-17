@@ -74,11 +74,11 @@ const handleForm = async (data) => {
         </div>
         <div className="newData">
         <div>
-            <label htmlFor="date">Fecha</label>
+            <label htmlFor="date">Fecha (YYYY-MM-DD)</label>
             <input type="text" id="date" name="date" {...register('date', {required: true})}/>
           </div>
           <div>
-            <label htmlFor="time">Hora</label>
+            <label htmlFor="time">Hora (HH:mm:ss)</label>
             <input type="text" id="time" name="time" {...register('time', {required: true})}/>
           </div>
           <input className="buttonEdit" type="submit" value="AÑADIR"/>
