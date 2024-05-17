@@ -22,7 +22,7 @@ const Detail = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [veganPeople, setVeganPeople] = useState(0);
   const { isAuthenticated } = useUserContext();
-  const [extraFeaturePrice, setExtraFeaturePrice] = useState({private: 0, iberian: 0})
+  const [extraFeaturePrice, setExtraFeaturePrice] = useState({private: 0, iberian: 0});
 
   useEffect(() => {
   
@@ -36,12 +36,12 @@ const Detail = () => {
         setEventDates(eventDates);
         const responseLocation = await getLocationById(eventInstance.id_location);
         setLocation(responseLocation)
+        
       } catch (error) {
         console.error('Error al cargar los datos del evento:', error);
       }};
       fetchEventById();
     }, [name]);
-  
   const tileContent = ({date, view}) => {
     if (view === 'month') {
       const formattedDate = formatDate(date);
@@ -153,7 +153,7 @@ const handleClick = async (id) => {
       const token = localStorage.getItem('token');
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
       const idUser = decodedToken.id;
-
+      console.log(idUser)
       const bookingData = {
         id_user: idUser,
         id_event: selectedDate.id,
@@ -172,7 +172,27 @@ const handleClick = async (id) => {
       console.error('Error al crear la reserva', error);
       alert('Error al añadir la reserva al carrito.')
     }
-  };
+    
+};
+
+const handlePayment = () => {
+  try {
+    const token = localStorage.getItem('token');
+    console.log(token)
+    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    console.log(decodedToken)
+    const idUser = decodedToken.userId;
+    console.log(idUser)
+    if (idUser) {
+      navigate(`/privateArea/payment/${idUser}`);
+    } else {
+      alert('Usuario no autenticado. Por favor, inicie sesión.');
+    }
+  } catch (error) {
+    console.error('Error al obtener el token. Lo odio', error)
+  }
+};
+
 
   return (
     
@@ -240,7 +260,7 @@ const handleClick = async (id) => {
             <div>
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
                   {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../../src/assets/images/icons/cart.png" onClick={() => navigate(`/privateArea/payment/${idUser}`)}/></div>
+            <img src="../../src/assets/images/icons/cart.png" onClick={handlePayment}/></div>
             
           ) : (
             <button className="card-button-login" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
