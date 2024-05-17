@@ -224,7 +224,7 @@ function Card({id}) {
 <div className="button-list">
   {isAuthenticated ? (
     <>
-  <LogoutButton/>,
+  <LogoutButton/>
   <button className="card-button-add" style={{ cursor: 'pointer', float: 'right', padding:'1.5vw', margin:'2vw', backgroundColor:'#ffffff',color: '#AC946A',border:'4px solid #AC946A' , fontWeight:'bold', fontSize:'2vw'}} onClick={() => navigate (`/privateArea/create`)}>Añadir Cata</button>
   </>
   ) : (
