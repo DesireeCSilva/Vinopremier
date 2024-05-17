@@ -36,6 +36,7 @@ const CreateForm = () => {
           <div>
             <label htmlFor="id_location">Id de la localización</label>
             <select id="id_location" name="id_location" {...register('id_location', {required: true})}>
+              <option value="">Selecciona la localización</option>
               <option value="1">Calle Silvela</option>
               <option value="2">Ríos Rosas</option>
               <option value="3">Boadilla</option>
