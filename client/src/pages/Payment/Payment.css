@@ -1,17 +1,14 @@
 .payment-page {
-    display: grid;
-    grid-template-columns: 60% 30%;
-    justify-items: center;
+    display: flex;
+    justify-content: center;
     margin-top: 3rem;
     font-family: 'Gotham';
 }
 
 .payment-page_right-container {
-    display: flex;
-    flex-direction: column;
     background: #000;
     width: 30rem;
-    height: 33rem;
+    margin: 0 1rem; /* Ajuste el margen si es necesario */
 }
 
 .payment-page_right-title {
@@ -27,9 +24,6 @@
     color: #fff;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
-    width: 27rem;
-    display: flex;
-    align-self: center;
 }
 
 .payment-page_right-text {
@@ -37,9 +31,8 @@
     color: #fff;
     font-size: 1.2rem;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;	
-    margin: 1rem 1.5rem 0.5rem 1.5rem;
+    justify-content: space-between;
+    margin: 1rem 1.5rem 0.5rem;
 }
 
 .payment-page_right-text02 {
@@ -47,9 +40,8 @@
     font-weight: 400;
     font-size: 1.5rem;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;	
-    margin: 1rem 1.5rem 0.5rem 1.5rem;
+    justify-content: space-between;
+    margin: 1rem 1.5rem 0.5rem;
 }
 
 .payment-page_right-img02 {
@@ -60,83 +52,47 @@
 
 .payment-page_right-article {
     display: flex;
+    flex-direction: column; /* Muestra cada artículo una debajo de la otra */
     color: #fff;
 }
 
 .payment-page_right-article-text {
     font-size: 1.4rem;
-    margin: 1rem 1.5rem 0.5rem 1.5rem;
+    margin: 1rem 1.5rem 0.5rem;
 }
-
 
 @media only screen and (max-width: 768px){
     .payment-page {
-        display: grid;
-        grid-template-columns: 1fr;
-        justify-items: center;
+        flex-direction: column;
         align-items: center;
-        margin-top: 2rem;
-        font-family: 'Gotham';
     }
 
-    .payment-page_img {
-        width: 30rem;
+    .payment-page_right-container {
+        width: 100%;
+        margin: 1rem 0; /* Ajuste el margen si es necesario */
     }
-    
+
     .payment-page_right-title {
         font-size: 1.5rem;
-        color: #AC946A;
-        border: solid 2px;
-        width: fit-content;
-        padding: 0.7rem;
         margin-top: 1rem;
         margin-bottom: 2rem;
-        margin-left: 1rem;
     }
-    
-    .payment-page_right-hr {
-        color: #fff;
-        margin-top: 1.5rem;
-        margin-bottom: 0.5rem;
-        width: 27rem;
-        display: flex;
-        align-self: center;
-    }
-    
+
     .payment-page_right-text {
-        font-family: 'Gotham Light';
-        color: #fff;
         font-size: 1rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;	
-        margin: 1rem 1.5rem 0.5rem 1.5rem;
     }
-    
+
     .payment-page_right-text02 {
-        color: #fff;
-        font-weight: 400;
         font-size: 1.3rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;	
-        margin: 1rem 1.5rem 0.5rem 1.5rem;
     }
-    
+
     .payment-page_right-img02 {
         width: 7rem;
         height: auto;
         margin: 1.5rem;
     }
-    
-    .payment-page_right-article {
-        display: flex;
-        color: #fff;
-    }
-    
+
     .payment-page_right-article-text {
         font-size: 1.2rem;
-        margin: 1rem 1.5rem 0.5rem 1.5rem;
     }
-    
 }

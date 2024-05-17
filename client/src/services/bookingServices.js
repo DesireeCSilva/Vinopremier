@@ -25,6 +25,18 @@ export const getAllBookings = async () => {
     }
 }
 
+export const getAllBookingsByUser = async(id_user) => {
+    try {
+        const headers = getHeaders();
+        const response = await axios.get(`${URL_BOOKING}/user/${id_user}`, { headers })
+        const data = response.data;
+        return data;
+    } catch (error) {
+        console.error("Error al obtener las reservas", error);
+        throw error;
+    }
+}
+
 export const getBookingById = async (id) => {
     try {
         const headers = getHeaders();
