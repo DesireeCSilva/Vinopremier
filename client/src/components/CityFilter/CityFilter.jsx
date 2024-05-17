@@ -13,7 +13,7 @@ const CityFilterContainer = styled.div`
   :hover {
     transform: scale(0.95);
     transition: transform 0.3s ease-in-out;
-  }
+}
 
 
   .name-filter {
@@ -30,7 +30,7 @@ const CityFilterContainer = styled.div`
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
     cursor: pointer;
 
-  }
+}
 
   .tittle-filter {
     font-size: 1.5rem;
@@ -38,7 +38,7 @@ const CityFilterContainer = styled.div`
     flex:1;
     cursor: pointer;
 
-  }
+}
 
   img {
     width: 90%;
@@ -48,7 +48,7 @@ const CityFilterContainer = styled.div`
     border-radius: 10px;
     cursor: pointer;
 
-  }
+}
 
 `
 const CityFilter = ({setEvents, events}) => {
@@ -77,10 +77,11 @@ const CityFilter = ({setEvents, events}) => {
     <button className='name-filter' onClick={() => onButtonClick('3')}>
     <h1 className='tittle-filter'>Catas y Eventos en Zaragoza</h1>
     <img src='../../src/assets/images/cities/zaragoza.jpeg' alt='Zaragoza' />
+
     </button> 
     </CityFilterContainer>
     </>
   );
-}
+};
 
 export default CityFilter

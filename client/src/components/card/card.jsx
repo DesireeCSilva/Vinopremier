@@ -64,6 +64,16 @@ const CardContainer = Styled.div`
     
   }
 
+  .card-list-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1vw;
+    
+  }
+
+
   .card-bg {
     display: flex;
     flex-direction: column;
@@ -114,7 +124,7 @@ const CardContainer = Styled.div`
     
   }
 
-    .card-tax  {
+  .card-tax  {
     font-size: 0.65vw;
     
   }
@@ -165,6 +175,16 @@ const CardContainer = Styled.div`
     
   }
 `;
+
+const CityFilterContainer = Styled.div`{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+
+}
+`;
+
 
 function Card({}) {
   const navigate = useNavigate();
@@ -219,18 +239,21 @@ function Card({}) {
 
 <>
 
+
+<CityFilter setEvents={setEvents} events={events}/>
 <h1 className="card-list-title" style={{ textAlign: 'left', marginLeft:'25px', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS DE VINOPREMIER</h1>
+<FilterButtons setEvents={setEvents} events={events}/>
+
 <div className="button-list">
   {isAuthenticated ? (
     <>
-  <LogoutButton/>,
+  <LogoutButton/>
   <button className="card-button-add" style={{ cursor:'pointer', float: 'right', fontFamily: 'Gotham', fontSize: '1rem', color:'#fff', background:'#000', border: 'none', padding:'2%', marginTop: '2rem', height: '4.4rem', cursor: 'pointer', letterSpacing: '0.09em', marginRight:'2.1rem', background:'#AC946A'}} onClick={() => navigate (`/privateArea/create`)}>AÑADIR CATA</button>
   </>
   ) : (
   <LoginButton />
   )}
 </div>
-          
 
 
 <ul className="card-list">
@@ -253,12 +276,13 @@ function Card({}) {
           </div>
           <section className="card-counter"> 
           <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black', marginBottom:'0'}}>
-            <button className="add-cart" style={{ width: '15px', height:'30px',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
-              <p style={{fontSize: '1vw', justifyContent: 'center'}}>+</p>
+            
+            <button className="less-cart" style={{ width: '15px', height:'30px',backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
+              <p style={{fontSize: '1vw', justifyContent: 'center'}}>-</p>
             </button>
             <div className="card-qty" style={{fontSize:'1vw',borderBottom:'none', display: 'flex', alignItems: 'center',  width: '8px', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
-            <button className="less-cart" style={{ width: '15px', height:'30px',backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
-              <p style={{fontSize:'1vw', justifyContent:'center'}}>-</p>
+            <button className="add-cart" style={{ width: '15px', height:'30px',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
+              <p style={{fontSize:'1vw', justifyContent:'center'}}>+</p>
             </button>
           </article> 
             <button className="adding-cart" onClick={() => handleClick(event.id)}>
@@ -270,9 +294,7 @@ function Card({}) {
       ))}
   </CardContainer>
 </ul>
-<FilterButtons setEvents={setEvents} events={events}/>
-<CityFilter setEvents={setEvents} events={events}/>
-  </>
+</>
   );
 }
 
