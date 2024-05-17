@@ -39,7 +39,14 @@ const CreateForm = () => {
       <form className="formCreate" onSubmit={handleSubmit(handleForm)}>
           <div>
             <label htmlFor="id_location">Id de la localización</label>
-            <input type="number" id="id_location" name="id_location" {...register('id_location')}/>
+            <select id="id_location" name="id_location" {...register('id_location')}>
+              <option value="">Selecciona la localización</option>
+              <option value="1">Calle Silvela</option>
+              <option value="2">Ríos Rosas</option>
+              <option value="3">Boadilla</option>
+              <option value="4">Zaragoza</option>
+              <option value="5">Palma</option>
+            </select>
             <p className="error-message">{errors.id_location && <span>{errors.id_location.message}</span>}</p>
           </div>
           <div>
@@ -59,7 +66,18 @@ const CreateForm = () => {
           </div>
           <div>
             <label htmlFor="cata_type">Tipo de cata</label>
-            <input type="text" id="cata_type" name="cata_type" {...register('cata_type')}/>
+            <select id="cata_type" name="cata_type" {...register('cata_type')}>
+              <option value="">Selecciona un tipo de cata</option>
+              <option value="vino">Vino</option>
+              <option value="cerveza">Cerveza</option>
+              <option value="cava">Cava</option>
+              <option value="gin">Gin</option>
+              <option value="whisky">Whisky</option>
+              <option value="ron">Ron</option>
+              <option value="tequila">Tequila</option>
+              <option value="brandy">Brandy</option>
+              <option value="cognac">Cognac</option>
+              </select>
             <p className="error-message">{errors.cata_type && <span>{errors.cata_type.message}</span>}</p>
           </div>
           <div>
@@ -73,22 +91,22 @@ const CreateForm = () => {
             <p className="error-message">{errors.price && <span>{errors.price.message}</span>}</p>
           </div>
           <div>
-            <label htmlFor="private_tasting_supplement">Suplemento de cata privada</label>
+            <label htmlFor="private_tasting_supplement">Precio por suplemento de cata privada</label>
             <input type="number" id="private_tasting_supplement" name="private_tasting_supplement" {...register('private_tasting_supplement')}/>
             <p className="error-message">{errors.private_tasting_supplement && <span>{errors.private_tasting_supplement.message}</span>}</p>
           </div>
           <div>
-            <label htmlFor="iberian_supplement">Suplemento de ibéricos</label>
+            <label htmlFor="iberian_supplement">Precio por suplemento de ibéricos</label>
             <input type="number" id="iberian_supplement" name="iberian_supplement" {...register('iberian_supplement')}/>
             <p className="error-message">{errors.iberian_supplement && <span>{errors.iberian_supplement.message}</span>}</p>
           </div>
           <div>
-            <label htmlFor="date">Fecha</label>
+            <label htmlFor="date">Fecha (YYYY-MM-DD) </label>
             <input type="text" id="date" name="date" {...register('date')}/>
             <p className="error-message">{errors.date && <span>{errors.date.message}</span>}</p>
           </div>
           <div>
-            <label htmlFor="time">Hora</label>
+            <label htmlFor="time">Hora (HH:mm:ss)</label>
             <input type="text" id="time" name="time" {...register('time')}/>
             <p className="error-message">{errors.time && <span>{errors.time.message}</span>}</p>
           </div>

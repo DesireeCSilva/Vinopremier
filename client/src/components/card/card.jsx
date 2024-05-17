@@ -244,7 +244,7 @@ function Card({id}) {
           <article className="button-controler">
             {isAuthenticated && (
               <>
-                <button className="card-button-edit" onClick={() => navigate(`edit/${encodeURIComponent(event.name)}`)}>Editar</button>
+                <button className="card-button-edit" onClick={() => navigate(`/privateArea/edit/${encodeURIComponent(event.name)}`)}>Editar</button>
                 <button className="card-button-delete" onClick={() =>  handleDelete(event.name)} >Eliminar</button>
               </>
             )}

@@ -88,46 +88,46 @@ const handleForm = async (data) => {
           </div>
           <div>
             <label htmlFor="image">Añadir imagen de la cata</label>
-            <input type="url" id="image" name="image" {...register('image', { required: true})}/>
+            <input type="url" id="image" name="image" {...register('image', { required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="description">Descripción</label>
-            <textarea type="text" id="description" name="description" {...register('description', {required: true})}/>
+            <textarea type="text" id="description" name="description" {...register('description', {required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="cata_type">Tipo de cata</label>
-            <input type="text" id="cata_type" name="cata_type" {...register('cata_type', {required: true})}/>
+            <input type="text" id="cata_type" name="cata_type" {...register('cata_type', {required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="products">Productos a catar</label>
-            <input type="text" id="products" name="products" {...register('products', {required: true})}/>
+            <input type="text" id="products" name="products" {...register('products', {required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="price">Precio por persona</label>
-            <input type="number" id="price" name="price" {...register('price', {required: true})}/>
+            <input type="number" id="price" name="price" {...register('price', {required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="private_tasting_supplement">Suplemento de cata privada</label>
-            <input type="number" id="private_tasting_supplement" name="private_tasting_supplement" {...register('private_tasting_supplement', {required: true})}/>
+            <input type="number" id="private_tasting_supplement" name="private_tasting_supplement" {...register('private_tasting_supplement', {required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="iberian_supplement">Suplemento de ibéricos</label>
-            <input type="number" id="iberian_supplement" name="iberian_supplement" {...register('iberian_supplement', {required: true})}/>
+            <input type="number" id="iberian_supplement" name="iberian_supplement" {...register('iberian_supplement', {required: true})} readOnly/>
           </div>
           <div>
             <label htmlFor="duration">Duración</label>
-            <input type="text" id="duration" name="duration" {...register('duration', {required: true})}/>
+            <input type="text" id="duration" name="duration" {...register('duration', {required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="capacity">Aforo máximo</label>
-            <input type="number" id="capacity" name="capacity" {...register('capacity', {required: true})}/>
+            <input type="number" id="capacity" name="capacity" {...register('capacity', {required: true})}readOnly/>
           </div>
           <div>
             <label htmlFor="parking">Parking</label>
-            <input type="text" id="parking" name="parking" {...register('parking', { required: true})}/>
+            <input type="text" id="parking" name="parking" {...register('parking', { required: true})}readOnly/>
           </div>
           <div>
-            <input type="checkbox" id="extra_people" name="extra_people" {...register('extra_people')}/>
+            <input type="checkbox" id="extra_people" name="extra_people" {...register('extra_people')}readOnly/>
             <label htmlFor='extra_people'>Pueden asistir más personas a la cata de las que compraron las entradas</label>
           </div>
           <div>
