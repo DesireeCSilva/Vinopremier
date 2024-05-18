@@ -202,7 +202,7 @@
    margin-left: 1rem;
 }
 
-.card-counter {
+.card-counter-detail {
    display: flex;
    margin-top: 2rem;
    flex-direction: row;
@@ -210,8 +210,8 @@
    align-content: center;
    align-items: center;
    height: fit-content;
-   width: 10vw;  
-   margin-left:13rem;
+   width: 19vw;  
+   margin-left:7rem;
 }
 
 .buttons-counter {
@@ -247,7 +247,7 @@
    border: none;
    padding: 1.5rem;
    background: #fff;
-   margin-top: 2rem;
+   
 }
 
 .adding-cart:hover {

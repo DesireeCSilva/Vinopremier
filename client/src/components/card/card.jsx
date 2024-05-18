@@ -86,7 +86,8 @@ const CardContainer = Styled.div`
 
   .card-bg {
     display: flex;
-    flex-flow: column wrap;
+   
+    flex-direction: column;
     align-items: center;
     width: 19vw;
     gap: 1rem;
@@ -134,9 +135,11 @@ const CardContainer = Styled.div`
     
   }
 
-  .card-counter {
+  .card-counter-card {
     display: flex;
     align-items: center;
+    flex-direction: row;
+    
     justify-content: space-around;
     margin-bottom: 0vw;
     bottom: 0;
@@ -165,6 +168,7 @@ const CardContainer = Styled.div`
     border: none;
     height: 3vw;
     padding: 0.1vw;
+    text-align: center;
   }
 
   img {
@@ -285,7 +289,7 @@ function Card({}) {
 
 <CityFilter setCityFilter={setCityFilter}/>
 <h1 className="card-list-title" style={{ textAlign: 'center', fontSize:'3vw', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS DE VINOPREMIER</h1>
-<div className="container"></div>
+
 <div className="filter-buttons" style={{ display:'flex',flexFlow:'column wrap', width:'10vw', padding:'1vw', margin:'0px', position:'absolute'}}>
   <PriceFilter setPriceFilter={setEvents}/>
   <FilterButtons setEvents={setEvents} events={originalEvents}/>
@@ -323,8 +327,8 @@ function Card({}) {
             <article className="card-name">{event.name}</article>
             <article className="card-price">{event.price}€<p className="card-tax">IVA incluido (Precio por persona)</p></article>
           </div>
-          <section className="card-counter"> 
-          <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black', marginBottom:'0'}}>
+          <section className="card-counter-card"> 
+          <article className="buttons-counter" style={{alignItems: 'center', border:'1px solid black', marginBottom:'0'}}>
             
             <button className="less-cart" style={{ width: '2vw', height:'3vh',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
               <p style={{fontSize: '2vw', fontWeight:'300', textAlign:'center'}}>-</p>

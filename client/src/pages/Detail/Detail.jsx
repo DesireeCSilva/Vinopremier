@@ -208,8 +208,8 @@ const handlePayment = () => {
         <div className='page-detail__section01__left'>
           <img className='page-detail__left__image' src={event.image} alt="cartel del tipo de cata" />
 
-          
-          <section className="card-counter"> 
+
+          <section className="card-counter-detail"> 
             <article className="buttons-counter" >
             <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
                 <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
