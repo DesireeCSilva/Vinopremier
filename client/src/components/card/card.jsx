@@ -11,7 +11,6 @@ import CityFilter from "../CityFilter/CityFilter.jsx";
 import PriceFilter from "../PriceFilter/PriceFilter.jsx";
 
 
-
 const CardContainer = Styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -42,7 +41,13 @@ const CardContainer = Styled.div`
     background-color: #AC946A;
     font-size: 1.25vw;
     margin: 1vw;
+    cursor: pointer;
     
+  }
+
+  .card-button-edit:hover {
+    transition: 0.5s;
+    transform: scale(1.4);
   }
 
   .card-button-delete {
@@ -50,7 +55,13 @@ const CardContainer = Styled.div`
     color: #AC946A;
     font-size: 1.25vw;
     margin: 1vw;
+    cursor: pointer;
 
+  }
+
+  .card-button-delete:hover {
+    transition: 0.5s;
+    transform: scale(1.4);
   }
 
   .card-list {
@@ -65,7 +76,7 @@ const CardContainer = Styled.div`
 
   .card-list-item {
     display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
     justify-content: space-between;
     align-items: center;
     margin: 1vw;
@@ -75,8 +86,7 @@ const CardContainer = Styled.div`
 
   .card-bg {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    flex-flow: column wrap;
     align-items: center;
     width: 19vw;
     gap: 1rem;
@@ -94,7 +104,6 @@ const CardContainer = Styled.div`
   }
 
   .card-information {
-    
     max-height: 130px;
     display: flex;
     flex-direction: column;
@@ -106,9 +115,6 @@ const CardContainer = Styled.div`
   }
 
   .card-name {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
     padding:0.1em;
     font-size: 1.2vw;
@@ -148,6 +154,17 @@ const CardContainer = Styled.div`
     transition: 0.5s;
     transform: scale(0.9);
   
+  }
+
+  .login-cart-button {
+    background-color: #AC946A;
+    color: #00000;
+    font-size: 1vw;
+    font-weight: bold;
+    margin: 0.5vw;
+    border: none;
+    height: 3vw;
+    padding: 0.1vw;
   }
 
   img {
@@ -254,9 +271,11 @@ function Card({}) {
 
 <CityFilter setEvents={setEvents} events={events}/>
 <h1 className="card-list-title" style={{ textAlign: 'center', fontSize:'3vw', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS DE VINOPREMIER</h1>
-<div className="filter-buttons" style={{ float:'left', marginTop:'230px'}}>
-<PriceFilter setEvents={setEvents} events={events}/>
-<FilterButtons setEvents={setEvents} events={events}/>
+<div className="container"></div>
+<div className="filter-buttons" style={{ display:'flex',flexFlow:'column wrap', width:'10vw', padding:'1vw', margin:'0px', position:'absolute'}}>
+  <PriceFilter setEvents={setEvents} events={events}/>
+  <FilterButtons setEvents={setEvents} events={events}/>
+  
 </div>
 
 
@@ -311,17 +330,18 @@ function Card({}) {
           
         ) : (
 
-          <button className="page-detail_back-button" onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
+          <button className="login-cart-button" onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
           )} 
           
-           </section>
+          </section>
         </section>
       </li>
       ))}
   </CardContainer>
 </ul>
+
 </>
-  );
+);
 }
 
 

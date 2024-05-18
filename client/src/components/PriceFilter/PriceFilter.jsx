@@ -78,7 +78,7 @@ const PriceFilter = () => {
 
   return (
     <PriceFilterContainer>
-      <h2>Precio</h2>
+      <h2>PRECIO</h2>
       <PriceRangeInput type="range" min={0} max={500} step={5} value={maxPrice} onChange={handleMaxPriceChange} />
       <PriceLabel style={{fontSize:'1vw'}}>P.máx.</PriceLabel><PriceValue>{maxPrice}</PriceValue>
     </PriceFilterContainer>

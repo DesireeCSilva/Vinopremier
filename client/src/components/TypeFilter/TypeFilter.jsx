@@ -73,7 +73,7 @@ const FilterButtons = ({setEvents, events}) => {
   
     <>
     <SelectTypeEvent>
-      <h1 className="title-select-type-event">Tipo de Cata</h1>
+      <h1 className="title-select-type-event">TIPOS DE CATAS</h1>
         <ul className="list-select-type-event">
         
         <button onClick={() => onButtonClick('Vino')}>Vino</button>
