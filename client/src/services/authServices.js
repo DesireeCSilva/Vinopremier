@@ -11,6 +11,9 @@ export const loginUser = async (data) =>{
         return response.data;
     } catch(error){
         console.error('Error de login:', error.message);
+        if (error.response && error.response.status === 401) {
+            throw new Error('Usuario o contraseña incorrectos'); 
+          }
         throw error;
     }
 };

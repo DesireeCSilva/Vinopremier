@@ -46,6 +46,12 @@
     text-decoration: none;
     cursor: pointer;
 }
+.error {
+    color: red;
+    font-size: 0.875em;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+  }
 
 
 @media only screen and (max-width: 768px){

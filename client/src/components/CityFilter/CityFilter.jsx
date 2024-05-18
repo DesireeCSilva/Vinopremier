@@ -51,30 +51,28 @@ const CityFilterContainer = styled.div`
 }
 
 `
-const CityFilter = ({setEvents, events}) => {
-
-  const onButtonClick = (id_location) => {
-          const filteredLocation = events.filter((event) => event.id_location === id_location);
-          setEvents(filteredLocation);
-        };
+const CityFilter = ({ setCityFilter }) => {
+  const onButtonClick = (id_locations) => {
+    setCityFilter(id_locations);
+  };
       
   return (
     <>
     <CityFilterContainer>
 
-    <button className='name-filter' id_location='2' onClick={() => onButtonClick('2')}>
+    <button className='name-filter' onClick={() => onButtonClick([5])}>
       <h1 className='tittle-filter'>Catas y Eventos en Mallorca</h1>
       <img src='../../src/assets/images/cities/palma.png' alt='Mallorca' />
 
     </button>
 
-    <button className='name-filter'id_location='1' onClick={() =>onButtonClick('1')}>
+    <button className='name-filter' onClick={() =>onButtonClick([1, 2, 3])}>
       <h1 className='tittle-filter'>Catas y Eventos en Madrid</h1>
       <img src='../../src/assets/images/cities/madrid.png' alt='Madrid' />
 
     </button>
 
-    <button className='name-filter' onClick={() => onButtonClick('3')}>
+    <button className='name-filter' onClick={() => onButtonClick([4])}>
     <h1 className='tittle-filter'>Catas y Eventos en Zaragoza</h1>
     <img src='../../src/assets/images/cities/zaragoza.png' alt='Zaragoza'/>
 
