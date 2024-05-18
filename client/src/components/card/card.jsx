@@ -191,7 +191,8 @@ function Card({}) {
   const [buttonTexts, setButtonTexts] = useState({});
   const [eventsCount, setEventsCount] = useState({}); 
   const [events, setEvents] = useState([]);
-const [originalEvents, setOriginalEvents] = useState([]);
+  const [originalEvents, setOriginalEvents] = useState([]);
+  const [cityFilter, setCityFilter] = useState([]);
   const { isAuthenticated } = useUserContext();
   const { isUserRole } = useUserContext();
     
@@ -211,6 +212,15 @@ const [originalEvents, setOriginalEvents] = useState([]);
   
       fetchData();
     }, []);
+
+    useEffect(() => {
+      if (cityFilter && cityFilter.length > 0) {
+        const filteredEvents = originalEvents.filter(event => cityFilter.includes(event.id_location));
+        setEvents(filteredEvents);
+      } else {
+        setEvents(originalEvents);
+      }
+    }, [cityFilter, originalEvents]);
   
     const handleCountChange = (eventId, delta) => {
       setEventsCount((prevCount) => {
@@ -244,7 +254,7 @@ const [originalEvents, setOriginalEvents] = useState([]);
 <>
 
 
-<CityFilter setEvents={setEvents} events={events}/>
+<CityFilter setCityFilter={setCityFilter}/>
 <h1 className="card-list-title" style={{ textAlign: 'left', marginLeft:'25px', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS DE VINOPREMIER</h1>
 <FilterButtons setEvents={setEvents} events={originalEvents}/>
 
