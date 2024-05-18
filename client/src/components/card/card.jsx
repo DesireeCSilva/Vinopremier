@@ -191,6 +191,7 @@ function Card({}) {
   const [buttonTexts, setButtonTexts] = useState({});
   const [eventsCount, setEventsCount] = useState({}); 
   const [events, setEvents] = useState([]);
+const [originalEvents, setOriginalEvents] = useState([]);
   const { isAuthenticated } = useUserContext();
   const { isUserRole } = useUserContext();
     
@@ -199,6 +200,7 @@ function Card({}) {
           const result = await axios.get('http://localhost:8000/event/name');
           
         setEvents(result.data);
+        setOriginalEvents(result.data);
         
         const initialCount = {};
         result.data.forEach((id) => {
@@ -231,6 +233,7 @@ function Card({}) {
         const decodedName = decodeURIComponent(name)
         await deleteEventByName(decodedName);
         setEvents(events.filter(event => event.name !== name));
+        setOriginalEvents(originalEvents.filter(event => event.name !== name));
       } catch (error) {
         console.error('Error al eliminar el evento:', error);
       }
@@ -243,7 +246,7 @@ function Card({}) {
 
 <CityFilter setEvents={setEvents} events={events}/>
 <h1 className="card-list-title" style={{ textAlign: 'left', marginLeft:'25px', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS DE VINOPREMIER</h1>
-<FilterButtons setEvents={setEvents} events={events}/>
+<FilterButtons setEvents={setEvents} events={originalEvents}/>
 
 <div className="button-list">
   {isAuthenticated ? (

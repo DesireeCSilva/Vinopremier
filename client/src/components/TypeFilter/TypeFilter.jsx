@@ -49,7 +49,7 @@ button:hover {
 `;
 
 
-const FilterButtons = ({setEvents, events}) => {
+const FilterButtons = ({setEvents, events}) => { 
   const [selectedType, setSelectedType] = useState('all'); // Initial selected state
 
   
