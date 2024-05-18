@@ -205,7 +205,7 @@ function Card({}) {
   const [cityFilter, setCityFilter] = useState([]);
   const { isAuthenticated } = useUserContext();
   const { isUserRole } = useUserContext();
-    
+  
     useEffect(() => {
         const fetchData = async () => {
           const result = await axios.get('http://localhost:8000/event/name');
@@ -231,6 +231,7 @@ function Card({}) {
         setEvents(originalEvents);
       }
     }, [cityFilter, originalEvents]);
+
   
     const handleCountChange = (eventId, delta) => {
       setEventsCount((prevCount) => {
@@ -286,7 +287,7 @@ function Card({}) {
 <h1 className="card-list-title" style={{ textAlign: 'center', fontSize:'3vw', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS DE VINOPREMIER</h1>
 <div className="container"></div>
 <div className="filter-buttons" style={{ display:'flex',flexFlow:'column wrap', width:'10vw', padding:'1vw', margin:'0px', position:'absolute'}}>
-  <PriceFilter setEvents={setEvents} events={events}/>
+  <PriceFilter setPriceFilter={setEvents}/>
   <FilterButtons setEvents={setEvents} events={originalEvents}/>
   
 </div>
@@ -328,7 +329,7 @@ function Card({}) {
             <button className="less-cart" style={{ width: '2vw', height:'3vh',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
               <p style={{fontSize: '2vw', fontWeight:'300', textAlign:'center'}}>-</p>
             </button>
-            <div className="card-qty" style={{fontSize:'2vw',borderBottom:'none', display: 'flex', alignItems: 'center',  width: '8px', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw'}}>{eventsCount[event.id] || 0}</div>
+            <div className="card-qty" style={{fontSize:'2vw',borderBottom:'none', display: 'flex', alignItems: 'center', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw'}}>{eventsCount[event.id] || 0}</div>
             <button className="add-cart" style={{width: '2vw', height:'3vh', backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
               <p style={{fontSize:'2vw', fontWeight:'300', textAlign:'center'}}>+</p>
             </button>

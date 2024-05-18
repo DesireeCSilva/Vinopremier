@@ -209,7 +209,9 @@
    justify-content: space-evenly;
    align-content: center;
    align-items: center;
-   height: fit-content;      
+   height: fit-content;
+   width: 10vw;  
+   margin-left:13rem;
 }
 
 .buttons-counter {
