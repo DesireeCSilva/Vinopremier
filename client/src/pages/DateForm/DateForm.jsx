@@ -62,6 +62,10 @@ const handleForm = async (data) => {
     }
 }
 
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
+
   return (
     <div className="dateFormContainer">
       <h2 className="dateFormTitle">AÑADIR NUEVA FECHA</h2>
