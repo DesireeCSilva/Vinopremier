@@ -87,11 +87,11 @@ const Payment = () => {
             <p>€{totalCost}</p>
           </div>
             <p className='payment-page_right-text02'>ARTÍCULOS EN EL CARRITO: {bookingData.length}</p>
-            <hr className='payment-page_right-hr' />
             {bookingData.map((booking, index) => (
               <div key={booking.id} className='payment-page_right-article'>
                 <img className='payment-page_right-img02' src={eventsData[index]?.image || "/src/assets/images/cards-original/card01.jpg"} alt="Imagen de la cata" />
                 <div className='payment-page_right-article-text'>
+                <hr className='payment-page_right-hr' />
                   <p className='payment-page_right-text-desciption-cata'>{eventsData[index]?.name || booking.id_event}</p>
                   <p className='payment-page_right-text-desciption'>Precio Final: {parseFloat(booking.final_price).toFixed(2)}€</p>
                   <p className='payment-page_right-text-desciption'>Número de Personas: {booking.people}</p>

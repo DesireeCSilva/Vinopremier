@@ -61,13 +61,14 @@
 }
 
 .payment-page_right-text-desciption-cata{
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin-top: 1.5rem;
     color:#AC946A
 }
 
 .payment-page_right-text-desciption{
     margin-top: 0.3rem;
+    font-size: 1.1rem;
 }
 
 .payment-page_button-delete {
@@ -76,7 +77,7 @@
     color: white;
     background: #AC946A;
     border: none;
-    width: 9rem;
+    width: 10rem;
     height: 3rem;
     cursor: pointer;
     margin-top: 1rem;
