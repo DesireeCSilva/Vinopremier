@@ -8,7 +8,7 @@
 
 .payment-page_right-container {
     background: #000;
-    width: 30rem;
+    width: 40rem;
 }
 
 .payment-page_right-title {
@@ -22,12 +22,11 @@
 
 .payment-page_right-hr {
     color: #fff;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     margin-bottom: 0.5rem;
 }
 
 .payment-page_right-text {
-    font-family: 'Gotham Light';
     color: #fff;
     font-size: 1.2rem;
     display: flex;
@@ -45,20 +44,42 @@
 }
 
 .payment-page_right-img02 {
-    width: 7rem;
+    width: 8rem;
     height: auto;
     margin: 1.5rem;
 }
 
 .payment-page_right-article {
     display: flex;
-    flex-direction: column; /* Muestra cada artículo una debajo de la otra */
+    flex-direction: row;
     color: #fff;
 }
 
 .payment-page_right-article-text {
-    font-size: 1.4rem;
-    margin: 1rem 1.5rem 0.5rem;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.payment-page_right-text-desciption-cata{
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    color:#AC946A
+}
+
+.payment-page_right-text-desciption{
+    margin-top: 0.3rem;
+}
+
+.payment-page_button-delete {
+    font-family: 'Gotham';
+    font-size: 1rem;
+    color: white;
+    background: #AC946A;
+    border: none;
+    width: 9rem;
+    height: 3rem;
+    cursor: pointer;
+    margin-top: 1rem;
 }
 
 @media only screen and (max-width: 768px){
@@ -69,7 +90,6 @@
 
     .payment-page_right-container {
         width: 100%;
-        margin: 1rem 0; /* Ajuste el margen si es necesario */
     }
 
     .payment-page_right-title {
