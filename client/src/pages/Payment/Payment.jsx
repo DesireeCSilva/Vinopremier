@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../Payment/Payment.css';
 import { getAllBookingsByUser, deleteBooking } from '../../services/bookingServices.js';
 import { getEventById } from '../../services/eventServices.js';
-import { useParams } from 'react-router-dom';
+import { useParams , Link } from 'react-router-dom';
 
 const Payment = () => {
   const { id_user } = useParams();
@@ -110,7 +110,10 @@ const Payment = () => {
               </div>
             ))}
           </div>
+          <Link to="/"><button className='payment-page_back-button'>VOLVER A CATAS Y EVENTOS</button></Link>
         </article>
+
+        
       </section>
     </>
   );
