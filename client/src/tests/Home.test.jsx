@@ -11,6 +11,6 @@ test("renders Home components", () => {
         </Router>
     </UserProvider>
     );
-    const titleElement = screen.getByText(/CATAS Y EVENTOS/i);
+    const titleElement = screen.getByText(/CATAS Y EVENTOS DE VINOPREMIER/i);
     expect(titleElement).toBeInTheDocument();
 })
