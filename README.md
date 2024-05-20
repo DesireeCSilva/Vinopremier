@@ -140,7 +140,7 @@ En la carpeta _server_:
 * __routes__: organiza las definiciones de los endpoints de la API.
 
 
-# Technologies
+# Tecnologías
 <img width="40" src="https://cdn.worldvectorlogo.com/logos/trello.svg">&nbsp;
 <img width="40" src="https://github.com/devicons/devicon/blob/master/icons/figma/figma-original.svg">&nbsp;
 <img width="40" src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-plain.svg" >&nbsp;
@@ -174,9 +174,9 @@ En este proyecto final de nuestro Bootcamp en Factoría F5 hemos contado con un 
 
 * Mejorar la calidad de algunos textos de detalle de las Catas, jugando mejor con el posicionamiento SEO.
 * Crear una navegación más intuitiva para que la experiencia de usuario sea óptima.
-* En la Side-Bar, afinar los filtros para que las Catas mostradas sean exactamente lo que el usuario busca.
+* En la Side-Bar, crear más filtros para que las Catas mostradas sean exactamente lo que el usuario busca.
 
-# Contributions
+# Contribuciones
 ¡Las contribuciones son siempre bienvenidas! Si encuentras algún problema o tienes sugerencias para mejorar nuestro repositorio, realiza un _pull request_.
    
 **[⬆️ Volver al índice](#index)**
