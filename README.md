@@ -175,7 +175,9 @@ En este proyecto final de nuestro Bootcamp en Factoría F5 hemos contado con un 
 * Mejorar la calidad de algunos textos de detalle de las Catas, jugando mejor con el posicionamiento SEO.
 * Crear una navegación más intuitiva para que la experiencia de usuario sea óptima.
 * En la Side-Bar, crear más filtros para que las Catas mostradas sean exactamente lo que el usuario busca.
-
+* Crear la opción de regalar la Cata.
+* Que el usuario pueda comprar Cata sin estar dado de alta como usuario de la web.
+  
 # Contribuciones
 ¡Las contribuciones son siempre bienvenidas! Si encuentras algún problema o tienes sugerencias para mejorar nuestro repositorio, realiza un _pull request_.
    
