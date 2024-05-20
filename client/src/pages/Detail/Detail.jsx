@@ -46,7 +46,7 @@ const Detail = () => {
   const tileContent = ({date, view}) => {
     if (view === 'month') {
       const formattedDate = formatDate(date);
-      const isAvailable = eventDates.some(eventDate => eventDate.date === formattedDate);
+      const isAvailable = eventDates.some(eventDate => eventDate.date === formattedDate && eventDate.avalaible_places > 0);
       return isAvailable ? <div className="green-dot"></div> : null;
     }
     return null;
@@ -54,7 +54,7 @@ const Detail = () => {
   const tileDisabled = ({ date, view }) => {
     if (view === 'month') {
       const formattedDate = formatDate(date);
-      return !eventDates.some(eventDate => eventDate.date === formattedDate);
+      return !eventDates.some(eventDate => eventDate.date === formattedDate && eventDate.avalaible_places > 0);
     }
     return false;
   };
