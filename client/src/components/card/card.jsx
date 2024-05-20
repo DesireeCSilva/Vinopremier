@@ -291,8 +291,8 @@ function Card({}) {
 <h1 className="card-list-title" style={{ textAlign: 'center', fontSize:'3vw', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS DE VINOPREMIER</h1>
 
 <div className="filter-buttons" style={{ display:'flex',flexFlow:'column wrap', width:'10vw', padding:'1vw', margin:'0px', position:'absolute'}}>
-  <PriceFilter setPriceFilter={setEvents}/>
   <FilterButtons setEvents={setEvents} events={originalEvents}/>
+  <PriceFilter setEvents={setEvents} events={originalEvents}/>
   
 </div>
 
