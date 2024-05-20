@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import '../RegisterForm/RegisterForm.css';
 import { useUserContext } from '../../context/UserContext';
+import { useEffect } from 'react';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -23,6 +24,11 @@ const RegisterForm = () => {
       console.error('Error:', error)
     }
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
     <form onSubmit={handleSubmit(onSubmit)}>

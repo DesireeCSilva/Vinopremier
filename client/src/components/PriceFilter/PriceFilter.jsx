@@ -8,11 +8,10 @@ const PriceFilterContainer = styled.div`
   margin-top: 1vh;
   margin-left: 2vw;
   padding: 2vh;
-  border: 3px solid #AC946A;
-  border-radius: 5px;
+ 
   width: 20vw;
   
-  font-size: 1.25vw;
+  font-size: 1vw;
   margin-bottom: 5px;
   
 `;
@@ -24,8 +23,7 @@ const PriceRangeInput = styled.input`
   step="5"
   padding: 1vw;
   margin-bottom: 1;
-  border: 3px solid #AC946A;
-  border-radius: 5px;
+  cursor: pointer;
 `;
 
 const PriceLabel = styled.label`
@@ -80,9 +78,9 @@ const PriceFilter = () => {
 
   return (
     <PriceFilterContainer>
-      <h2>Filtro de Precios</h2>
+      <h2>PRECIO</h2>
       <PriceRangeInput type="range" min={0} max={500} step={5} value={maxPrice} onChange={handleMaxPriceChange} />
-      <PriceLabel style={{fontSize:'2vw'}}>Precio máx.</PriceLabel><PriceValue>{maxPrice}</PriceValue>
+      <PriceLabel style={{fontSize:'1vw'}}>P.máx.</PriceLabel><PriceValue>{maxPrice}</PriceValue>
     </PriceFilterContainer>
   );
 };

@@ -69,6 +69,10 @@ const onSubmit = async (editEvent) => {
       }
 }
 
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
+
   return (
     <div className="editFormContainer">
       <h2 className="editFormTitle">FORMULARIO DE EDICIÓN DE CATAS</h2>

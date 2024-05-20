@@ -13,7 +13,7 @@ const CityFilterContainer = styled.div`
   :hover {
     transform: scale(0.95);
     transition: transform 0.3s ease-in-out;
-  }
+}
 
 
   .name-filter {
@@ -30,7 +30,7 @@ const CityFilterContainer = styled.div`
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
     cursor: pointer;
 
-  }
+}
 
   .tittle-filter {
     font-size: 1.5rem;
@@ -38,49 +38,48 @@ const CityFilterContainer = styled.div`
     flex:1;
     cursor: pointer;
 
-  }
+}
 
   img {
-    width: 90%;
-    height: auto;
+    width: 25vw;
+    height: 15vw;
     object-fit: cover;
     border: 2px solid #AC946A;
     border-radius: 10px;
     cursor: pointer;
 
-  }
+}
 
 `
-const CityFilter = ({setEvents, events}) => {
-
-  const onButtonClick = (id_location) => {
-          const filteredLocation = events.filter((event) => event.id_location === id_location);
-          setEvents(filteredLocation);
-        };
+const CityFilter = ({ setCityFilter }) => {
+  const onButtonClick = (id_locations) => {
+    setCityFilter(id_locations);
+  };
       
   return (
     <>
     <CityFilterContainer>
 
-    <button className='name-filter' id_location='2' onClick={() => onButtonClick('2')}>
+    <button className='name-filter' onClick={() => onButtonClick([5])}>
       <h1 className='tittle-filter'>Catas y Eventos en Mallorca</h1>
-      <img src='../../src/assets/images/cities/mallorca.png' alt='Mallorca' />
+      <img src='../../src/assets/images/cities/palma.png' alt='Mallorca' />
 
     </button>
 
-    <button className='name-filter'id_location='1' onClick={() =>onButtonClick('1')}>
+    <button className='name-filter' onClick={() =>onButtonClick([1, 2, 3])}>
       <h1 className='tittle-filter'>Catas y Eventos en Madrid</h1>
       <img src='../../src/assets/images/cities/madrid.png' alt='Madrid' />
 
     </button>
 
-    <button className='name-filter' onClick={() => onButtonClick('3')}>
+    <button className='name-filter' onClick={() => onButtonClick([4])}>
     <h1 className='tittle-filter'>Catas y Eventos en Zaragoza</h1>
-    <img src='../../src/assets/images/cities/zaragoza.jpeg' alt='Zaragoza' />
+    <img src='../../src/assets/images/cities/zaragoza.png' alt='Zaragoza'/>
+
     </button> 
     </CityFilterContainer>
     </>
   );
-}
+};
 
 export default CityFilter

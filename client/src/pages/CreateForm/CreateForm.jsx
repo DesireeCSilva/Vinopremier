@@ -1,6 +1,7 @@
 import React from 'react';
 import './CreateForm.css';
 import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postEvent } from '../../services/eventServices';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -32,6 +33,10 @@ const CreateForm = () => {
         console.error("Error al crear el evento")
       }
     };
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
   return (
     <div className="createFormContainer">
