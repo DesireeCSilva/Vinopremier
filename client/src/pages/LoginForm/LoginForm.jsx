@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import '../LoginForm/LoginForm.css';
 import { useUserContext } from '../../context/UserContext';
+import { useEffect } from 'react';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -29,6 +30,9 @@ const LoginForm = () => {
 
     }
   }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
