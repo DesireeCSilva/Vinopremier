@@ -8,12 +8,17 @@ const SelectTypeEvent = styled.div`
   margin-left: 2vw;
   margin-top: 3vh;
   padding: 2vh;
-  border: 3px solid #AC946A;
+ 
   border-radius: 5px;
   width: 20vw;
-  font-size: 1.25vw;
+  font-size: 1vw;
 
-
+h1 {  
+  
+  font-size: 1.5vw;
+  text-align: left;
+  margin-bottom: 2vh;
+}
 
 
 ul {
@@ -31,10 +36,11 @@ ul {
 
 button {
   margin: 1vh;
+
   padding: 1vh;
   border:none;
   border-radius: 5px;
-  color: #AC946A;
+  
   background-color: #fff;
   font-size: 1.25vw;
   cursor: pointer;
@@ -67,9 +73,9 @@ const FilterButtons = ({setEvents, events}) => {
   
     <>
     <SelectTypeEvent>
-      <h1 className="title-select-type-event">Tipo de Cata</h1>
+      <h1 className="title-select-type-event">TIPOS DE CATAS</h1>
         <ul className="list-select-type-event">
-        <button onClick={() => onButtonClick('all')} className={selectedType === 'all' ? 'active' : ''}>Todos los tipos</button>
+        
         <button onClick={() => onButtonClick('Vino')}>Vino</button>
         <button onClick={() => onButtonClick('Cerveza')}>Cerveza</button>
         <button onClick={() => onButtonClick('Vermout')}>Vermout</button>
@@ -78,6 +84,7 @@ const FilterButtons = ({setEvents, events}) => {
         <button onClick={() => onButtonClick('Whisky')}>Whisky</button>
         <button onClick={() => onButtonClick('Tequila')}>Tequila</button>
         <button onClick={() => onButtonClick('Otro')}>Otro</button>
+        <button onClick={() => onButtonClick('all')} className={selectedType === 'all' ? 'active' : ''}>Todos los tipos</button>
         </ul>
       </SelectTypeEvent>
     </>

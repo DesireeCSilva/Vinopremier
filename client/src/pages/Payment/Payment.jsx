@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../Payment/Payment.css';
 import { getAllBookingsByUser, deleteBooking } from '../../services/bookingServices.js';
 import { getEventById } from '../../services/eventServices.js';
-import { useParams } from 'react-router-dom';
+import { useParams , Link } from 'react-router-dom';
 
 const Payment = () => {
   const { id_user } = useParams();
@@ -63,6 +63,11 @@ const Payment = () => {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+
   return (
     <>
       <section className='payment-page'>
@@ -70,6 +75,7 @@ const Payment = () => {
         <p className='payment-page_right-title'>RESUMEN DE COMPRA</p>
         
         <div className='payment-page_right-container'>
+          <br />
           <hr className='payment-page_right-hr' />
           <div className='payment-page_right-text'>
             <p>Subtotal impuestos NO incl. </p>
@@ -85,30 +91,34 @@ const Payment = () => {
             <p>Total del pedido</p>
             <p>€{totalCost}</p>
           </div>
-            <p className='payment-page_right-text'>ARTÍCULOS EN EL CARRITO: {bookingData.length}</p>
-            <hr className='payment-page_right-hr' />
+            <p className='payment-page_right-text02'>ARTÍCULOS EN EL CARRITO: {bookingData.length}</p>
             {bookingData.map((booking, index) => (
               <div key={booking.id} className='payment-page_right-article'>
                 <img className='payment-page_right-img02' src={eventsData[index]?.image || "/src/assets/images/cards-original/card01.jpg"} alt="Imagen de la cata" />
                 <div className='payment-page_right-article-text'>
-                  <p>{eventsData[index]?.name || booking.id_event}</p>
-                  <p>Precio Final: €{parseFloat(booking.final_price).toFixed(2)}</p>
-                  <p>Número de Personas: {booking.people}</p>
+                <hr className='payment-page_right-hr' />
+                  <p className='payment-page_right-text-desciption-cata'>{eventsData[index]?.name || booking.id_event}</p>
+                  <p className='payment-page_right-text-desciption'>Precio Final: {parseFloat(booking.final_price).toFixed(2)}€</p>
+                  <p className='payment-page_right-text-desciption'>Número de Personas: {booking.people}</p>
                   {booking.vegan_people > 0 && (
-                    <p>Personas Veganas: {booking.vegan_people}</p>
+                    <p className='payment-page_right-text-desciption'>Personas Veganas: {booking.vegan_people}</p>
                   )}
                   {booking.iberian_supplement > 0 && (
-                    <p>Suplemento Ibérico: Sí</p>
+                    <p className='payment-page_right-text-desciption'>Suplemento Ibérico: Sí</p>
                   )}
                   {booking.private_tasting_supplement && (
-                    <p>Suplemento de Cata Privada: Sí</p>
+                    <p className='payment-page_right-text-desciption'>Suplemento de Cata Privada: Sí</p>
                   )}
+                
+                <button className='payment-page_button-delete' onClick={() => handleDeleteBooking(booking.id)}>Eliminar pedido</button>
                 </div>
-                <button onClick={() => handleDeleteBooking(booking.id)}>Eliminar pedido</button>
               </div>
             ))}
           </div>
+          <Link to="/"><button className='payment-page_back-button'>VOLVER A CATAS Y EVENTOS</button></Link>
         </article>
+
+        
       </section>
     </>
   );

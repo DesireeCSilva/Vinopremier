@@ -8,9 +8,7 @@ import LoginButton from '../../components/LoginButton/LoginButton.jsx'
 import { useUserContext } from '../../context/UserContext.jsx'
 import FilterButtons from '../../components/TypeFilter/TypeFilter.jsx'
 import CityFilter from "../CityFilter/CityFilter.jsx";
-
-
-
+import PriceFilter from "../PriceFilter/PriceFilter.jsx";
 
 
 const CardContainer = Styled.div`
@@ -43,7 +41,13 @@ const CardContainer = Styled.div`
     background-color: #AC946A;
     font-size: 1.25vw;
     margin: 1vw;
+    cursor: pointer;
     
+  }
+
+  .card-button-edit:hover {
+    transition: 0.5s;
+    transform: scale(1.4);
   }
 
   .card-button-delete {
@@ -51,7 +55,13 @@ const CardContainer = Styled.div`
     color: #AC946A;
     font-size: 1.25vw;
     margin: 1vw;
+    cursor: pointer;
 
+  }
+
+  .card-button-delete:hover {
+    transition: 0.5s;
+    transform: scale(1.4);
   }
 
   .card-list {
@@ -66,7 +76,7 @@ const CardContainer = Styled.div`
 
   .card-list-item {
     display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
     justify-content: space-between;
     align-items: center;
     margin: 1vw;
@@ -76,8 +86,8 @@ const CardContainer = Styled.div`
 
   .card-bg {
     display: flex;
+   
     flex-direction: column;
-    flex-wrap: wrap;
     align-items: center;
     width: 19vw;
     gap: 1rem;
@@ -95,7 +105,6 @@ const CardContainer = Styled.div`
   }
 
   .card-information {
-    
     max-height: 130px;
     display: flex;
     flex-direction: column;
@@ -107,9 +116,6 @@ const CardContainer = Styled.div`
   }
 
   .card-name {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
     padding:0.1em;
     font-size: 1.2vw;
@@ -129,10 +135,12 @@ const CardContainer = Styled.div`
     
   }
 
-  .card-counter {
+  .card-counter-card {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    flex-direction: row;
+    
+    justify-content: space-around;
     margin-bottom: 0vw;
     bottom: 0;
     background-color: #AC946A;
@@ -151,10 +159,23 @@ const CardContainer = Styled.div`
   
   }
 
+  .login-cart-button {
+    background-color: #AC946A;
+    color: #00000;
+    font-size: 1vw;
+    font-weight: bold;
+    margin: 0.5vw;
+    border: none;
+    height: 3vw;
+    padding: 0.1vw;
+    text-align: center;
+  }
+
   img {
     width: 2vw;
     height: 2vw;
     background-color: #AC946A;
+    padding: 0.1vw;
   
   }
   
@@ -166,6 +187,7 @@ const CardContainer = Styled.div`
     margin: 0.5vw;
     border: none;
     height: 3vw;
+    padding: 0.5vw;
     
   }
 
@@ -174,16 +196,8 @@ const CardContainer = Styled.div`
     transform: scale(1.4);
     
   }
-`;
+  `;
 
-const CityFilterContainer = Styled.div`{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  
-
-}
-`;
 
 
 function Card({}) {
@@ -195,7 +209,7 @@ function Card({}) {
   const [cityFilter, setCityFilter] = useState([]);
   const { isAuthenticated } = useUserContext();
   const { isUserRole } = useUserContext();
-    
+  
     useEffect(() => {
         const fetchData = async () => {
           const result = await axios.get('http://localhost:8000/event/name');
@@ -221,6 +235,7 @@ function Card({}) {
         setEvents(originalEvents);
       }
     }, [cityFilter, originalEvents]);
+
   
     const handleCountChange = (eventId, delta) => {
       setEventsCount((prevCount) => {
@@ -249,14 +264,38 @@ function Card({}) {
       }
     };
     console.log(isAuthenticated)
+
+    const handlePayment = () => {
+      try {
+        const token = localStorage.getItem('token');
+        console.log(token)
+        const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        console.log(decodedToken)
+        const idUser = decodedToken.userId;
+        console.log(idUser)
+        if (idUser) {
+          navigate(`/privateArea/payment/${idUser}`);
+        } else {
+          alert('Usuario no autenticado. Por favor, inicie sesión.');
+        }
+      } catch (error) {
+        console.error('Error al obtener el token. Lo odio', error)
+      }
+    };
       return (
 
 <>
 
 
 <CityFilter setCityFilter={setCityFilter}/>
-<h1 className="card-list-title" style={{ textAlign: 'left', marginLeft:'25px', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS DE VINOPREMIER</h1>
-<FilterButtons setEvents={setEvents} events={originalEvents}/>
+<h1 className="card-list-title" style={{ textAlign: 'center', fontSize:'3vw', fontWeight: 'extra-bold,', paddingTop:'2vw' }}>CATAS Y EVENTOS DE VINOPREMIER</h1>
+
+<div className="filter-buttons" style={{ display:'flex',flexFlow:'column wrap', width:'10vw', padding:'1vw', margin:'0px', position:'absolute'}}>
+  <PriceFilter setPriceFilter={setEvents}/>
+  <FilterButtons setEvents={setEvents} events={originalEvents}/>
+  
+</div>
+
 
 <div className="button-list">
   {isAuthenticated ? (
@@ -288,28 +327,39 @@ function Card({}) {
             <article className="card-name">{event.name}</article>
             <article className="card-price">{event.price}€<p className="card-tax">IVA incluido (Precio por persona)</p></article>
           </div>
-          <section className="card-counter"> 
-          <article className="buttons-counter" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border:'1px solid black', marginBottom:'0'}}>
+          <section className="card-counter-card"> 
+          <article className="buttons-counter" style={{alignItems: 'center', border:'1px solid black', marginBottom:'0'}}>
             
-            <button className="less-cart" style={{ width: '15px', height:'30px',backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
-              <p style={{fontSize: '1vw', justifyContent: 'center'}}>-</p>
+            <button className="less-cart" style={{ width: '2vw', height:'3vh',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, -1)}>
+              <p style={{fontSize: '2vw', fontWeight:'300', textAlign:'center'}}>-</p>
             </button>
-            <div className="card-qty" style={{fontSize:'1vw',borderBottom:'none', display: 'flex', alignItems: 'center',  width: '8px', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw',fontWeight:'bold'}}>{eventsCount[event.id] || 0}</div>
-            <button className="add-cart" style={{ width: '15px', height:'30px',backgroundColor:'#ffffff', border:'none', borderRight:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
-              <p style={{fontSize:'1vw', justifyContent:'center'}}>+</p>
+            <div className="card-qty" style={{fontSize:'2vw',borderBottom:'none', display: 'flex', alignItems: 'center', borderTop:'none' , paddingLeft:'1vw', paddingRight:'1vw'}}>{eventsCount[event.id] || 0}</div>
+            <button className="add-cart" style={{width: '2vw', height:'3vh', backgroundColor:'#ffffff', border:'none', borderLeft:'1px solid black'}} onClick={() => handleCountChange(event.id, 1)}>
+              <p style={{fontSize:'2vw', fontWeight:'300', textAlign:'center'}}>+</p>
             </button>
           </article> 
-            <button className="adding-cart" onClick={() => handleClick(event.id)}>
-                  {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img src="../src/assets/images/icons/cart.png" onClick={() => navigate(`Payment/`)}/>
+          {isAuthenticated ? (
+          
+          <>
+          <button className="adding-cart" onClick={() => handleClick(event.id)}>
+                {buttonTexts[event.id] || "AÑADIR"}</button>
+          <img src="../../src/assets/images/icons/cart.png" onClick={handlePayment} style={{cursor:'pointer'}}/>
+          </>
+          
+        ) : (
+
+          <button className="login-cart-button" onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
+          )} 
+          
           </section>
         </section>
       </li>
       ))}
   </CardContainer>
 </ul>
+
 </>
-  );
+);
 }
 
 
