@@ -3,6 +3,16 @@ import Swal from 'sweetalert2';
 
 const URL_EVENT = 'http://localhost:8000/event';
 
+const getHeaders = () => {
+    const userToken = localStorage.getItem('token');
+    if (!userToken) {
+        throw new Error('Token no encontrado en el almacenamiento local')
+    }
+    return {
+        'Authorization': `Bearer ${userToken}`
+    };
+}
+
 export const getAllEvents = async () => {
     try {
         const response = await axios.get(URL_EVENT);
@@ -38,7 +48,8 @@ export const getEventByName = async(name) => {
 
 export const postEvent = async(data) => {
     try {
-        const event = await axios.post(URL_EVENT, data);
+        const headers = getHeaders()
+        const event = await axios.post(URL_EVENT, data, { headers });
         Swal.fire('Evento creado correctamente');
         return event.data;
     } catch (error) {
@@ -49,7 +60,8 @@ export const postEvent = async(data) => {
 
 export const updateEvent = async (id, newData) => {
     try {
-        const response = await axios.put(`${URL_EVENT}/${id}`, newData);
+        const headers = getHeaders();
+        const response = await axios.put(`${URL_EVENT}/${id}`, newData, { headers });
         const data = response.data;
         Swal.fire('Evento actualizado correctamente');
         return data;
@@ -61,7 +73,8 @@ export const updateEvent = async (id, newData) => {
 
 export const updateEventByName = async(name, newData) => {
     try {
-        const response = await axios.put(`${URL_EVENT}/${encodeURIComponent(name)}`, newData);
+        const headers = getHeaders();
+        const response = await axios.put(`${URL_EVENT}/${encodeURIComponent(name)}`, newData, { headers });
         const data = response.data;
         Swal.fire('Evento actualizado correctamente');
         return data;
@@ -82,7 +95,8 @@ export const deleteEvent = async (id) => {
     });
     if(confirmDelete.isConfirmed) {
         try {
-            const response = await axios.delete(`${URL_EVENT}/${id}`);
+            const headers = getHeaders();
+            const response = await axios.delete(`${URL_EVENT}/${id}`, { headers });
             Swal.fire("Evento eliminado correctamente");
         } catch (error) {
             console.log('Error al eliminar el evento', error);
@@ -102,7 +116,8 @@ export const deleteEventByName = async (name) => {
     });
     if(confirmDelete.isConfirmed) {
         try {
-            const response = await axios.delete(`${URL_EVENT}/${encodeURIComponent(name)}`);
+            const headers = getHeaders();
+            const response = await axios.delete(`${URL_EVENT}/${encodeURIComponent(name)}`, { headers });
             Swal.fire("Evento eliminado correctamente");
         } catch (error) {
             console.log('Error al eliminar el evento', error);
