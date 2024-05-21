@@ -8,10 +8,10 @@ import { eventValidator } from '../validators/eventsValidator.js';
 const eventRouter = express.Router();
 
 eventRouter.get("/", getAllEvents);
-eventRouter.post("/", authToken, authRole['superadmin', 'admin'], eventValidator, handleValidationResults, createEvent);
-eventRouter.delete("/:name", authToken, authRole['superadmin'], eventValidator, handleValidationResults, deleteEventByName)
+eventRouter.post("/", authToken, authRole(['superadmin', 'admin']), eventValidator, handleValidationResults, createEvent);
+eventRouter.delete("/:name", authToken, authRole(['superadmin']), eventValidator, handleValidationResults, deleteEventByName)
 eventRouter.delete("/:id", deleteEvent);
-eventRouter.put("/:name", authToken, authRole['superadmin'], eventValidator, handleValidationResults, updateEventByName)
+eventRouter.put("/:name", authToken, authRole(['superadmin']), eventValidator, handleValidationResults, updateEventByName)
 eventRouter.put("/:id", updateEvent);
 eventRouter.get("/name", getEventByName);
 eventRouter.get("/:eventName/dates", getEventDatesByName)
