@@ -268,7 +268,7 @@ const handlePayment = () => {
             )}
             {isAuthenticated && (
               <>
-            {(isUserRole === "admin" || isUserRole === "superadmin") && <button onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>}
+            {(isUserRole === "admin" || isUserRole === "superadmin") && <button className="page-detail_left_new_data" onClick={handleDateForm}>AÑADIR NUEVA FECHA</button>}
             </>
             )}
           </div>

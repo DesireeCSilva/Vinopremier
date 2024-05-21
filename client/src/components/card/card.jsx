@@ -23,7 +23,7 @@ const CardContainer = Styled.div`
     font-family: 'Gotham', sans-serif;
     text-align: center;
   
-  
+
   .button-controler   {
     display: flex;
     justify-content: space-around;
@@ -33,7 +33,6 @@ const CardContainer = Styled.div`
     flex-wrap: wrap;
     width: 100%;
     cursor: pointer;
-    
   }
 
   .card-button-edit  {
@@ -42,7 +41,6 @@ const CardContainer = Styled.div`
     font-size: 1.25vw;
     margin: 1vw;
     cursor: pointer;
-    
   }
 
   .card-button-edit:hover {
@@ -52,11 +50,10 @@ const CardContainer = Styled.div`
 
   .card-button-delete {
     background-color: #000000;
-    color: #AC946A;
+    color: #FFFFFF;
     font-size: 1.25vw;
     margin: 1vw;
     cursor: pointer;
-
   }
 
   .card-button-delete:hover {
@@ -71,7 +68,6 @@ const CardContainer = Styled.div`
     justify-content: space-around;
     gap: 0.75vw;
     list-style: none;
-    
   }
 
   .card-list-item {
@@ -80,20 +76,17 @@ const CardContainer = Styled.div`
     justify-content: space-between;
     align-items: center;
     margin: 1vw;
-    
   }
 
 
   .card-bg {
     display: flex;
-   
     flex-direction: column;
     align-items: center;
     width: 19vw;
     gap: 1rem;
     overflow: hidden;
     border: 2px solid #AC946A;
-  
   }
 
   .card-img {
@@ -101,62 +94,53 @@ const CardContainer = Styled.div`
     height: auto;
     object-fit: cover;
     cursor: pointer;
-    
   }
 
   .card-information {
-    max-height: 130px;
+    height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
     overflow: hidden;
-    
   }
 
   .card-name {
     align-items: center;
     padding:0.1em;
     font-size: 1.2vw;
-    
   }
 
   .card-price {
     align-items: center;
     justify-content: center;
     padding: px;
-    font-size: 2vw;
-    
+    font-size: 3vw;
   }
 
   .card-tax  {
     font-size: 0.65vw;
-    
   }
 
   .card-counter-card {
     display: flex;
     align-items: center;
     flex-direction: row;
-    
     justify-content: space-around;
     margin-bottom: 0vw;
     bottom: 0;
     background-color: #AC946A;
     width: 100%;
-    
   }
 
   .buttons-counter {
     background-color: #ffffff;
-  
   }
 
   .card-counter button:hover {
     transition: 0.5s;
     transform: scale(0.9);
-  
   }
 
   .login-cart-button {
@@ -169,6 +153,7 @@ const CardContainer = Styled.div`
     height: 3vw;
     padding: 0.1vw;
     text-align: center;
+    cursor: pointer;
   }
 
   img {
@@ -176,7 +161,6 @@ const CardContainer = Styled.div`
     height: 2vw;
     background-color: #AC946A;
     padding: 0.1vw;
-  
   }
   
   .adding-cart {
@@ -188,13 +172,11 @@ const CardContainer = Styled.div`
     border: none;
     height: 3vw;
     padding: 0.5vw;
-    
   }
 
   .adding-cart:hover {
     transition: 0.5s;
     transform: scale(1.4);
-    
   }
   `;
 
@@ -301,7 +283,7 @@ function Card({}) {
   {isAuthenticated ? (
     <>
   <LogoutButton/>,
-  {isUserRole && isUserRole === "superadmin" && <button className="card-button-add" style={{ cursor:'pointer', float: 'right', fontFamily: 'Gotham', fontSize: '1rem', color:'#fff', background:'#000', border: 'none', padding:'2%', marginTop: '2rem', height: '4.4rem', cursor: 'pointer', letterSpacing: '0.09em', marginRight:'2.1rem', background:'#AC946A'}} onClick={() => navigate (`/privateArea/create`)}>AÑADIR CATA</button>}
+  {isUserRole && isUserRole === "superadmin" && <button className="card-button-add" style={{ cursor:'pointer', float: 'right', fontFamily: 'Gotham', fontSize: '1rem', color:'#fff', background:'#000', border: 'none', padding:'1%', marginTop: '2rem', height: '4.4rem', cursor: 'pointer', letterSpacing: '0.09em', marginRight:'2.1rem', background:'#AC946A',  textAlign: 'center'}} onClick={() => navigate (`/privateArea/create`)}>AÑADIR CATA</button>}
   </>
   ) : (
   <LoginButton />

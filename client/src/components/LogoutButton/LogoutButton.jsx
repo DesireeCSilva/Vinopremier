@@ -18,7 +18,7 @@ const LogoutButton = () => {
       };
 
   return (
-    <button style={{ cursor:'pointer', float: 'right', fontFamily: 'Gotham', fontSize: '1rem', color:'#fff', background:'#000', border: 'none', padding:'2%', marginTop: '2rem', height: '4.4rem', cursor: 'pointer', letterSpacing: '0.09em', marginRight:'2.1rem'}} onClick={handleLogout}>CERRAR SESIÓN</button>
+    <button style={{ cursor:'pointer', float: 'right', fontFamily: 'Gotham', fontSize: '1rem', color:'#fff', background:'#000', border: 'none', padding:'1%', marginTop: '2rem', height: '4.4rem', cursor: 'pointer', letterSpacing: '0.09em', marginRight:'2.1rem'}} onClick={handleLogout}>CERRAR SESIÓN</button>
   )
 }
 

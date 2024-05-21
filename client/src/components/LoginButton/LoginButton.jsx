@@ -19,7 +19,6 @@ const LoginButton = () => {
             border: 'none', 
             padding:'1vw', 
             marginTop: '2.5vw', 
-            
             cursor: 'pointer', 
             letterSpacing: '0.09em', 
             marginRight:'2.1rem', 

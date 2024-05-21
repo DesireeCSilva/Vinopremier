@@ -10,6 +10,11 @@
    font-family: 'Gotham';
    font-size: 0.8rem;
    margin-left: 3rem;
+   text-decoration: none;
+}
+
+.page-detail__subtitle-link {
+   text-decoration: none;
 }
 
 .page-detail__subtitlegold {
@@ -34,12 +39,16 @@
 }
 
 .page-detail__section01__left {
-   margin-left: 15%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   
 }
 
 .page-detail__left__image {
    width: 25rem;
-   height: 45rem;
+   
    border-color: #AC946A;
    border-top-width: 2rem; 
    border-bottom-width: 4rem;
@@ -49,7 +58,7 @@
    display: flex;
    align-content: center;
    justify-self: center;
-   margin-left:15%;
+   
 }
 
 .page-detail__left__price {
@@ -58,6 +67,7 @@
    font-weight: 900;
    text-align: center;
    margin-top: 1rem;
+   display: flex;
 }
 
 .page-detail__left__iva {
@@ -65,13 +75,15 @@
    font-size: 1rem;
    text-align: center;
    margin-bottom: 2rem;
+   display: flex;
 }
 
 .page-detail__left__supplement-private {
    display: block;
    align-content: center;
    margin-top: 1rem;
-   margin-left:15%;
+   
+   
 }
 
 .page-detail__left__suptext {
@@ -79,6 +91,7 @@
    font-size: 1rem;
    font-weight: 500;
    margin-left: 1rem;
+   
 }
 
 .page-detail__left__extra {
@@ -91,13 +104,12 @@
    align-content: center;
    justify-content: center;
    margin-top: 25rem;
-   margin-left: 1rem;
+   
 }
 
 .page-detail__left__extratext {
    font-family: 'Gotham';
    font-size: 1.1rem;
-   margin-left: 1rem;
    padding: 0.4rem;
    font-weight: 500;
    background: #AC946A;
@@ -112,16 +124,27 @@
 .page-detail__left__calendar {
    display: flex;
    flex-direction: column;
-   justify-content: center;
-   align-items: center;
+   
 }
 .page-detail__left__calendartext {
    font-family: 'Gotham';
    font-size: 1.5rem;
    font-weight: 800;
    margin-top: 2rem;
-   text-align: center;
+   
    margin-bottom: 2rem;
+}
+
+.page-detail_left_new_data {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   margin-top: 2rem;
+   background-color: #000000;
+   color: white;
+   padding:1vw;
+   font-size: 1.25vw;
 }
 
 .page-detail__right__description {
@@ -191,14 +214,14 @@
 }
 .page-detail_back-button {
    font-family: 'Gotham';
-   font-size: 1rem;
+   font-size: 1.25vw;
    color: white;
    background: #000;
    border: none;
    width: 24.5rem;
    height: 4.4rem;
    cursor: pointer;
-   margin-top: 1.3rem;
+   margin-top:1rem;
    margin-left: 1rem;
 }
 
@@ -211,7 +234,7 @@
    align-items: center;
    height: fit-content;
    width: 19vw;  
-   margin-left:7rem;
+   
 }
 
 .buttons-counter {
@@ -285,7 +308,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin-left: auto;
+      
       margin-right: 5%;
    }
 
@@ -348,10 +371,10 @@
    }
    
    .page-detail__left__extra {
-      width: 22em;
+      width: 85vw;
       height: 10rem;
       background: #AC946A;
-      padding: 2rem;
+      padding: 2vw;
       display: flex;
       flex-direction: column;
       align-content: center;
