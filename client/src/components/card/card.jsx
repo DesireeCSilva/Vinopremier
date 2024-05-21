@@ -102,14 +102,13 @@ const CardContainer = Styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
     overflow: hidden;
   }
 
   .card-name {
     align-items: center;
     padding:0.1em;
-    font-size: 1.2vw;
+    font-size: 1.30vw;
   }
 
   .card-price {
@@ -154,6 +153,7 @@ const CardContainer = Styled.div`
     padding: 0.1vw;
     text-align: center;
     cursor: pointer;
+    
   }
 
   img {
@@ -177,6 +177,18 @@ const CardContainer = Styled.div`
   .adding-cart:hover {
     transition: 0.5s;
     transform: scale(1.4);
+  }
+
+//Media Queries
+  @media screen and (max-width: 768px) {
+ 
+ 
+  .card-information {
+    height: 70px;
+  }
+
+  .login-cart-button {
+    font-weight: 400;
   }
   `;
 

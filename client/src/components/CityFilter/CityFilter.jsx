@@ -50,6 +50,25 @@ const CityFilterContainer = styled.div`
 
 }
 
+//Media Queries 
+@media screen and (max-width: 768px) {
+  
+
+  .name-filter {
+    width: 28vw;
+    height: 25vw;
+  }
+
+  .tittle-filter {
+    font-size: 1rem;
+  }
+
+  img {
+    width: 25vw;
+    height: 10vw;
+  }
+}
+
 `
 const CityFilter = ({ setCityFilter }) => {
   const onButtonClick = (id_locations) => {

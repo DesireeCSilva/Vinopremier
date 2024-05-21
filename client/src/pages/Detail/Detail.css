@@ -29,7 +29,7 @@
    font-size: 2.8rem;
    margin-left: 3rem;
    margin-top: 1rem;
-   margin-bottom: 3rem;
+   margin-bottom: 1rem;
 }
 
 .page-detail__section01 {
@@ -48,7 +48,6 @@
 
 .page-detail__left__image {
    width: 25rem;
-   
    border-color: #AC946A;
    border-top-width: 2rem; 
    border-bottom-width: 4rem;
@@ -131,7 +130,6 @@
    font-size: 1.5rem;
    font-weight: 800;
    margin-top: 2rem;
-   
    margin-bottom: 2rem;
 }
 
@@ -214,14 +212,14 @@
 }
 .page-detail_back-button {
    font-family: 'Gotham';
-   font-size: 1.25vw;
+   font-size: 1vw;
    color: white;
    background: #000;
    border: none;
    width: 24.5rem;
    height: 4.4rem;
    cursor: pointer;
-   margin-top:1rem;
+   padding: 2%;
    margin-left: 1rem;
 }
 
@@ -308,7 +306,6 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      
       margin-right: 5%;
    }
 
@@ -358,8 +355,9 @@
    .page-detail__left__supplement-private {
       display: flex;
       flex-direction: row;
-      align-items: center;
+      align-items: left;
       margin-top: 1rem;
+      
    }
    
    .page-detail__left__suptext {
@@ -532,14 +530,14 @@
    
    .page-detail_back-button {
       font-family: 'Gotham';
-      font-size: 1rem;
+      font-size: 0.55rem;
       color: white;
       background: #000;
       border: none;
-      width: 22rem;
-      margin-top: 2rem;
-      margin-left: 2.5rem;
-      height: 4rem;
+      width: 50rem;
+      padding: 14%;
+      text-align: center;
+      height: 6rem;
       cursor: pointer;
    }
 }

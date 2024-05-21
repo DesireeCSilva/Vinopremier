@@ -219,42 +219,45 @@ const handlePayment = () => {
           <p className='page-detail__left__price'>{event.price}€</p>
           <p className='page-detail__left__iva'>IVA INCLUIDO</p>
 
-          <div className='page-detail__left__supplement-private'>
-            <input type="checkbox" id="private" name="private" onChange={handleCheckboxChange} checked={isChecked.private}/>
-            <label className='page-detail__left__suptext' for="add-extra-feature-private">Añadir suplemento de cata privada ({event.private_tasting_supplement}€)</label>
-          </div>
+          <div className='page-detail__left__supplement-private-container'>
+            <div className='page-detail__left__supplement-private'>
+              <input type="checkbox" id="private" name="private" onChange={handleCheckboxChange} checked={isChecked.private}/>
+              <label className='page-detail__left__suptext' for="add-extra-feature-private">Añadir suplemento de cata privada ({event.private_tasting_supplement}€)</label>
+            </div>
 
-          <div className='page-detail__left__supplement-private'>
-          <input type="checkbox" id="iberian" name="iberian" onChange={handleCheckboxChange} checked={isChecked.iberian}/>
-            <label className='page-detail__left__suptext' for="add-extra-feature">Añadir suplemento de Ibéricos ({event.iberian_supplement}€)</label>
-          </div>
+            <div className='page-detail__left__supplement-private'>
+              <input type="checkbox" id="iberian" name="iberian" onChange={handleCheckboxChange} checked={isChecked.iberian}/>
+              <label className='page-detail__left__suptext' for="add-extra-feature">Añadir suplemento de Ibéricos ({event.iberian_supplement}€)</label>
+            </div>
 
-          {event.english && (
-          <div className='page-detail__left__supplement-private'>
-            <input type="checkbox" id="english_version" name="english_version" onChange={handleCheckboxChange} checked={isChecked.english_version} />
-            <label className='page-detail__left__suptext' htmlFor="vegan">Versión en inglés</label>
-          </div>
-          )}
+            {event.english && (
+           <div className='page-detail__left__supplement-private'>
+              <input type="checkbox" id="english_version" name="english_version" onChange={handleCheckboxChange} checked={isChecked.english_version} />
+              <label className='page-detail__left__suptext' htmlFor="vegan">Versión en inglés</label>
+            </div>
+            )}
 
-          {event.vegan_version && (
-            <>
-          <div className='page-detail__left__supplement-private'>
-                <input type="checkbox" id="vegan" name="vegan" onChange={handleCheckboxChange} checked={isChecked.vegan} />
-                <label className='page-detail__left__suptext' htmlFor="vegan">Opción vegana</label>
-          </div>
+            {event.vegan_version && (
+             <>
+           <div className='page-detail__left__supplement-private'>
+              <input type="checkbox" id="vegan" name="vegan" onChange={handleCheckboxChange} checked={isChecked.vegan} />
+              <label className='page-detail__left__suptext' htmlFor="vegan">Opción vegana</label>
+            </div>
             {isChecked.vegan && (
               
-              <div className='page-detail__left__supplement-private'>
-                <label className='page-detail__left__suptext' htmlFor="vegan-people">Número de personas veganas</label>
-                    <select id="vegan-people" value={veganPeople} onChange={handleVeganPeopleChange}>
-                      {[...Array(Math.max(eventsCount[event.id] +1 || 0, 1)).keys()].map(num => (
+            <div className='page-detail__left__supplement-private'>
+              <label className='page-detail__left__suptext' htmlFor="vegan-people">Número de personas veganas</label>
+                <select id="vegan-people" value={veganPeople} onChange={handleVeganPeopleChange}>
+                  {[...Array(Math.max(eventsCount[event.id] +1 || 0, 1)).keys()].map(num => (
                         <option key={num} value={num}>{num}</option>
                       ))}
                     </select>
+                
               </div>
             )}
             </>
-          )}
+            )}
+          </div>
 
           <div className='page-detail__left__calendar' >
             <p className='page-detail__left__calendartext'>Seleccionar fecha</p>

@@ -8,10 +8,9 @@ const SelectTypeEvent = styled.div`
   margin-left: 2vw;
   margin-top: 3vh;
   padding: 2vh;
- 
   border-radius: 5px;
   width: 20vw;
-  font-size: 1vw;
+
 
 h1 {  
   
@@ -36,13 +35,11 @@ ul {
 
 button {
   margin: 1vh;
-
   padding: 1vh;
   border:none;
   border-radius: 5px;
-  
   background-color: #fff;
-  font-size: 1.25vw;
+  font-size: 1.75vw;
   cursor: pointer;
 }
 
@@ -56,14 +53,14 @@ button:hover {
 
 
 const FilterButtons = ({setEvents, events}) => { 
-  const [selectedType, setSelectedType] = useState('all'); // Initial selected state
+  const [selectedType, setSelectedType] = useState('all'); 
 
   
   const onButtonClick = (cata_type) => {
-    setSelectedType(cata_type); // Update selected state
+    setSelectedType(cata_type); 
 
     const filteredEvents = cata_type === 'all'
-      ? events  // Show all events if "all" is selected
+      ? events  
       : events.filter((event) => event.cata_type === cata_type);
 
     setEvents(filteredEvents);
