@@ -7,7 +7,7 @@ import { handleValidationResults } from '../helpers/validateHelper.js';
 const bookingRouter = express.Router();
 
 bookingRouter.get("/", authToken, authRole(['admin']), getAllBookings);
-bookingRouter.post("/", authToken, authRole(['user', 'admin', 'superadmin']), bookingValidator, handleValidationResults, createBooking);
+bookingRouter.post("/", authToken, authRole(['user', 'admin', 'superadmin']), createBooking);
 bookingRouter.delete("/:id", authToken, authRole(['user', 'admin', 'superadmin']), deleteBooking);
 bookingRouter.put("/:id", authToken, updateBooking);
 bookingRouter.get("/:id", authToken, getBookingById)
