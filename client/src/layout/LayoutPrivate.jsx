@@ -10,7 +10,9 @@ const LayoutPrivate = () => {
     return( 
     <>
     <Nav/>
-    {isAuthenticated ? <Outlet/> : <Navigate to = "/"/>}
+    {isAuthenticated ? 
+    <Outlet/> 
+    : <Navigate to = "/"/>}
     <Footer/>
     </>
     );
