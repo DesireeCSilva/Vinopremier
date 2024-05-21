@@ -115,6 +115,7 @@ const Payment = () => {
               </div>
             ))}
           </div>
+          <button className='payment-page_back-button' style={{background:'#AC946A'}}>PAGAR AHORA</button>
           <Link to="/"><button className='payment-page_back-button'>VOLVER A CATAS Y EVENTOS</button></Link>
         </article>
 
