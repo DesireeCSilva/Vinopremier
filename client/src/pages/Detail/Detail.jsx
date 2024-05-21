@@ -79,8 +79,7 @@ const Detail = () => {
     setEventsCount((prevCount) => {
       const currentCount = prevCount[eventId] || 0;
       const newCount = currentCount + delta;
-  
-      // Usar selectedDate para obtener las plazas disponibles
+
       if (!selectedDate || newCount < 0 || newCount > selectedDate.avalaible_places) {
         return prevCount;
       }
