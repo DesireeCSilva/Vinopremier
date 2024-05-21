@@ -46,7 +46,7 @@ const Detail = () => {
   const tileContent = ({date, view}) => {
     if (view === 'month') {
       const formattedDate = formatDate(date);
-      const isAvailable = eventDates.some(eventDate => eventDate.date === formattedDate);
+      const isAvailable = eventDates.some(eventDate => eventDate.date === formattedDate && eventDate.avalaible_places > 0);
       return isAvailable ? <div className="green-dot"></div> : null;
     }
     return null;
@@ -54,7 +54,7 @@ const Detail = () => {
   const tileDisabled = ({ date, view }) => {
     if (view === 'month') {
       const formattedDate = formatDate(date);
-      return !eventDates.some(eventDate => eventDate.date === formattedDate);
+      return !eventDates.some(eventDate => eventDate.date === formattedDate && eventDate.avalaible_places > 0);
     }
     return false;
   };
@@ -76,12 +76,17 @@ const Detail = () => {
   };
 
   const handleCountChange = (eventId, delta) => {
-      setEventsCount((prevCount) => {
-        const currentCount = prevCount[eventId] || 0;
-        const newCount = currentCount + delta;
-        return { ...prevCount, [eventId]: newCount >= 0 ? newCount : 0 };
-      });
-    };
+    setEventsCount((prevCount) => {
+      const currentCount = prevCount[eventId] || 0;
+      const newCount = currentCount + delta;
+
+      if (!selectedDate || newCount < 0 || newCount > selectedDate.avalaible_places) {
+        return prevCount;
+      }
+  
+      return { ...prevCount, [eventId]: newCount };
+    });
+  };
 
   const [isChecked, setIsChecked] = useState({
       private: false,
@@ -211,39 +216,8 @@ const handlePayment = () => {
       <section className='page-detail__section01'>
         <div className='page-detail__section01__left'>
           <img className='page-detail__left__image' src={event.image} alt="cartel del tipo de cata" />
-
-
-          <section className="card-counter-detail"> 
-            <article className="buttons-counter" >
-            <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
-                <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
-              </button>
-              <div style={{fontFamily:'Gotham', padding:'16.5px',border:'3px solid black',fontWeight:'bold', fontSize:'21px'}}>{eventsCount[event.id] || 0}</div>
-              <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
-                <p style={{fontFamily:'Gotham', fontSize: '2rem', justifyContent: 'center'}}>+</p>
-              </button>
-          </article>
-          
-          {isAuthenticated ? (
-          
-            <>
-            <button className="adding-cart" onClick={() => handleClick(event.id)}>
-                  {buttonTexts[event.id] || "AÑADIR"}</button>
-            <img className="img-cart" src="../../src/assets/images/icons/cart.png" onClick={handlePayment} style={{cursor:'pointer'}}/>
-            </>
-            
-          ) : (
-
-              <button className="page-detail_back-button" onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
-          )} 
-          </section>
           <p className='page-detail__left__price'>{event.price}€</p>
           <p className='page-detail__left__iva'>IVA INCLUIDO</p>
-
-         
-
-          
-          
 
           <div className='page-detail__left__supplement-private'>
             <input type="checkbox" id="private" name="private" onChange={handleCheckboxChange} checked={isChecked.private}/>
@@ -298,10 +272,32 @@ const handlePayment = () => {
             </>
             )}
           </div>
+          <section className="card-counter-detail"> 
+            <article className="buttons-counter" >
+            <button className="less-cart"  onClick={() => handleCountChange(event.id, -1)}>
+                <p style={{fontFamily:'Gotham', fontSize:'2rem', justifyContent:'center'}}>-</p>
+              </button>
+              <div style={{fontFamily:'Gotham', padding:'16.5px',border:'3px solid black',fontWeight:'bold', fontSize:'21px'}}>{eventsCount[event.id] || 0}</div>
+              <button className="add-cart" onClick={() => handleCountChange(event.id, 1)}>
+                <p style={{fontFamily:'Gotham', fontSize: '2rem', justifyContent: 'center'}}>+</p>
+              </button>
+          </article>
           
+          {isAuthenticated ? (
           
+            <>
+            <button className="adding-cart" onClick={() => handleClick(event.id)}>
+                  {buttonTexts[event.id] || "AÑADIR"}</button>
+            <img className="img-cart" src="../../src/assets/images/icons/cart.png" onClick={handlePayment} style={{cursor:'pointer'}}/>
+            </>
+            
+          ) : (
 
+              <button className="page-detail_back-button" onClick={() => navigate (`/login`)} >INICIA SESIÓN PARA HACER LA RESERVA</button>
+          )} 
+          </section>
         </div>
+       
 
       <div className='page-detail__section01__right'>
           <div className='page-detail__right__icons'>

@@ -31,7 +31,7 @@ export const userValidator = [
 
     check('role')
     .optional()
-    .isIn(['user', 'admin']).withMessage('Rol field must be either "user" or "admin".')
+    .isIn(['user', 'admin', 'superadmin']).withMessage('Rol field must be either "user", "admin" or "superadmin".')
     .default('user')
 ]
 
